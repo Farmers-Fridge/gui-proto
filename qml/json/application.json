@@ -1,0 +1,8 @@
+{
+    "appName": "Tablet GUI",
+    "clientName": "Farmers Fridge",
+    "categorySource": "config/categories",
+    "categoryQuery": "/categories/item",
+    "categoryListSource": "config/vendItems",
+    "categoryListQuery": "/vendItems/item"
+}

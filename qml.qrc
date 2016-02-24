@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/AlbumDelegate.qml</file>
+        <file>qml/BusyIndicator.qml</file>
+        <file>qml/Button.qml</file>
+        <file>qml/EditableButton.qml</file>
+        <file>qml/PhotoDelegate.qml</file>
+        <file>qml/ProgressBar.qml</file>
+        <file>qml/RssModel.qml</file>
+        <file>qml/Tag.qml</file>
+        <file>qml/images/box-shadow.png</file>
+        <file>qml/images/busy.png</file>
+        <file>qml/images/cardboard.png</file>
+        <file>qml/script/script.js</file>
+        <file>qml/main.qml</file>
+        <file>qml/Settings.qml</file>
+        <file>qml/script/Utils.js</file>
+        <file>qml/json/application.json</file>
+        <file>qml/XMLParser.qml</file>
+    </qresource>
+</RCC>

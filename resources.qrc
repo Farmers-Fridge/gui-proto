@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/AlbumDelegate.qml</file>
+        <file>qml/BusyIndicator.qml</file>
+        <file>qml/Button.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/MenuPictureDelegate.qml</file>
+        <file>qml/Settings.qml</file>
+        <file>qml/Tag.qml</file>
+        <file>qml/XMLParser.qml</file>
+        <file>qml/images/ico-box-shadow.png</file>
+        <file>qml/images/ico-busy.png</file>
+        <file>qml/images/ico-cardboard.png</file>
+        <file>qml/json/application.json</file>
+        <file>qml/script/Utils.js</file>
+        <file>qml/MainApplication.qml</file>
+        <file>qml/CategoryListModel.qml</file>
+        <file>qml/images/ico-logo.png</file>
+        <file>qml/HeaderArea.qml</file>
+        <file>qml/images/ico-cancel.png</file>
+        <file>qml/ImageButton.qml</file>
+        <file>qml/Command.qml</file>
+        <file>qml/commands/ExitCommand.qml</file>
+        <file>qml/images/ico-back.png</file>
+        <file>qml/images/ico-left.png</file>
+        <file>qml/images/ico-right.png</file>
+        <file>qml/images/ico-checkout.png</file>
+        <file>qml/Popup.qml</file>
+        <file>qml/CheckOutPopup.qml</file>
+        <file>qml/PopupMgr.qml</file>
+        <file>qml/commands/CheckOutCommand.qml</file>
+        <file>qml/CartView.qml</file>
+        <file>qml/IncrementalButton.qml</file>
+        <file>qml/CommonText.qml</file>
+        <file>qml/images/ico-minus.png</file>
+        <file>qml/images/ico-plus.png</file>
+    </qresource>
+</RCC>
