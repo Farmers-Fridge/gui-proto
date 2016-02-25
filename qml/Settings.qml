@@ -45,4 +45,7 @@ Item {
 
     // Application green:
     readonly property string appGreen: "darkgreen"
+
+    // Nutrition fact timeout:
+    readonly property int nutritionFactTimer: 5000
 }

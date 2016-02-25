@@ -34,5 +34,6 @@
         <file>qml/CommonText.qml</file>
         <file>qml/images/ico-minus.png</file>
         <file>qml/images/ico-plus.png</file>
+        <file>qml/images/ico-question.png</file>
     </qresource>
 </RCC>
