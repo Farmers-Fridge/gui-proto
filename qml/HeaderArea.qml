@@ -53,6 +53,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         source: "qrc:/qml/images/ico-checkout.png"
         onClicked: _checkOutCommand.execute()
+        enabled: _controller.cartModel.cartCount > 0
     }
 }
 

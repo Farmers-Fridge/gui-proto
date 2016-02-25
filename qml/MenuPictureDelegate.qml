@@ -59,6 +59,7 @@ Package {
             color: "white"
             width: photoWrapper.width
             height: photoWrapper.height
+            visible: viewState === "fullscreen"
             opacity: 0
             Image {
                 id: nutritionfactImage
@@ -95,6 +96,7 @@ Package {
                 anchors.leftMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
                 source: "qrc:/qml/images/ico-question.png"
+                enabled: nutrition !== ""
                 onClicked: {
                     nutritionFactTimer.start()
                     if (nutritionFactContainer.state === "")

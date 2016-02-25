@@ -29,7 +29,10 @@ Popup {
                 anchors.verticalCenter: parent.verticalCenter
                 source: "qrc:/qml/images/ico-clear.png"
                 width: parent.height
-                onClicked: _clearCartCommand.execute()
+                onClicked: {
+                    _clearCartCommand.execute()
+                    popup.state = ""
+                }
             }
         }
 

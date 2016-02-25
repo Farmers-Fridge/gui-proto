@@ -4,6 +4,7 @@ Image {
     id: imageButton
     fillMode: Image.PreserveAspectFit
     signal clicked()
+    opacity: enabled ? 1 : .5
 
     MouseArea {
         id: mouseArea
