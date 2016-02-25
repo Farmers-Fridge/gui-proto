@@ -32,6 +32,19 @@ public:
     // Decrement item count:
     Q_INVOKABLE void decrementItemCount(const QString &vendItemName);
 
+    // Add item:
+    Q_INVOKABLE void addItem(const QString &vendItemName, const QString &icon,
+        const QString &nutrition, const QString &category, const QString &price);
+
+    // Clear cart:
+    Q_INVOKABLE void clearCart();
+
+    // Validate email address:
+    Q_INVOKABLE bool validateEmailAddress(const QString &emailAddress);
+
+    // Validate coupon:
+    Q_INVOKABLE bool validateCoupon(const QString &coupon);
+
 protected:
     // Constructor:
     explicit Controller(QObject *parent = 0);

@@ -3,48 +3,119 @@ import QtQuick 2.4
 Popup {
     id: popup
     popupId: "_checkout_"
-    y: height
+    title: _settings.shoppingCartTitle
 
-    // Border:
-    Rectangle {
+    contents: Item {
         anchors.fill: parent
-        color: "transparent"
-        border.width: 32
-        border.color: _settings.appGreen
-    }
 
-    // Title:
-    CommonText {
-        anchors.top: parent.top
-        anchors.topMargin: 48
-        anchors.horizontalCenter: parent.horizontalCenter
-        color: _settings.appGreen
-        text: _settings.shoppingCartTitle
-        font.pixelSize: 24
-        font.bold: true
-    }
-
-    // Back button:
-    ImageButton {
-        id: backButton
-        source: "qrc:/qml/images/ico-back.png"
-        anchors.right: parent.right
-        anchors.rightMargin: 8
-        anchors.top: parent.top
-        anchors.topMargin: 8
-        onClicked: mainApplication.hideCurrentPopup()
-    }
-
-    states: State {
-        name: "on"
-        PropertyChanges {
-            target: popup
-            y: 0
+        // Header:
+        Rectangle {
+            id: header
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: _settings.checkOutPopupHeaderHeight
+            color: "brown"
+            CommonText {
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("Recently Added Items")
+                color: "white"
+            }
+            ImageButton {
+                anchors.right: parent.right
+                anchors.rightMargin: 4
+                anchors.verticalCenter: parent.verticalCenter
+                source: "qrc:/qml/images/ico-clear.png"
+                width: parent.height
+                onClicked: _clearCartCommand.execute()
+            }
         }
-    }
 
-    transitions: Transition {
-        SpringAnimation {target: popup; property: "y"; duration: 500; spring: 3; damping: 0.2}
+        // View container:
+        Item {
+            id: viewContainer
+            width: parent.width
+            anchors.top: header.bottom
+            anchors.bottom: totalArea.top
+
+            // Cart view:
+            CartView {
+                id: cartView
+                anchors.fill: parent
+            }
+        }
+
+        // Total area:
+        Rectangle {
+            id: totalArea
+            width: parent.width
+            height: _settings.checkOutPopupHeaderHeight
+            anchors.bottom: parent.bottom
+            color: "brown"
+            CommonText {
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Total: $" + _controller.cartModel.cartTotal
+                color: "white"
+            }
+
+            // Email:
+            ImageButton {
+                id: emailButton
+                height: parent.height-8
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                source: "qrc:/qml/images/ico-email.png"
+                onClicked: {
+                    keyboard.enterClicked.connect(onEnterClicked)
+                    mainApplication.showKeyBoard()
+                }
+
+                // Enter clicked:
+                function onEnterClicked()
+                {
+                    // Setup takeReceiptEmailAddressCommand:
+                    if (_controller.validateEmailAddress(_keyboardText))
+                    {
+                        _takeReceiptEmailAddressCommand.emailAddress = _keyboardText
+                        _takeReceiptEmailAddressCommand.execute()
+                    }
+                    else console.log(_keyboardText + " IS NOT A VALID EMAIL ADDRESS")
+                    keyboard.enterClicked.disconnect(onEnterClicked)
+                }
+            }
+
+            // Take receipt email address command:
+            ImageButton {
+                id: enterCouponButton
+                anchors.right: emailButton.left
+                anchors.rightMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.height
+                source: "qrc:/qml/images/ico-entercoupon.png"
+                onClicked: {
+                    keyboard.enterClicked.connect(onEnterClicked)
+                    mainApplication.showKeyBoard()
+                }
+
+                // Enter clicked:
+                function onEnterClicked()
+                {
+                    // Setup takeCouponCodeCommand:
+                    if (_controller.validateCoupon(_keyboardText))
+                    {
+                        _takeCouponCodeCommand.couponCode = _keyboardText
+                        _takeCouponCodeCommand.execute()
+                    }
+                    else console.log(_keyboardText + " IS NOT A VALID COUPON")
+                    keyboard.enterClicked.disconnect(onEnterClicked)
+                }
+            }
+        }
     }
 }
 

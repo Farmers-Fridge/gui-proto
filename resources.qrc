@@ -35,5 +35,23 @@
         <file>qml/images/ico-minus.png</file>
         <file>qml/images/ico-plus.png</file>
         <file>qml/images/ico-question.png</file>
+        <file>qml/AddToCartCommand.qml</file>
+        <file>qml/images/ico-clear.png</file>
+        <file>qml/ClearCartCommand.qml</file>
+        <file>qml/images/ico-email.png</file>
+        <file>qml/images/ico-entercoupon.png</file>
+        <file>qml/keyboard/JSONListModel.qml</file>
+        <file>qml/keyboard/Key.qml</file>
+        <file>qml/keyboard/KeyBoard.qml</file>
+        <file>qml/keyboard/KeyboardSettings.qml</file>
+        <file>qml/keyboard/assets/ico-backspace.png</file>
+        <file>qml/keyboard/assets/ico-clear.png</file>
+        <file>qml/keyboard/assets/ico-enter.png</file>
+        <file>qml/keyboard/assets/ico-shift.png</file>
+        <file>qml/keyboard/js/jsonpath.js</file>
+        <file>qml/keyboard/keyboards/keyboard_us.json</file>
+        <file>qml/commands/TakeReceiptEmailAddressCommand.qml</file>
+        <file>qml/RestCommand.qml</file>
+        <file>qml/commands/TakeCouponCommand.qml</file>
     </qresource>
 </RCC>

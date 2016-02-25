@@ -161,3 +161,30 @@ void Controller::decrementItemCount(const QString &vendItemName)
 {
     mCartModel->decrementItemCount(vendItemName);
 }
+
+// Add item:
+void Controller::addItem(const QString &vendItemName, const QString &icon,
+    const QString &nutrition, const QString &category, const QString &price)
+{
+    mCartModel->addItem(vendItemName, icon, nutrition, category, price);
+}
+
+// Clear cart:
+void Controller::clearCart()
+{
+    mCartModel->clear();
+}
+
+// Validate email address:
+bool Controller::validateEmailAddress(const QString &emailAddress)
+{
+    QRegExp regex("^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$");
+    return regex.exactMatch(emailAddress);
+}
+
+// Validate coupon:
+bool Controller::validateCoupon(const QString &coupon)
+{
+    Q_UNUSED(coupon);
+    return true;
+}

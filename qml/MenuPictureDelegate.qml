@@ -110,6 +110,10 @@ Package {
                 anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
                 source: "qrc:/qml/images/ico-plus.png"
+                onClicked: {
+                    _addToCartCommand.currentItem = categoryListModel.get(index)
+                    _addToCartCommand.execute()
+                }
             }
         }
 

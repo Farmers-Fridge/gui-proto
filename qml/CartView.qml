@@ -45,7 +45,7 @@ ListView {
             anchors.bottom: parent.bottom
             height: 1
             width: parent.width
-            color: _settings.cartViewBorderColor
+            color: _settings.appGreen
         }
 
         // Incremental button:

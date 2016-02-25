@@ -35,7 +35,6 @@ Item {
 
     // Cart view:
     readonly property int cartViewDelegateHeight: scaledHeight(400)
-    readonly property string cartViewBorderColor: appGreen
 
     // Popup:
     readonly property string popupBkgColor: "ivory"
@@ -48,4 +47,7 @@ Item {
 
     // Nutrition fact timeout:
     readonly property int nutritionFactTimer: 5000
+
+    // Checkout popup header height:
+    readonly property int checkOutPopupHeaderHeight: 96
 }

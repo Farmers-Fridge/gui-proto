@@ -1,6 +1,8 @@
 import QtQuick 2.4
 import QtQml.Models 2.1
+import QtQuick.Controls.Styles 1.2
 import "commands"
+import "./keyboard"
 
 Item {
     id: mainApplication
@@ -9,15 +11,47 @@ Item {
     // View state:
     property string viewState: ""
 
+    // Keyboard text:
+    property string _keyboardText: ""
+
+    // Application busy state:
+    property bool _appIsBusy: false
+
     // Load popup:
     signal showPopup(string popupId)
 
     // Hide current popup:
     signal hideCurrentPopup()
 
+    // Show keyboard:
+    signal showKeyBoard()
+
+    // Hide keyboard:
+    signal hideKeyBoard()
+
     // Check out command:
     CheckOutCommand {
         id: _checkOutCommand
+    }
+
+    // Add to cart command:
+    AddToCartCommand {
+        id: _addToCartCommand
+    }
+
+    // Clear cart command:
+    ClearCartCommand {
+        id: _clearCartCommand
+    }
+
+    // Take receipt email address command:
+    TakeReceiptEmailAddressCommand {
+        id: _takeReceiptEmailAddressCommand
+    }
+
+    // Take coupon command:
+    TakeCouponCommand {
+        id: _takeCouponCodeCommand
     }
 
     // Commands:
@@ -39,6 +73,7 @@ Item {
     // Menu view area:
     Item {
         id: menuViewArea
+        enabled: keyboard.state === ""
         width: parent.width
         anchors.top: headerArea.bottom
         anchors.bottom: parent.bottom
@@ -87,12 +122,31 @@ Item {
     // Popup mgr:
     PopupMgr {
         anchors.fill: parent
+        enabled: keyboard.state === ""
 
         // Check out popup:
         CheckOutPopup {
             width: parent.width
             height: parent.height
         }
+    }
+
+    // Keyboard:
+    KeyBoard {
+        id: keyboard
+        anchors.centerIn: parent
+        onEnterClicked: {
+            _keyboardText = text
+            hideKeyBoard()
+        }
+    }
+
+    // Busy indicator:
+    BusyIndicator {
+        id: busyIndicator
+        anchors.centerIn: parent
+        on: _appIsBusy
+        visible: _appIsBusy
     }
 }
 
