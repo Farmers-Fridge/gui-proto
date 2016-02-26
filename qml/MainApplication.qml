@@ -10,6 +10,7 @@ Item {
 
     // View state:
     property string viewState: ""
+    onViewStateChanged: console.log("ICI: ", viewState)
 
     // Keyboard text:
     property string _keyboardText: ""
@@ -28,6 +29,12 @@ Item {
 
     // Hide keyboard:
     signal hideKeyBoard()
+
+    // Navigate left:
+    signal navigateLeft()
+
+    // Navigate right:
+    signal navigateRight()
 
     // Check out command:
     CheckOutCommand {
@@ -102,6 +109,32 @@ Item {
             anchors.fill: parent
             model: albumVisualModel.parts.fullscreen
             interactive: false
+        }
+
+        Rectangle {
+            color: "transparent"
+            border.color: _settings.appGreen
+            border.width: 3
+            anchors.fill: fullScreenListView
+            visible: viewState === "fullscreen"
+
+            // Navigate left:
+            ImageButton {
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                source: "qrc:/qml/images/ico-left.png"
+                onClicked: navigateLeft()
+            }
+
+            // Navigate right:
+            ImageButton {
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                source: "qrc:/qml/images/ico-right.png"
+                onClicked: navigateRight()
+            }
         }
 
         // Foreground:

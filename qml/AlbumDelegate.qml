@@ -22,6 +22,43 @@ Component {
                 width: mainWindow.width; height: mainWindow.height; interactive: false
                 onCurrentIndexChanged: photosGridView.positionViewAtIndex(currentIndex, GridView.Contain)
                 highlightRangeMode: ListView.StrictlyEnforceRange; snapMode: ListView.SnapOneItem
+
+                // Animation:
+                NumberAnimation {id: anim; target: photosListView; property: "contentX"; duration: 500; easing.type: Easing.OutBounce}
+
+                // Go to specific index:
+                function gotoIndex(idx) {
+                    anim.running = false
+                    var pos = photosListView.contentX
+                    photosListView.positionViewAtIndex(idx, ListView.Beginning)
+                    var destPos = photosListView.contentX
+                    anim.from = pos
+                    anim.to = destPos
+                    anim.running = true
+                }
+
+                // Navigate left:
+                function onNavigateLeft()
+                {
+                    var currentIndex = photosListView.currentIndex
+                    if (currentIndex > 0)
+                        currentIndex--
+                    photosListView.gotoIndex(currentIndex)
+                }
+
+                // Navigate right:
+                function onNavigateRight()
+                {
+                    var currentIndex = photosListView.currentIndex
+                    if (currentIndex < (photosListView.count-1))
+                        currentIndex++
+                    photosListView.gotoIndex(currentIndex)
+                }
+
+                Component.onCompleted: {
+                    mainApplication.navigateLeft.connect(onNavigateLeft)
+                    mainApplication.navigateRight.connect(onNavigateRight)
+                }
             }
         }
 

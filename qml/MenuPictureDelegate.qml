@@ -49,10 +49,55 @@ Package {
             id: originalImage
             antialiasing: true
             source: Utils.urlPublicStatic(icon)
-            cache: false
+            cache: true
             fillMode: Image.PreserveAspectFit
             width: photoWrapper.width
             height: photoWrapper.height
+
+            MouseArea {
+                width: originalImage.paintedWidth; height: originalImage.paintedHeight; anchors.centerIn: originalImage
+                onClicked: {
+                    if (albumWrapper.state == "inGrid") {
+                        gridItem.GridView.view.currentIndex = index
+                        albumWrapper.state = 'fullscreen'
+                    } else {
+                        gridItem.GridView.view.currentIndex = index;
+                        albumWrapper.state = "inGrid"
+                    }
+                }
+            }
+
+            // Question:
+            ImageButton {
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.top: parent.top
+                anchors.topMargin: 8
+                source: "qrc:/qml/images/ico-question.png"
+                enabled: nutrition !== ""
+                visible: viewState === "fullscreen"
+                onClicked: {
+                    nutritionFactTimer.start()
+                    if (nutritionFactContainer.state === "")
+                        nutritionFactContainer.state = "on"
+                    else
+                        nutritionFactContainer.state = ""
+                }
+            }
+
+            // Add:
+            ImageButton {
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.top: parent.top
+                anchors.topMargin: 8
+                source: "qrc:/qml/images/ico-plus.png"
+                visible: viewState === "fullscreen"
+                onClicked: {
+                    _addToCartCommand.currentItem = categoryListModel.get(index)
+                    _addToCartCommand.execute()
+                }
+            }
         }
         Rectangle {
             id: nutritionFactContainer
@@ -67,7 +112,7 @@ Package {
                 antialiasing: true
                 source: nutrition !== "" ? Utils.urlPublicStatic(nutrition) : ""
                 visible: nutrition !== ""
-                cache: false
+                cache: true
                 fillMode: Image.PreserveAspectFit
             }
             states: State {
@@ -81,56 +126,6 @@ Package {
                 NumberAnimation {duration: 500}
             }
         }
-        Rectangle {
-            color: "transparent"
-            border.color: _settings.appGreen
-            border.width: 3
-            width: originalImage.width*1.5
-            height: originalImage.height
-            anchors.centerIn: originalImage
-            visible: viewState === "fullscreen"
-
-            // Question:
-            ImageButton {
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                source: "qrc:/qml/images/ico-question.png"
-                enabled: nutrition !== ""
-                onClicked: {
-                    nutritionFactTimer.start()
-                    if (nutritionFactContainer.state === "")
-                        nutritionFactContainer.state = "on"
-                    else
-                        nutritionFactContainer.state = ""
-                }
-            }
-
-            // Add:
-            ImageButton {
-                anchors.right: parent.right
-                anchors.rightMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                source: "qrc:/qml/images/ico-plus.png"
-                onClicked: {
-                    _addToCartCommand.currentItem = categoryListModel.get(index)
-                    _addToCartCommand.execute()
-                }
-            }
-        }
-
-        MouseArea {
-            width: originalImage.paintedWidth; height: originalImage.paintedHeight; anchors.centerIn: originalImage
-            onClicked: {
-                if (albumWrapper.state == 'inGrid') {
-                    gridItem.GridView.view.currentIndex = index;
-                    albumWrapper.state = 'fullscreen'
-                } else {
-                    gridItem.GridView.view.currentIndex = index;
-                    albumWrapper.state = 'inGrid'
-                }
-            }
-        }
 
         states: [
             State {
@@ -139,7 +134,7 @@ Package {
                 PropertyChanges { target: photoWrapper; opacity: stackItem.PathView.onPath ? 1.0 : 0.0 }
             },
             State {
-                name: 'inGrid'; when: albumWrapper.state == 'inGrid'
+                name: "inGrid"; when: albumWrapper.state == "inGrid"
                 ParentChange { target: photoWrapper; parent: gridItem; x: 10; y: 10; rotation: photoWrapper.randomAngle2 }
             },
             State {
@@ -158,7 +153,7 @@ Package {
 
         transitions: [
             Transition {
-                from: 'stacked'; to: 'inGrid'
+                from: 'stacked'; to: "inGrid"
                 SequentialAnimation {
                     PauseAnimation { duration: 10 * index }
                     ParentAnimation {
@@ -170,14 +165,14 @@ Package {
                 }
             },
             Transition {
-                from: 'inGrid'; to: 'stacked'
+                from: "inGrid"; to: 'stacked'
                 ParentAnimation {
                     target: photoWrapper; via: foreground
                     NumberAnimation { properties: 'x,y,rotation,opacity'; duration: 600; easing.type: 'OutQuart' }
                 }
             },
             Transition {
-                from: 'inGrid'; to: 'fullscreen'
+                from: "inGrid"; to: 'fullscreen'
                 SequentialAnimation {
                     ParentAnimation {
                         target: photoWrapper; via: foreground
@@ -190,7 +185,7 @@ Package {
                 }
             },
             Transition {
-                from: 'fullscreen'; to: 'inGrid'
+                from: 'fullscreen'; to: "inGrid"
                 ParentAnimation {
                     target: photoWrapper; via: foreground
                     NumberAnimation {
