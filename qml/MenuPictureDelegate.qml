@@ -69,7 +69,7 @@ Package {
 
             // Question:
             ImageButton {
-                anchors.left: parent.left
+                anchors.right: parent.left
                 anchors.leftMargin: 8
                 anchors.top: parent.top
                 anchors.topMargin: 8
@@ -87,7 +87,7 @@ Package {
 
             // Add:
             ImageButton {
-                anchors.right: parent.right
+                anchors.left: parent.right
                 anchors.rightMargin: 8
                 anchors.top: parent.top
                 anchors.topMargin: 8
