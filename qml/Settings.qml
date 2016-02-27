@@ -23,7 +23,7 @@ Item {
     }
 
     // Menu view top area height:
-    readonly property int menuViewTopAreaHeight: scaledHeight(320)
+    readonly property int menuViewTopAreaHeight: scaledHeight(refScreenHeight-1200)
 
     // Main window color:
     readonly property string mainWindowColor: "#d5d6d8"

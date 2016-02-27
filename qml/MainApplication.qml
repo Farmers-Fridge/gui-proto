@@ -10,7 +10,6 @@ Item {
 
     // View state:
     property string viewState: ""
-    onViewStateChanged: console.log("ICI: ", viewState)
 
     // Keyboard text:
     property string _keyboardText: ""

@@ -53,5 +53,6 @@
         <file>qml/commands/TakeReceiptEmailAddressCommand.qml</file>
         <file>qml/RestCommand.qml</file>
         <file>qml/commands/TakeCouponCommand.qml</file>
+        <file>qml/CategoryView.qml</file>
     </qresource>
 </RCC>
