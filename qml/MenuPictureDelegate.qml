@@ -59,7 +59,7 @@ Package {
                 onClicked: {
                     if (albumWrapper.state == "inGrid") {
                         gridItem.GridView.view.currentIndex = index
-                        albumWrapper.state = 'fullscreen'
+                        albumWrapper.state = "fullscreen"
                     } else {
                         gridItem.GridView.view.currentIndex = index;
                         albumWrapper.state = "inGrid"
@@ -129,7 +129,7 @@ Package {
 
         states: [
             State {
-                name: 'stacked'; when: albumWrapper.state == ''
+                name: "stacked"; when: albumWrapper.state == ''
                 ParentChange { target: photoWrapper; parent: stackItem; x: 10; y: 10 }
                 PropertyChanges { target: photoWrapper; opacity: stackItem.PathView.onPath ? 1.0 : 0.0 }
             },
@@ -138,7 +138,7 @@ Package {
                 ParentChange { target: photoWrapper; parent: gridItem; x: 10; y: 10; rotation: photoWrapper.randomAngle2 }
             },
             State {
-                name: 'fullscreen'; when: albumWrapper.state == 'fullscreen'
+                name: "fullscreen"; when: albumWrapper.state == "fullscreen"
                 ParentChange {
                     target: photoWrapper
                     parent: listItem
@@ -153,7 +153,7 @@ Package {
 
         transitions: [
             Transition {
-                from: 'stacked'; to: "inGrid"
+                from: "stacked"; to: "inGrid"
                 SequentialAnimation {
                     PauseAnimation { duration: 10 * index }
                     ParentAnimation {
@@ -165,14 +165,14 @@ Package {
                 }
             },
             Transition {
-                from: "inGrid"; to: 'stacked'
+                from: "inGrid"; to: "stacked"
                 ParentAnimation {
                     target: photoWrapper; via: foreground
                     NumberAnimation { properties: 'x,y,rotation,opacity'; duration: 600; easing.type: 'OutQuart' }
                 }
             },
             Transition {
-                from: "inGrid"; to: 'fullscreen'
+                from: "inGrid"; to: "fullscreen"
                 SequentialAnimation {
                     ParentAnimation {
                         target: photoWrapper; via: foreground
@@ -185,7 +185,7 @@ Package {
                 }
             },
             Transition {
-                from: 'fullscreen'; to: "inGrid"
+                from: "fullscreen"; to: "inGrid"
                 ParentAnimation {
                     target: photoWrapper; via: foreground
                     NumberAnimation {

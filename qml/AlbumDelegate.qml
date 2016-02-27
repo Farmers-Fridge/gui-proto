@@ -5,9 +5,14 @@ import QtQml.Models 2.1
 Component {
     id: albumDelegate
     Package {
+        // Delegate model:
+        DelegateModel {
+            id: visualModel; delegate: MenuPictureDelegate { }
+            model: CategoryListModel { id: categoryListModel; targetCategory: categoryName }
+        }
 
         Item {
-            Package.name: 'browser'
+            Package.name: "browser"
             GridView {
                 id: photosGridView; model: visualModel.parts.grid; width: mainWindow.width; height: mainWindow.height - 21
                 x: 0; y: 21; cellWidth: 160; cellHeight: 153; interactive: false
@@ -16,7 +21,7 @@ Component {
         }
 
         Item {
-            Package.name: 'fullscreen'
+            Package.name: "fullscreen"
             ListView {
                 id: photosListView; model: visualModel.parts.list; orientation: Qt.Horizontal
                 width: mainWindow.width; height: mainWindow.height; interactive: false
@@ -63,14 +68,9 @@ Component {
         }
 
         Item {
-            Package.name: 'album'
+            Package.name: "album"
             id: albumWrapper; width: 210; height: 220
             onStateChanged: mainApplication.viewState = state
-
-            DelegateModel {
-                id: visualModel; delegate: MenuPictureDelegate { }
-                model: CategoryListModel { id: categoryListModel; targetCategory: categoryName }
-            }
 
             BusyIndicator {
                 id: busyIndicator
@@ -108,7 +108,7 @@ Component {
                 PropertyChanges { target: backButton; onClicked: albumWrapper.state = "" }
             },
             State {
-                name: 'fullscreen'
+                name: "fullscreen"
                 PropertyChanges { target: photosGridView; interactive: false }
                 PropertyChanges { target: photosListView; interactive: true }
                 PropertyChanges { target: photosShade; opacity: 1 }
