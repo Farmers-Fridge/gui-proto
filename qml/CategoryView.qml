@@ -15,7 +15,10 @@ Row {
             fillMode: Image.PreserveAspectFit
             anchors.top: parent.top
             source: Utils.urlPublicStatic(icon)
-            onClicked: _controller.currentCategory = categoryName
+            onClicked: {
+                _controller.currentCategory = categoryName
+                mainApplication.updateBrowserView(index)
+            }
         }
     }
 }

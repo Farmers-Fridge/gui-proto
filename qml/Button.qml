@@ -18,7 +18,7 @@ Item {
     Image { anchors.fill: parent; source: "qrc:/qml/images/ico-cardboard.png"; antialiasing: true }
 
     Rectangle {
-        anchors.fill: container; color: container.tint; visible: container.tint != ""
+        anchors.fill: container; color: container.tint; visible: container.tint !== ""
         opacity: 0.25
     }
 

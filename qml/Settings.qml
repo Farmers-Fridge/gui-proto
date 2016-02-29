@@ -10,6 +10,9 @@ Item {
     readonly property int screenWidth: Screen.desktopAvailableWidth
     readonly property int screenHeight: Screen.desktopAvailableHeight
 
+    onScreenWidthChanged: console.log("SCREEN WIDTH: ", screenWidth)
+    onScreenHeightChanged: console.log("SCREEN HEIGHT: ", screenHeight)
+
     // Return scaled width:
     function scaledWidth(width)
     {
@@ -50,4 +53,10 @@ Item {
 
     // Checkout popup header height:
     readonly property int checkOutPopupHeaderHeight: 96
+
+    // Image width:
+    readonly property int gridImageWidth: scaledWidth(213)
+
+    // Image height:
+    readonly property int gridImageHeight: scaledHeight(565)
 }

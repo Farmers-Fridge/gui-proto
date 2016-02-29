@@ -8,6 +8,7 @@ Window {
     visibility: Window.FullScreen
     visible: true    
     property bool imageLoading: false
+
     color: _settings.mainWindowColor
 
     // Application data:
@@ -71,6 +72,9 @@ Window {
                     // Model ready:
                     if (status === XmlListModel.Ready)
                     {
+                        // Set current category name:
+                        _controller.currentCategory = categoryModel.get(0).categoryName
+
                         // Set category model:
                         _categoryModel = categoryModel
 

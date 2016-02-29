@@ -2,14 +2,19 @@ import QtQuick 2.4
 import "script/Utils.js" as Utils
 
 Package {
-    Item { id: stackItem; Package.name: 'stack'; width: 160; height: 153; z: stackItem.PathView.z }
-    Item { id: listItem; Package.name: 'list'; width: mainWindow.width + 40; height: 153 }
-    Item { id: gridItem; Package.name: 'grid'; width: 160; height: 153 }
+    Item { id: listItem; Package.name: "list"; width: mainWindow.width + 40; height: _settings.gridImageHeight }
+    Item { id: gridItem; Package.name: "grid"; width: mainWindow.width + 40; height: _settings.gridImageHeight }
     Item {
-        id: photoWrapper
-
+        id: menuImageWrapper
+        property int imageMargin: 20
         property double randomAngle: Math.random()*13-6
         property double randomAngle2: Math.random()*13-6
+
+        // Width/Height:
+        width: mainApplication.viewState === "fullscreen" ?
+            _settings.gridImageWidth*2-imageMargin : _settings.gridImageWidth
+        height: _settings.gridImageHeight-imageMargin
+        rotation: menuImageWrapper.randomAngle
 
         // Nutrition fact timer:
         Timer {
@@ -19,50 +24,47 @@ Package {
             repeat: false
         }
 
-        x: 0; y: 0; width: 140; height: 133
-        z: stackItem.PathView.z; rotation: photoWrapper.randomAngle
-
         // Image loading background
         Rectangle {
             id: imageLoadingBkg
-
-            property int w: photoWrapper.width;
-            property int h: photoWrapper.height
-            property double s: Utils.calculateScale(w, h, photoWrapper.width)
+            property int w: menuImageWrapper.width
+            property int h: menuImageWrapper.height
+            property double s: Utils.calculateScale(w, h, menuImageWrapper.width)
 
             color: "white"; anchors.centerIn: parent; antialiasing: true
-            width: w*s; height: h*s; visible: originalImage.status != Image.Ready
+            width: w*s; height: h*s; visible: originalImage.status !== Image.Ready
             Rectangle {
-                color: "#878787"; antialiasing: true
-                anchors { fill: parent; topMargin: 3; bottomMargin: 3; leftMargin: 3; rightMargin: 3 }
+                color: _settings.appGreen; antialiasing: true
+                anchors { fill: parent; margins: 3 }
             }
         }
 
+        // Image loaded background:
         Rectangle {
             id: border; color: "white"; anchors.centerIn: parent; antialiasing: true
             width: originalImage.paintedWidth + 6; height: originalImage.paintedHeight + 6
             visible: !imageLoadingBkg.visible
         }
 
-        BusyIndicator { anchors.centerIn: parent; on: originalImage.status != Image.Ready }
+        BusyIndicator { anchors.centerIn: parent; on: originalImage.status !== Image.Ready; visible: on}
         Image {
             id: originalImage
             antialiasing: true
             source: Utils.urlPublicStatic(icon)
             cache: true
             fillMode: Image.PreserveAspectFit
-            width: photoWrapper.width
-            height: photoWrapper.height
+            width: menuImageWrapper.width
+            height: menuImageWrapper.height
 
             MouseArea {
                 width: originalImage.paintedWidth; height: originalImage.paintedHeight; anchors.centerIn: originalImage
                 onClicked: {
-                    if (albumWrapper.state == "inGrid") {
+                    if (menuWrapper.state === "inGrid") {
                         gridItem.GridView.view.currentIndex = index
-                        albumWrapper.state = "fullscreen"
+                        menuWrapper.state = "fullscreen"
                     } else {
                         gridItem.GridView.view.currentIndex = index;
-                        albumWrapper.state = "inGrid"
+                        menuWrapper.state = "inGrid"
                     }
                 }
             }
@@ -102,8 +104,8 @@ Package {
         Rectangle {
             id: nutritionFactContainer
             color: "white"
-            width: photoWrapper.width
-            height: photoWrapper.height
+            width: menuImageWrapper.width
+            height: menuImageWrapper.height
             visible: viewState === "fullscreen"
             opacity: 0
             Image {
@@ -129,18 +131,13 @@ Package {
 
         states: [
             State {
-                name: "stacked"; when: albumWrapper.state == ''
-                ParentChange { target: photoWrapper; parent: stackItem; x: 10; y: 10 }
-                PropertyChanges { target: photoWrapper; opacity: stackItem.PathView.onPath ? 1.0 : 0.0 }
+                name: "inGrid"; when: menuWrapper.state === "inGrid"
+                ParentChange { target: menuImageWrapper; parent: gridItem; x: 10; y: 10; rotation: menuImageWrapper.randomAngle2 }
             },
             State {
-                name: "inGrid"; when: albumWrapper.state == "inGrid"
-                ParentChange { target: photoWrapper; parent: gridItem; x: 10; y: 10; rotation: photoWrapper.randomAngle2 }
-            },
-            State {
-                name: "fullscreen"; when: albumWrapper.state == "fullscreen"
+                name: "fullscreen"; when: menuWrapper.state === "fullscreen"
                 ParentChange {
-                    target: photoWrapper
+                    target: menuImageWrapper
                     parent: listItem
                     x: (menuViewArea.width-width)/2; y: 16
                     rotation: 0
@@ -153,33 +150,14 @@ Package {
 
         transitions: [
             Transition {
-                from: "stacked"; to: "inGrid"
-                SequentialAnimation {
-                    PauseAnimation { duration: 10 * index }
-                    ParentAnimation {
-                        target: photoWrapper; via: foreground
-                        NumberAnimation {
-                            target: photoWrapper; properties: 'x,y,rotation,opacity'; duration: 600; easing.type: 'OutQuart'
-                        }
-                    }
-                }
-            },
-            Transition {
-                from: "inGrid"; to: "stacked"
-                ParentAnimation {
-                    target: photoWrapper; via: foreground
-                    NumberAnimation { properties: 'x,y,rotation,opacity'; duration: 600; easing.type: 'OutQuart' }
-                }
-            },
-            Transition {
                 from: "inGrid"; to: "fullscreen"
                 SequentialAnimation {
                     ParentAnimation {
-                        target: photoWrapper; via: foreground
+                        target: menuImageWrapper; via: foreground
                         NumberAnimation {
-                            targets: [ photoWrapper, border ]
-                            properties: 'x,y,width,height,opacity,rotation'
-                            duration: gridItem.GridView.isCurrentItem ? 600 : 1; easing.type: 'OutQuart'
+                            targets: [ menuImageWrapper, border ]
+                            properties: "x,y,width,height,opacity,rotation"
+                            duration: gridItem.GridView.isCurrentItem ? 600 : 1; easing.type: "OutQuart"
                         }
                     }
                 }
@@ -187,11 +165,11 @@ Package {
             Transition {
                 from: "fullscreen"; to: "inGrid"
                 ParentAnimation {
-                    target: photoWrapper; via: foreground
+                    target: menuImageWrapper; via: foreground
                     NumberAnimation {
-                        targets: [ photoWrapper, border ]
-                        properties: 'x,y,width,height,rotation,opacity'
-                        duration: gridItem.GridView.isCurrentItem ? 600 : 1; easing.type: 'OutQuart'
+                        targets: [ menuImageWrapper, border ]
+                        properties: "x,y,width,height,rotation,opacity"
+                        duration: gridItem.GridView.isCurrentItem ? 600 : 1; easing.type: "OutQuart"
                     }
                 }
             }

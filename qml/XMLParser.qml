@@ -11,8 +11,8 @@ Item {
             if (xhr.readyState === XMLHttpRequest.DONE)
                 dataReady(xhr.responseText)
         }
-        xhr.open('GET', url, true)
-        xhr.send('')
+        xhr.open("GET", url, true)
+        xhr.send("")
     }
 
     // Url changed:

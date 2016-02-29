@@ -13,6 +13,7 @@ class Controller : public QObject, public IService
     Q_PROPERTY(QString currentRoute READ currentRoute NOTIFY currentRouteChanged)
     Q_PROPERTY(QString currentIP READ currentIP NOTIFY currentIPChanged)
     Q_PROPERTY(QObject *cartModel READ cartModel NOTIFY cartModelChanged)
+    Q_PROPERTY(QString currentCategory READ currentCategory WRITE setCurrentCategory NOTIFY currentCategoryChanged)
 
 public:
     friend class MenuViewer;
@@ -77,6 +78,12 @@ private:
     // Return cart model:
     QObject *cartModel() const;
 
+    // Return current category:
+    const QString &currentCategory() const;
+
+    // Set current category:
+    void setCurrentCategory(const QString &categoryName);
+
 private:
     // Application keys:
     QStringList mAppKeys;
@@ -93,6 +100,9 @@ private:
     // Cart model:
     CartModel *mCartModel;
 
+    // Current category:
+    QString mCurrentCategory;
+
 signals:
     // Current route changed:
     void currentRouteChanged();
@@ -102,6 +112,9 @@ signals:
 
     // Cart model changed:
     void cartModelChanged();
+
+    // Current category changed:
+    void currentCategoryChanged();
 };
 
 #endif // CONTROLLER_H

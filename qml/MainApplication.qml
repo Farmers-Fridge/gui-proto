@@ -66,7 +66,7 @@ Item {
     }
 
     // Delegate model:
-    DelegateModel { id: albumVisualModel; model: _categoryModel; delegate: AlbumDelegate {} }
+    DelegateModel { id: albumVisualModel; model: _categoryModel; delegate: MenuDelegate {} }
 
     // Header area:
     HeaderArea {
@@ -74,6 +74,12 @@ Item {
         anchors.top: parent.top
         width: parent.width
         height: _settings.menuViewTopAreaHeight
+    }
+
+    // Update browser view:
+    function updateBrowserView(index)
+    {
+        browserView.positionViewAtIndex(index, ListView.Beginning)
     }
 
     // Menu view area:
@@ -84,23 +90,23 @@ Item {
         anchors.top: headerArea.bottom
         anchors.bottom: parent.bottom
 
-        // Grid view:
-        GridView {
-            id: albumView; width: parent.width; height: parent.height; cellWidth: 210; cellHeight: 220
-            model: albumVisualModel.parts.album; visible: albumsShade.opacity != 1.0
-        }
-
-        // Album shade:
-        Rectangle {
-            id: albumsShade; color: mainWindow.color
-            width: parent.width; height: parent.height; opacity: 0.0
-        }
-
         // Image browser:
-        ListView { anchors.fill: parent; model: albumVisualModel.parts.browser; interactive: false }
+        ListView {
+            id: browserView
+            anchors.fill: parent
+            model: albumVisualModel.parts.browser
+            interactive: false;
+            highlightRangeMode: ListView.StrictlyEnforceRange
+            clip: true
+        }
 
         // Photo shade:
-        Rectangle { id: photosShade; color: 'black'; width: parent.width; height: parent.height; opacity: 0; visible: opacity != 0.0 }
+        Rectangle { id: photosShade;
+            color: "black"; width: parent.width; height: parent.height; opacity: 0; visible: opacity != 0.0
+            Behavior on opacity {
+                NumberAnimation {duration: 500}
+            }
+        }
 
         // Listview:
         ListView {
@@ -147,7 +153,8 @@ Item {
             anchors.rightMargin: 8
             anchors.top: parent.top
             anchors.topMargin: 8
-            visible: viewState !== ""
+            visible: viewState !== "inGrid"
+            onClicked: menuWrapper.state = "inGrid"
         }
     }
 
@@ -178,7 +185,7 @@ Item {
         id: busyIndicator
         anchors.centerIn: parent
         on: _appIsBusy
-        visible: _appIsBusy
+        visible: on
     }
 }
 

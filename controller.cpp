@@ -8,7 +8,7 @@
 
 // Constructor:
 Controller::Controller(QObject *parent) : QObject(parent),
-    mEventWatcher(0), mCartModel(0)
+    mEventWatcher(0), mCartModel(0), mCurrentCategory("")
 {
     // Define application keys:
     mAppKeys << "CURRENT_ROUTE" << "CURRENT_IP";
@@ -148,6 +148,20 @@ QString Controller::currentIP() const
 QObject *Controller::cartModel() const
 {
     return mCartModel;
+}
+
+// Return current category:
+const QString &Controller::currentCategory() const
+{
+    return mCurrentCategory;
+}
+
+// Set current category:
+void Controller::setCurrentCategory(const QString &categoryName)
+{
+    mCurrentCategory = categoryName;
+    qDebug() << "CURRENT CATEGORY = " << categoryName;
+    emit currentCategoryChanged();
 }
 
 // Increment item count:

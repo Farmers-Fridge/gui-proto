@@ -1,12 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/AlbumDelegate.qml</file>
+        <file>qml/MenuDelegate.qml</file>
         <file>qml/BusyIndicator.qml</file>
         <file>qml/Button.qml</file>
         <file>qml/main.qml</file>
         <file>qml/MenuPictureDelegate.qml</file>
         <file>qml/Settings.qml</file>
-        <file>qml/Tag.qml</file>
         <file>qml/XMLParser.qml</file>
         <file>qml/images/ico-box-shadow.png</file>
         <file>qml/images/ico-busy.png</file>
@@ -15,7 +14,6 @@
         <file>qml/script/Utils.js</file>
         <file>qml/MainApplication.qml</file>
         <file>qml/CategoryListModel.qml</file>
-        <file>qml/images/ico-logo.png</file>
         <file>qml/HeaderArea.qml</file>
         <file>qml/images/ico-cancel.png</file>
         <file>qml/ImageButton.qml</file>
@@ -54,5 +52,8 @@
         <file>qml/RestCommand.qml</file>
         <file>qml/commands/TakeCouponCommand.qml</file>
         <file>qml/CategoryView.qml</file>
+        <file>qml/images/ico-logo1.png</file>
+        <file>qml/images/ico-logo2.png</file>
+        <file>qml/images/ico-background.png</file>
     </qresource>
 </RCC>

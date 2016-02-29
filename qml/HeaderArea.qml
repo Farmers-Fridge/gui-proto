@@ -2,16 +2,21 @@ import QtQuick 2.4
 import "script/Utils.js" as Utils
 
 // Header:
-Item {
+Rectangle {
     id: header
+    color: "transparent"
+    border.color: _settings.appGreen
+    border.width: 3
 
     // Category view:
     CategoryView {
         id: categoryView
         width: parent.width
+        height: parent.height/2
         anchors.top: parent.top
     }
 
+    // Controls:
     Item {
         width: parent.width
         anchors.top: categoryView.bottom
@@ -43,7 +48,7 @@ Item {
         Image {
             id: logo
             anchors.centerIn: parent
-            source: "qrc:/qml/images/ico-logo.png"
+            source: "qrc:/qml/images/ico-logo1.png"
         }
 
         // Cart total:
