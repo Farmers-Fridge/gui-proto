@@ -16,7 +16,7 @@ Component {
             id: menuWrapper
             Package.name: "browser"
             state: "inGrid"
-            onStateChanged: mainApplication.viewState = state
+            onStateChanged: _viewState = state
             GridView {
                 id: photosGridView
                 model: visualModel.parts.grid
@@ -44,6 +44,11 @@ Component {
                 PropertyChanges { target: backButton; onClicked: menuWrapper.state = "inGrid" }
             }
             ]
+            function onGoBackToMainPage()
+            {
+                menuWrapper.state = "inGrid"
+            }
+            Component.onCompleted: mainApplication.goBackToMainPage.connect(onGoBackToMainPage)
         }
 
         // Full screen:
@@ -52,7 +57,11 @@ Component {
             ListView {
                 id: photosListView; model: visualModel.parts.list; orientation: Qt.Horizontal
                 width: mainWindow.width; height: mainWindow.height; interactive: false
-                onCurrentIndexChanged: photosGridView.positionViewAtIndex(currentIndex, GridView.Contain)
+                onCurrentIndexChanged: {
+                    photosGridView.positionViewAtIndex(currentIndex, GridView.Contain)
+                    _currentItem = categoryListModel.get(currentIndex)
+                }
+
                 highlightRangeMode: ListView.StrictlyEnforceRange; snapMode: ListView.SnapOneItem
 
                 // Animation:

@@ -9,13 +9,16 @@ Item {
     anchors.fill: parent
 
     // View state:
-    property string viewState: ""
+    property string _viewState: ""
 
     // Keyboard text:
     property string _keyboardText: ""
 
     // Application busy state:
     property bool _appIsBusy: false
+
+    // Current item:
+    property variant _currentItem: undefined
 
     // Load popup:
     signal showPopup(string popupId)
@@ -34,6 +37,9 @@ Item {
 
     // Navigate right:
     signal navigateRight()
+
+    // Go back to main page:
+    signal goBackToMainPage()
 
     // Check out command:
     CheckOutCommand {
@@ -153,7 +159,7 @@ Item {
             anchors.rightMargin: 8
             anchors.top: parent.top
             anchors.topMargin: 8
-            visible: viewState !== "inGrid"
+            visible: _viewState !== "inGrid"
             onClicked: menuWrapper.state = "inGrid"
         }
     }

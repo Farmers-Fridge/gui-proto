@@ -61,9 +61,10 @@ Package {
                 cache: true
                 fillMode: Image.PreserveAspectFit
             }
-            visible: (nutrition !== "") && (mainApplication.viewState === "fullscreen")
+            visible: (nutrition !== "") && (_viewState === "fullscreen")
         }
 
+        // Original image:
         Image {
             id: originalImage
             antialiasing: true
@@ -83,20 +84,6 @@ Package {
                         gridItem.GridView.view.currentIndex = index;
                         menuWrapper.state = "inGrid"
                     }
-                }
-            }
-
-            // Add:
-            ImageButton {
-                anchors.right: parent.right
-                anchors.rightMargin: 8
-                anchors.top: parent.top
-                anchors.topMargin: 8
-                source: "qrc:/qml/images/ico-plus.png"
-                visible: viewState === "fullscreen"
-                onClicked: {
-                    _addToCartCommand.currentItem = categoryListModel.get(index)
-                    _addToCartCommand.execute()
                 }
             }
         }

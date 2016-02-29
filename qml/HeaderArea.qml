@@ -49,6 +49,27 @@ Rectangle {
             id: logo
             anchors.centerIn: parent
             source: "qrc:/qml/images/ico-logo1.png"
+            opacity: _viewState !== "fullscreen" ? 1 : 0
+            Behavior on opacity {
+                NumberAnimation {duration: 500}
+            }
+        }
+
+        // Add:
+        ImageButton {
+            anchors.centerIn: parent
+            source: "qrc:/qml/images/ico-plus.png"
+            opacity: _viewState === "fullscreen" ? 1 : 0
+            Behavior on opacity {
+                NumberAnimation {duration: 500}
+            }
+            onClicked: {
+                if (typeof(_currentItem) !== "undefined")
+                {
+                    _addToCartCommand.currentItem = _currentItem
+                    _addToCartCommand.execute()
+                }
+            }
         }
 
         // Cart total:

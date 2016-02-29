@@ -5,8 +5,6 @@ import "script/Utils.js" as Utils
 Row {
     Repeater {
         model: _categoryModel
-        width: parent.width
-        height: itemIcon.paintedHeight
 
         // Item icon:
         ImageButton {
@@ -18,6 +16,7 @@ Row {
             onClicked: {
                 _controller.currentCategory = categoryName
                 mainApplication.updateBrowserView(index)
+                mainApplication.goBackToMainPage()
             }
         }
     }
