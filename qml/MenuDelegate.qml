@@ -57,11 +57,7 @@ Component {
             ListView {
                 id: photosListView; model: visualModel.parts.list; orientation: Qt.Horizontal
                 width: mainWindow.width; height: mainWindow.height; interactive: false
-                onCurrentIndexChanged: {
-                    photosGridView.positionViewAtIndex(currentIndex, GridView.Contain)
-                    _currentItem = categoryListModel.get(currentIndex)
-                }
-
+                onCurrentIndexChanged: photosGridView.positionViewAtIndex(currentIndex, GridView.Contain)
                 highlightRangeMode: ListView.StrictlyEnforceRange; snapMode: ListView.SnapOneItem
 
                 // Animation:
@@ -96,10 +92,22 @@ Component {
                     photosListView.gotoIndex(currentIndex)
                 }
 
+                // Add current item:
+                function onAddCurrentItem()
+                {
+                    var currentItem = categoryListModel.get(photosListView.currentIndex)
+                    if ((typeof(currentItem) !== "undefined") && (_controller.currentCategory === categoryName))
+                    {
+                        _addToCartCommand.currentItem = currentItem
+                        _addToCartCommand.execute()
+                    }
+                }
+
                 // Handle navigation:
                 Component.onCompleted: {
                     mainApplication.navigateLeft.connect(onNavigateLeft)
                     mainApplication.navigateRight.connect(onNavigateRight)
+                    mainApplication.addCurrentItem.connect(onAddCurrentItem)
                 }
             }
         }

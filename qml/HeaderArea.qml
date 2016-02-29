@@ -63,13 +63,7 @@ Rectangle {
             Behavior on opacity {
                 NumberAnimation {duration: 500}
             }
-            onClicked: {
-                if (typeof(_currentItem) !== "undefined")
-                {
-                    _addToCartCommand.currentItem = _currentItem
-                    _addToCartCommand.execute()
-                }
-            }
+            onClicked: mainApplication.addCurrentItem()
         }
 
         // Cart total:

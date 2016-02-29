@@ -74,6 +74,27 @@ Package {
             width: menuImageWrapper.width
             height: menuImageWrapper.height
 
+            Image {
+                width: 128
+                fillMode: Image.PreserveAspectFit
+                rotation: 3
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.top: parent.top
+                anchors.topMargin: 8
+                visible: _viewState === "fullscreen"
+                source: "qrc:/qml/images/ico-cardboard.png"
+                antialiasing: true
+
+                // Display price top right:
+                CommonText {
+                    anchors.centerIn: parent
+                    color: "white"
+                    text: price
+                    font.pixelSize: 30
+                }
+            }
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: {

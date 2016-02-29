@@ -11,6 +11,7 @@ ListView {
         height: _settings.cartViewDelegateHeight
 
         Row {
+            id: row
             anchors.fill: parent
             Row {
                 width: parent.width/3

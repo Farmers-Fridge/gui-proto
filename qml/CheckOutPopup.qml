@@ -30,6 +30,15 @@ Popup {
                 }
             }
 
+            // Separator:
+            Rectangle {
+                width: 1
+                height: parent.height-8
+                anchors.left: firstCol.right
+                anchors.verticalCenter: parent.verticalCenter
+                color: "white"
+            }
+
             // Second col:
             Item {
                 id: secondCol
@@ -42,6 +51,15 @@ Popup {
                     color: "white"
                     font.pixelSize: 30
                 }
+            }
+
+            // Separator:
+            Rectangle {
+                width: 1
+                height: parent.height-8
+                anchors.left: secondCol.right
+                anchors.verticalCenter: parent.verticalCenter
+                color: "white"
             }
 
             // Third col:
@@ -58,6 +76,15 @@ Popup {
                 }
             }
 
+            // Separator:
+            Rectangle {
+                width: 1
+                height: parent.height-8
+                anchors.left: thirdCol.right
+                anchors.verticalCenter: parent.verticalCenter
+                color: "white"
+            }
+
             // Fourth col:
             Item {
                 id: fourthCol
@@ -70,6 +97,15 @@ Popup {
                     color: "white"
                     font.pixelSize: 30
                 }
+            }
+
+            // Separator:
+            Rectangle {
+                width: 1
+                height: parent.height-8
+                anchors.left: fourthCol.right
+                anchors.verticalCenter: parent.verticalCenter
+                color: "white"
             }
 
             // Fifth col:

@@ -17,9 +17,6 @@ Item {
     // Application busy state:
     property bool _appIsBusy: false
 
-    // Current item:
-    property variant _currentItem: undefined
-
     // Load popup:
     signal showPopup(string popupId)
 
@@ -40,6 +37,9 @@ Item {
 
     // Go back to main page:
     signal goBackToMainPage()
+
+    // Add current item:
+    signal addCurrentItem()
 
     // Check out command:
     CheckOutCommand {
