@@ -20,7 +20,7 @@ Popup {
                 anchors.left: parent.left
                 anchors.leftMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
-                text: qsTr("Recently Added Items")
+                text: _settings.cartViewTitle
                 color: "white"
             }
             ImageButton {
@@ -31,7 +31,7 @@ Popup {
                 width: parent.height
                 onClicked: {
                     _clearCartCommand.execute()
-                    popup.state = ""
+                    checkOutPopup.state = ""
                 }
             }
         }
@@ -120,6 +120,8 @@ Popup {
             }
         }
     }
+
+    // Cart count changed: if cart empty, close popup:
     function onCartCountChanged()
     {
         if (_controller.cartModel.cartCount < 1)

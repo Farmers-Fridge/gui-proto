@@ -59,4 +59,7 @@ Item {
 
     // Image height:
     readonly property int gridImageHeight: scaledHeight(565)
+
+    // Cart view title:
+    readonly property string cartViewTitle: qsTr("Fresh Market")
 }
