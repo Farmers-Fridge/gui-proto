@@ -1,7 +1,7 @@
 import QtQuick 2.4
 
 Popup {
-    id: popup
+    id: checkOutPopup
     popupId: "_checkout_"
     title: _settings.shoppingCartTitle
 
@@ -120,5 +120,11 @@ Popup {
             }
         }
     }
+    function onCartCountChanged()
+    {
+        if (_controller.cartModel.cartCount < 1)
+            checkOutPopup.state = ""
+    }
+    Component.onCompleted: _controller.cartModel.cartTotalChanged.connect(onCartCountChanged)
 }
 

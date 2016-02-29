@@ -11,8 +11,7 @@ Package {
         property double randomAngle2: Math.random()*13-6
 
         // Width/Height:
-        width: mainApplication.viewState === "fullscreen" ?
-            _settings.gridImageWidth*2-imageMargin : _settings.gridImageWidth
+        width: _settings.gridImageWidth
         height: _settings.gridImageHeight-imageMargin
         rotation: menuImageWrapper.randomAngle
 
@@ -47,6 +46,24 @@ Package {
         }
 
         BusyIndicator { anchors.centerIn: parent; on: originalImage.status !== Image.Ready; visible: on}
+
+        Rectangle {
+            id: nutritionFactContainer
+            color: "white"
+            width: menuImageWrapper.width
+            height: menuImageWrapper.height
+            x: (nutrition !== "") ? originalImage.x + originalImage.width : originalImage.x
+            Image {
+                id: nutritionfactImage
+                anchors.fill: parent
+                antialiasing: true
+                source: nutrition !== "" ? Utils.urlPublicStatic(nutrition) : ""
+                cache: true
+                fillMode: Image.PreserveAspectFit
+            }
+            visible: (nutrition !== "") && (mainApplication.viewState === "fullscreen")
+        }
+
         Image {
             id: originalImage
             antialiasing: true
@@ -57,7 +74,7 @@ Package {
             height: menuImageWrapper.height
 
             MouseArea {
-                width: originalImage.paintedWidth; height: originalImage.paintedHeight; anchors.centerIn: originalImage
+                anchors.fill: parent
                 onClicked: {
                     if (menuWrapper.state === "inGrid") {
                         gridItem.GridView.view.currentIndex = index
@@ -69,27 +86,9 @@ Package {
                 }
             }
 
-            // Question:
-            ImageButton {
-                anchors.right: parent.left
-                anchors.leftMargin: 8
-                anchors.top: parent.top
-                anchors.topMargin: 8
-                source: "qrc:/qml/images/ico-question.png"
-                enabled: nutrition !== ""
-                visible: viewState === "fullscreen"
-                onClicked: {
-                    nutritionFactTimer.start()
-                    if (nutritionFactContainer.state === "")
-                        nutritionFactContainer.state = "on"
-                    else
-                        nutritionFactContainer.state = ""
-                }
-            }
-
             // Add:
             ImageButton {
-                anchors.left: parent.right
+                anchors.right: parent.right
                 anchors.rightMargin: 8
                 anchors.top: parent.top
                 anchors.topMargin: 8
@@ -99,33 +98,6 @@ Package {
                     _addToCartCommand.currentItem = categoryListModel.get(index)
                     _addToCartCommand.execute()
                 }
-            }
-        }
-        Rectangle {
-            id: nutritionFactContainer
-            color: "white"
-            width: menuImageWrapper.width
-            height: menuImageWrapper.height
-            visible: viewState === "fullscreen"
-            opacity: 0
-            Image {
-                id: nutritionfactImage
-                anchors.fill: parent
-                antialiasing: true
-                source: nutrition !== "" ? Utils.urlPublicStatic(nutrition) : ""
-                visible: nutrition !== ""
-                cache: true
-                fillMode: Image.PreserveAspectFit
-            }
-            states: State {
-                name: "on"
-                PropertyChanges {
-                    target: nutritionFactContainer
-                    opacity: 1
-                }
-            }
-            Behavior on opacity {
-                NumberAnimation {duration: 500}
             }
         }
 
@@ -139,7 +111,11 @@ Package {
                 ParentChange {
                     target: menuImageWrapper
                     parent: listItem
-                    x: (menuViewArea.width-width)/2; y: 16
+                }
+                PropertyChanges {
+                    target: menuImageWrapper
+                    x: (menuViewArea.width-((nutrition === "") ? 1 : 2)*width)/2
+                    y: 16
                     rotation: 0
                     width: menuViewArea.height-32
                     height: width

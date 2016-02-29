@@ -1,6 +1,7 @@
 import QtQuick 2.4
 
 Item {
+    id: popup
     property string popupId: ""
     property bool isPopup: true
     property int idleTime: 0
