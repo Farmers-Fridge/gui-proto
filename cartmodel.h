@@ -32,6 +32,9 @@ public:
     void addItem(const QString &vendItemName, const QString &icon,
         const QString &nutrition, const QString &category, const QString &price);
 
+    // Remove item:
+    void removeItem(const QString &vendItemName);
+
     // Clear:
     void clear();
 
@@ -44,6 +47,9 @@ private:
 
     // Return cart count:
     int cartCount() const;
+
+    // Return index of specific item:
+    int indexOf(const QString &vendItemName) const;
 
 private:
     // Items:

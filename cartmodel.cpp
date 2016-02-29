@@ -119,6 +119,20 @@ void CartModel::addItem(const QString &vendItemName, const QString &icon,
     emit cartTotalChanged();
 }
 
+// Remove item:
+void CartModel::removeItem(const QString &vendItemName)
+{
+    int itemIndex = indexOf(vendItemName);
+    if (itemIndex < 0)
+        return;
+    beginRemoveRows(QModelIndex(), itemIndex, itemIndex);
+    mItems.removeAt(itemIndex);
+    endRemoveRows();
+
+    // Update cart total:
+    emit cartTotalChanged();
+}
+
 // Return cart total:
 double CartModel::cartTotal() const
 {
@@ -135,6 +149,18 @@ int CartModel::cartCount() const
     for (int i=0; i<mItems.size(); i++)
         count += mItems[i]._count;
     return count;
+}
+
+// Return index of specific item:
+int CartModel::indexOf(const QString &vendItemName) const
+{
+    for (int i=0; i<mItems.size(); i++)
+    {
+        QString currentItemName = mItems[i]._vendItemName;
+        if (currentItemName.compare(vendItemName, Qt::CaseInsensitive) == 0)
+            return i;
+    }
+    return -1;
 }
 
 // Clear:

@@ -10,34 +10,91 @@ ListView {
         width: parent.width
         height: _settings.cartViewDelegateHeight
 
-        // Item icon:
-        Image {
-            id: image
-            anchors.left: parent.left
-            anchors.leftMargin: 4
-            anchors.verticalCenter: parent.verticalCenter
-            height: parent.height
-            width: height
-            fillMode: Image.PreserveAspectFit
-            source: Utils.urlPublicStatic(icon)
-        }
+        Row {
+            anchors.fill: parent
+            Row {
+                width: parent.width/3
+                height: parent.height
 
-        // Vend item name:
-        CommonText {
-            anchors.left: image.right
-            anchors.leftMargin: 8
-            anchors.top: parent.top
-            anchors.topMargin: 8
-            text: vendItemName
-        }
+                // Item icon:
+                Image {
+                    id: image
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: height
+                    fillMode: Image.PreserveAspectFit
+                    source: Utils.urlPublicStatic(icon)
+                }
 
-        // Price:
-        CommonText {
-            anchors.left: image.right
-            anchors.leftMargin: 8
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 8
-            text: count + " X $" + price
+                // Vend item name:
+                Item {
+                    anchors.verticalCenter: image.verticalCenter
+                    height: image.height/2
+                    width: image.width
+                    Column {
+                        // Vend item name:
+                        CommonText {
+                            text: vendItemName
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        // More info:
+                        CommonText {
+                            text: '<html><style type="text/css"></style><a href="http://google.com">more info...</a></html>'
+                            //onLinkActivated: Qt.openUrlExternally(link)
+                            verticalAlignment: Text.AlignVCenter
+                            color: _settings.appGreen
+                        }
+                    }
+                }
+            }
+
+            // Incremental button:
+            Item {
+                width: parent.width/4
+                height: parent.height
+
+                // Incremental button:
+                IncrementalButton {
+                    anchors.centerIn: parent
+                    value: count
+                    onIncrement: _controller.incrementItemCount(vendItemName)
+                    onDecrement: _controller.decrementItemCount(vendItemName)
+                }
+            }
+
+            // Price:
+            Item {
+                width: parent.width*5/36
+                height: parent.height
+                CommonText {
+                    anchors.centerIn: parent
+                    text: "$"+price
+                    font.pixelSize: 30
+                }
+            }
+
+            // Total:
+            Item {
+                width: parent.width*5/36
+                height: parent.height
+                CommonText {
+                    anchors.centerIn: parent
+                    text: "$"+count*price
+                    font.pixelSize: 30
+                }
+            }
+
+            // Trash:
+            Item {
+                width: parent.width*5/36
+                height: parent.height
+                ImageButton {
+                    anchors.centerIn: parent
+                    source: "qrc:/qml/images/ico-trash.png"
+                    onClicked: _controller.removeItem(vendItemName)
+                }
+            }
         }
 
         // Separator:
@@ -46,16 +103,6 @@ ListView {
             height: 1
             width: parent.width
             color: _settings.appGreen
-        }
-
-        // Incremental button:
-        IncrementalButton {
-            anchors.left: image.right
-            anchors.leftMargin: 8
-            anchors.verticalCenter: parent.verticalCenter
-            value: count
-            onIncrement: _controller.incrementItemCount(vendItemName)
-            onDecrement: _controller.decrementItemCount(vendItemName)
         }
     }
 }

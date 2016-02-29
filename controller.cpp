@@ -183,6 +183,12 @@ void Controller::addItem(const QString &vendItemName, const QString &icon,
     mCartModel->addItem(vendItemName, icon, nutrition, category, price);
 }
 
+// Remove item:
+void Controller::removeItem(const QString &vendItemName)
+{
+    mCartModel->removeItem(vendItemName);
+}
+
 // Clear cart:
 void Controller::clearCart()
 {

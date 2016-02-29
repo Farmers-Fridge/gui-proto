@@ -32,7 +32,7 @@ Item {
     readonly property string mainWindowColor: "#d5d6d8"
 
     // Used for CommonText element:
-    readonly property int fontSize: 20
+    readonly property int pixelSize: 24
     readonly property string fontFamily: "Comic Sans MS"
     readonly property string textColor: "black"
 

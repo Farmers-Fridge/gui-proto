@@ -6,32 +6,83 @@ Popup {
     title: _settings.shoppingCartTitle
 
     contents: Item {
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
 
         // Header:
         Rectangle {
             id: header
             anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
+            width: parent.width
             height: _settings.checkOutPopupHeaderHeight
             color: "brown"
-            CommonText {
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                text: _settings.cartViewTitle
-                color: "white"
+
+            // First col:
+            Item {
+                id: firstCol
+                width: parent.width/3
+                height: parent.height
+                CommonText {
+                    anchors.centerIn: parent
+                    text: qsTr("PRODUCT NAME")
+                    color: "white"
+                    font.pixelSize: 30
+                }
             }
-            ImageButton {
-                anchors.right: parent.right
-                anchors.rightMargin: 4
-                anchors.verticalCenter: parent.verticalCenter
-                source: "qrc:/qml/images/ico-clear.png"
-                width: parent.height
-                onClicked: {
-                    _clearCartCommand.execute()
-                    checkOutPopup.state = ""
+
+            // Second col:
+            Item {
+                id: secondCol
+                width: parent.width/4
+                height: parent.height
+                anchors.left: firstCol.right
+                CommonText {
+                    anchors.centerIn: parent
+                    text: qsTr("QUANTITY")
+                    color: "white"
+                    font.pixelSize: 30
+                }
+            }
+
+            // Third col:
+            Item {
+                id: thirdCol
+                width: parent.width*5/36
+                height: parent.height
+                anchors.left: secondCol.right
+                CommonText {
+                    anchors.centerIn: parent
+                    text: qsTr("PRICE")
+                    color: "white"
+                    font.pixelSize: 30
+                }
+            }
+
+            // Fourth col:
+            Item {
+                id: fourthCol
+                width: parent.width*5/36
+                height: parent.height
+                anchors.left: thirdCol.right
+                CommonText {
+                    anchors.centerIn: parent
+                    text: qsTr("TOTAL")
+                    color: "white"
+                    font.pixelSize: 30
+                }
+            }
+
+            // Fifth col:
+            Item {
+                id: fifthCol
+                width: parent.width*5/36
+                height: parent.height
+                anchors.left: fourthCol.right
+                CommonText {
+                    anchors.centerIn: parent
+                    text: qsTr("ACTIONS")
+                    color: "white"
+                    font.pixelSize: 30
                 }
             }
         }

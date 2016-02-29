@@ -37,6 +37,9 @@ public:
     Q_INVOKABLE void addItem(const QString &vendItemName, const QString &icon,
         const QString &nutrition, const QString &category, const QString &price);
 
+    // Remove item:
+    Q_INVOKABLE void removeItem(const QString &vendItemName);
+
     // Clear cart:
     Q_INVOKABLE void clearCart();
 
