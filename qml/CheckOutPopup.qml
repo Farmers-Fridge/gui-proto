@@ -114,6 +114,7 @@ Popup {
                 anchors.verticalCenter: parent.verticalCenter
                 text: "Total: $" + _controller.cartModel.cartTotal
                 color: "white"
+                font.pixelSize: 30
             }
 
             // Email:
