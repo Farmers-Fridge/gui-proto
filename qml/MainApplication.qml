@@ -127,7 +127,7 @@ Item {
             border.color: _settings.appGreen
             border.width: 3
             anchors.fill: fullScreenListView
-            visible: viewState === "fullscreen"
+            visible: _viewState === "fullscreen"
 
             // Navigate left:
             ImageButton {
