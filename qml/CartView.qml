@@ -7,6 +7,7 @@ ListView {
     model: _controller.cartModel
     snapMode: ListView.SnapOneItem
     delegate: Item {
+        id: delegate
         width: parent.width
         height: _settings.cartViewDelegateHeight
 
@@ -14,28 +15,42 @@ ListView {
             id: row
             anchors.fill: parent
             Row {
-                width: parent.width/3
+                width: parent.width*2/5
                 height: parent.height
 
-                // Item icon:
-                Image {
-                    id: image
-                    anchors.verticalCenter: parent.verticalCenter
+                Item {
+                    id: imageContainer
+                    width: parent.width/2
                     height: parent.height
-                    width: height
-                    fillMode: Image.PreserveAspectFit
-                    source: Utils.urlPublicStatic(icon)
+
+                    // Item icon:
+                    Image {
+                        id: image
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
+                        source: Utils.urlPublicStatic(icon)
+                        onStatusChanged: {
+                            if (status === Image.Ready)
+                                delegate.height = Math.max(_settings.cartViewDelegateHeight, image.paintedHeight)
+                        }
+                    }
                 }
 
                 // Vend item name:
                 Item {
-                    anchors.verticalCenter: image.verticalCenter
-                    height: image.height/2
-                    width: image.width
+                    anchors.top: imageContainer.top
+                    anchors.topMargin: 8
+                    width: parent.width/2
+                    height: parent.height
                     Column {
+                        width: parent.width
+                        height: parent.height
+
                         // Vend item name:
                         CommonText {
                             text: vendItemName
+                            width: parent.width
+                            wrapMode: Text.WordWrap
                             verticalAlignment: Text.AlignVCenter
                         }
 
@@ -47,12 +62,20 @@ ListView {
                             color: _settings.appGreen
                         }
                     }
+
+                    // Price:
+                    CommonText {
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 8
+                        text: "$"+price
+                        font.pixelSize: 30
+                    }
                 }
             }
 
             // Incremental button:
             Item {
-                width: parent.width/4
+                width: parent.width/5
                 height: parent.height
 
                 // Incremental button:
@@ -64,20 +87,9 @@ ListView {
                 }
             }
 
-            // Price:
-            Item {
-                width: parent.width*5/36
-                height: parent.height
-                CommonText {
-                    anchors.centerIn: parent
-                    text: "$"+price
-                    font.pixelSize: 30
-                }
-            }
-
             // Total:
             Item {
-                width: parent.width*5/36
+                width: parent.width/5
                 height: parent.height
                 CommonText {
                     anchors.centerIn: parent
@@ -88,7 +100,7 @@ ListView {
 
             // Trash:
             Item {
-                width: parent.width*5/36
+                width: parent.width/5
                 height: parent.height
                 ImageButton {
                     anchors.centerIn: parent

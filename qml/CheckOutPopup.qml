@@ -3,7 +3,6 @@ import QtQuick 2.4
 Popup {
     id: checkOutPopup
     popupId: "_checkout_"
-    title: _settings.shoppingCartTitle
 
     contents: Item {
         width: parent.width
@@ -20,7 +19,7 @@ Popup {
             // First col:
             Item {
                 id: firstCol
-                width: parent.width/3
+                width: parent.width*2/5
                 height: parent.height
                 CommonText {
                     anchors.centerIn: parent
@@ -42,12 +41,12 @@ Popup {
             // Second col:
             Item {
                 id: secondCol
-                width: parent.width/4
+                width: parent.width/5
                 height: parent.height
                 anchors.left: firstCol.right
                 CommonText {
                     anchors.centerIn: parent
-                    text: qsTr("QUANTITY")
+                    text: qsTr("QTY")
                     color: "white"
                     font.pixelSize: 30
                 }
@@ -65,12 +64,12 @@ Popup {
             // Third col:
             Item {
                 id: thirdCol
-                width: parent.width*5/36
+                width: parent.width/5
                 height: parent.height
                 anchors.left: secondCol.right
                 CommonText {
                     anchors.centerIn: parent
-                    text: qsTr("PRICE")
+                    text: qsTr("TOTAL")
                     color: "white"
                     font.pixelSize: 30
                 }
@@ -88,37 +87,16 @@ Popup {
             // Fourth col:
             Item {
                 id: fourthCol
-                width: parent.width*5/36
+                width: parent.width/5
                 height: parent.height
                 anchors.left: thirdCol.right
-                CommonText {
-                    anchors.centerIn: parent
-                    text: qsTr("TOTAL")
-                    color: "white"
-                    font.pixelSize: 30
-                }
-            }
 
-            // Separator:
-            Rectangle {
-                width: 1
-                height: parent.height-8
-                anchors.left: fourthCol.right
-                anchors.verticalCenter: parent.verticalCenter
-                color: "white"
-            }
-
-            // Fifth col:
-            Item {
-                id: fifthCol
-                width: parent.width*5/36
-                height: parent.height
-                anchors.left: fourthCol.right
-                CommonText {
+                // Back button:
+                ImageButton {
+                    id: backButton
+                    source: "qrc:/qml/images/ico-back.png"
                     anchors.centerIn: parent
-                    text: qsTr("ACTIONS")
-                    color: "white"
-                    font.pixelSize: 30
+                    onClicked: mainApplication.hideCurrentPopup()
                 }
             }
         }
@@ -151,6 +129,14 @@ Popup {
                 text: "Total: $" + _controller.cartModel.cartTotal
                 color: "white"
                 font.pixelSize: 30
+            }
+
+            // Title:
+            CommonText {
+                anchors.centerIn: parent
+                text: _settings.shoppingCartTitle
+                font.pixelSize: 30
+                color: "white"
             }
 
             // Email:

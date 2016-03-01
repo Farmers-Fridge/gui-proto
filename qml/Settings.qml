@@ -43,7 +43,7 @@ Item {
     readonly property string popupBkgColor: "ivory"
 
     // Shopping cart:
-    readonly property string shoppingCartTitle: qsTr("Your Shopping Cart")
+    readonly property string shoppingCartTitle: qsTr("Your Fresh Market")
 
     // Application green:
     readonly property string appGreen: "darkgreen"
