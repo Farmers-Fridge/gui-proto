@@ -107,7 +107,7 @@ Item {
         }
 
         // Photo shade:
-        Rectangle { id: photosShade;
+        Rectangle { id: photosShade
             color: "black"; width: parent.width; height: parent.height; opacity: 0; visible: opacity != 0.0
             Behavior on opacity {
                 NumberAnimation {duration: 500}

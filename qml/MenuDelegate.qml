@@ -35,6 +35,8 @@ Component {
             State {
                 name: "inGrid"
                 PropertyChanges { target: photosGridView; interactive: true }
+                PropertyChanges { target: photosListView; interactive: false }
+                PropertyChanges { target: photosShade; opacity: 0 }
              },
             State {
                 name: "fullscreen"
