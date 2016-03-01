@@ -15,14 +15,6 @@ Package {
         height: _settings.gridImageHeight-imageMargin
         rotation: menuImageWrapper.randomAngle
 
-        // Nutrition fact timer:
-        Timer {
-            id: nutritionFactTimer
-            interval: _settings.nutritionFactTimer
-            onTriggered: nutritionFactContainer.state = ""
-            repeat: false
-        }
-
         // Image loading background
         Rectangle {
             id: imageLoadingBkg
