@@ -12,45 +12,25 @@ Component {
         }
 
         // Menu wrapper:
-        Item {
+        MenuWrapper {
             id: menuWrapper
-            Package.name: "browser"
-            state: "inGrid"
-            onStateChanged: _viewState = state
-            GridView {
-                id: photosGridView
-                model: visualModel.parts.grid
-                width: mainWindow.width; height: mainWindow.height - 21
-                x: 0; y: 21;
-                cellWidth: _settings.gridImageWidth; cellHeight: _settings.gridImageHeight
-                interactive: false
-                onCurrentIndexChanged: photosListView.positionViewAtIndex(currentIndex, ListView.Contain)
-                visible: _controller.currentCategory === categoryName
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: menuWrapper.state = "fullscreen"
-            }
+
+            // States:
             states: [
-            State {
-                name: "inGrid"
-                PropertyChanges { target: photosGridView; interactive: true }
-                PropertyChanges { target: photosListView; interactive: false }
-                PropertyChanges { target: photosShade; opacity: 0 }
-             },
-            State {
-                name: "fullscreen"
-                PropertyChanges { target: photosGridView; interactive: false }
-                PropertyChanges { target: photosListView; interactive: true }
-                PropertyChanges { target: photosShade; opacity: 1 }
-                PropertyChanges { target: backButton; onClicked: menuWrapper.state = "inGrid" }
-            }
+                // In grid:
+                State {
+                    name: "inGrid"
+                    PropertyChanges { target: photosListView; interactive: false }
+                    PropertyChanges { target: photosShade; opacity: 0 }
+                },
+                // Full screen:
+                State {
+                    name: "fullscreen"
+                    PropertyChanges { target: photosListView; interactive: true }
+                    PropertyChanges { target: photosShade; opacity: 1 }
+                    PropertyChanges { target: backButton; onClicked: menuWrapper.state = "inGrid" }
+                }
             ]
-            function onGoBackToMainPage()
-            {
-                menuWrapper.state = "inGrid"
-            }
-            Component.onCompleted: mainApplication.goBackToMainPage.connect(onGoBackToMainPage)
         }
 
         // Full screen:
@@ -59,7 +39,6 @@ Component {
             ListView {
                 id: photosListView; model: visualModel.parts.list; orientation: Qt.Horizontal
                 width: mainWindow.width; height: mainWindow.height; interactive: false
-                onCurrentIndexChanged: photosGridView.positionViewAtIndex(currentIndex, GridView.Contain)
                 highlightRangeMode: ListView.StrictlyEnforceRange; snapMode: ListView.SnapOneItem
 
                 // Animation:

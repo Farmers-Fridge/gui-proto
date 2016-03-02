@@ -56,5 +56,6 @@
         <file>qml/images/ico-logo2.png</file>
         <file>qml/images/ico-background.png</file>
         <file>qml/images/ico-trash.png</file>
+        <file>qml/MenuWrapper.qml</file>
     </qresource>
 </RCC>
