@@ -6,13 +6,14 @@ Item {
     Package.name: "browser"
     state: "inGrid"
     onStateChanged: _viewState = state
+    property variant model
 
     // View component:
     Component {
         id: viewComponent
         GridView {
             id: itemView
-            model: visualModel.parts.grid
+            model: menuWrapper.model
             anchors.fill: parent
             cellWidth: _settings.gridImageWidth; cellHeight: _settings.gridImageHeight
             interactive: false
@@ -42,5 +43,6 @@ Item {
     Component.onCompleted: {
         viewLoader.sourceComponent = viewComponent
         mainApplication.goBackToMainPage.connect(onGoBackToMainPage)
+        console.log("-------------------------------------------------------- ", categoryListModel.count)
     }
 }

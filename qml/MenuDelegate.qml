@@ -14,6 +14,7 @@ Component {
         // Menu wrapper:
         MenuWrapper {
             id: menuWrapper
+            model: visualModel.parts.grid
 
             // States:
             states: [
