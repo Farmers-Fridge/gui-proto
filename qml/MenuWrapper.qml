@@ -20,6 +20,17 @@ Item {
             onCurrentIndexChanged: photosListView.positionViewAtIndex(currentIndex, ListView.Contain)
             visible: _controller.currentCategory === categoryName
         }
+
+        /*
+        // Carousel:
+        Carousel {
+            id: carousel
+            anchors.fill: parent
+            clip: true
+            model: menuWrapper.model
+            visible: _controller.currentCategory === categoryName
+        }
+        */
     }
 
     // View loader:

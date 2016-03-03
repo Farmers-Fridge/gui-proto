@@ -161,8 +161,8 @@ Package {
     Item {
         id: menuImageWrapper
         property int imageMargin: 20
-        property double randomAngle: Math.random()*13-6
-        property double randomAngle2: Math.random()*13-6
+        property double randomAngle: Math.random()*12-6
+        property double randomAngle2: Math.random()*12-6
 
         // Width/Height:
         width: _settings.gridImageWidth

@@ -57,5 +57,7 @@
         <file>qml/images/ico-background.png</file>
         <file>qml/images/ico-trash.png</file>
         <file>qml/MenuWrapper.qml</file>
+        <file>qml/Carousel.qml</file>
+        <file>qml/Ellipse.qml</file>
     </qresource>
 </RCC>
