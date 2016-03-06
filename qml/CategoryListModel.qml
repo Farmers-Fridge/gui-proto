@@ -8,6 +8,7 @@ XmlListModel {
     property string targetCategory: ""
     source: Utils.urlPlay(_appData.categoryListSource + "?category=" + targetCategory)
     query: _appData.categoryListQuery
+    signal modelReady()
 
     XmlRole { name: "vendItemName"; query: "vendItemName/string()"; isKey: true }
     XmlRole { name: "icon"; query: "icon/string()"; isKey: true }
@@ -26,6 +27,7 @@ XmlListModel {
             {
                 // Success:
                 console.log("IMAGES FOR CATEGORY: " + targetCategory + " LOADED SUCCESSFULLY")
+                modelReady()
             }
         }
     }

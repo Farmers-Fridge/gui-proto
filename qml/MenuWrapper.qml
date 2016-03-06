@@ -50,10 +50,16 @@ Item {
         menuWrapper.state = "inGrid"
     }
 
+    // Model ready:
+    function onModelReady()
+    {
+        console.log("MODEL COUNT: ", categoryListModel.count)
+    }
+
     // Connections:
     Component.onCompleted: {
         viewLoader.sourceComponent = viewComponent
         mainApplication.goBackToMainPage.connect(onGoBackToMainPage)
-        console.log("-------------------------------------------------------- ", categoryListModel.count)
+        categoryListModel.modelReady.connect(onModelReady)
     }
 }
