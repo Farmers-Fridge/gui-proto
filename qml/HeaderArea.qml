@@ -14,6 +14,7 @@ Rectangle {
         width: parent.width
         height: parent.height/2
         anchors.top: parent.top
+        enabled: _viewState === "inGrid"
     }
 
     // Controls:
