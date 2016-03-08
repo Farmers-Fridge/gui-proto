@@ -13,9 +13,8 @@ Package {
         property double randomAngle2: Math.random()*12-6
 
         // Width/Height:
-        width: parent.width
-        height: parent.height
-        anchors.centerIn: parent
+        width: _settings.gridImageWidth
+        height: _settings.gridImageHeight
         rotation: menuImageWrapper.randomAngle
 
         // Image loading background
@@ -92,7 +91,9 @@ Package {
                 name: "inGrid"; when: menuWrapper.state === "inGrid"
                 ParentChange {
                     target: menuImageWrapper
-                    parent: gridItem; x: 10; y: 10
+                    parent: gridItem;
+                    x: (gridItem.width-_settings.gridImageWidth)/2
+                    y: (gridItem.height-_settings.gridImageHeight)/2
                     rotation: menuImageWrapper.randomAngle2
                 }
             },
@@ -130,9 +131,7 @@ Package {
             },
             Transition {
                 from: "fullscreen"; to: "inGrid"
-                ScriptAction {
-                    script: menuImageWrapper.anchors.centerIn = undefined
-                }
+
                 ParentAnimation {
                     target: menuImageWrapper; via: foreground
                     NumberAnimation {
