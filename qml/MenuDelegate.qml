@@ -129,18 +129,21 @@ Component {
                 // Navigate left:
                 function onNavigateLeft()
                 {
+                    console.log(categoryListModelPrivate.count)
+                    var incr = ((categoryListModelPrivate.count%2) === 0 ? 1 : 2)
                     var currentIndex = photosListView.currentIndex
-                    if (currentIndex > 1)
-                        currentIndex -= 2
+                    if ((currentIndex-incr) >=0)
+                        currentIndex -= incr
                     photosListView.gotoIndex(currentIndex)
                 }
 
                 // Navigate right:
                 function onNavigateRight()
                 {
+                    var incr = ((categoryListModelPrivate.count%2) === 0 ? 1 : 2)
                     var currentIndex = photosListView.currentIndex
-                    if (currentIndex < (photosListView.count-2))
-                        currentIndex += 2
+                    if (currentIndex < (photosListView.count-incr))
+                        currentIndex += incr
                     photosListView.gotoIndex(currentIndex)
                 }
 
