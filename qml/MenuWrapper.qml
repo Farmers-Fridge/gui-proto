@@ -15,22 +15,77 @@ Item {
             id: itemView
             model: menuWrapper.model
             anchors.fill: parent
-            cellWidth: _settings.gridImageWidth; cellHeight: _settings.gridImageHeight
             interactive: false
             onCurrentIndexChanged: photosListView.positionViewAtIndex(currentIndex, ListView.Contain)
             visible: _controller.currentCategory === categoryName
-        }
+            function onModelReady()
+            {
+                var nItems = categoryListModelPrivate.count
+                if (nItems === 1)
+                {
+                    cellWidth = menuViewArea.width
+                    cellHeight = menuViewArea.height
+                }
+                else
+                if (nItems === 2)
+                {
+                    cellWidth = menuViewArea.width/2
+                    cellHeight = menuViewArea.height
+                }
+                else
+                if (nItems === 3)
+                {
+                    cellWidth = menuViewArea.width/3
+                    cellHeight = menuViewArea.height/2
+                }
+                else
+                if (nItems === 4)
+                {
+                    cellWidth = menuViewArea.width/2
+                    cellHeight = menuViewArea.height/2
+                }
+                else
+                if (nItems === 5)
+                {
+                    cellWidth = menuViewArea.width/5
+                    cellHeight = menuViewArea.height/2
+                }
+                else
+                if (nItems === 6)
+                {
+                    cellWidth = menuViewArea.width/3
+                    cellHeight = menuViewArea.height/2
+                }
+                else
+                if (nItems === 7)
+                {
+                    cellWidth = menuViewArea.width/7
+                    cellHeight = menuViewArea.height/2
+                }
+                else
+                if (nItems === 8)
+                {
+                    cellWidth = menuViewArea.width/4
+                    cellHeight = menuViewArea.height/2
+                }
+                else
+                if (nItems === 9)
+                {
+                    cellWidth = menuViewArea.width/9
+                    cellHeight = menuViewArea.height/2
+                }
+                else
+                if (nItems === 10)
+                {
+                    cellWidth = menuViewArea.width/5
+                    cellHeight = menuViewArea.height/2
+                }
+            }
 
-        /*
-        // Carousel:
-        Carousel {
-            id: carousel
-            anchors.fill: parent
-            clip: true
-            model: menuWrapper.model
-            visible: _controller.currentCategory === categoryName
+            Component.onCompleted: {
+                categoryListModel.modelReady.connect(onModelReady)
+            }
         }
-        */
     }
 
     // View loader:
@@ -50,16 +105,9 @@ Item {
         menuWrapper.state = "inGrid"
     }
 
-    // Model ready:
-    function onModelReady()
-    {
-        console.log("MODEL COUNT: ", categoryListModel.count)
-    }
-
     // Connections:
     Component.onCompleted: {
         viewLoader.sourceComponent = viewComponent
         mainApplication.goBackToMainPage.connect(onGoBackToMainPage)
-        categoryListModel.modelReady.connect(onModelReady)
     }
 }

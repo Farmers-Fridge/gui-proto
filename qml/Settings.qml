@@ -10,9 +10,6 @@ Item {
     readonly property int screenWidth: Screen.desktopAvailableWidth
     readonly property int screenHeight: Screen.desktopAvailableHeight
 
-    onScreenWidthChanged: console.log("SCREEN WIDTH: ", screenWidth)
-    onScreenHeightChanged: console.log("SCREEN HEIGHT: ", screenHeight)
-
     // Return scaled width:
     function scaledWidth(width)
     {

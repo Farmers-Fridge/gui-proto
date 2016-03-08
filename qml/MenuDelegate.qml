@@ -5,10 +5,79 @@ import QtQml.Models 2.1
 Component {
     id: menuDelegate
     Package {
+        // Category list model private:
+        CategoryListModel {
+            id: categoryListModelPrivate
+            targetCategory: categoryName
+            onModelReady: categoryListModel.initialize()
+        }
+
+        // Category list model:
+        ListModel {
+            id: categoryListModel
+            signal modelReady()
+            function initialize()
+            {
+                var nItems = categoryListModelPrivate.count
+                if ((nItems %2 !== 0) && (nItems !== 1))
+                {
+                    // Insert empty item:
+                    for (var i=0; i<categoryListModelPrivate.count*2; i++)
+                    {
+                        // Get model item:
+                        var modelItem = categoryListModelPrivate.get(i/2)
+
+                        // Get data:
+                        var data = {
+                            vendItemName: "",
+                            icon: "",
+                            nutrition: "",
+                            category: "",
+                            price: "",
+                        }
+
+                        if (i%2 === 0)
+                        {
+                            var data = {
+                                vendItemName: modelItem.vendItemName,
+                                icon: modelItem.icon,
+                                nutrition: modelItem.nutrition,
+                                category: modelItem.category,
+                                price: modelItem.price
+                            }
+                        }
+                        categoryListModel.append(data)
+                    }
+                }
+                else
+                {
+                    // Insert empty item:
+                    for (var i=0; i<categoryListModelPrivate.count; i++)
+                    {
+                        // Get model item:
+                        var modelItem = categoryListModelPrivate.get(i)
+
+                        // Get data:
+                        var data = {
+                            vendItemName: modelItem.vendItemName,
+                            icon: modelItem.icon,
+                            nutrition: modelItem.nutrition,
+                            category: modelItem.category,
+                            price: modelItem.price
+                        }
+                        categoryListModel.append(data)
+                    }
+                }
+
+                // Notify:
+                categoryListModel.modelReady()
+            }
+        }
+
         // Delegate model:
         DelegateModel {
             id: visualModel; delegate: MenuPictureDelegate { }
-            model: CategoryListModel { id: categoryListModel; targetCategory: categoryName }
+            model: categoryListModel
         }
 
         // Menu wrapper:
@@ -41,6 +110,7 @@ Component {
                 id: photosListView; model: visualModel.parts.list; orientation: Qt.Horizontal
                 width: mainWindow.width; height: mainWindow.height; interactive: false
                 highlightRangeMode: ListView.StrictlyEnforceRange; snapMode: ListView.SnapOneItem
+                enabled: false
 
                 // Animation:
                 NumberAnimation {id: anim; target: photosListView; property: "contentX"; duration: 500; easing.type: Easing.OutBounce}
@@ -60,8 +130,8 @@ Component {
                 function onNavigateLeft()
                 {
                     var currentIndex = photosListView.currentIndex
-                    if (currentIndex > 0)
-                        currentIndex--
+                    if (currentIndex > 1)
+                        currentIndex -= 2
                     photosListView.gotoIndex(currentIndex)
                 }
 
@@ -69,8 +139,8 @@ Component {
                 function onNavigateRight()
                 {
                     var currentIndex = photosListView.currentIndex
-                    if (currentIndex < (photosListView.count-1))
-                        currentIndex++
+                    if (currentIndex < (photosListView.count-2))
+                        currentIndex += 2
                     photosListView.gotoIndex(currentIndex)
                 }
 
