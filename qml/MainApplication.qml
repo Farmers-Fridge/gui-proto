@@ -101,7 +101,7 @@ Item {
             id: browserView
             anchors.fill: parent
             model: albumVisualModel.parts.browser
-            interactive: false;
+            interactive: false
             highlightRangeMode: ListView.StrictlyEnforceRange
             clip: true
         }

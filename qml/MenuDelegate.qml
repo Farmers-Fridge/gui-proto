@@ -90,13 +90,11 @@ Component {
                 // In grid:
                 State {
                     name: "inGrid"
-                    PropertyChanges { target: photosListView; interactive: false }
                     PropertyChanges { target: photosShade; opacity: 0 }
                 },
                 // Full screen:
                 State {
                     name: "fullscreen"
-                    PropertyChanges { target: photosListView; interactive: true }
                     PropertyChanges { target: photosShade; opacity: 1 }
                     PropertyChanges { target: backButton; onClicked: menuWrapper.state = "inGrid" }
                 }
@@ -108,9 +106,9 @@ Component {
             Package.name: "fullscreen"
             ListView {
                 id: photosListView; model: visualModel.parts.list; orientation: Qt.Horizontal
-                width: mainWindow.width; height: mainWindow.height; interactive: false
+                width: mainWindow.width; height: mainWindow.height
                 highlightRangeMode: ListView.StrictlyEnforceRange; snapMode: ListView.SnapOneItem
-                enabled: false
+                interactive: false
 
                 // Animation:
                 NumberAnimation {id: anim; target: photosListView; property: "contentX"; duration: 500; easing.type: Easing.OutBounce}
