@@ -8,6 +8,7 @@ Rectangle {
     // Cancel button:
     ImageButton {
         id: cancelButton
+        height: parent.height-4
         anchors.left: parent.left
         anchors.leftMargin: 8
         anchors.verticalCenter: parent.verticalCenter
@@ -41,6 +42,7 @@ Rectangle {
     // Add:
     ImageButton {
         anchors.centerIn: parent
+        height: parent.height-4
         source: "qrc:/qml/images/ico-plus.png"
         opacity: _viewState === "fullscreen" ? 1 : 0
         Behavior on opacity {
@@ -64,6 +66,7 @@ Rectangle {
     // Checkout button:
     ImageButton {
         id: checkOutButton
+        height: parent.height-4
         anchors.right: parent.right
         anchors.rightMargin: 8
         anchors.verticalCenter: parent.verticalCenter
