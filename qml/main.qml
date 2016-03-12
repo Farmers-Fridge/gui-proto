@@ -6,6 +6,8 @@ import "script/Utils.js" as Utils
 Window {
     id: mainWindow
     visibility: Window.FullScreen
+    width: Screen.desktopAvailableWidth
+    height: Screen.desktopAvailableHeight
     visible: true    
     property bool imageLoading: false
 

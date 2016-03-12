@@ -5,25 +5,10 @@ Item {
     // Enter reference screen size:
     readonly property int refScreenWidth: 1280
     readonly property int refScreenHeight: 1920
-
-    // Get screen size:
-    readonly property int screenWidth: Screen.desktopAvailableWidth
-    readonly property int screenHeight: Screen.desktopAvailableHeight
-
-    // Return scaled width:
-    function scaledWidth(width)
-    {
-        return (width/refScreenWidth)*screenWidth
-    }
-
-    // Return scaled height:
-    function scaledHeight(height)
-    {
-        return (height/refScreenHeight)*screenHeight
-    }
+    readonly property int viewAreaHeight: (60/100)*refScreenHeight
 
     // Menu view top area height:
-    readonly property int menuViewTopAreaHeight: scaledHeight(refScreenHeight-1200)
+    readonly property double toolbarHeightRatio: .1
 
     // Main window color:
     readonly property string mainWindowColor: "#d5d6d8"
@@ -34,7 +19,7 @@ Item {
     readonly property string textColor: "black"
 
     // Cart view:
-    readonly property int cartViewDelegateHeight: scaledHeight(400)
+    readonly property int cartViewDelegateHeight: gridImageHeight
 
     // Popup:
     readonly property string popupBkgColor: "ivory"
@@ -46,14 +31,13 @@ Item {
     readonly property string appGreen: "darkgreen"
 
     // Checkout popup header height:
-    readonly property int checkOutPopupHeaderHeight: 96
+    readonly property int checkOutPopupHeaderHeight: (5/100)*refScreenHeight
 
     // Image width:
-    readonly property int gridImageWidth: scaledWidth(213)
+    readonly property int gridImageWidth: Math.min(refScreenWidth/3, viewAreaHeight/3)
+    onGridImageWidthChanged: console.log(gridImageWidth)
 
     // Image height:
-    readonly property int gridImageHeight: scaledHeight(565)
-
-    // Cart view title:
-    readonly property string cartViewTitle: qsTr("Fresh Market")
+    readonly property int gridImageHeight: gridImageWidth
+    onGridImageHeightChanged: console.log(gridImageHeight)
 }

@@ -14,7 +14,7 @@
         <file>qml/script/Utils.js</file>
         <file>qml/MainApplication.qml</file>
         <file>qml/CategoryListModel.qml</file>
-        <file>qml/HeaderArea.qml</file>
+        <file>qml/PrimaryHeaderArea.qml</file>
         <file>qml/images/ico-cancel.png</file>
         <file>qml/ImageButton.qml</file>
         <file>qml/Command.qml</file>
@@ -58,5 +58,8 @@
         <file>qml/images/ico-trash.png</file>
         <file>qml/MenuWrapper.qml</file>
         <file>qml/Ellipse.qml</file>
+        <file>qml/SecondaryHeaderArea.qml</file>
+        <file>qml/BottomArea.qml</file>
+        <file>qml/ThirdHeaderArea.qml</file>
     </qresource>
 </RCC>

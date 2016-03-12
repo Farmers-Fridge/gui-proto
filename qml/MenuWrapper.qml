@@ -20,7 +20,7 @@ Item {
             visible: _controller.currentCategory === categoryName
             function onModelReady()
             {
-                var nItems = categoryListModelPrivate.count
+                var nItems = categoryListModel.count
                 if (nItems === 1)
                 {
                     cellWidth = menuViewArea.width
@@ -36,7 +36,7 @@ Item {
                 if (nItems === 3)
                 {
                     cellWidth = menuViewArea.width/3
-                    cellHeight = menuViewArea.height/2
+                    cellHeight = menuViewArea.height/1
                 }
                 else
                 if (nItems === 4)
@@ -47,7 +47,7 @@ Item {
                 else
                 if (nItems === 5)
                 {
-                    cellWidth = menuViewArea.width/5
+                    cellWidth = menuViewArea.width/3
                     cellHeight = menuViewArea.height/2
                 }
                 else
@@ -59,7 +59,7 @@ Item {
                 else
                 if (nItems === 7)
                 {
-                    cellWidth = menuViewArea.width/7
+                    cellWidth = menuViewArea.width/4
                     cellHeight = menuViewArea.height/2
                 }
                 else
@@ -71,14 +71,8 @@ Item {
                 else
                 if (nItems === 9)
                 {
-                    cellWidth = menuViewArea.width/9
-                    cellHeight = menuViewArea.height/2
-                }
-                else
-                if (nItems === 10)
-                {
-                    cellWidth = menuViewArea.width/5
-                    cellHeight = menuViewArea.height/2
+                    cellWidth = menuViewArea.width/3
+                    cellHeight = menuViewArea.height/3
                 }
             }
 

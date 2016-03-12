@@ -71,21 +71,37 @@ Item {
         id: _exitCommand
     }
 
-    // Delegate model:
-    DelegateModel { id: albumVisualModel; model: _categoryModel; delegate: MenuDelegate {} }
-
-    // Header area:
-    HeaderArea {
-        id: headerArea
-        anchors.top: parent.top
-        width: parent.width
-        height: _settings.menuViewTopAreaHeight
-    }
-
     // Update browser view:
     function updateBrowserView(index)
     {
         browserView.positionViewAtIndex(index, ListView.Beginning)
+    }
+
+    // Delegate model:
+    DelegateModel { id: albumVisualModel; model: _categoryModel; delegate: MenuDelegate {} }
+
+    // Primary header area:
+    PrimaryHeaderArea {
+        id: primaryHeaderArea
+        anchors.top: parent.top
+        width: parent.width
+        height: _settings.toolbarHeightRatio*parent.height
+    }
+
+    // Secondary header area:
+    SecondaryHeaderArea {
+        id: secondaryHeaderArea
+        anchors.top: primaryHeaderArea.bottom
+        width: parent.width
+        height: _settings.toolbarHeightRatio*parent.height
+    }
+
+    // Third header area:
+    ThirdHeaderArea {
+        id: thirdHeaderArea
+        anchors.top: secondaryHeaderArea.bottom
+        width: parent.width
+        height: _settings.toolbarHeightRatio*parent.height
     }
 
     // Menu view area:
@@ -93,8 +109,8 @@ Item {
         id: menuViewArea
         enabled: keyboard.state === ""
         width: parent.width
-        anchors.top: headerArea.bottom
-        anchors.bottom: parent.bottom
+        anchors.top: thirdHeaderArea.bottom
+        anchors.bottom: primaryBottomArea.top
 
         // Image browser:
         ListView {
@@ -162,6 +178,13 @@ Item {
             visible: _viewState !== "inGrid"
             onClicked: menuWrapper.state = "inGrid"
         }
+    }
+
+    BottomArea {
+        id: primaryBottomArea
+        width: parent.width
+        height: _settings.toolbarHeightRatio*parent.height
+        anchors.bottom: parent.bottom
     }
 
     // Popup mgr:

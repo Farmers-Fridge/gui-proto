@@ -7,71 +7,8 @@ Component {
     Package {
         // Category list model private:
         CategoryListModel {
-            id: categoryListModelPrivate
-            targetCategory: categoryName
-            onModelReady: categoryListModel.initialize()
-        }
-
-        // Category list model:
-        ListModel {
             id: categoryListModel
-            signal modelReady()
-            function initialize()
-            {
-                var nItems = categoryListModelPrivate.count
-                if ((nItems %2 !== 0) && (nItems !== 1))
-                {
-                    // Insert empty item:
-                    for (var i=0; i<categoryListModelPrivate.count*2; i++)
-                    {
-                        // Get model item:
-                        var modelItem = categoryListModelPrivate.get(i/2)
-
-                        // Get data:
-                        var data = {
-                            vendItemName: "",
-                            icon: "",
-                            nutrition: "",
-                            category: "",
-                            price: "",
-                        }
-
-                        if (i%2 === 0)
-                        {
-                            var data = {
-                                vendItemName: modelItem.vendItemName,
-                                icon: modelItem.icon,
-                                nutrition: modelItem.nutrition,
-                                category: modelItem.category,
-                                price: modelItem.price
-                            }
-                        }
-                        categoryListModel.append(data)
-                    }
-                }
-                else
-                {
-                    // Insert empty item:
-                    for (var i=0; i<categoryListModelPrivate.count; i++)
-                    {
-                        // Get model item:
-                        var modelItem = categoryListModelPrivate.get(i)
-
-                        // Get data:
-                        var data = {
-                            vendItemName: modelItem.vendItemName,
-                            icon: modelItem.icon,
-                            nutrition: modelItem.nutrition,
-                            category: modelItem.category,
-                            price: modelItem.price
-                        }
-                        categoryListModel.append(data)
-                    }
-                }
-
-                // Notify:
-                categoryListModel.modelReady()
-            }
+            targetCategory: categoryName
         }
 
         // Delegate model:
@@ -127,8 +64,7 @@ Component {
                 // Navigate left:
                 function onNavigateLeft()
                 {
-                    console.log(categoryListModelPrivate.count)
-                    var incr = ((categoryListModelPrivate.count%2) === 0 ? 1 : 2)
+                    var incr = 1
                     var currentIndex = photosListView.currentIndex
                     if ((currentIndex-incr) >=0)
                         currentIndex -= incr
@@ -138,7 +74,7 @@ Component {
                 // Navigate right:
                 function onNavigateRight()
                 {
-                    var incr = ((categoryListModelPrivate.count%2) === 0 ? 1 : 2)
+                    var incr = 1
                     var currentIndex = photosListView.currentIndex
                     if (currentIndex < (photosListView.count-incr))
                         currentIndex += incr

@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import QtQuick.Window 2.2
 
 Item {
     id: popup
@@ -6,7 +7,7 @@ Item {
     property bool isPopup: true
     property int idleTime: 0
     property alias contents: contents.children
-    y: height
+    y: Screen.desktopAvailableHeight+40
 
     // Background color:
     Rectangle {
