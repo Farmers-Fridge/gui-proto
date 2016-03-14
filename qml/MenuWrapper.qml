@@ -57,19 +57,7 @@ Item {
                     cellHeight = menuViewArea.height/2
                 }
                 else
-                if (nItems === 7)
-                {
-                    cellWidth = menuViewArea.width/4
-                    cellHeight = menuViewArea.height/2
-                }
-                else
-                if (nItems === 8)
-                {
-                    cellWidth = menuViewArea.width/4
-                    cellHeight = menuViewArea.height/2
-                }
-                else
-                if (nItems === 9)
+                if (nItems > 6)
                 {
                     cellWidth = menuViewArea.width/3
                     cellHeight = menuViewArea.height/3

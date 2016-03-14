@@ -45,7 +45,7 @@ Package {
             id: originalImage
             antialiasing: true
             source: icon !== "" ? Utils.urlPublicStatic(icon) : ""
-            cache: true
+            //cache: true
             fillMode: Image.PreserveAspectFit
             width: menuImageWrapper.width
             height: menuImageWrapper.height
