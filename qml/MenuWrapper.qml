@@ -16,7 +16,8 @@ Item {
             model: menuWrapper.model
             anchors.fill: parent
             interactive: false
-            onCurrentIndexChanged: photosListView.positionViewAtIndex(currentIndex, ListView.Contain)
+            property int offset: (categoryListModel.count < 3) ? 1 : 2
+            onCurrentIndexChanged: photosListView.positionViewAtIndex(currentIndex-offset, PathView.Visible)
             visible: _controller.currentCategory === categoryName
             function onModelReady()
             {

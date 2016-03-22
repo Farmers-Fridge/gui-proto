@@ -74,12 +74,11 @@ Package {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+                    gridItem.GridView.view.currentIndex = index
                     if (menuWrapper.state === "inGrid") {
-                        gridItem.GridView.view.currentIndex = index
                         menuWrapper.state = "fullscreen"
                     } else {
-                        gridItem.GridView.view.currentIndex = index;
-                        menuWrapper.state = "inGrid"
+                         menuWrapper.state = "inGrid"
                     }
                 }
             }

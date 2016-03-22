@@ -15,7 +15,6 @@ Row {
             ImageButton {
                 id: itemIcon
                 anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
                 anchors.top: parent.top
                 source: Utils.urlPublicStatic(icon)
                 onClicked: {

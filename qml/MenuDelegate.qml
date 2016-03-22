@@ -41,24 +41,26 @@ Component {
         // Full screen:
         Item {
             Package.name: "fullscreen"
-            ListView {
-                id: photosListView; model: visualModel.parts.list; orientation: Qt.Horizontal
+            PathView {
+                pathItemCount: 3
+                id: photosListView
+                property int offset: categoryListModel.count < 3 ? width/2 : 0
+                model: visualModel.parts.list
                 width: mainWindow.width; height: mainWindow.height
-                highlightRangeMode: ListView.StrictlyEnforceRange; snapMode: ListView.SnapOneItem
+                highlightRangeMode: PathView.StrictlyEnforceRange
+                snapMode: ListView.SnapOneItem
                 interactive: false
-
+                path: Path {
+                    startX: -1.5*width+photosListView.offset; startY: height/2
+                    PathLine { x: width/2+photosListView.offset; y: height/2 }
+                    PathLine { x: 1.5*width+photosListView.offset; y: height/2 }
+                }
                 // Animation:
                 NumberAnimation {id: anim; target: photosListView; property: "contentX"; duration: 500; easing.type: Easing.OutBounce}
 
                 // Go to specific index:
                 function gotoIndex(idx) {
-                    anim.running = false
-                    var pos = photosListView.contentX
-                    photosListView.positionViewAtIndex(idx, ListView.Beginning)
-                    var destPos = photosListView.contentX
-                    anim.from = pos
-                    anim.to = destPos
-                    anim.running = true
+                    photosListView.currentIndex = idx
                 }
 
                 // Navigate left:
@@ -66,8 +68,7 @@ Component {
                 {
                     var incr = 1
                     var currentIndex = photosListView.currentIndex
-                    if ((currentIndex-incr) >=0)
-                        currentIndex -= incr
+                    currentIndex -= incr
                     photosListView.gotoIndex(currentIndex)
                 }
 
@@ -76,8 +77,7 @@ Component {
                 {
                     var incr = 1
                     var currentIndex = photosListView.currentIndex
-                    if (currentIndex < (photosListView.count-incr))
-                        currentIndex += incr
+                    currentIndex += incr
                     photosListView.gotoIndex(currentIndex)
                 }
 
