@@ -1,8 +1,8 @@
 import QtQuick 2.4
 
 Item {
-    width: 320
-    height: 128
+    width: 128
+    height: 320
     property int value: 0
     property int minValue: 0
     property int maxValue: 50
@@ -10,12 +10,12 @@ Item {
     signal decrement()
     signal increment()
 
-    // Decrement:
+    // Increment:
     ImageButton {
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        source: "qrc:/qml/images/ico-minus.png"
-        onClicked: decrement()
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        source: "qrc:/qml/images/ico-plus.png"
+        onClicked: increment()
     }
 
     CommonText {
@@ -24,12 +24,13 @@ Item {
         font.pixelSize: 30
     }
 
-    // Increment:
+    // Decrement:
     ImageButton {
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        source: "qrc:/qml/images/ico-plus.png"
-        onClicked: increment()
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        source: "qrc:/qml/images/ico-minus.png"
+        onClicked: decrement()
     }
+
 }
 

@@ -19,25 +19,18 @@ Package {
         // Image loading background
         Rectangle {
             id: imageLoadingBkg
-            property int w: menuImageWrapper.width
-            property int h: menuImageWrapper.width
-            property double s: Utils.calculateScale(w, h, menuImageWrapper.width)
-
-            color: "white"; anchors.centerIn: parent; antialiasing: true
-            width: w*s; height: h*s; visible: originalImage.status !== Image.Ready
+            color: "white"; anchors.centerIn: parent
+            antialiasing: true
+            width: _settings.gridImageWidth-4
+            height: _settings.gridImageHeight-4
+            visible: originalImage.status !== Image.Ready
             Rectangle {
-                color: _settings.appGreen; antialiasing: true
+                color: _settings.unSelectedCategoryBkgColor; antialiasing: true
                 anchors { fill: parent; margins: 3 }
             }
         }
 
-        // Image loaded background:
-        Rectangle {
-            id: border; color: "white"; anchors.centerIn: parent; antialiasing: true
-            width: originalImage.paintedWidth + 6; height: originalImage.paintedHeight + 6
-            visible: !imageLoadingBkg.visible
-        }
-
+        // Busy indicator:
         BusyIndicator { anchors.centerIn: parent; on: originalImage.status !== Image.Ready; visible: on}
 
         // Original image:
@@ -45,7 +38,7 @@ Package {
             id: originalImage
             antialiasing: true
             source: icon !== "" ? Utils.urlPublicStatic(icon) : ""
-            //cache: true
+            cache: true
             fillMode: Image.PreserveAspectFit
             width: menuImageWrapper.width
             height: menuImageWrapper.height
@@ -54,8 +47,7 @@ Package {
                 width: 128
                 fillMode: Image.PreserveAspectFit
                 rotation: 3
-                anchors.right: parent.right
-                anchors.rightMargin: 8
+                anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
                 anchors.topMargin: 8
                 visible: _viewState === "fullscreen"
@@ -104,12 +96,11 @@ Package {
                 PropertyChanges {
                     target: menuImageWrapper
                     x: (menuViewArea.width-width)/2
-                    y: 16
+                    y: 8
                     rotation: 0
-                    width: menuViewArea.height-32
+                    width: menuViewArea.width+16
                     height: width
                 }
-                PropertyChanges { target: border; opacity: 0 }
             }
         ]
 
@@ -118,9 +109,10 @@ Package {
                 from: "inGrid"; to: "fullscreen"
                 SequentialAnimation {
                     ParentAnimation {
-                        target: menuImageWrapper; via: foreground
+                        target: menuImageWrapper
+                        via: foreground
                         NumberAnimation {
-                            targets: [ menuImageWrapper, border ]
+                            target: menuImageWrapper
                             properties: "x,y,width,height,opacity,rotation"
                             duration: gridItem.GridView.isCurrentItem ? 600 : 1; easing.type: "OutQuart"
                         }
@@ -133,7 +125,7 @@ Package {
                 ParentAnimation {
                     target: menuImageWrapper; via: foreground
                     NumberAnimation {
-                        targets: [ menuImageWrapper, border ]
+                        target: menuImageWrapper
                         properties: "x,y,width,height,rotation,opacity"
                         duration: gridItem.GridView.isCurrentItem ? 600 : 1; easing.type: "OutQuart"
                     }

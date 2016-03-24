@@ -59,7 +59,7 @@ ListView {
                             text: '<html><style type="text/css"></style><a href="http://google.com">more info...</a></html>'
                             //onLinkActivated: Qt.openUrlExternally(link)
                             verticalAlignment: Text.AlignVCenter
-                            color: _settings.appGreen
+                            color: _settings.unSelectedCategoryBkgColor
                         }
                     }
 
@@ -115,7 +115,7 @@ ListView {
             anchors.bottom: parent.bottom
             height: 1
             width: parent.width
-            color: _settings.appGreen
+            color: _settings.unSelectedCategoryBkgColor
         }
     }
 }

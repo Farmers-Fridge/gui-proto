@@ -2,18 +2,17 @@ import QtQuick 2.4
 import "script/Utils.js" as Utils
 
 // Header:
-Rectangle {
+Item {
     id: header
-    color: "transparent"
-    border.color: _settings.appGreen
-    border.width: 1
 
-    CommonText {
-        anchors.centerIn: parent
-        color: "white"
-        font.pixelSize: 48
-        font.bold: true
-        text: qsTr("*** CALL TO ACTION LOREM IPSUM *** ")
+    // Category view:
+    CategoryView {
+        id: categoryView
+        width: parent.width
+        height: parent.height
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        enabled: _viewState === "inGrid"
     }
 }
 

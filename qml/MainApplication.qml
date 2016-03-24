@@ -1,12 +1,14 @@
 import QtQuick 2.4
 import QtQml.Models 2.1
 import QtQuick.Controls.Styles 1.2
+import QtQuick.Layouts 1.1
 import "commands"
 import "./keyboard"
 
-Item {
+Rectangle {
     id: mainApplication
     anchors.fill: parent
+    color: "#dad7c4"
 
     // View state:
     property string _viewState: ""
@@ -82,34 +84,19 @@ Item {
 
     // Primary header area:
     PrimaryHeaderArea {
-        id: primaryHeaderArea
+        id: categoryView
         anchors.top: parent.top
         width: parent.width
         height: _settings.toolbarHeightRatio*parent.height
     }
 
-    // Secondary header area:
-    SecondaryHeaderArea {
-        id: secondaryHeaderArea
-        anchors.top: primaryHeaderArea.bottom
-        width: parent.width
-        height: _settings.toolbarHeightRatio*parent.height
-    }
-
-    // Third header area:
-    ThirdHeaderArea {
-        id: thirdHeaderArea
-        anchors.top: secondaryHeaderArea.bottom
-        width: parent.width
-        height: _settings.toolbarHeightRatio*parent.height
-    }
-
     // Menu view area:
-    Item {
+    Rectangle {
         id: menuViewArea
+        color: "black"
         enabled: keyboard.state === ""
         width: parent.width
-        anchors.top: thirdHeaderArea.bottom
+        anchors.top: categoryView.bottom
         anchors.bottom: primaryBottomArea.top
 
         // Image browser:
@@ -138,48 +125,60 @@ Item {
             interactive: false
         }
 
-        Rectangle {
-            color: "transparent"
-            border.color: _settings.appGreen
-            border.width: 3
-            anchors.fill: fullScreenListView
+        Item {
+            anchors.fill: menuViewArea
             visible: _viewState === "fullscreen"
 
-            // Navigate left:
-            ImageButton {
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                source: "qrc:/qml/images/ico-left.png"
+            // Previous button:
+            CircularButton {
+                anchors.bottom: returnToSaladsButton.top
+                anchors.bottomMargin: 48
+                anchors.horizontalCenter: returnToSaladsButton.horizontalCenter
+                source: "qrc:/qml/images/ico-prev.png"
                 onClicked: navigateLeft()
+                imageOffset: -8
             }
 
-            // Navigate right:
-            ImageButton {
+            // Return to salads:
+            TextClickButton {
+                id: returnToSaladsButton
+                text: _settings.returnToSaladsText
+                width: _settings.buttonWidth*1.75
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 48
+                onButtonClicked: mainApplication.goBackToMainPage()
+            }
+
+            // Next button:
+            CircularButton {
+                anchors.bottom: addTocartButton.top
+                anchors.bottomMargin: 48
+                anchors.horizontalCenter: addTocartButton.horizontalCenter
+                source: "qrc:/qml/images/ico-next.png"
+                onClicked: navigateRight()
+                imageOffset: 8
+            }
+
+            // Add to cart:
+            TextClickButton {
+                id: addTocartButton
+                text: _settings.addToCartText
+                width: _settings.buttonWidth*1.75
                 anchors.right: parent.right
                 anchors.rightMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                source: "qrc:/qml/images/ico-right.png"
-                onClicked: navigateRight()
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 48
+                onButtonClicked: mainApplication.addCurrentItem()
             }
         }
 
         // Foreground:
         Item { id: foreground; anchors.fill: parent }
-
-        // Back button:
-        ImageButton {
-            id: backButton
-            source: "qrc:/qml/images/ico-back.png"
-            anchors.right: parent.right
-            anchors.rightMargin: 8
-            anchors.top: parent.top
-            anchors.topMargin: 8
-            visible: _viewState !== "inGrid"
-            onClicked: menuWrapper.state = "inGrid"
-        }
     }
 
+    // Bottom area:
     BottomArea {
         id: primaryBottomArea
         width: parent.width

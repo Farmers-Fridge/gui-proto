@@ -2,7 +2,7 @@ import QtQuick 2.4
 
 Rectangle {
     color: "transparent"
-    border.color: _settings.appGreen
+    border.color: _settings.unSelectedCategoryBkgColor
     border.width: 1
 
     // Cancel button:
@@ -33,22 +33,6 @@ Rectangle {
         id: logo
         anchors.centerIn: parent
         source: "qrc:/qml/images/ico-logo1.png"
-        opacity: _viewState !== "fullscreen" ? 1 : 0
-        Behavior on opacity {
-            NumberAnimation {duration: 500}
-        }
-    }
-
-    // Add:
-    ImageButton {
-        anchors.centerIn: parent
-        height: parent.height-4
-        source: "qrc:/qml/images/ico-plus.png"
-        opacity: _viewState === "fullscreen" ? 1 : 0
-        Behavior on opacity {
-            NumberAnimation {duration: 500}
-        }
-        onClicked: mainApplication.addCurrentItem()
     }
 
     // Cart total:

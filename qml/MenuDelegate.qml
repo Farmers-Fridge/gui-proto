@@ -33,8 +33,7 @@ Component {
                 State {
                     name: "fullscreen"
                     PropertyChanges { target: photosShade; opacity: 1 }
-                    PropertyChanges { target: backButton; onClicked: menuWrapper.state = "inGrid" }
-                }
+                 }
             ]
         }
 
@@ -44,9 +43,8 @@ Component {
             PathView {
                 pathItemCount: 3
                 id: photosListView
-                property int offset: categoryListModel.count < 3 ? width/2 : 0
                 model: visualModel.parts.list
-                width: mainWindow.width; height: mainWindow.height
+                anchors.fill: parent
                 highlightRangeMode: PathView.StrictlyEnforceRange
                 snapMode: ListView.SnapOneItem
                 interactive: false
