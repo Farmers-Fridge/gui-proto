@@ -33,7 +33,7 @@ Component {
                 State {
                     name: "fullscreen"
                     PropertyChanges { target: photosShade; opacity: 1 }
-                 }
+                }
             ]
         }
 
@@ -41,18 +41,20 @@ Component {
         Item {
             Package.name: "fullscreen"
             PathView {
-                pathItemCount: 3
                 id: photosListView
+                pathItemCount: 2
                 model: visualModel.parts.list
                 anchors.fill: parent
                 highlightRangeMode: PathView.StrictlyEnforceRange
                 snapMode: ListView.SnapOneItem
                 interactive: false
+
+                // Path:
                 path: Path {
-                    startX: -1.5*width+photosListView.offset; startY: height/2
-                    PathLine { x: width/2+photosListView.offset; y: height/2 }
-                    PathLine { x: 1.5*width+photosListView.offset; y: height/2 }
+                    startX: -width/2; startY: height/2
+                    PathLine {x: width + width/2; y:height/2 }
                 }
+
                 // Animation:
                 NumberAnimation {id: anim; target: photosListView; property: "contentX"; duration: 500; easing.type: Easing.OutBounce}
 
