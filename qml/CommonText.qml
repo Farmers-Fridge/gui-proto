@@ -1,12 +1,10 @@
-import QtQuick 2.5
+import QtQuick 2.4
 
 Text {
-    font.pixelSize: 30
+    font.pixelSize: 24
     font.family: _settings.fontFamily
     color: "black"
     font.bold: true
     wrapMode: Text.WordWrap
-    horizontalAlignment: Text.AlignHCenter
-    verticalAlignment: Text.AlignVCenter
 }
 

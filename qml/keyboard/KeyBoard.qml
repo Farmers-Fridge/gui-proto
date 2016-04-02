@@ -1,7 +1,9 @@
-import QtQuick 2.5
+import QtQuick 2.4
 
 Item {
     id: keyboard
+    opacity: 0
+    visible: opacity !== 0
 
     // Settings:
     KeyboardSettings {
@@ -76,9 +78,7 @@ Item {
                 // Enter clicked:
                 function onEnterClicked()
                 {
-                    var currentText = input.text
-                    keyboard.enterClicked(currentText)
-                    eraseText()
+                    keyboard.enterClicked(input.text)
                 }
 
                 // Backspace clicked:
@@ -224,5 +224,36 @@ Item {
                 }
             }
         }
+    }
+
+    // On state:
+    states: State {
+        name: "on"
+        PropertyChanges {
+            target: keyboard
+            opacity: 1
+        }
+    }
+
+    // Behavior on opacity:
+    Behavior on opacity {
+        PropertyAnimation {duration: 500}
+    }
+
+    // Show keyboard:
+    function onShowKeyBoard()
+    {
+        keyboard.state = "on"
+    }
+
+    // Hide keyboard:
+    function onHideKeyBoard()
+    {
+        keyboard.state = ""
+    }
+
+    Component.onCompleted: {
+        mainApplication.showKeyBoard.connect(onShowKeyBoard)
+        mainApplication.hideKeyBoard.connect(onHideKeyBoard)
     }
 }

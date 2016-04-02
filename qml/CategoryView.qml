@@ -1,4 +1,4 @@
-import QtQuick 2.5
+import QtQuick 2.4
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
@@ -17,7 +17,7 @@ Item {
         StyledTitle {
             id: styledTitle
             anchors.top: parent.top
-            anchors.topMargin: 12
+            anchors.topMargin: 16
             anchors.left: parent.left
             anchors.right: parent.right
             height: 1
@@ -26,7 +26,6 @@ Item {
 
         // Top area:
         Item {
-            id: topArea
             width: parent.width
             anchors.top: styledTitle.bottom
             anchors.bottom: centralLine.top
@@ -36,14 +35,17 @@ Item {
                 Repeater {
                     model: _categoryModel
                     Item {
-                        width: topArea.width/_categoryModel.count
-                        height: topArea.height
+                        width: parent.width/_categoryModel.count
+                        height: parent.height
                         TextPushButton {
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             text: categoryName.toUpperCase()
                             selected: _controller.currentCategory === categoryName
-                            onButtonClicked: _controller.currentCategory = categoryName
+                            onButtonClicked: {
+                                _controller.currentCategory = categoryName
+                                mainApplication.updateBrowserView(index)
+                            }
                         }
                     }
                 }
@@ -61,7 +63,6 @@ Item {
 
         // Bottom area:
         Item {
-            id: bottomArea
             width: parent.width
             anchors.top: centralLine.bottom
             anchors.bottom: parent.bottom
@@ -72,22 +73,19 @@ Item {
             }
 
             RowLayout {
-                id: rowLayout
-                width: parent.width
+                width: parent.width/1.5
                 height: parent.height
                 anchors.centerIn: parent
                 Repeater {
                     model: 4
                     CheckBox {
-                        id: checkBox
                         text: qsTr(" LOREM IPSUM")
                         anchors.verticalCenter: parent.verticalCenter
                         exclusiveGroup: exclusive
-                        height: parent.height-32
                         style: CheckBoxStyle {
                             indicator: Rectangle {
-                                implicitWidth: checkBox.height
-                                implicitHeight: checkBox.height
+                                implicitWidth: 48
+                                implicitHeight: 48
                                 border.color: control.activeFocus ? "darkblue" : "gray"
                                 border.width: 1
                                 Rectangle {
@@ -101,7 +99,7 @@ Item {
                             }
                             label: Label {
                                 text: control.text
-                                font.pixelSize: rowLayout.height-32
+                                font.pixelSize: 18
                                 anchors.leftMargin: 24
                             }
                         }

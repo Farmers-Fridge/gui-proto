@@ -4,6 +4,5 @@
     "categorySource": "config/categories",
     "categoryQuery": "/categories/item",
     "categoryListSource": "config/vendItems",
-    "categoryListQuery": "/vendItems/item",
-    "exitCode": "1234"
+    "categoryListQuery": "/vendItems/item"
 }

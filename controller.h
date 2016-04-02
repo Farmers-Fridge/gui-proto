@@ -14,7 +14,6 @@ class Controller : public QObject, public IService
     Q_PROPERTY(QString currentIP READ currentIP NOTIFY currentIPChanged)
     Q_PROPERTY(QObject *cartModel READ cartModel NOTIFY cartModelChanged)
     Q_PROPERTY(QString currentCategory READ currentCategory WRITE setCurrentCategory NOTIFY currentCategoryChanged)
-    Q_PROPERTY(QStringList saladAssets READ saladAssets NOTIFY saladAssetsChanged)
 
 public:
     friend class MenuViewer;
@@ -27,9 +26,6 @@ public:
 
     // Shutdown:
     virtual void shutdown();
-
-    // Return salad assets:
-    const QStringList &saladAssets() const;
 
     // Increment item count:
     Q_INVOKABLE void incrementItemCount(const QString &vendItemName);
@@ -76,9 +72,6 @@ private:
     // Set default parameters:
     void setDefaultParameters();
 
-    // Read salad assets:
-    void readSaladAssets();
-
     // Return current route:
     QString currentRoute() const;
 
@@ -100,9 +93,6 @@ private:
 
     // Application parameters:
     QVariantMap mAppParameters;
-
-    // Salad assets:
-    QStringList mSaladAssets;
 
     // QML application engine:
     QQmlApplicationEngine mEngine;
@@ -128,9 +118,6 @@ signals:
 
     // Current category changed:
     void currentCategoryChanged();
-
-    // Salad assets changed:
-    void saladAssetsChanged();
 };
 
 #endif // CONTROLLER_H

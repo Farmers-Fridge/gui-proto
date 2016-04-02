@@ -1,58 +1,62 @@
-import QtQuick 2.5
-import QtQuick.Layouts 1.1
+import QtQuick 2.4
 
 Rectangle {
     color: "transparent"
-    border.color: _settings.green
+    border.color: _settings.unSelectedCategoryBkgColor
     border.width: 1
 
     // Cancel button:
-    MouseArea {
+    ImageButton {
         id: cancelButton
-        width: parent.height
-        height: parent.height
+        height: parent.height-4
         anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        onClicked: mainApplication.showKeyPad()
+        anchors.leftMargin: 8
+        anchors.verticalCenter: parent.verticalCenter
+        source: "qrc:/qml/images/ico-cancel.png"
+        onClicked: _exitCommand.execute()
     }
 
-    Row {
-        anchors.fill: parent
-        Item {
-            width: parent.width/3
-            height: parent.height
-            CircularButton {
-                color: "brown"
-                anchors.centerIn: parent
-                width: parent.height-32
-                source: "qrc:/qml/images/ico-start-over.png"
-                onClicked: _clearCartCommand.execute()
-            }
+    // Cart count:
+    Item {
+        anchors.left: cancelButton.right
+        anchors.right: logo.left
+        height: parent.height
+        CommonText {
+            anchors.centerIn: parent
+            text: _controller.cartModel.cartCount + " items"
+            font.pixelSize: 32
         }
-        Item {
-            width: parent.width/3
-            height: parent.height
-            CircularButton {
-                color: "brown"
-                anchors.centerIn: parent
-                width: parent.height-32
-                source: "qrc:/qml/images/ico-login.png"
-            }
+    }
+
+    // Logo:
+    Image {
+        id: logo
+        anchors.centerIn: parent
+        source: "qrc:/qml/images/ico-logo1.png"
+    }
+
+    // Cart total:
+    Item {
+        anchors.left: logo.right
+        anchors.right: checkOutButton.left
+        height: parent.height
+        CommonText {
+            anchors.centerIn: parent
+            text: "$ " + _controller.cartModel.cartTotal
+            font.pixelSize: 32
         }
-        Item {
-            width: parent.width/3
-            height: parent.height
-            CircularButton {
-                color: "brown"
-                anchors.centerIn: parent
-                width: parent.height-32
-                source: "qrc:/qml/images/ico-checkout.png"
-                onClicked: {
-                    if (_controller.cartModel.cartTotal > 0)
-                        mainApplication.showPopup("_checkout_")
-                }
-            }
-        }
+    }
+
+    // Checkout button:
+    ImageButton {
+        id: checkOutButton
+        height: parent.height-4
+        anchors.right: parent.right
+        anchors.rightMargin: 8
+        anchors.verticalCenter: parent.verticalCenter
+        source: "qrc:/qml/images/ico-checkout.png"
+        onClicked: _checkOutCommand.execute()
+        enabled: _controller.cartModel.cartCount > 0
     }
 }
 

@@ -1,9 +1,7 @@
-import QtQuick 2.5
+import QtQuick 2.4
 import QtQml.Models 2.1
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Layouts 1.1
-import QtQuick.XmlListModel 2.0
-import "script/Utils.js" as Utils
 import "commands"
 import "./keyboard"
 
@@ -11,6 +9,9 @@ Rectangle {
     id: mainApplication
     anchors.fill: parent
     color: "#dad7c4"
+
+    // View state:
+    property string _viewState: ""
 
     // Keyboard text:
     property string _keyboardText: ""
@@ -21,8 +22,14 @@ Rectangle {
     // Load popup:
     signal showPopup(string popupId)
 
-    // Hide popup:
-    signal hidePopup(string popupId)
+    // Hide current popup:
+    signal hideCurrentPopup()
+
+    // Show keyboard:
+    signal showKeyBoard()
+
+    // Hide keyboard:
+    signal hideKeyBoard()
 
     // Navigate left:
     signal navigateLeft()
@@ -33,29 +40,8 @@ Rectangle {
     // Go back to main page:
     signal goBackToMainPage()
 
-    // Load page:
-    signal loadPage(string pageId)
-
-    // Model ready:
-    signal modelReady()
-
-    // Load grid view:
-    signal loadGridView()
-
-    // Load path view:
-    signal loadPathView()
-
-    // Show keypad:
-    signal showKeyPad()
-
-    // Show keyboard:
-    signal showKeyBoard()
-
-    // Keyboard enter key clicked:
-    signal keyboardEnterKeyClicked()
-
-    // Set first page mode:
-    signal setFirstPageMode(string mode)
+    // Add current item:
+    signal addCurrentItem()
 
     // Check out command:
     CheckOutCommand {
@@ -87,59 +73,123 @@ Rectangle {
         id: _exitCommand
     }
 
-    // XML version model:
-    XmlListModel {
-        id: categoryModel
-        source: Utils.urlPlay(_appData.categorySource)
-        query: _appData.categoryQuery
-
-        XmlRole { name: "categoryName"; query: "categoryName/string()"; isKey: true }
-        XmlRole { name: "icon"; query: "icon/string()"; isKey: true }
-        XmlRole { name: "header"; query: "header/string()"; isKey: true }
-
-        onStatusChanged: {
-            // Load main application:
-            if (status !== XmlListModel.Loading)
-            {
-                // Error:
-                if (status === XmlListModel.Error)
-                {
-                    // Log:
-                    console.log("Can't load: " + source)
-                }
-                else
-                // Model ready:
-                if (status === XmlListModel.Ready)
-                {
-                    // Set current category name:
-                    _controller.currentCategory = categoryModel.get(0).categoryName
-
-                    // Set category model:
-                    _categoryModel = categoryModel
-
-                    // Log:
-                    console.log(source + " loaded successfully")
-
-                    // Notify:
-                    modelReady()
-                }
-            }
-        }
+    // Update browser view:
+    function updateBrowserView(index)
+    {
+        browserView.positionViewAtIndex(index, ListView.Beginning)
     }
 
-    // Page mgr:
-    PageMgr {
-        id: _pageMgr
-        anchors.fill: parent
-        enabled: !_popupMgr.popupOn &&
-            (_numericKeyPadPopup.state === "") && (_keyboardPopup.state === "")
+    // Delegate model:
+    DelegateModel { id: albumVisualModel; model: _categoryModel; delegate: MenuDelegate {} }
+
+    // Primary header area:
+    PrimaryHeaderArea {
+        id: categoryView
+        anchors.top: parent.top
+        width: parent.width
+        height: _settings.toolbarHeightRatio*parent.height
+    }
+
+    // Menu view area:
+    Rectangle {
+        id: menuViewArea
+        color: "black"
+        enabled: keyboard.state === ""
+        width: parent.width
+        anchors.top: categoryView.bottom
+        anchors.bottom: primaryBottomArea.top
+
+        // Image browser:
+        ListView {
+            id: browserView
+            anchors.fill: parent
+            model: albumVisualModel.parts.browser
+            interactive: false
+            highlightRangeMode: ListView.StrictlyEnforceRange
+            clip: true
+        }
+
+        // Photo shade:
+        Rectangle { id: photosShade
+            color: "black"; width: parent.width; height: parent.height; opacity: 0; visible: opacity != 0.0
+            Behavior on opacity {
+                NumberAnimation {duration: 500}
+            }
+        }
+
+        // Listview:
+        ListView {
+            id: fullScreenListView
+            anchors.fill: parent
+            model: albumVisualModel.parts.fullscreen
+            interactive: false
+        }
+
+        Item {
+            anchors.fill: menuViewArea
+            visible: _viewState === "fullscreen"
+
+            // Previous button:
+            CircularButton {
+                anchors.bottom: returnToSaladsButton.top
+                anchors.bottomMargin: 48
+                anchors.horizontalCenter: returnToSaladsButton.horizontalCenter
+                source: "qrc:/qml/images/ico-prev.png"
+                onClicked: navigateLeft()
+                imageOffset: -8
+            }
+
+            // Return to salads:
+            TextClickButton {
+                id: returnToSaladsButton
+                text: _settings.returnToSaladsText
+                width: _settings.buttonWidth*1.75
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 48
+                onButtonClicked: mainApplication.goBackToMainPage()
+            }
+
+            // Next button:
+            CircularButton {
+                anchors.bottom: addTocartButton.top
+                anchors.bottomMargin: 48
+                anchors.horizontalCenter: addTocartButton.horizontalCenter
+                source: "qrc:/qml/images/ico-next.png"
+                onClicked: navigateRight()
+                imageOffset: 8
+            }
+
+            // Add to cart:
+            TextClickButton {
+                id: addTocartButton
+                text: _settings.addToCartText
+                width: _settings.buttonWidth*1.75
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 48
+                onButtonClicked: mainApplication.addCurrentItem()
+            }
+        }
+
+        // Foreground:
+        Item { id: foreground; anchors.fill: parent }
+    }
+
+    // Bottom area:
+    BottomArea {
+        id: primaryBottomArea
+        width: parent.width
+        height: _settings.toolbarHeightRatio*parent.height
+        anchors.bottom: parent.bottom
     }
 
     // Popup mgr:
     PopupMgr {
-        id: _popupMgr
         anchors.fill: parent
-        enabled: (_numericKeyPadPopup.state === "") && (_keyboardPopup.state === "")
+        enabled: keyboard.state === ""
 
         // Check out popup:
         CheckOutPopup {
@@ -148,18 +198,14 @@ Rectangle {
         }
     }
 
-    // Numeric key pad:
-    NumericKeyPadPopup {
-        id: _numericKeyPadPopup
-        width: parent.width
-        height: parent.height
-    }
-
-    // Keyboard popup:
-    KeyBoardPopup {
-        id: _keyboardPopup
-        width: parent.width
-        height: parent.height
+    // Keyboard:
+    KeyBoard {
+        id: keyboard
+        anchors.centerIn: parent
+        onEnterClicked: {
+            _keyboardText = text
+            hideKeyBoard()
+        }
     }
 
     // Busy indicator:

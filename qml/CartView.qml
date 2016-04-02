@@ -1,4 +1,4 @@
-import QtQuick 2.5
+import QtQuick 2.4
 import "script/Utils.js" as Utils
 
 ListView {
@@ -9,36 +9,66 @@ ListView {
     delegate: Item {
         id: delegate
         width: parent.width
-        height: cartView.height/4
+        height: _settings.cartViewDelegateHeight
 
         Row {
             id: row
             anchors.fill: parent
-            Item {
+            Row {
                 width: parent.width*2/5
                 height: parent.height
 
-                // Item icon:
-                Image {
-                    id: image
-                    anchors.left: parent.left
-                    anchors.leftMargin: 8
-                    height: parent.height-16
-                    anchors.verticalCenter: parent.verticalCenter
-                    fillMode: Image.PreserveAspectFit
-                    source: Utils.urlPublicStatic(icon)
+                Item {
+                    id: imageContainer
+                    width: parent.width/2
+                    height: parent.height
+
+                    // Item icon:
+                    Image {
+                        id: image
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
+                        source: Utils.urlPublicStatic(icon)
+                        onStatusChanged: {
+                            if (status === Image.Ready)
+                                delegate.height = Math.max(_settings.cartViewDelegateHeight, image.paintedHeight)
+                        }
+                    }
                 }
 
-                // Price:
+                // Vend item name:
                 Item {
-                    anchors.left: image.right
-                    anchors.right: parent.right
+                    anchors.top: imageContainer.top
+                    anchors.topMargin: 8
+                    width: parent.width/2
                     height: parent.height
+                    Column {
+                        width: parent.width
+                        height: parent.height
+
+                        // Vend item name:
+                        CommonText {
+                            text: vendItemName
+                            width: parent.width
+                            wrapMode: Text.WordWrap
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        // More info:
+                        CommonText {
+                            text: '<html><style type="text/css"></style><a href="http://google.com">more info...</a></html>'
+                            //onLinkActivated: Qt.openUrlExternally(link)
+                            verticalAlignment: Text.AlignVCenter
+                            color: _settings.unSelectedCategoryBkgColor
+                        }
+                    }
 
                     // Price:
                     CommonText {
-                        anchors.centerIn: parent
-                        text: "($"+price+")"
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 8
+                        text: "$"+price
+                        font.pixelSize: 30
                     }
                 }
             }
@@ -50,7 +80,7 @@ ListView {
 
                 // Incremental button:
                 IncrementalButton {
-                    anchors.fill: parent
+                    anchors.centerIn: parent
                     value: count
                     onIncrement: _controller.incrementItemCount(vendItemName)
                     onDecrement: _controller.decrementItemCount(vendItemName)
@@ -64,6 +94,7 @@ ListView {
                 CommonText {
                     anchors.centerIn: parent
                     text: "$"+count*price
+                    font.pixelSize: 30
                 }
             }
 
@@ -84,7 +115,7 @@ ListView {
             anchors.bottom: parent.bottom
             height: 1
             width: parent.width
-            color: _settings.green
+            color: _settings.unSelectedCategoryBkgColor
         }
     }
 }

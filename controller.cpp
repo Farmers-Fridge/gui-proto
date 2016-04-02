@@ -31,9 +31,6 @@ bool Controller::startup()
     // Load application parameters:
     loadApplicationParameters();
 
-    // Read salad assets:
-    readSaladAssets();
-
     // Register types:
     registerTypes();
 
@@ -53,12 +50,6 @@ bool Controller::startup()
 void Controller::shutdown()
 {
     saveApplicationParameters();
-}
-
-// Return salad assets:
-const QStringList &Controller::saladAssets() const
-{
-    return mSaladAssets;
 }
 
 // Register types:
@@ -139,22 +130,6 @@ void Controller::setDefaultParameters()
     mAppParameters.clear();
     mAppParameters["CURRENT_ROUTE"] = "https://bytebucket.org/jacbop/kiosk-assets/raw/master";
     mAppParameters["CURRENT_IP"] = "166.130.89.142";
-}
-
-// Read asset salads:
-void Controller::readSaladAssets()
-{
-    QDir saladAssetsDir = Utils::appDir();
-    if (saladAssetsDir.cdUp())
-    {
-        if (saladAssetsDir.cd("salad_assets"))
-        {
-            QStringList filter;
-            filter << "*.png";
-            Utils::files(saladAssetsDir.absolutePath(), filter, mSaladAssets);
-            emit saladAssetsChanged();
-        }
-    }
 }
 
 // Return current route:

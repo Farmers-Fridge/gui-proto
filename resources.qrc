@@ -1,7 +1,10 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/MenuDelegate.qml</file>
         <file>qml/BusyIndicator.qml</file>
+        <file>qml/Button.qml</file>
         <file>qml/main.qml</file>
+        <file>qml/MenuPictureDelegate.qml</file>
         <file>qml/Settings.qml</file>
         <file>qml/XMLParser.qml</file>
         <file>qml/images/ico-box-shadow.png</file>
@@ -11,6 +14,7 @@
         <file>qml/script/Utils.js</file>
         <file>qml/MainApplication.qml</file>
         <file>qml/CategoryListModel.qml</file>
+        <file>qml/images/ico-cancel.png</file>
         <file>qml/ImageButton.qml</file>
         <file>qml/Command.qml</file>
         <file>qml/commands/ExitCommand.qml</file>
@@ -25,7 +29,10 @@
         <file>qml/CommonText.qml</file>
         <file>qml/images/ico-minus.png</file>
         <file>qml/images/ico-plus.png</file>
+        <file>qml/images/ico-question.png</file>
+        <file>qml/AddToCartCommand.qml</file>
         <file>qml/images/ico-clear.png</file>
+        <file>qml/ClearCartCommand.qml</file>
         <file>qml/images/ico-email.png</file>
         <file>qml/images/ico-entercoupon.png</file>
         <file>qml/keyboard/JSONListModel.qml</file>
@@ -42,8 +49,12 @@
         <file>qml/RestCommand.qml</file>
         <file>qml/commands/TakeCouponCommand.qml</file>
         <file>qml/CategoryView.qml</file>
+        <file>qml/images/ico-logo1.png</file>
+        <file>qml/images/ico-logo2.png</file>
         <file>qml/images/ico-background.png</file>
         <file>qml/images/ico-trash.png</file>
+        <file>qml/MenuWrapper.qml</file>
+        <file>qml/Ellipse.qml</file>
         <file>qml/PrimaryHeaderArea.qml</file>
         <file>qml/BottomArea.qml</file>
         <file>qml/StyledTitle.qml</file>
@@ -53,23 +64,5 @@
         <file>qml/images/ico-prev.png</file>
         <file>qml/TextPushButton.qml</file>
         <file>qml/TextClickButton.qml</file>
-        <file>qml/IdlePage.qml</file>
-        <file>qml/Page.qml</file>
-        <file>qml/PageMgr.qml</file>
-        <file>qml/FirstPage.qml</file>
-        <file>qml/commands/AddToCartCommand.qml</file>
-        <file>qml/commands/ClearCartCommand.qml</file>
-        <file>qml/GridItemView.qml</file>
-        <file>qml/PathItemView.qml</file>
-        <file>qml/NumericKeyPadPopup.qml</file>
-        <file>qml/Key.qml</file>
-        <file>qml/images/ico-cross.png</file>
-        <file>qml/images/ico-ok.png</file>
-        <file>qml/images/ico-login.png</file>
-        <file>qml/images/ico-start-over.png</file>
-        <file>qml/CartViewHeader.qml</file>
-        <file>qml/images/ico-keep-shopping.png</file>
-        <file>qml/KeyBoardPopup.qml</file>
-        <file>qml/keyboard/NumericKeyPad.qml</file>
     </qresource>
 </RCC>
