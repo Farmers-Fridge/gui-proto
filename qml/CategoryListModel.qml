@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.5
 import QtQuick.XmlListModel 2.0
 import "script/Utils.js" as Utils
 

@@ -1,8 +1,8 @@
-import QtQuick 2.4
+import QtQuick 2.5
 
 Item {
     id: styledTitle
-    property string color: _settings.unSelectedCategoryBkgColor
+    property string color: _settings.green
     property alias title: title.text
 
     // Horizontal line:
@@ -24,6 +24,7 @@ Item {
             id: title
             color: styledTitle.color
             anchors.centerIn: parent
+            font.pixelSize: 24
         }
     }
 }

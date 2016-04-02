@@ -4,6 +4,7 @@
 #include <QUrl>
 #include <QDir>
 #include <QCoreApplication>
+#include <QDirIterator>
 
 class Utils
 {
@@ -37,6 +38,18 @@ public:
         applicationDir.cdUp();
         applicationDir.cd("ini");
         return applicationDir.filePath("preferences.ini");
+    }
+
+    // Get files  recursively:
+    static void files(const QString &srcDir, const QStringList &imageFilters, QStringList &files)
+    {
+        files.clear();
+        if (imageFilters.isEmpty())
+            return;
+
+        QDirIterator it(srcDir, imageFilters, QDir::Files, QDirIterator::Subdirectories);
+        while (it.hasNext())
+            files << fromLocalFile(it.next());
     }
 };
 

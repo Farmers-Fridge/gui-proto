@@ -1,104 +1,39 @@
-import QtQuick 2.4
+import QtQuick 2.5
 
 Popup {
     id: checkOutPopup
     popupId: "_checkout_"
 
-    contents: Item {
+    contents: Rectangle {
+        id: container
         width: parent.width
-        height: parent.height
+        height: parent.height*3/4
+        anchors.centerIn: parent
+        color: _settings.popupBkgColor
 
-        // Header:
+        // Header (tax and total):
         Rectangle {
+            width: parent.width/2
+            height: _settings.checkOutPopupHeaderHeight
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: container.top
+            color: _settings.popupBkgColor
+            border.color: _settings.green
+            border.width: 3
+
+            CommonText {
+                anchors.centerIn: parent
+                text: qsTr("Your Total: $") + _controller.cartModel.cartTotal
+            }
+        }
+
+        // Cart view header:
+        CartViewHeader {
             id: header
             anchors.top: parent.top
             width: parent.width
             height: _settings.checkOutPopupHeaderHeight
             color: "brown"
-
-            // First col:
-            Item {
-                id: firstCol
-                width: parent.width*2/5
-                height: parent.height
-                CommonText {
-                    anchors.centerIn: parent
-                    text: qsTr("PRODUCT NAME")
-                    color: "white"
-                    font.pixelSize: 30
-                }
-            }
-
-            // Separator:
-            Rectangle {
-                width: 1
-                height: parent.height-8
-                anchors.left: firstCol.right
-                anchors.verticalCenter: parent.verticalCenter
-                color: "white"
-            }
-
-            // Second col:
-            Item {
-                id: secondCol
-                width: parent.width/5
-                height: parent.height
-                anchors.left: firstCol.right
-                CommonText {
-                    anchors.centerIn: parent
-                    text: qsTr("QTY")
-                    color: "white"
-                    font.pixelSize: 30
-                }
-            }
-
-            // Separator:
-            Rectangle {
-                width: 1
-                height: parent.height-8
-                anchors.left: secondCol.right
-                anchors.verticalCenter: parent.verticalCenter
-                color: "white"
-            }
-
-            // Third col:
-            Item {
-                id: thirdCol
-                width: parent.width/5
-                height: parent.height
-                anchors.left: secondCol.right
-                CommonText {
-                    anchors.centerIn: parent
-                    text: qsTr("TOTAL")
-                    color: "white"
-                    font.pixelSize: 30
-                }
-            }
-
-            // Separator:
-            Rectangle {
-                width: 1
-                height: parent.height-8
-                anchors.left: thirdCol.right
-                anchors.verticalCenter: parent.verticalCenter
-                color: "white"
-            }
-
-            // Fourth col:
-            Item {
-                id: fourthCol
-                width: parent.width/5
-                height: parent.height
-                anchors.left: thirdCol.right
-
-                // Back button:
-                ImageButton {
-                    id: backButton
-                    source: "qrc:/qml/images/ico-back.png"
-                    anchors.centerIn: parent
-                    onClicked: mainApplication.hideCurrentPopup()
-                }
-            }
         }
 
         // View container:
@@ -106,7 +41,7 @@ Popup {
             id: viewContainer
             width: parent.width
             anchors.top: header.bottom
-            anchors.bottom: totalArea.top
+            anchors.bottom: controlArea.top
 
             // Cart view:
             CartView {
@@ -115,81 +50,95 @@ Popup {
             }
         }
 
-        // Total area:
+        // Control area:
         Rectangle {
-            id: totalArea
+            id: controlArea
             width: parent.width
             height: _settings.checkOutPopupHeaderHeight
             anchors.bottom: parent.bottom
             color: "brown"
-            CommonText {
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Total: $" + _controller.cartModel.cartTotal
-                color: "white"
-                font.pixelSize: 30
-            }
 
-            // Title:
-            CommonText {
-                anchors.centerIn: parent
-                text: _settings.shoppingCartTitle
-                font.pixelSize: 30
-                color: "white"
-            }
-
-            // Email:
-            ImageButton {
-                id: emailButton
-                height: parent.height-8
-                anchors.right: parent.right
-                anchors.rightMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                source: "qrc:/qml/images/ico-email.png"
-                onClicked: {
-                    keyboard.enterClicked.connect(onEnterClicked)
-                    mainApplication.showKeyBoard()
-                }
-
-                // Enter clicked:
-                function onEnterClicked()
-                {
-                    // Setup takeReceiptEmailAddressCommand:
-                    if (_controller.validateEmailAddress(_keyboardText))
-                    {
-                        _takeReceiptEmailAddressCommand.emailAddress = _keyboardText
-                        _takeReceiptEmailAddressCommand.execute()
+            Row {
+                anchors.fill: parent
+                Item {
+                    width: parent.width/4
+                    height: parent.height
+                    CircularButton {
+                        color: _settings.popupBkgColor
+                        anchors.centerIn: parent
+                        width: parent.height
+                        source: "qrc:/qml/images/ico-cross.png"
+                        onClicked: {
+                            mainApplication.hidePopup("_checkout_")
+                            _clearCartCommand.execute()
+                            _controller.currentCategory = categoryModel.get(0).categoryName
+                            mainApplication.setFirstPageMode("gridview")
+                            mainApplication.loadPage("_idle_")
+                        }
                     }
-                    else console.log(_keyboardText + " IS NOT A VALID EMAIL ADDRESS")
-                    keyboard.enterClicked.disconnect(onEnterClicked)
                 }
-            }
-
-            // Take receipt email address command:
-            ImageButton {
-                id: enterCouponButton
-                anchors.right: emailButton.left
-                anchors.rightMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                width: parent.height
-                source: "qrc:/qml/images/ico-entercoupon.png"
-                onClicked: {
-                    keyboard.enterClicked.connect(onEnterClicked)
-                    mainApplication.showKeyBoard()
-                }
-
-                // Enter clicked:
-                function onEnterClicked()
-                {
-                    // Setup takeCouponCodeCommand:
-                    if (_controller.validateCoupon(_keyboardText))
-                    {
-                        _takeCouponCodeCommand.couponCode = _keyboardText
-                        _takeCouponCodeCommand.execute()
+                Item {
+                    width: parent.width/4
+                    height: parent.height
+                    CircularButton {
+                        color: _settings.popupBkgColor
+                        anchors.centerIn: parent
+                        width: parent.height
+                        source: "qrc:/qml/images/ico-keep-shopping.png"
+                        onClicked: mainApplication.hidePopup("_checkout_")
                     }
-                    else console.log(_keyboardText + " IS NOT A VALID COUPON")
-                    keyboard.enterClicked.disconnect(onEnterClicked)
+                }
+                Item {
+                    width: parent.width/4
+                    height: parent.height
+                    CircularButton {
+                        color: _settings.popupBkgColor
+                        anchors.centerIn: parent
+                        width: parent.height
+                        source: "qrc:/qml/images/ico-email.png"
+
+                        // Keyboard enter key clicked:
+                        function onKeyboardEnterKeyClicked()
+                        {
+                            if (_controller.validateEmailAddress(mainApplication._keyboardText))
+                            {
+                                _takeReceiptEmailAddressCommand.emailAddress = mainApplication._keyboardText
+                                _takeReceiptEmailAddressCommand.execute()
+                            }
+                            mainApplication.keyboardEnterKeyClicked.disconnect(onKeyboardEnterKeyClicked)
+                        }
+
+                        onClicked: {
+                            mainApplication.keyboardEnterKeyClicked.connect(onKeyboardEnterKeyClicked)
+                            mainApplication.showKeyBoard()
+                        }
+                    }
+                }
+                Item {
+                    width: parent.width/4
+                    height: parent.height
+                    CircularButton {
+                        color: _settings.popupBkgColor
+                        anchors.centerIn: parent
+                        width: parent.height
+                        source: "qrc:/qml/images/ico-entercoupon.png"
+
+                        // Keyboard enter key clicked:
+                        function onKeyboardEnterKeyClicked()
+                        {
+                            if (mainApplication._keyboardText.length > 0)
+                            {
+                                _takeCouponCodeCommand.couponCode = mainApplication._keyboardText
+                                _takeCouponCodeCommand.execute()
+                            }
+                            mainApplication.keyboardEnterKeyClicked.disconnect(onKeyboardEnterKeyClicked)
+                        }
+
+                        onClicked: {
+                            mainApplication.keyboardEnterKeyClicked.connect(onKeyboardEnterKeyClicked)
+                            mainApplication.showKeyBoard()
+                        }
+                    }
                 }
             }
         }
@@ -199,7 +148,7 @@ Popup {
     function onCartCountChanged()
     {
         if (_controller.cartModel.cartCount < 1)
-            checkOutPopup.state = ""
+            mainApplication.hidePopup("_checkout_")
     }
     Component.onCompleted: _controller.cartModel.cartTotalChanged.connect(onCartCountChanged)
 }
