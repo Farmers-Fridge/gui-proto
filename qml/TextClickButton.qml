@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.5
 
 Rectangle {
     id: container
@@ -11,7 +11,7 @@ Rectangle {
     property alias text: text.text
 
     // Set colors:
-    color: _settings.unSelectedCategoryBkgColor
+    color: _settings.green
 
     // Selected signal:
     signal buttonClicked()
@@ -21,7 +21,7 @@ Rectangle {
         id: text
         anchors.centerIn: parent
         text: categoryName.toUpperCase()
-        font.pixelSize: 42
+        font.pixelSize: parent.height-32
         font.bold: true
         color: "white"
     }

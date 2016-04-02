@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.5
 import QtQuick.Window 2.2
 
 Item {
@@ -9,16 +9,16 @@ Item {
     property alias contents: contents.children
     y: Screen.desktopAvailableHeight+40
 
-    // Background color:
-    Rectangle {
-        anchors.fill: parent
-        color: _settings.popupBkgColor
-    }
-
     // Border:
     Item {
         id: contents
         anchors.fill: parent
+    }
+
+    // Reset:
+    function reset()
+    {
+        // Base impl does nothing:
     }
 
     // Time out:
@@ -36,6 +36,6 @@ Item {
     }
 
     transitions: Transition {
-        SpringAnimation {target: popup; property: "y"; duration: 500; spring: 3; damping: 0.2}
+        SpringAnimation {target: popup; property: "y"; duration: _settings.pageTransitionDelay; spring: 3; damping: 0.2}
     }
 }

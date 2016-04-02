@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.5
 
 Rectangle {
     id: container
@@ -10,8 +10,8 @@ Rectangle {
     // Properties:
     property alias text: text.text
     property string selectedBkgColor: _settings.selectedCategoryBkgColor
-    property string unSelectedBkgColor: _settings.unSelectedCategoryBkgColor
-    property string selectedTextColor: _settings.unSelectedCategoryBkgColor
+    property string unSelectedBkgColor: _settings.green
+    property string selectedTextColor: _settings.green
     property string unselectedTextColor: "white"
     property bool selected: false
 
@@ -26,7 +26,7 @@ Rectangle {
         id: text
         anchors.centerIn: parent
         text: categoryName.toUpperCase()
-        font.pixelSize: 36
+        font.pixelSize: parent.height-32
         font.bold: true
         color: selected ? selectedTextColor : unselectedTextColor
     }
