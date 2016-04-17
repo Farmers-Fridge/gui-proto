@@ -21,9 +21,6 @@ Item {
     // Popup:
     readonly property string popupBkgColor: "ivory"
 
-    // Shopping cart:
-    readonly property string shoppingCartTitle: qsTr("Your Fresh Market")
-
     // Application green:
     readonly property string green: "darkgreen"
 
@@ -51,5 +48,14 @@ Item {
     readonly property int idleTimeOut: 3000
 
     // Page idle time:
-    readonly property int pageIdleTime: 10000
+    readonly property int pageIdleTime: 15000
+
+    // Floating z max:
+    readonly property int zMax: 1e6
+
+    // Network time out:
+    readonly property int networkTimeOut: 15000
+
+    // Cart view header color:
+    readonly property string cartViewHeaderColor: "brown"
 }

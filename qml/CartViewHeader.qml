@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.5
 
 // Header:
 Rectangle {
@@ -6,7 +6,7 @@ Rectangle {
     anchors.top: parent.top
     width: parent.width
     height: _settings.checkOutPopupHeaderHeight
-    color: "brown"
+    color: _settings.cartViewHeaderColor
 
     // First col:
     Item {

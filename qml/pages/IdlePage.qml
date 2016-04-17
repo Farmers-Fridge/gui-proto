@@ -1,7 +1,9 @@
 import QtQuick 2.5
+import "../script/Utils.js" as Utils
+import ".."
 
 Page {
-    pageId: "_idle_"
+    pageId: "_idlepage_"
 
     // Main timer (debug only):
     Timer {
@@ -38,6 +40,7 @@ Page {
         }
     }
 
+    // Touch screen to start text:
     CommonText {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
@@ -47,19 +50,10 @@ Page {
         font.pixelSize: 42
     }
 
+    // Clicking anywhere loads previous page:
     MouseArea {
         anchors.fill: parent
-        onClicked: mainApplication.loadPage(_pageMgr.previousPage)
-
-        // Cancel button:
-        MouseArea {
-            id: cancelButton
-            width: 96
-            height: 96
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            onClicked: mainApplication.showKeyPad()
-        }
+        onClicked: mainApplication.loadPage("_menupage_")
     }
 }
 

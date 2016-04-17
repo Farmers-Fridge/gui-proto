@@ -8,11 +8,9 @@
 
 // Constructor:
 Controller::Controller(QObject *parent) : QObject(parent),
-    mEventWatcher(0), mCartModel(0), mCurrentCategory("")
+    mEventWatcher(0), mCartModel(0), mCurrentCategory(""),
+    mCurrentNetworkIP("127.0.0.1")
 {
-    // Define application keys:
-    mAppKeys << "CURRENT_ROUTE" << "CURRENT_IP";
-
     // Cart model:
     mCartModel = new CartModel(this);
 
@@ -28,9 +26,6 @@ Controller::~Controller()
 // Startup:
 bool Controller::startup()
 {
-    // Load application parameters:
-    loadApplicationParameters();
-
     // Read salad assets:
     readSaladAssets();
 
@@ -52,7 +47,6 @@ bool Controller::startup()
 // Shutdown:
 void Controller::shutdown()
 {
-    saveApplicationParameters();
 }
 
 // Return salad assets:
@@ -80,67 +74,6 @@ void Controller::startGUI()
     mEngine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 }
 
-// Load application parameters:
-void Controller::loadApplicationParameters()
-{
-    // Read preferences.ini:
-    QString preferencesFile = Utils::pathToPreferencesDotIni();
-    QFileInfo fi(preferencesFile);
-    if (!fi.exists())
-    {
-        // No preferences.ini found, set default parameters:
-        setDefaultParameters();
-        return;
-    }
-    qDebug() << "READING: " << preferencesFile << " INI FILE";
-
-    QSettings settings(preferencesFile, QSettings::IniFormat);
-    settings.beginGroup("Parameter");
-
-    // Get all keys:
-    QStringList allKeys = settings.allKeys();
-
-    bool settingsOK = true;
-    for (int i=0; i<allKeys.size(); i++)
-    {
-        // Get actual parameter name:
-        QString actualParameter = allKeys[i].simplified().toUpper();
-
-        // Expected?
-        if (!mAppKeys.contains(actualParameter))
-            continue;
-
-        // Read:
-        QString value = settings.value(allKeys[i]).toString();
-        if (value.simplified().isEmpty())
-        {
-            settingsOK = false;
-            break;
-        }
-        mAppParameters[actualParameter] = settings.value(allKeys[i]);
-    }
-
-    // Settings not OK:
-    if (!settingsOK)
-        setDefaultParameters();
-
-    settings.endGroup();
-}
-
-// Save application parameters:
-void Controller::saveApplicationParameters()
-{
-    qDebug() << "SAVING APPLICATION PARAMETERS";
-}
-
-// Set default parameters:
-void Controller::setDefaultParameters()
-{
-    mAppParameters.clear();
-    mAppParameters["CURRENT_ROUTE"] = "https://bytebucket.org/jacbop/kiosk-assets/raw/master";
-    mAppParameters["CURRENT_IP"] = "166.130.89.142";
-}
-
 // Read asset salads:
 void Controller::readSaladAssets()
 {
@@ -157,16 +90,17 @@ void Controller::readSaladAssets()
     }
 }
 
-// Return current route:
-QString Controller::currentRoute() const
+// Return current network IP:
+const QString &Controller::currentNetworkIP() const
 {
-    return mAppParameters["CURRENT_ROUTE"].toString();
+    return mCurrentNetworkIP;
 }
 
-// Return current IP:
-QString Controller::currentIP() const
+// Set current network IP:
+void Controller::setCurrentNetworkIP(const QString &currentNetworkIP)
 {
-    return mAppParameters["CURRENT_IP"].toString();
+    mCurrentNetworkIP = currentNetworkIP;
+    emit currentNetworkIPChanged();
 }
 
 // Return cart model:

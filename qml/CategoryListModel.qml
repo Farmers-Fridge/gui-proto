@@ -3,10 +3,11 @@ import QtQuick.XmlListModel 2.0
 import "script/Utils.js" as Utils
 
 // XML version model:
-XmlListModel {
+CustomXmlListModel {
     id: categoryListModel
     property string targetCategory: ""
-    source: Utils.urlPlay(_appData.categoryListSource + "?category=" + targetCategory)
+    source: Utils.urlPlay(_appData.currentIP, _appData.categoryListSource + "?category=" + targetCategory)
+
     query: _appData.categoryListQuery
     signal modelReady()
 
@@ -17,6 +18,7 @@ XmlListModel {
     XmlRole { name: "price"; query: "price/string()"; isKey: true }
 
     onStatusChanged: {
+        //_appIsBusy = (categoryListModel.status === XmlListModel.Loading)
         if (status !== XmlListModel.Loading)
         {
             if (status === XmlListModel.Error)

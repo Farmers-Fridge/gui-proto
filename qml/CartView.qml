@@ -10,7 +10,6 @@ ListView {
         id: delegate
         width: parent.width
         height: cartView.height/4
-
         Row {
             id: row
             anchors.fill: parent
@@ -26,7 +25,7 @@ ListView {
                     height: parent.height-16
                     anchors.verticalCenter: parent.verticalCenter
                     fillMode: Image.PreserveAspectFit
-                    source: Utils.urlPublicStatic(icon)
+                    source: Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
                 }
 
                 // Price:

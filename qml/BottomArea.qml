@@ -6,16 +6,6 @@ Rectangle {
     border.color: _settings.green
     border.width: 1
 
-    // Cancel button:
-    MouseArea {
-        id: cancelButton
-        width: parent.height
-        height: parent.height
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        onClicked: mainApplication.showKeyPad()
-    }
-
     Row {
         anchors.fill: parent
         Item {
@@ -49,7 +39,7 @@ Rectangle {
                 source: "qrc:/qml/images/ico-checkout.png"
                 onClicked: {
                     if (_controller.cartModel.cartTotal > 0)
-                        mainApplication.showPopup("_checkout_")
+                        mainApplication.showPopup("_checkoutpopup_")
                 }
             }
         }

@@ -3,6 +3,7 @@ import ".."
 
 RestCommand {
     _restOrder: "takeReceiptEmailAddress"
+    _networkIP: _appData.currentIP
     property string emailAddress: ""
 
     // Execute:

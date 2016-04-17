@@ -2,11 +2,12 @@ import QtQuick 2.5
 import ".."
 
 Command {
-    id: checkOutCommand
+    id: clearAllCommand
 
     // Execute:
     function execute()
     {
-        mainApplication.showPopup("_checkoutpopup_")
+        console.log("RUNNING CLEARALL COMMAND")
     }
 }
+

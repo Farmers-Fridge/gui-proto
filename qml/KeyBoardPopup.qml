@@ -4,7 +4,7 @@ import QtQuick.Window 2.0
 
 Popup {
     id: keyboardPopup
-    popupId: "_keyboard_"
+    popupId: "_keyboardpoup_"
     y: Screen.desktopAvailableHeight+40
 
     contents: KeyBoard {
@@ -12,17 +12,7 @@ Popup {
         anchors.centerIn: parent
         onEnterClicked: {
             _keyboardText = text
-            mainApplication.keyboardEnterKeyClicked()
-            keyboardPopup.state = ""
-        }
-    }
-
-    // States:
-    states: State {
-        name: "on"
-        PropertyChanges {
-            target: checkOutPopup
-            y: 0
+            mainApplication.keyBoardEnterKeyClicked()
         }
     }
 
@@ -31,12 +21,26 @@ Popup {
         SpringAnimation {target: popup; property: "y"; duration: _settings.pageTransitionDelay; spring: 3; damping: 0.2}
     }
 
-    // Show keyboard:
+    // Show key board:
     function onShowKeyBoard()
     {
         keyboardPopup.state = "on"
     }
 
-    Component.onCompleted: mainApplication.showKeyBoard.connect(onShowKeyBoard)
+    // Hide key pad:
+    function onHideKeyBoard()
+    {
+        keyboardPopup.state = ""
+    }
+
+    Component.onCompleted: {
+        // Show keyboard:
+        mainApplication.showKeyBoard.connect(onShowKeyBoard)
+        mainApplication.hideKeyBoard.connect(onHideKeyBoard)
+
+        // Show notepad:
+        mainApplication.showNotePad.connect(onShowKeyBoard)
+        mainApplication.hideNodePad.connect(onHideKeyBoard)
+    }
 }
 

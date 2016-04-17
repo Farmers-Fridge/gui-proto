@@ -50,18 +50,11 @@ PathView {
                 }
             }
 
-            // Busy indicator:
-            BusyIndicator {
-                anchors.centerIn: parent
-                on: originalImage.status !== Image.Ready
-                visible: on
-            }
-
             // Original image:
             Image {
                 id: originalImage
                 antialiasing: true
-                source: icon !== "" ? Utils.urlPublicStatic(icon) : ""
+                source: icon !== "" ? Utils.urlPublicStatic(_appData.urlPublicRootValue, icon) : ""
                 cache: true
                 fillMode: Image.PreserveAspectFit
                 width: imageLoadingBkg.width
@@ -84,6 +77,7 @@ PathView {
                         text: price
                     }
                 }
+                onStatusChanged:_appIsBusy = (originalImage.status === Image.Loading)
             }
         }
 
@@ -138,7 +132,7 @@ PathView {
             anchors.leftMargin: 8
             anchors.verticalCenter: parent.verticalCenter
             source: "qrc:/qml/images/ico-prev.png"
-            onClicked: navigateLeft()
+            onClicked: mainApplication.navigateLeft()
             imageOffset: -8
         }
 
@@ -148,7 +142,7 @@ PathView {
             anchors.rightMargin: 8
             anchors.verticalCenter: parent.verticalCenter
             source: "qrc:/qml/images/ico-next.png"
-            onClicked: navigateRight()
+            onClicked: mainApplication.navigateRight()
             imageOffset: 8
         }
     }

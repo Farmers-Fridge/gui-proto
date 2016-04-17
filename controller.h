@@ -10,8 +10,7 @@ class CartModel;
 class Controller : public QObject, public IService
 {
     Q_OBJECT
-    Q_PROPERTY(QString currentRoute READ currentRoute NOTIFY currentRouteChanged)
-    Q_PROPERTY(QString currentIP READ currentIP NOTIFY currentIPChanged)
+    Q_PROPERTY(QString currentNetworkIP READ currentNetworkIP WRITE setCurrentNetworkIP NOTIFY currentNetworkIPChanged)
     Q_PROPERTY(QObject *cartModel READ cartModel NOTIFY cartModelChanged)
     Q_PROPERTY(QString currentCategory READ currentCategory WRITE setCurrentCategory NOTIFY currentCategoryChanged)
     Q_PROPERTY(QStringList saladAssets READ saladAssets NOTIFY saladAssetsChanged)
@@ -67,23 +66,14 @@ private:
     // Start GUI:
     void startGUI();
 
-    // Load application parameters:
-    void loadApplicationParameters();
-
-    // Save application parameters:
-    void saveApplicationParameters();
-
-    // Set default parameters:
-    void setDefaultParameters();
-
     // Read salad assets:
     void readSaladAssets();
 
-    // Return current route:
-    QString currentRoute() const;
+    // Return current network IP:
+    const QString &currentNetworkIP() const;
 
-    // Return current IP:
-    QString currentIP() const;
+    // Set current network IP:
+    void setCurrentNetworkIP(const QString &currentNetworkIP);
 
     // Return cart model:
     QObject *cartModel() const;
@@ -95,12 +85,6 @@ private:
     void setCurrentCategory(const QString &categoryName);
 
 private:
-    // Application keys:
-    QStringList mAppKeys;
-
-    // Application parameters:
-    QVariantMap mAppParameters;
-
     // Salad assets:
     QStringList mSaladAssets;
 
@@ -116,12 +100,12 @@ private:
     // Current category:
     QString mCurrentCategory;
 
-signals:
-    // Current route changed:
-    void currentRouteChanged();
+    // Current network IP:
+    QString mCurrentNetworkIP;
 
-    // Current IP changed:
-    void currentIPChanged();
+signals:
+    // Current network IP changed:
+    void currentNetworkIPChanged();
 
     // Cart model changed:
     void cartModelChanged();

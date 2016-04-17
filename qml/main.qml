@@ -9,18 +9,12 @@ Window {
     height: Screen.desktopAvailableHeight
     visible: true    
     property bool imageLoading: false
-    color: _settings.mainWindowColor
 
     // Application data:
     property variant _appData: undefined
 
     // Category model:
     property variant _categoryModel: undefined
-
-    // Settings:
-    Settings {
-        id: _settings
-    }
 
     // XML parser:
     XMLParser {

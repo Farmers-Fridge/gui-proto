@@ -1,22 +1,31 @@
 import QtQuick 2.5
-import QtQml.Models 2.1
-import QtQuick.Controls.Styles 1.2
+import QtQml.Models 2.2
+import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.XmlListModel 2.0
 import "script/Utils.js" as Utils
 import "commands"
 import "./keyboard"
 
-Rectangle {
+Item {
     id: mainApplication
     anchors.fill: parent
-    color: "#dad7c4"
+
+    // Background decoration:
+    Background {
+        anchors.fill: parent
+        color: _settings.mainWindowColor
+    }
 
     // Keyboard text:
     property string _keyboardText: ""
 
     // Application busy state:
     property bool _appIsBusy: false
+
+    // Identify current stock item by row/column:
+    property int _currentStockItemRow: -1
+    property int _currentStockItemCol: -1
 
     // Load popup:
     signal showPopup(string popupId)
@@ -30,11 +39,11 @@ Rectangle {
     // Navigate right:
     signal navigateRight()
 
-    // Go back to main page:
-    signal goBackToMainPage()
-
     // Load page:
     signal loadPage(string pageId)
+
+    // Load previous page:
+    signal loadPreviousPage()
 
     // Model ready:
     signal modelReady()
@@ -48,14 +57,71 @@ Rectangle {
     // Show keypad:
     signal showKeyPad()
 
+    // Hide keypad:
+    signal hideKeyPad()
+
     // Show keyboard:
     signal showKeyBoard()
 
-    // Keyboard enter key clicked:
-    signal keyboardEnterKeyClicked()
+    // Hide keyboard:
+    signal hideKeyBoard()
 
-    // Set first page mode:
-    signal setFirstPageMode(string mode)
+    // Show notepad:
+    signal showNotePad()
+
+    // Hide notepad:
+    signal hideNodePad()
+
+    // Show stock keypad:
+    signal showStockKeyPad(int theoPar, int actualPar)
+
+    // Hide stock keypad:
+    signal hideStockKeyPad()
+
+    // Keyboard enter key clicked:
+    signal keyBoardEnterKeyClicked()
+
+    // Keyboard cancel key clicked:
+    signal keyBoardCancelKeyClicked()
+
+    // Keypad enter key clicked:
+    signal keyPadEnterKeyClicked(string text)
+
+    // Keypad cancel key clicked:
+    signal keyPadCancelKeyClicked()
+
+    // Stock keypad enter key clicked:
+    signal stockKeyPadEnterKeyClicked(string text)
+
+    // Stock leypad cancel key clicked:
+    signal stockKeyPadCancelKeyClicked()
+
+    // Set menu page mode:
+    signal setMenuPageMode(string mode)
+
+    // Current stock item changed:
+    signal currentStockItemChanged()
+
+    // Set current stock item:
+    function setCurrentStockItem(rowNumber, columnNumber)
+    {
+        if ((rowNumber > 0) && (columnNumber > 0))
+        {
+            _currentStockItemRow = rowNumber
+            _currentStockItemCol = columnNumber
+            currentStockItemChanged()
+        }
+    }
+
+    // Settings:
+    Settings {
+        id: _settings
+    }
+
+    // Colors:
+    Colors {
+        id: _colors
+    }
 
     // Check out command:
     CheckOutCommand {
@@ -82,15 +148,30 @@ Rectangle {
         id: _takeCouponCodeCommand
     }
 
+    // Restock from tablet command:
+    RestockFromTabletCommand {
+        id: _restockFromTabletCommand
+    }
+
+    // Update restock exception command:
+    UpdateRestockExceptionCommand {
+        id: _updateRestockExceptionCommand
+    }
+
+    // Clear all command:
+    ClearAllCommand {
+        id: _clearAllCommand
+    }
+
     // Commands:
     ExitCommand {
         id: _exitCommand
     }
 
     // XML version model:
-    XmlListModel {
+    CustomXmlListModel {
         id: categoryModel
-        source: Utils.urlPlay(_appData.categorySource)
+        source: Utils.urlPlay(_appData.currentIP, _appData.categorySource)
         query: _appData.categoryQuery
 
         XmlRole { name: "categoryName"; query: "categoryName/string()"; isKey: true }
@@ -121,7 +202,7 @@ Rectangle {
                     console.log(source + " loaded successfully")
 
                     // Notify:
-                    modelReady()
+                    mainApplication.modelReady()
                 }
             }
         }
@@ -132,14 +213,16 @@ Rectangle {
         id: _pageMgr
         anchors.fill: parent
         enabled: !_popupMgr.popupOn &&
-            (_numericKeyPadPopup.state === "") && (_keyboardPopup.state === "")
+            (_keyPadPopup.state === "") &&
+                 (_keyboardPopup.state === "") &&
+                    (_stockKeyPadPopup.state === "")
     }
 
     // Popup mgr:
     PopupMgr {
         id: _popupMgr
         anchors.fill: parent
-        enabled: (_numericKeyPadPopup.state === "") && (_keyboardPopup.state === "")
+        enabled: (_keyPadPopup.state === "") && (_keyboardPopup.state === "")
 
         // Check out popup:
         CheckOutPopup {
@@ -149,8 +232,15 @@ Rectangle {
     }
 
     // Numeric key pad:
-    NumericKeyPadPopup {
-        id: _numericKeyPadPopup
+    KeyPadPopup {
+        id: _keyPadPopup
+        width: parent.width
+        height: parent.height
+    }
+
+    // Stock numeric key pad:
+    StockKeyPadPopup {
+        id: _stockKeyPadPopup
         width: parent.width
         height: parent.height
     }
@@ -164,7 +254,7 @@ Rectangle {
 
     // Busy indicator:
     BusyIndicator {
-        id: busyIndicator
+        id: _busyIndicator
         anchors.centerIn: parent
         on: _appIsBusy
         visible: on

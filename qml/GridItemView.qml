@@ -29,23 +29,17 @@ GridView {
             }
         }
 
-        // Busy indicator:
-        BusyIndicator {
-            anchors.centerIn: parent
-            on: originalImage.status !== Image.Ready
-            visible: on
-        }
-
         // Original image:
         Image {
             id: originalImage
             antialiasing: true
-            source: icon !== "" ? Utils.urlPublicStatic(icon) : ""
+            source: Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
             cache: true
             fillMode: Image.PreserveAspectFit
             width: height
             height: itemView.width/3
             anchors.centerIn: parent
+            onStatusChanged: _appIsBusy = (originalImage.status === Image.Loading)
 
             MouseArea {
                 anchors.fill: parent
@@ -99,7 +93,5 @@ GridView {
             cellWidth = itemView.width/3
             cellHeight = itemView.height/3
         }
-
-        console.log("CELLWIDTH/CELLHEIGHT: ", nItems, cellWidth, cellHeight)
     }
 }

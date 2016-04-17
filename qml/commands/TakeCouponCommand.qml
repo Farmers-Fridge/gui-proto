@@ -3,6 +3,7 @@ import ".."
 
 RestCommand {
     _restOrder: "takeCouponCode"
+    _networkIP: _appData.currentIP
     property string couponCode: ""
 
     // Execute:

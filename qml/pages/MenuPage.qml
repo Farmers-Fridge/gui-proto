@@ -1,10 +1,11 @@
 import QtQuick 2.5
 import QtQuick.XmlListModel 2.0
-import "script/Utils.js" as Utils
+import "../script/Utils.js" as Utils
+import ".."
 
 Page {
     id: firstPage
-    pageId: "_first_"
+    pageId: "_menupage_"
     idleTime: _settings.pageIdleTime
     property int gridViewIndex: 0
     property string viewMode: "gridview"
@@ -12,8 +13,7 @@ Page {
     // Time out:
     function onIdleTimeOut()
     {
-        _pageMgr.previousPage = "_first_"
-        mainApplication.loadPage("_idle_")
+        mainApplication.loadPage("_idlepage_")
     }
 
     // Load path view:
@@ -28,8 +28,8 @@ Page {
         viewMode = "gridview"
     }
 
-    // Set first page mode:
-    function onSetFirstPageMode(mode)
+    // Set menu page mode:
+    function onSetMenuPageMode(mode)
     {
         viewMode = mode
     }
@@ -123,7 +123,7 @@ Page {
     Component.onCompleted: {
         mainApplication.loadPathView.connect(onLoadPathView)
         mainApplication.loadGridView.connect(onLoadGridView)
-        mainApplication.setFirstPageMode.connect(onSetFirstPageMode)
+        mainApplication.setMenuPageMode.connect(onSetMenuPageMode)
     }
 }
 

@@ -6,6 +6,12 @@ Rectangle {
     width: 3*(kbdSettings.keyWidth+4)+4
     height: 4*(kbdSettings.keyHeight+4)+4
 
+    // Return key enabled state (virtual):
+    function keyEnabledState(keyId)
+    {
+        return true
+    }
+
     // Settings:
     KeyboardSettings {
         id: kbdSettings
@@ -142,6 +148,7 @@ Rectangle {
                 keyColor: "#34495E"
                 mainFontColor: proxyMainTextItem.color
                 keyPressedColor: "#1ABC9C"
+                enabled: keyEnabledState(keyId)
                 onClicked: {
                     if (keyId >= 10)
                     {

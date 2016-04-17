@@ -5,13 +5,14 @@ Command {
     // Id:
     property string _restOrder: ""
 
+    // IP address:
+    property string _networkIP: ""
+
     // Post:
     function post(params) {
-        // Set application busy:
         _appIsBusy = true
-
         var http = new XMLHttpRequest()
-        var url = Utils.urlPlay("post/" + _restOrder);
+        var url = Utils.urlPlay(_networkIP, "/post/" + _restOrder);
         http.open("POST", url, true);
 
         // Send the proper header information along with the request
@@ -20,6 +21,9 @@ Command {
         http.setRequestHeader("Connection", "close");
 
         http.onreadystatechange = function() { // Call a function when the state changes.
+            _appIsBusy = false
+            console.log("USED PARAMETERS: ")
+            console.log(params)
             if (http.readyState === 4) {
                 if (http.status === 200) {
                     console.log("RESPONSE TO REST ORDER: " + _restOrder + " IS: " + http.responseText)
@@ -29,9 +33,6 @@ Command {
                     cmdError(_restOrder + " COMMAND REST ERROR: " + http.status)
                 }
             }
-
-            // Application not busy:
-            _appIsBusy = false
         }
         http.send(params);
     }

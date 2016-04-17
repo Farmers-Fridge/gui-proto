@@ -2,7 +2,7 @@ import QtQuick 2.5
 
 Popup {
     id: checkOutPopup
-    popupId: "_checkout_"
+    popupId: "_checkoutpopup_"
 
     contents: Rectangle {
         id: container
@@ -69,11 +69,11 @@ Popup {
                         width: parent.height
                         source: "qrc:/qml/images/ico-cross.png"
                         onClicked: {
-                            mainApplication.hidePopup("_checkout_")
+                            mainApplication.hidePopup("_checkoutpopup_")
                             _clearCartCommand.execute()
                             _controller.currentCategory = categoryModel.get(0).categoryName
-                            mainApplication.setFirstPageMode("gridview")
-                            mainApplication.loadPage("_idle_")
+                            mainApplication.setMenuPageMode("gridview")
+                            mainApplication.loadPage("_idlepage_")
                         }
                     }
                 }
@@ -85,7 +85,7 @@ Popup {
                         anchors.centerIn: parent
                         width: parent.height
                         source: "qrc:/qml/images/ico-keep-shopping.png"
-                        onClicked: mainApplication.hidePopup("_checkout_")
+                        onClicked: mainApplication.hidePopup("_checkoutpopup_")
                     }
                 }
                 Item {
@@ -98,18 +98,34 @@ Popup {
                         source: "qrc:/qml/images/ico-email.png"
 
                         // Keyboard enter key clicked:
-                        function onKeyboardEnterKeyClicked()
+                        function onKeyBoardEnterKeyClicked()
                         {
                             if (_controller.validateEmailAddress(mainApplication._keyboardText))
                             {
                                 _takeReceiptEmailAddressCommand.emailAddress = mainApplication._keyboardText
                                 _takeReceiptEmailAddressCommand.execute()
                             }
-                            mainApplication.keyboardEnterKeyClicked.disconnect(onKeyboardEnterKeyClicked)
+
+                            mainApplication.hideKeyBoard()
+
+                            // Disconnect:
+                            mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyBoardEnterKeyClicked)
+                            mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyBoardCancelKeyClicked)
+                        }
+
+                        // Keyboard cancel key clicked:
+                        function onKeyBoardCancelKeyClicked()
+                        {
+                            mainApplication.hideKeyBoard()
+
+                            // Disconnect:
+                            mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyBoardEnterKeyClicked)
+                            mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyBoardCancelKeyClicked)
                         }
 
                         onClicked: {
-                            mainApplication.keyboardEnterKeyClicked.connect(onKeyboardEnterKeyClicked)
+                            mainApplication.keyBoardEnterKeyClicked.connect(onKeyBoardEnterKeyClicked)
+                            mainApplication.keyBoardCancelKeyClicked.connect(onKeyBoardCancelKeyClicked)
                             mainApplication.showKeyBoard()
                         }
                     }
@@ -124,18 +140,34 @@ Popup {
                         source: "qrc:/qml/images/ico-entercoupon.png"
 
                         // Keyboard enter key clicked:
-                        function onKeyboardEnterKeyClicked()
+                        function onKeyBoardEnterKeyClicked()
                         {
                             if (mainApplication._keyboardText.length > 0)
                             {
                                 _takeCouponCodeCommand.couponCode = mainApplication._keyboardText
                                 _takeCouponCodeCommand.execute()
                             }
-                            mainApplication.keyboardEnterKeyClicked.disconnect(onKeyboardEnterKeyClicked)
+
+                            mainApplication.hideKeyBoard()
+
+                            // Disconnect:
+                            mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyBoardEnterKeyClicked)
+                            mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyBoardCancelKeyClicked)
+                        }
+
+                        // Keyboard enter cancel key clicked:
+                        function onKeyBoardCancelKeyClicked()
+                        {
+                            mainApplication.hideKeyBoard()
+
+                            // Disconnect:
+                            mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyBoardEnterKeyClicked)
+                            mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyBoardCancelKeyClicked)
                         }
 
                         onClicked: {
-                            mainApplication.keyboardEnterKeyClicked.connect(onKeyboardEnterKeyClicked)
+                            mainApplication.keyBoardEnterKeyClicked.connect(onKeyBoardEnterKeyClicked)
+                            mainApplication.keyBoardCancelKeyClicked.connect(onKeyBoardCancelKeyClicked)
                             mainApplication.showKeyBoard()
                         }
                     }
@@ -148,7 +180,7 @@ Popup {
     function onCartCountChanged()
     {
         if (_controller.cartModel.cartCount < 1)
-            mainApplication.hidePopup("_checkout_")
+            mainApplication.hidePopup("_checkoutpopup_")
     }
     Component.onCompleted: _controller.cartModel.cartTotalChanged.connect(onCartCountChanged)
 }

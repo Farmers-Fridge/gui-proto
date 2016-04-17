@@ -5,8 +5,8 @@ Text {
     font.family: _settings.fontFamily
     color: "black"
     font.bold: true
-    wrapMode: Text.WordWrap
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
+    elide: Text.ElideMiddle
 }
 

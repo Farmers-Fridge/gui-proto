@@ -1,13 +1,13 @@
 // URL public static:
-function urlPublicStatic(path) {
-    var value = _controller.currentRoute + path
-    console.log("URLPUBLICSTATIC: " + _controller.currentRoute + path)
+function urlPublicStatic(route, path) {
+    var value = "https://" + route + path
+    //console.log("URLPUBLICSTATIC: ", value)
     return value
 }
 
 // URL play:
-function urlPlay(path) {
-    var url = "http://" + _controller.currentIP + ":9000/" + path
+function urlPlay(ip, path) {
+    var url = "http://" + ip + ":9000" + path
     console.log("URLPLAY: " + url)
     return url
 }
@@ -20,16 +20,13 @@ function stringCompare(str1, str2)
     return str1.toLowerCase() === str2.toLowerCase()
 }
 
-// Calculate scale:
-function calculateScale(width, height, cellSize) {
-    var widthScale = (cellSize * 1.0) / width
-    var heightScale = (cellSize * 1.0) / height
-    var scale = 0
 
-    if (widthScale <= heightScale) {
-        scale = widthScale;
-    } else if (heightScale < widthScale) {
-        scale = heightScale;
-    }
-    return scale;
+// BELOW IS FROM TABLET GUI
+
+// Static no cache of URL:
+function staticNoCacheOf(route, url) {
+    var fakeVersionCacheBuster = Date.now()
+    var urlUnique = url + "?v=" + fakeVersionCacheBuster
+    return urlPublicStatic(route, urlUnique)
 }
+
