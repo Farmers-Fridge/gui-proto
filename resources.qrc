@@ -91,5 +91,6 @@
         <file>qml/StockKeyPadPopup.qml</file>
         <file>qml/StockNumericKeyPad.qml</file>
         <file>qml/keyboard/StockNumericKeyPad.qml</file>
+        <file>qml/SingleItemView.qml</file>
     </qresource>
 </RCC>
