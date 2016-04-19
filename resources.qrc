@@ -92,5 +92,8 @@
         <file>qml/StockNumericKeyPad.qml</file>
         <file>qml/keyboard/StockNumericKeyPad.qml</file>
         <file>qml/SingleItemView.qml</file>
+        <file>qml/keyboard/NotePad.qml</file>
+        <file>qml/keyboard/ToolBarSeparator.qml</file>
+        <file>qml/keyboard/FontView.qml</file>
     </qresource>
 </RCC>

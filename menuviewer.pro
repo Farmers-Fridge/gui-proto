@@ -42,14 +42,16 @@ HEADERS += \
     utils.h \
     eventwatcher.h \
     cartmodel.h \
-    defs.h
+    defs.h \
+    documenthandler.h
 
 SOURCES += \
     controller.cpp \
     main.cpp \
     menuviewer.cpp \
     eventwatcher.cpp \
-    cartmodel.cpp
+    cartmodel.cpp \
+    documenthandler.cpp
 
 RESOURCES += \
     resources.qrc
