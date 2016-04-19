@@ -44,9 +44,6 @@ Item {
     // Input text color:
     readonly property color inputTextColor: "white"
 
-    // Input text height:
-    readonly property int inputTextHeight: keyHeight/2
-
     // Input text pixel size:
     readonly property int inputTextPixelSize: keyHeight/2
 
@@ -61,5 +58,8 @@ Item {
 
     // Margin:
     readonly property int margin: 9
+
+    // Text area height:
+    readonly property int textAreaHeight: 2*keyHeight
 }
 

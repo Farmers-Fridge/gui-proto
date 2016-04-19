@@ -218,8 +218,8 @@ Rectangle {
     }
 
     // Alpha numeric keypad:
-    AlphaNumericKeyPad {
-        id: alphaNumericKeyPad
+    KeyBoard {
+        id: keyboard
         anchors.bottom: parent.bottom
 
         // Key clicked:
