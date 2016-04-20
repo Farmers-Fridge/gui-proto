@@ -5,8 +5,7 @@ import QtQuick.Controls 1.4
 Rectangle {
     id: keyBoard
     width: 10*kbdSettings.keyWidth
-    height: 4*kbdSettings.keyHeight + kbdSettings.textAreaHeight
-    anchors.centerIn: parent
+    height: 4*kbdSettings.keyHeight
 
     // All upper case?
     property bool allUpperCase: false
@@ -14,8 +13,29 @@ Rectangle {
     // Show symbol?
     property bool showSymbol: false
 
+    // Keyboard text:
+    property string keyBoardText: ""
+
+    // Back space clicked:
+    signal backSpaceClicked()
+
     // Enter clicked signal:
-    signal enterClicked(string text)
+    signal enterClicked()
+
+    // Return clicked:
+    signal returnClicked()
+
+    // .com clicked:
+    signal dotComClicked(string text)
+
+    // Space clicked:
+    signal spaceClicked()
+
+    // Clear clicked:
+    signal clearClicked()
+
+    // Key clicked:
+    signal keyClicked(string key)
 
     // Bgk color:
     color: kbdSettings.bkgColor
@@ -50,84 +70,9 @@ Rectangle {
         input.text = ""
     }
 
-    // Key clicked:
-    function onKeyClicked(text) {
-        var actualText = allUpperCase ? text.toUpperCase() : text
-        input.insert(input.cursorPosition, actualText)
-    }
-
-    // Enter clicked:
-    function onEnterClicked()
-    {
-        var currentText = input.text
-        keyboard.enterClicked(currentText)
-        eraseText()
-    }
-
-    // Backspace clicked:
-    function onBackSpaceClicked()
-    {
-        input.remove(input.cursorPosition-1, input.cursorPosition)
-    }
-
-    // .dotcom clicked:
-    function onDotComClicked(text)
-    {
-        input.insert(input.cursorPosition, text)
-    }
-
-    // Space clicked:
-    function onSpaceClicked()
-    {
-        input.insert(input.cursorPosition, " ")
-    }
-
-    // Clear clicked:
-    function onClearClicked()
-    {
-        input.text = ""
-    }
-
-    Component{
-        id: cursorA
-        Rectangle {
-            id: cursorRect
-            width: 3
-            height: kbdSettings.inputTextHeight-9
-            //anchors.verticalCenter: input.verticalCenter
-            color: "#1c94ff"
-            visible: input.cursorVisible
-
-            PropertyAnimation on opacity  {
-                easing.type: Easing.OutSine
-                loops: Animation.Infinite
-                from: 0
-                to: 1.0
-                duration: 750
-            }
-        }
-    }
-
-    // Input text:
-    TextArea {
-        id: input
-        width: parent.width
-        height: kbdSettings.textAreaHeight
-        font.family: kbdSettings.inputTextFontFamily
-        font.pixelSize: kbdSettings.inputTextPixelSize
-        font.weight: kbdSettings.inputTextFontWeight
-        //maximumLength: kbdSettings.inputTextMaxCharCount
-        //color: kbdSettings.inputTextColor
-        //cursorDelegate: cursorA
-        focus: true
-        clip: true
-    }
-
     // Main layout:
     Column {
-        width: parent.width
-        anchors.top: input.bottom
-        anchors.bottom: parent.bottom
+        anchors.fill: parent
         Repeater {
             model: keyboardRowModel.model
 
@@ -163,29 +108,40 @@ Rectangle {
                                 {
                                 case "shift":
                                     keyBoard.allUpperCase = !keyBoard.allUpperCase
-                                    return;
+                                    break
                                 case "backspace":
-                                    keyBoard.onBackSpaceClicked()
-                                    return;
+                                    keyBoard.backSpaceClicked()
+                                    break
                                 case "enter":
-                                    keyBoard.onEnterClicked()
-                                    return;
+                                    keyBoard.enterClicked()
+                                    keyBoardText = ""
+                                    break
+                                case "return":
+                                    keyBoard.returnClicked()
+                                    keyBoardText = ""
+                                    break
                                 case "symbol":
                                     keyBoard.showSymbol = !keyBoard.showSymbol
-                                    return;
+                                    break
                                 case ".com":
-                                    keyBoard.onDotComClicked(model.label)
-                                    return;
+                                    keyBoard.dotComClicked(model.label)
+                                    break
                                 case "space":
-                                    keyBoard.onSpaceClicked()
-                                    return;
+                                    keyBoard.spaceClicked()
+                                    break
                                 case "clear":
-                                    keyBoard.onClearClicked()
-                                    return;
-                                default: return;
+                                    keyBoard.clearClicked()
+                                    break
+                                default: break
                                 }
                             }
-                            else keyBoard.onKeyClicked(mainLabel)
+                            else
+                            {
+                                // Retrieve text (lower or upper case):
+                                var actualText = allUpperCase ? mainLabel.toUpperCase() : mainLabel
+                                keyBoardText += actualText
+                                keyBoard.keyClicked(actualText)
+                            }
                         }
                     }
                 }

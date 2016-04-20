@@ -97,36 +97,36 @@ Popup {
                         width: parent.height
                         source: "qrc:/qml/images/ico-email.png"
 
-                        // Keyboard enter key clicked:
-                        function onKeyBoardEnterKeyClicked()
+                        // Nodepad enter key clicked:
+                        function onNotePadEnterKeyClicked()
                         {
-                            if (_controller.validateEmailAddress(mainApplication._keyboardText))
+                            if (_controller.validateEmailAddress(mainApplication._notePadText))
                             {
-                                _takeReceiptEmailAddressCommand.emailAddress = mainApplication._keyboardText
+                                _takeReceiptEmailAddressCommand.emailAddress = mainApplication._notePadText
                                 _takeReceiptEmailAddressCommand.execute()
                             }
 
-                            mainApplication.hideKeyBoard()
+                            mainApplication.hideNotePad()
 
                             // Disconnect:
-                            mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyBoardEnterKeyClicked)
-                            mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyBoardCancelKeyClicked)
+                            mainApplication.notePadEnterClicked.disconnect(onNotePadEnterKeyClicked)
+                            mainApplication.notePadCancelKeyClicked.disconnect(onNotePadCancelKeyClicked)
                         }
 
-                        // Keyboard cancel key clicked:
-                        function onKeyBoardCancelKeyClicked()
+                        // Notepad cancel key clicked:
+                        function onNotePadCancelKeyClicked()
                         {
-                            mainApplication.hideKeyBoard()
+                            mainApplication.hideNotePad()
 
                             // Disconnect:
-                            mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyBoardEnterKeyClicked)
-                            mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyBoardCancelKeyClicked)
+                            mainApplication.notePadEnterClicked.disconnect(onNotePadEnterKeyClicked)
+                            mainApplication.notePadCancelKeyClicked.disconnect(onNotePadCancelKeyClicked)
                         }
 
                         onClicked: {
-                            mainApplication.keyBoardEnterKeyClicked.connect(onKeyBoardEnterKeyClicked)
-                            mainApplication.keyBoardCancelKeyClicked.connect(onKeyBoardCancelKeyClicked)
-                            mainApplication.showKeyBoard()
+                            mainApplication.notePadEnterClicked.connect(onNotePadEnterKeyClicked)
+                            mainApplication.notePadCancelKeyClicked.connect(onNotePadCancelKeyClicked)
+                            mainApplication.showNodePad()
                         }
                     }
                 }
@@ -139,36 +139,36 @@ Popup {
                         width: parent.height
                         source: "qrc:/qml/images/ico-entercoupon.png"
 
-                        // Keyboard enter key clicked:
-                        function onKeyBoardEnterKeyClicked()
+                        // Notepad enter key clicked:
+                        function onNotePadEnterKeyClicked()
                         {
-                            if (mainApplication._keyboardText.length > 0)
+                            if (mainApplication._notePadText.length > 0)
                             {
-                                _takeCouponCodeCommand.couponCode = mainApplication._keyboardText
+                                _takeCouponCodeCommand.couponCode = mainApplication._notePadText
                                 _takeCouponCodeCommand.execute()
                             }
 
-                            mainApplication.hideKeyBoard()
+                            mainApplication.hideNotePad()
 
                             // Disconnect:
-                            mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyBoardEnterKeyClicked)
-                            mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyBoardCancelKeyClicked)
+                            mainApplication.notePadEnterClicked.disconnect(onNotePadEnterKeyClicked)
+                            mainApplication.notePadCancelKeyClicked.disconnect(onNotePadCancelKeyClicked)
                         }
 
-                        // Keyboard enter cancel key clicked:
-                        function onKeyBoardCancelKeyClicked()
+                        // Notepad enter cancel key clicked:
+                        function onNotePadCancelKeyClicked()
                         {
-                            mainApplication.hideKeyBoard()
+                            mainApplication.hideNotePad()
 
                             // Disconnect:
-                            mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyBoardEnterKeyClicked)
-                            mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyBoardCancelKeyClicked)
+                            mainApplication.notePadEnterClicked.disconnect(onNotePadEnterKeyClicked)
+                            mainApplication.notePadCancelKeyClicked.disconnect(onNotePadCancelKeyClicked)
                         }
 
                         onClicked: {
-                            mainApplication.keyBoardEnterKeyClicked.connect(onKeyBoardEnterKeyClicked)
-                            mainApplication.keyBoardCancelKeyClicked.connect(onKeyBoardCancelKeyClicked)
-                            mainApplication.showKeyBoard()
+                            mainApplication.notePadEnterClicked.connect(onNotePadEnterKeyClicked)
+                            mainApplication.notePadCancelKeyClicked.connect(onNotePadCancelKeyClicked)
+                            mainApplication.showNodePad()
                         }
                     }
                 }

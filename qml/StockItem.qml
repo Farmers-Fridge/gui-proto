@@ -139,8 +139,6 @@ Item {
         {
             userActualPar = keyId
 
-            console.log("ICI ", rowNumber, columnNumber, theoExpired, theoAdds, userActualPar, theoPar, kitchenShort, machineShort)
-
             // Run command:
             _updateRestockExceptionCommand.row = rowNumber
             _updateRestockExceptionCommand.column = columnNumber

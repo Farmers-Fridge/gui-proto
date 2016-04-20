@@ -62,30 +62,30 @@ CustomPage {
                 id: note
                 text: qsTr("NOTE")
 
-                // Keyboard enter key clicked:
-                function onKeyboardEnterKeyClicked()
+                // Notepad enter key clicked:
+                function onNotePadEnterKeyClicked()
                 {
                     console.log("ENTER KEY CLICKED FOR NOTEPAD")
-                    mainApplication.hideNodePad()
+                    mainApplication.hideNotePad()
 
-                    mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyboardEnterKeyClicked)
-                    mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyboardCancelKeyClicked)
+                    mainApplication.notePadEnterClicked.disconnect(onNotePadEnterKeyClicked)
+                    mainApplication.notePadCancelKeyClicked.disconnect(onNotePadCancelKeyClicked)
                 }
 
-                // Keyboard cancel key clicked:
-                function onKeyboardCancelKeyClicked()
+                // Notepad cancel key clicked:
+                function onNotePadCancelKeyClicked()
                 {
                     console.log("CANCEL KEY CLICKED FOR NOTEPAD")
                     mainApplication.hideNotePad()
 
-                    mainApplication.keyBoardEnterKeyClicked.disconnect(onKeyboardEnterKeyClicked)
-                    mainApplication.keyBoardCancelKeyClicked.disconnect(onKeyboardCancelKeyClicked)
+                    mainApplication.notePadEnterClicked.disconnect(onNotePadEnterKeyClicked)
+                    mainApplication.notePadCancelKeyClicked.disconnect(onNotePadCancelKeyClicked)
                 }
 
                 onClicked: {
-                    mainApplication.keyBoardEnterKeyClicked.connect(onKeyboardEnterKeyClicked)
-                    mainApplication.keyBoardCancelKeyClicked.connect(onKeyboardCancelKeyClicked)
-                    mainApplication.showNotePad()
+                    mainApplication.notePadEnterClicked.connect(onNotePadEnterKeyClicked)
+                    mainApplication.notePadCancelKeyClicked.connect(onNotePadCancelKeyClicked)
+                    mainApplication.showNodePad()
                 }
             }
         }

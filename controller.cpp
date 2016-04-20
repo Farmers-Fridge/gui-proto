@@ -2,6 +2,7 @@
 #include "utils.h"
 #include "eventwatcher.h"
 #include "cartmodel.h"
+#include "documenthandler.h"
 #include <QQmlContext>
 #include <QSettings>
 #include <QDebug>
@@ -58,7 +59,7 @@ const QStringList &Controller::saladAssets() const
 // Register types:
 void Controller::registerTypes()
 {
-    // TO DO
+    qmlRegisterType<DocumentHandler>("Components", 1, 0, "DocumentHandler");
 }
 
 // Set context properties:

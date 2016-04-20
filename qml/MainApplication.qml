@@ -17,8 +17,8 @@ Item {
         color: _settings.mainWindowColor
     }
 
-    // Keyboard text:
-    property string _keyboardText: ""
+    // Notepad text:
+    property string _notePadText: ""
 
     // Application busy state:
     property bool _appIsBusy: false
@@ -60,17 +60,11 @@ Item {
     // Hide keypad:
     signal hideKeyPad()
 
-    // Show keyboard:
-    signal showKeyBoard()
-
-    // Hide keyboard:
-    signal hideKeyBoard()
-
     // Show notepad:
-    signal showNotePad()
+    signal showNodePad()
 
     // Hide notepad:
-    signal hideNodePad()
+    signal hideNotePad()
 
     // Show stock keypad:
     signal showStockKeyPad(int theoPar, int actualPar)
@@ -78,11 +72,11 @@ Item {
     // Hide stock keypad:
     signal hideStockKeyPad()
 
-    // Keyboard enter key clicked:
-    signal keyBoardEnterKeyClicked()
+    // Notepad enter key clicked:
+    signal notePadEnterClicked()
 
-    // Keyboard cancel key clicked:
-    signal keyBoardCancelKeyClicked()
+    // Notepad cancel key clicked:
+    signal notePadCancelKeyClicked()
 
     // Keypad enter key clicked:
     signal keyPadEnterKeyClicked(string text)
@@ -214,7 +208,7 @@ Item {
         anchors.fill: parent
         enabled: !_popupMgr.popupOn &&
             (_keyPadPopup.state === "") &&
-                 (_keyboardPopup.state === "") &&
+                 (_notePadPopup.state === "") &&
                     (_stockKeyPadPopup.state === "")
     }
 
@@ -222,7 +216,7 @@ Item {
     PopupMgr {
         id: _popupMgr
         anchors.fill: parent
-        enabled: (_keyPadPopup.state === "") && (_keyboardPopup.state === "")
+        enabled: (_keyPadPopup.state === "") && (_notePadPopup.state === "")
 
         // Check out popup:
         CheckOutPopup {
@@ -245,9 +239,9 @@ Item {
         height: parent.height
     }
 
-    // Keyboard popup:
-    KeyBoardPopup {
-        id: _keyboardPopup
+    // Nodepad popup:
+    NodePadPopup {
+        id: _notePadPopup
         width: parent.width
         height: parent.height
     }

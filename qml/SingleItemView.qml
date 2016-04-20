@@ -4,7 +4,8 @@ import QtQuick.Window 2.0
 Item {
     id: singleItemView
     visible: vendItemName !== ""
-    property alias imageUrl: originalImage.source
+    property alias itemUrl: originalImage.source
+    property alias itemPrice: priceText.text
 
     Rectangle {
         id: container
@@ -51,9 +52,9 @@ Item {
 
                 // Display price top right:
                 CommonText {
+                    id: priceText
                     anchors.centerIn: parent
                     color: "white"
-                    text: price
                 }
             }
             onStatusChanged: _appIsBusy = (originalImage.status === Image.Loading)

@@ -34,7 +34,6 @@
         <file>qml/keyboard/KeyboardSettings.qml</file>
         <file>qml/keyboard/assets/ico-backspace.png</file>
         <file>qml/keyboard/assets/ico-clear.png</file>
-        <file>qml/keyboard/assets/ico-enter.png</file>
         <file>qml/keyboard/assets/ico-shift.png</file>
         <file>qml/keyboard/js/jsonpath.js</file>
         <file>qml/keyboard/keyboards/keyboard_us.json</file>
@@ -60,13 +59,11 @@
         <file>qml/GridItemView.qml</file>
         <file>qml/PathItemView.qml</file>
         <file>qml/KeyPadPopup.qml</file>
-        <file>qml/images/ico-cross.png</file>
-        <file>qml/images/ico-ok.png</file>
         <file>qml/images/ico-login.png</file>
         <file>qml/images/ico-start-over.png</file>
         <file>qml/CartViewHeader.qml</file>
         <file>qml/images/ico-keep-shopping.png</file>
-        <file>qml/KeyBoardPopup.qml</file>
+        <file>qml/NodePadPopup.qml</file>
         <file>qml/keyboard/NumericKeyPad.qml</file>
         <file>qml/pages/MenuPage.qml</file>
         <file>qml/pages/IdlePage.qml</file>
@@ -94,6 +91,25 @@
         <file>qml/SingleItemView.qml</file>
         <file>qml/keyboard/NotePad.qml</file>
         <file>qml/keyboard/ToolBarSeparator.qml</file>
-        <file>qml/keyboard/FontView.qml</file>
+        <file>qml/FontSizeControl.qml</file>
+        <file>qml/keyboard/assets/ico-cross.png</file>
+        <file>qml/keyboard/assets/ico-editredo.png</file>
+        <file>qml/keyboard/assets/ico-editundo.png</file>
+        <file>qml/keyboard/assets/ico-filenew.png</file>
+        <file>qml/keyboard/assets/ico-fileopen.png</file>
+        <file>qml/keyboard/assets/ico-filesave.png</file>
+        <file>qml/keyboard/assets/ico-ok.png</file>
+        <file>qml/keyboard/assets/ico-return.png</file>
+        <file>qml/keyboard/assets/ico-textbold.png</file>
+        <file>qml/keyboard/assets/ico-textcenter.png</file>
+        <file>qml/keyboard/assets/ico-textitalic.png</file>
+        <file>qml/keyboard/assets/ico-textjustify.png</file>
+        <file>qml/keyboard/assets/ico-textleft.png</file>
+        <file>qml/keyboard/assets/ico-textright.png</file>
+        <file>qml/keyboard/assets/ico-textunder.png</file>
+        <file>qml/images/ico-cross.png</file>
+        <file>qml/keyboard/assets/ico-minus.png</file>
+        <file>qml/keyboard/assets/ico-plus.png</file>
+        <file>qml/images/ico-ok.png</file>
     </qresource>
 </RCC>

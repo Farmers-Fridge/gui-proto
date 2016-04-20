@@ -10,8 +10,11 @@ DocumentHandler::DocumentHandler(QObject *parent) : QObject(parent),
     mDoc(0),
     mCursorPosition(-1),
     mSelectionStart(0),
-    mSelectionEnd(0)
+    mSelectionEnd(0),
+    mText(""),
+    mDocumentTitle("")
 {
+    setFontSize(24);
 }
 
 // Set target:
@@ -154,14 +157,19 @@ void DocumentHandler::reset()
 // Return text cursor:
 QTextCursor DocumentHandler::textCursor() const
 {
-    QTextCursor cursor = QTextCursor(mDoc);
-    if (mSelectionStart != mSelectionEnd)
+    QTextCursor tmp;
+    if (mDoc)
     {
-        cursor.setPosition(mSelectionStart);
-        cursor.setPosition(mSelectionEnd, QTextCursor::KeepAnchor);
+        QTextCursor cursor = QTextCursor(mDoc);
+        if (mSelectionStart != mSelectionEnd)
+        {
+            cursor.setPosition(mSelectionStart);
+            cursor.setPosition(mSelectionEnd, QTextCursor::KeepAnchor);
+        }
+        else cursor.setPosition(mCursorPosition);
+        return cursor;
     }
-    else cursor.setPosition(mCursorPosition);
-    return cursor;
+    return tmp;
 }
 
 // Merge format on word or selection:
@@ -242,21 +250,15 @@ void DocumentHandler::setUnderline(bool arg)
 // Return font size:
 int DocumentHandler::fontSize() const
 {
-    QTextCursor cursor = textCursor();
-    if (cursor.isNull())
-        return 0;
-    QTextCharFormat format = cursor.charFormat();
-    return format.font().pointSize();
+    return mFontSize;
 }
 
 // Set font size:
 void DocumentHandler::setFontSize(int arg)
 {
-    QTextCursor cursor = textCursor();
-    if (cursor.isNull())
-        return;
+    mFontSize = arg;
     QTextCharFormat format;
-    format.setFontPointSize(arg);
+    format.setFontPointSize(mFontSize);
     mergeFormatOnWordOrSelection(format);
     emit fontSizeChanged();
 }

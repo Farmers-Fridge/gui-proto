@@ -1,268 +1,275 @@
 {
-   "Keyboard":{
-      "Row":[
-         {
-            "Key":[
-               {
-                  "label":"q",
-                  "symbol":"1",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"w",
-                  "symbol":"2",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"e",
-                  "symbol":"3",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"r",
-                  "symbol":"4",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"t",
-                  "symbol":"5",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"y",
-                  "symbol":"6",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"u",
-                  "symbol":"7",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"i",
-                  "symbol":"8",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"o",
-                  "symbol":"9",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"p",
-                  "symbol":"0",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               }
-            ]
-         },
-         {
-            "Key":[
-               {
-                  "label":"a",
-                  "symbol":"!",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"s",
-                  "symbol":"@",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"d",
-                  "symbol":"#",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"f",
-                  "symbol":"$",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"g",
-                  "symbol":"%",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"h",
-                  "symbol":"&",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"j",
-                  "symbol":"*",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"k",
-                  "symbol":"?",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"l",
-                  "symbol":"/",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"/",
-                  "symbol":"?",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               }
-            ]
-         },
-         {
-            "Key":[
-               {
-                  "label":"",
-                  "symbol":"",
-                  "icon":"ico-shift.png",
-                  "ratio":"1.5",
-                  "command": "shift"
-               },
-               {
-                  "label":"z",
-                  "symbol":"_",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"x",
-                  "symbol":"\"",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"c",
-                  "symbol":"'",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"v",
-                  "symbol":"(",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"b",
-                  "symbol":")",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"n",
-                  "symbol":"-",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"m",
-                  "symbol":"+",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ""
-               },
-               {
-                  "label":"",
-                  "symbol":"",
-                  "icon":"ico-backspace.png",
-                  "ratio":"1.5",
-                  "command": "backspace"
-               }
-            ]
-         },
-         {
-            "Key":[
-               {
-                  "label":"123",
-                  "symbol":"123",
-                  "icon":"",
-                  "ratio":"1.5",
-                  "command": "symbol"
-               },
-               {
-                  "label":".com",
-                  "symbol":".com",
-                  "icon":"",
-                  "ratio":"1",
-                  "command": ".com"
-               },
-               {
-                  "label":"space",
-                  "symbol":"space",
-                  "icon":"",
-                  "ratio":"4",
-                  "command": "space"
-               },
-               {
-                   "label":".",
-                   "symbol":",",
-                   "icon":"",
-                   "ratio":"1",
-                   "command": ""
-               },
-               {
-                  "label":"",
-                  "symbol":"",
-                  "icon":"ico-clear.png",
-                  "ratio":"1",
-                  "command": "clear"
-               },
-               {
-                  "label":"",
-                  "symbol":"",
-                  "icon":"ico-enter.png",
-                  "ratio":"1.5",
-                  "command": "enter"
-               }
-            ]
-         }
-      ]
-   }
+    "Keyboard":{
+        "Row":[
+            {
+                "Key":[
+                    {
+                        "label":"q",
+                        "symbol":"1",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"w",
+                        "symbol":"2",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"e",
+                        "symbol":"3",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"r",
+                        "symbol":"4",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"t",
+                        "symbol":"5",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"y",
+                        "symbol":"6",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"u",
+                        "symbol":"7",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"i",
+                        "symbol":"8",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"o",
+                        "symbol":"9",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"p",
+                        "symbol":"0",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    }
+                ]
+            },
+            {
+                "Key":[
+                    {
+                        "label":"a",
+                        "symbol":"!",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"s",
+                        "symbol":"@",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"d",
+                        "symbol":"#",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"f",
+                        "symbol":"$",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"g",
+                        "symbol":"%",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"h",
+                        "symbol":"&",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"j",
+                        "symbol":"*",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"k",
+                        "symbol":"?",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"l",
+                        "symbol":"/",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"/",
+                        "symbol":"?",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    }
+                ]
+            },
+            {
+                "Key":[
+                    {
+                        "label":"",
+                        "symbol":"",
+                        "icon":"ico-shift.png",
+                        "ratio":"1.5",
+                        "command": "shift"
+                    },
+                    {
+                        "label":"z",
+                        "symbol":"_",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"x",
+                        "symbol":"\"",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"c",
+                        "symbol":"'",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"v",
+                        "symbol":"(",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"b",
+                        "symbol":")",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"n",
+                        "symbol":"-",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"m",
+                        "symbol":"+",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"",
+                        "symbol":"",
+                        "icon":"ico-backspace.png",
+                        "ratio":"1.5",
+                        "command": "backspace"
+                    }
+                ]
+            },
+            {
+                "Key":[
+                    {
+                        "label":"123",
+                        "symbol":"123",
+                        "icon":"",
+                        "ratio":"1.5",
+                        "command": "symbol"
+                    },
+                    {
+                        "label":".com",
+                        "symbol":".com",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ".com"
+                    },
+                    {
+                        "label":"space",
+                        "symbol":"space",
+                        "icon":"",
+                        "ratio":"3",
+                        "command": "space"
+                    },
+                    {
+                        "label":".",
+                        "symbol":",",
+                        "icon":"",
+                        "ratio":"1",
+                        "command": ""
+                    },
+                    {
+                        "label":"",
+                        "symbol":"",
+                        "icon":"ico-clear.png",
+                        "ratio":"1",
+                        "command": "clear"
+                    },
+                    {
+                        "label":"",
+                        "symbol":"",
+                        "icon":"ico-return.png",
+                        "ratio":"1",
+                        "command": "return"
+                    },
+                    {
+                        "label":"",
+                        "symbol":"",
+                        "icon":"ico-ok.png",
+                        "ratio":"1.5",
+                        "command": "enter"
+                    }
+                ]
+            }
+        ]
+    }
 }
 

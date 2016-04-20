@@ -16,7 +16,7 @@ Item {
     readonly property string source: "keyboard_us.json"
 
     // Key size:
-    readonly property int keyWidth: 100
+    readonly property int keyWidth: 110
     readonly property int keyHeight: 110
 
     // Bounds:

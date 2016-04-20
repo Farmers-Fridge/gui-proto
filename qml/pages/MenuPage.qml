@@ -97,24 +97,13 @@ Page {
             // Path item view:
             PathItemView {
                 id: pathItemView
-                anchors.fill: parent
+                width: parent.width
+                height: parent.height
                 interactive: false
                 opacity: ((_controller.currentCategory === categoryListModel.targetCategory) &&
-                    (viewMode === "pathview") && (categoryListModel.count > 1))
+                    (viewMode === "pathview"))
                 visible: opacity > 0
                 model: categoryListModel
-                Behavior on opacity {
-                    NumberAnimation {duration: _settings.pageTransitionDelay}
-                }
-            }
-
-            // Single item view:
-            SingleItemView {
-                id: singleItemView
-                anchors.fill: parent
-                opacity: ((_controller.currentCategory === categoryListModel.targetCategory) &&
-                    (viewMode === "pathview") && (categoryListModel.count < 2)) ? 1 : 0
-                visible: opacity > 0
                 Behavior on opacity {
                     NumberAnimation {duration: _settings.pageTransitionDelay}
                 }

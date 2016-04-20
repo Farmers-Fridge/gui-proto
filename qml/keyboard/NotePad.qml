@@ -6,18 +6,21 @@ import Components 1.0
 import ".."
 
 Rectangle {
-    id: notepad
+    id: notePad
     color: _colors.ffLightGray
-    opacity: 0
-    visible: opacity !== 0
-    width: alphaNumericKeyPad.width
-    height: alphaNumericKeyPad.height*2
+    width: keyBoard.width
+    height: 2*keyBoard.height
+    property int toolBarItemSpacing: 4
+    property int toolBarHeight: 48
     property string spaceStr: " "
 
-    // Show notepad:
-    function onShowNotePad()
+    // Enter clicked:
+    signal enterClicked(string text)
+
+    // Clear:
+    function clear()
     {
-        notepad.state = "on"
+        textArea.text = ""
     }
 
     // Error dialog:
@@ -28,7 +31,7 @@ Rectangle {
     // Bold:
     Action {
         id: boldAction
-        iconSource: "qrc:/qml/notepad/assets/ico-textbold.png"
+        iconSource: "qrc:/qml/keyboard/assets/ico-textbold.png"
         onTriggered: document.bold = !document.bold
         checkable: true
         checked: document.bold
@@ -37,7 +40,7 @@ Rectangle {
     // Italic:
     Action {
         id: italicAction
-        iconSource: "qrc:/qml/notepad/assets/ico-textitalic.png"
+        iconSource: "qrc:/qml/keyboard/assets/ico-textitalic.png"
         onTriggered: document.italic = !document.italic
         checkable: true
         checked: document.italic
@@ -46,7 +49,7 @@ Rectangle {
     // Underline:
     Action {
         id: underlineAction
-        iconSource: "qrc:/qml/notepad/assets/ico-textunder.png"
+        iconSource: "qrc:/qml/keyboard/assets/ico-textunder.png"
         onTriggered: document.underline = !document.underline
         checkable: true
         checked: document.underline
@@ -55,7 +58,7 @@ Rectangle {
     // Undo:
     Action {
         id: undoAction
-        iconSource: "qrc:/qml/notepad/assets/ico-editundo.png"
+        iconSource: "qrc:/qml/keyboard/assets/ico-editundo.png"
         onTriggered: {
             textArea.undo()
             document.reset()
@@ -65,18 +68,11 @@ Rectangle {
     // Redo:
     Action {
         id: redoAction
-        iconSource: "qrc:/qml/notepad/assets/ico-editredo.png"
+        iconSource: "qrc:/qml/keyboard/assets/ico-editredo.png"
         onTriggered: {
             textArea.redo()
             document.reset()
         }
-    }
-
-    // Exit:
-    Action {
-        id: exitAction
-        iconSource: "qrc:/icons/ico-cross.png"
-        onTriggered: notepad.state = ""
     }
 
     // Save as dialog:
@@ -101,19 +97,32 @@ Rectangle {
     // File savas action:
     Action {
         id: fileSaveAsAction
-        iconSource: "qrc:/qml/notepad/assets/ico-filesave.png"
+        iconSource: "qrc:/qml/keyboard/assets/ico-filesave.png"
         onTriggered: {
             fileDialog.selectExisting = false
             fileDialog.open()
         }
     }
 
-    // Font action:
+    // Font size action (+):
     Action {
-        id: fontAction
-        iconSource: "qrc:/icons/ico-font.png"
+        id: fontActionPlus
+        iconSource: "qrc:/qml/keyboard/assets/ico-plus.png"
+    }
+
+    // Font size action (-):
+    Action {
+        id: fontActionMinus
+        iconSource: "qrc:/qml/keyboard/assets/ico-minus.png"
+    }
+
+    // Quit:
+    Action {
+        id: exitAction
+        iconSource: "qrc:/qml/keyboard/assets/ico-cross.png"
         onTriggered: {
-            fontView.state = (fontView.state == "on" ? "" : "on")
+            mainApplication.hideNotePad()
+            notePad.clear()
         }
     }
 
@@ -121,15 +130,13 @@ Rectangle {
     ToolBar {
         id: mainToolBar
         anchors.top: parent.top
-        anchors.topMargin: 4
         anchors.left: parent.left
-        anchors.leftMargin: 4
         anchors.right: parent.right
-        anchors.rightMargin: 4
-        height: _settings.keyPadToolbarHeight
+        anchors.margins: 4
+        height: toolBarHeight
         RowLayout {
             anchors.fill: parent
-            spacing: _settings.toolbarItemSpacing
+            spacing: toolBarItemSpacing
             ToolButton { action: fileSaveAsAction }
             ToolBarSeparator {}
             ToolButton { action: boldAction }
@@ -138,7 +145,7 @@ Rectangle {
             ToolBarSeparator {}
             ToolButton {
                 id: colorButton
-                property var color: document.textColor
+                property variant color: document.textColor
                 Rectangle {
                     id: colorRect
                     anchors.fill: parent
@@ -155,33 +162,24 @@ Rectangle {
             ToolBarSeparator {}
             ToolButton { action: undoAction }
             ToolButton { action: redoAction }
-            Item { Layout.fillWidth: true }
-            ToolButton { action: exitAction }
-        }
-    }
-
-    // Secondary toolbar:
-    ToolBar {
-        id: secondaryToolBar
-        anchors.top: mainToolBar.bottom
-        anchors.topMargin: 4
-        anchors.left: parent.left
-        anchors.leftMargin: 4
-        anchors.right: parent.right
-        anchors.rightMargin: 4
-        height: _settings.keyPadToolbarHeight
-
-        RowLayout {
-            anchors.fill: parent
-            spacing: _settings.toolbarItemSpacing
-            IncrementalButton {
+            ToolBarSeparator {}
+            FontSizeControl {
                 id: fontSizeControl
-                property bool valueGuard: true
-                value: 0
-                onValueChanged: if (valueGuard) document.fontSize = value
+                enabled: document.text !== ""
+                minusAction: fontActionMinus
+                plusAction: fontActionPlus
+                value: document.fontSize
+                onDecreaseFont: {
+                    if (document.fontSize > 8)
+                        document.fontSize--
+                }
+                onIncreaseFont: {
+                    if (document.fontSize < 42)
+                        document.fontSize++
+                }
             }
             Item { Layout.fillWidth: true }
-            ToolButton { action: fontAction }
+            ToolButton { action: exitAction }
         }
     }
 
@@ -190,43 +188,33 @@ Rectangle {
         id: textArea
         Accessible.name: "document"
         frameVisible: false
+        width: parent.width
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: secondaryToolBar.bottom
-        anchors.topMargin: 4
-        anchors.bottom: alphaNumericKeyPad.top
+        anchors.top: mainToolBar.bottom
+        anchors.bottom: keyBoard.top
         anchors.margins: 4
         baseUrl: "qrc:/"
-        text: document.text
-        //textFormat: TextEdit.RichText
-        Component.onCompleted: forceActiveFocus()
-    }
-
-    // Font view:
-    FontView {
-        id: fontView
-        z: -1
-        anchors.top: textArea.top
-        anchors.bottom: textArea.bottom
-        width: 288
-        height: alphaNumericKeyPad.height
-        onFontSelected: {
-            if (special == false) {
-                document.fontFamily = Qt.fontFamilies()[fontIndex]
-            }
+        onTextChanged: document.text = text
+        Component.onCompleted: {
+            textArea.font.pointSize = document.fontSize
+            forceActiveFocus()
         }
     }
 
     // Alpha numeric keypad:
     KeyBoard {
-        id: keyboard
+        id: keyBoard
         anchors.bottom: parent.bottom
 
         // Key clicked:
-        onKeyClicked: textArea.insert(textArea.cursorPosition, text)
+        onKeyClicked: textArea.insert(textArea.cursorPosition, key)
 
         // Enter clicked:
-        onEnterClicked: textArea.append("")
+        onEnterClicked: notePad.enterClicked(textArea.text)
+
+        // Return clicked:
+        onReturnClicked: textArea.insert(textArea.cursorPosition, "\n")
 
         // Backspace clicked:
         onBackSpaceClicked: textArea.remove(textArea.cursorPosition, textArea.cursorPosition-1)
@@ -248,45 +236,10 @@ Rectangle {
         cursorPosition: textArea.cursorPosition
         selectionStart: textArea.selectionStart
         selectionEnd: textArea.selectionEnd
-        Component.onCompleted: document.fileUrl = "qrc:/qml/notepad/example.html"
-        onFontSizeChanged: {
-            fontSizeControl.valueGuard = false
-            fontSizeControl.value = document.fontSize
-            fontSizeControl.valueGuard = true
-        }
-        onFontFamilyChanged: {
-            var index = Qt.fontFamilies().indexOf(document.fontFamily)
-            if (index == -1) {
-                fontView.setCurrentIndex(0)
-                fontView.special = true
-
-            } else {
-                fontView.setCurrentIndex(index)
-                fontView.special = false
-            }
-        }
         onError: {
             errorDialog.text = message
             errorDialog.visible = true
         }
     }
-
-    states: State {
-        name: "on"
-        PropertyChanges {
-            target: notepad
-            opacity: 1
-        }
-    }
-
-    // Erase on visibility changed:
-    onStateChanged: {
-        if (state == "on")
-            textArea.text = ""
-    }
-
-    // Behavior on opacity:
-    Behavior on opacity {
-        PropertyAnimation {duration: _settings.keyboardAnimDuration}
-    }
 }
+

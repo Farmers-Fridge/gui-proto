@@ -7,17 +7,35 @@ import "script/Utils.js" as Utils
 PathView {
     id: pathView
     pathItemCount: 2
-    anchors.fill: parent
     highlightRangeMode: PathView.StrictlyEnforceRange
     snapMode: ListView.SnapOneItem
     interactive: false
     property int containerWidth: .75*width
     property int containerHeight: .75*height
 
-    // Path:
-    path: Path {
-        startX: -width/2; startY: height/2
-        PathLine {x: width + width/2; y:height/2 }
+    // Single item path:
+    Component {
+        id: singleItemPathComponent
+        Path {
+            startX: pathView.width/2; startY: pathView.height/2
+            PathLine {x: Z*pathView.width + pathView.width/2; y: pathView.height/2 }
+        }
+    }
+
+    // Multiple item path:
+    Component {
+        id: multipleItemPathComponent
+        Path {
+            startX: -pathView.width/2; startY: pathView.height/2
+            PathLine {x: pathView.width + pathView.width/2; y: pathView.height/2 }
+        }
+    }
+
+    // Path loader:
+    Loader {
+        id: pathLoader
+        sourceComponent: categoryListModel.count > 1 ? multipleItemPathComponent : singleItemPathComponent
+        onLoaded: pathView.path = item
     }
 
     // Delegate:
@@ -26,8 +44,8 @@ PathView {
         visible: vendItemName !== ""
         width: pathView.width
         height: pathView.height
-        imageUrl: icon !== "" ? Utils.urlPublicStatic(_appData.urlPublicRootValue, icon) : ""
-
+        itemUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
+        itemPrice: price
     }
 
     // Navigation arrows:
@@ -35,6 +53,7 @@ PathView {
         width: parent.width
         height: containerHeight
         anchors.centerIn: parent
+        visible: categoryListModel.count > 1
 
         // Previous button:
         CircularButton {
