@@ -16,8 +16,8 @@ Item {
     readonly property string source: "keyboard_us.json"
 
     // Key size:
-    readonly property int keyWidth: 110
-    readonly property int keyHeight: 110
+    readonly property int keyWidth: 105
+    readonly property int keyHeight: 105
 
     // Bounds:
     readonly property int bounds: 3
@@ -30,7 +30,7 @@ Item {
     readonly property color keyLabelColor: "#F2F2F2"
 
     // Key label point size:
-    readonly property int keyLabelPointSize: 32
+    readonly property int keyLabelPointSize: 28
 
     // Key label font weight:
     readonly property int keyLabelFontWeight: Font.Light

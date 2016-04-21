@@ -7,12 +7,13 @@ import ".."
 
 Rectangle {
     id: notePad
-    color: _colors.ffLightGray
+    color: _colors.ffGray
     width: keyBoard.width
     height: 2*keyBoard.height
     property int toolBarItemSpacing: 4
     property int toolBarHeight: 48
     property string spaceStr: " "
+    property bool simple: false
 
     // Enter clicked:
     signal enterClicked(string text)
