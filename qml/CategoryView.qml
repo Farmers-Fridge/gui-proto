@@ -39,6 +39,8 @@ Item {
                         width: topArea.width/_categoryModel.count
                         height: topArea.height
                         TextPushButton {
+                            width: .9*parent.width
+                            height: _settings.buttonHeight
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             text: categoryName.toUpperCase()
