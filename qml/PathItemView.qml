@@ -18,7 +18,7 @@ PathView {
         id: singleItemPathComponent
         Path {
             startX: pathView.width/2; startY: pathView.height/2
-            PathLine {x: Z*pathView.width + pathView.width/2; y: pathView.height/2 }
+            PathLine {x: pathView.width + pathView.width/2; y: pathView.height/2 }
         }
     }
 
