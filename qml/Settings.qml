@@ -6,7 +6,7 @@ Item {
     property string mainTitle: qsTr("CHOOSE CATEGORY & SELECT ITEMS")
 
     // Enter reference screen size:
-    readonly property int refScreenWidth: 1280
+    readonly property int refScreenWidth: 1080
     readonly property int refScreenHeight: 1920
 
     // Menu view top area height:
