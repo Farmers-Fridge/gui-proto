@@ -45,13 +45,10 @@
         <file>qml/images/ico-trash.png</file>
         <file>qml/PrimaryHeaderArea.qml</file>
         <file>qml/BottomArea.qml</file>
-        <file>qml/StyledTitle.qml</file>
         <file>qml/Line.qml</file>
         <file>qml/CircularButton.qml</file>
         <file>qml/images/ico-next.png</file>
         <file>qml/images/ico-prev.png</file>
-        <file>qml/TextPushButton.qml</file>
-        <file>qml/TextClickButton.qml</file>
         <file>qml/Page.qml</file>
         <file>qml/PageMgr.qml</file>
         <file>qml/commands/AddToCartCommand.qml</file>
@@ -111,5 +108,29 @@
         <file>qml/keyboard/assets/ico-minus.png</file>
         <file>qml/keyboard/assets/ico-plus.png</file>
         <file>qml/images/ico-ok.png</file>
+        <file>qml/images/ico-return-to-salads.png</file>
+        <file>qml/images/ico-add-to-cart.png</file>
+        <file>qml/images/ico-filter-box.png</file>
+        <file>qml/images/ico-select-category.png</file>
+        <file>qml/images/ico-gluten-free-checked.png</file>
+        <file>qml/images/ico-gluten-free-unchecked.png</file>
+        <file>qml/images/ico-high-prot-checked.png</file>
+        <file>qml/images/ico-high-prot-unchecked.png</file>
+        <file>qml/images/ico-lite-bites-checked.png</file>
+        <file>qml/images/ico-lite-bites-unchecked.png</file>
+        <file>qml/images/ico-vegan-checked.png</file>
+        <file>qml/images/ico-vegan-unchecked.png</file>
+        <file>qml/images/sign_IN.png</file>
+        <file>qml/images/ico-dishes-dr.png</file>
+        <file>qml/images/ico-dishes-lg.png</file>
+        <file>qml/images/ico-drinks-dr.png</file>
+        <file>qml/images/ico-drinks-lg.png</file>
+        <file>qml/images/ico-salads-dr.png</file>
+        <file>qml/images/ico-salads-lg.png</file>
+        <file>qml/images/ico-snacks-dr.png</file>
+        <file>qml/images/ico-snacks-lg.png</file>
+        <file>qml/ToggleImageButton.qml</file>
+        <file>qml/images/ico-bottom-bg.png</file>
+        <file>qml/images/ico-top-bg.png</file>
     </qresource>
 </RCC>

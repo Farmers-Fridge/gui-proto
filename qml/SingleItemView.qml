@@ -61,40 +61,40 @@ Item {
         }
     }
 
-    Row {
+    Item {
         anchors.top: container.bottom
         anchors.bottom: parent.bottom
         width: container.width
         anchors.horizontalCenter: container.horizontalCenter
 
-        Item {
-            width: parent.width/2
-            height: parent.height
-
-            // Return to salads:
-            TextClickButton {
-                id: returnToSaladsButton
-                width: (384/_settings.refScreenWidth)*Screen.desktopAvailableWidth
-                text: _settings.returnToSaladsText
-                anchors.centerIn: parent
-                onButtonClicked: mainApplication.loadGridView(index)
-            }
+        // Return to salads:
+        ImageButton {
+            id: returnToSaladsButton
+            anchors.right: separator.left
+            anchors.leftMargin: 8
+            anchors.verticalCenter: parent.verticalCenter
+            source: "qrc:/qml/images/ico-return-to-salads.png"
+            onClicked: mainApplication.loadGridView(index)
         }
 
+        // Separator:
         Item {
-            width: parent.width/2
+            id: separator
+            anchors.centerIn: parent
+            width: 1
             height: parent.height
+        }
 
-            // Add to cart:
-            TextClickButton {
-                id: addToCartButton
-                width: (384/_settings.refScreenWidth)*Screen.desktopAvailableWidth
-                text: _settings.addToCartText
-                anchors.centerIn: parent
-                onButtonClicked: {
-                    _addToCartCommand.currentItem = categoryListModel.get(index)
-                    _addToCartCommand.execute()
-                }
+        // Add to cart:
+        ImageButton {
+            id: addToCartButton
+            source: "qrc:/qml/images/ico-add-to-cart.png"
+            anchors.left: separator.right
+            anchors.leftMargin: 8
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: {
+                _addToCartCommand.currentItem = categoryListModel.get(index)
+                _addToCartCommand.execute()
             }
         }
     }

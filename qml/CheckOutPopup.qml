@@ -64,9 +64,8 @@ Popup {
                     width: parent.width/4
                     height: parent.height
                     CircularButton {
-                        color: _settings.popupBkgColor
                         anchors.centerIn: parent
-                        width: parent.height
+                        size: parent.height
                         source: "qrc:/qml/images/ico-cross.png"
                         onClicked: {
                             mainApplication.hidePopup("_checkoutpopup_")
@@ -81,9 +80,8 @@ Popup {
                     width: parent.width/4
                     height: parent.height
                     CircularButton {
-                        color: _settings.popupBkgColor
                         anchors.centerIn: parent
-                        width: parent.height
+                        size: parent.height
                         source: "qrc:/qml/images/ico-keep-shopping.png"
                         onClicked: mainApplication.hidePopup("_checkoutpopup_")
                     }
@@ -92,9 +90,8 @@ Popup {
                     width: parent.width/4
                     height: parent.height
                     CircularButton {
-                        color: _settings.popupBkgColor
                         anchors.centerIn: parent
-                        width: parent.height
+                        size: parent.height
                         source: "qrc:/qml/images/ico-email.png"
 
                         // Nodepad enter key clicked:
@@ -134,9 +131,8 @@ Popup {
                     width: parent.width/4
                     height: parent.height
                     CircularButton {
-                        color: _settings.popupBkgColor
                         anchors.centerIn: parent
-                        width: parent.height
+                        size: parent.height
                         source: "qrc:/qml/images/ico-entercoupon.png"
 
                         // Notepad enter key clicked:

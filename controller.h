@@ -13,6 +13,7 @@ class Controller : public QObject, public IService
     Q_PROPERTY(QString currentNetworkIP READ currentNetworkIP WRITE setCurrentNetworkIP NOTIFY currentNetworkIPChanged)
     Q_PROPERTY(QObject *cartModel READ cartModel NOTIFY cartModelChanged)
     Q_PROPERTY(QString currentCategory READ currentCategory WRITE setCurrentCategory NOTIFY currentCategoryChanged)
+    Q_PROPERTY(QString currentFilter READ currentFilter WRITE setCurrentFilter NOTIFY currentFilterChanged)
     Q_PROPERTY(QStringList saladAssets READ saladAssets NOTIFY saladAssetsChanged)
 
 public:
@@ -84,6 +85,12 @@ private:
     // Set current category:
     void setCurrentCategory(const QString &categoryName);
 
+    // Return current filter:
+    const QString &currentFilter() const;
+
+    // Set current filter:
+    void setCurrentFilter(const QString &filterName);
+
 private:
     // Salad assets:
     QStringList mSaladAssets;
@@ -100,6 +107,9 @@ private:
     // Current category:
     QString mCurrentCategory;
 
+    // Current filter:
+    QString mCurrentFilter;
+
     // Current network IP:
     QString mCurrentNetworkIP;
 
@@ -112,6 +122,9 @@ signals:
 
     // Current category changed:
     void currentCategoryChanged();
+
+    // Current filter changed:
+    void currentFilterChanged();
 
     // Salad assets changed:
     void saladAssetsChanged();

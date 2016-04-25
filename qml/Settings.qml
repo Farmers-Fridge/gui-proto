@@ -10,7 +10,7 @@ Item {
     readonly property int refScreenHeight: 1920
 
     // Menu view top area height:
-    readonly property int toolbarHeight: (200/refScreenHeight)*Screen.desktopAvailableHeight
+    readonly property int toolbarHeight: (233/refScreenHeight)*Screen.desktopAvailableHeight
 
     // Main window color:
     readonly property string mainWindowColor: "#d5d6d8"
@@ -38,7 +38,6 @@ Item {
     readonly property int buttonHeight: (64/refScreenHeight)*Screen.desktopAvailableHeight
 
     // Labels:
-    readonly property string returnToSaladsText: qsTr("RETURN TO SALADS")
     readonly property string addToCartText: qsTr("ADD TO CART")
 
     // Page transition delay:

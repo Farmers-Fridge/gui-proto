@@ -1,22 +1,18 @@
 import QtQuick 2.5
 
-Rectangle {
+Item {
     id: container
-    width: 128
-    height: width
-    color: "#736F63"
-    radius: width
+    property int size: 128
+    width: size
+    height: size
     property int imageOffset: 0
     property alias source: image.source
     signal clicked()
 
     Image {
         id: image
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.horizontalCenterOffset: imageOffset
+        anchors.fill: parent
         fillMode: Image.PreserveAspectFit
-        width: parent.width-36
     }
 
     MouseArea {

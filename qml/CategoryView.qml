@@ -8,106 +8,162 @@ import "script/Utils.js" as Utils
 Item {
     anchors.fill: parent
 
-    Item {
-        width: parent.width
-        height: parent.height
-        anchors.horizontalCenter: parent.horizontalCenter
+    // Background:
+    Image {
+        anchors.fill: parent
+        source: "qrc:/qml/images/ico-top-bg.png"
+        smooth: true
+    }
 
-        // Title:
-        StyledTitle {
+    // Dishes images:
+    property variant dishImages: [
+        {
+            name: "Salads",
+            selected: "qrc:/qml/images/ico-salads-dr.png",
+            unselected: "qrc:/qml/images/ico-salads-lg.png"
+        },
+        {
+            name: "Proteins",
+            selected: "qrc:/qml/images/ico-dishes-dr.png",
+            unselected: "qrc:/qml/images/ico-dishes-lg.png"
+        },
+        {
+            name: "Snacks",
+            selected: "qrc:/qml/images/ico-snacks-dr.png",
+            unselected: "qrc:/qml/images/ico-snacks-lg.png"
+        },
+        {
+            name: "Drinks",
+            selected: "qrc:/qml/images/ico-drinks-dr.png",
+            unselected: "qrc:/qml/images/ico-drinks-lg.png"
+        }
+    ]
+
+    // Filter images:
+    property variant filterImages: [
+        {
+            name: "Vegan",
+            selected: "qrc:/qml/images/ico-vegan-checked.png",
+            unselected: "qrc:/qml/images/ico-vegan-unchecked.png"
+        },
+        {
+            name: "GlutenFree",
+            selected: "qrc:/qml/images/ico-gluten-free-checked.png",
+            unselected: "qrc:/qml/images/ico-gluten-free-unchecked.png"
+        },
+        {
+            name: "HighProtein",
+            selected: "qrc:/qml/images/ico-high-prot-checked.png",
+            unselected: "qrc:/qml/images/ico-high-prot-unchecked.png"
+        },
+        {
+            name: "LiteBites",
+            selected: "qrc:/qml/images/ico-lite-bites-checked.png",
+            unselected: "qrc:/qml/images/ico-lite-bites-unchecked.png"
+        }
+    ]
+
+    // Get checked image:
+    function getSelectedImage(categoryName)
+    {
+        var target = categoryName.toUpperCase()
+        for (var i=0; i<dishImages.length; i++)
+        {
+            var current = dishImages[i].name.toUpperCase()
+            if (current === target)
+                return dishImages[i].selected
+        }
+        return ""
+    }
+
+    // Get unchecked image:
+    function getUnSelectedImage(categoryName)
+    {
+        var target = categoryName.toUpperCase()
+        console.log("TARGET IS: ", target)
+        for (var i=0; i<dishImages.length; i++)
+        {
+            var current = dishImages[i].name.toUpperCase()
+            console.log("CURRENT IS: ", current)
+            if (current === target)
+                return dishImages[i].unselected
+        }
+        return ""
+    }
+
+    // Top area:
+    Item {
+        id: topArea
+        width: parent.width
+        height: parent.height/2
+        anchors.top: parent.top
+
+        // Styled title:
+        Image {
             id: styledTitle
             anchors.top: parent.top
-            anchors.topMargin: 12
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 1
-            title: _settings.mainTitle
+            anchors.horizontalCenter: parent.horizontalCenter
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/qml/images/ico-select-category.png"
         }
 
-        // Top area:
-        Item {
-            id: topArea
-            width: parent.width
-            anchors.top: styledTitle.bottom
-            anchors.bottom: centralLine.top
+        Row {
+            anchors.fill: parent
+            Repeater {
+                model: _categoryModel
+                Item {
+                    width: topArea.width/_categoryModel.count
+                    height: topArea.height
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenterOffset: 4
 
-            Row {
-                anchors.fill: parent
-                Repeater {
-                    model: _categoryModel
-                    Item {
-                        width: topArea.width/_categoryModel.count
-                        height: topArea.height
-                        TextPushButton {
-                            width: .9*parent.width
-                            height: _settings.buttonHeight
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: categoryName.toUpperCase()
-                            selected: _controller.currentCategory === categoryName
-                            onButtonClicked: _controller.currentCategory = categoryName
-                        }
+                    // Toggle image button:
+                    ToggleImageButton {
+                        id: checkableImage
+                        selectedImage: getSelectedImage(categoryName)
+                        unSelectedImage: getUnSelectedImage(categoryName)
+                        anchors.centerIn: parent
+                        selected: _controller.currentCategory === categoryName
+                        onClicked: _controller.currentCategory = categoryName
                     }
                 }
             }
         }
 
-        // Central line:
-        Line {
-            id: centralLine
-            anchors.top: parent.top
-            anchors.topMargin: (2/3)*parent.height
-            anchors.left: styledTitle.left
-            anchors.right: styledTitle.right
-        }
+    }
 
-        // Bottom area:
-        Item {
-            id: bottomArea
-            width: parent.width
-            anchors.top: centralLine.bottom
-            anchors.bottom: parent.bottom
+    // Central line:
+    Line {
+        id: centralLine
+        width: styledTitle.width
+        height: 1
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: topArea.bottom
+    }
 
-            // Exclusive group:
-            ExclusiveGroup {
-                id: exclusive
-            }
+    Row {
+        id: row
+        width: parent.width
+        height: parent.height/2
+        anchors.top: centralLine.bottom
 
-            RowLayout {
-                id: rowLayout
-                width: parent.width
+        Repeater {
+            id: repeater
+            model: filterImages
+
+            Item {
+                width: parent.width/filterImages.length
                 height: parent.height
-                anchors.centerIn: parent
-                Repeater {
-                    model: 4
-                    CheckBox {
-                        id: checkBox
-                        text: qsTr(" LOREM IPSUM")
-                        anchors.verticalCenter: parent.verticalCenter
-                        exclusiveGroup: exclusive
-                        height: parent.height-32
-                        style: CheckBoxStyle {
-                            indicator: Rectangle {
-                                implicitWidth: checkBox.height
-                                implicitHeight: checkBox.height
-                                border.color: control.activeFocus ? "darkblue" : "gray"
-                                border.width: 1
-                                Rectangle {
-                                    visible: control.checked
-                                    color: "#555"
-                                    border.color: "#333"
-                                    radius: 1
-                                    anchors.margins: 4
-                                    anchors.fill: parent
-                                }
-                            }
-                            label: Label {
-                                text: control.text
-                                font.pixelSize: rowLayout.height-32
-                                anchors.leftMargin: 24
-                            }
-                        }
-                    }
+                anchors.verticalCenter: parent.verticalCenter
+
+                // Toggle image button:
+                ToggleImageButton {
+                    id: checkableFilter
+                    selectedImage: filterImages[index].selected
+                    unSelectedImage: filterImages[index].unselected
+                    anchors.centerIn: parent
+                    selected: _controller.currentFilter === filterImages[index].name
+                    onClicked: _controller.currentFilter = filterImages[index].name
                 }
             }
         }

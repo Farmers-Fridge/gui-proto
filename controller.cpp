@@ -10,7 +10,7 @@
 // Constructor:
 Controller::Controller(QObject *parent) : QObject(parent),
     mEventWatcher(0), mCartModel(0), mCurrentCategory(""),
-    mCurrentNetworkIP("127.0.0.1")
+    mCurrentFilter(""), mCurrentNetworkIP("127.0.0.1")
 {
     // Cart model:
     mCartModel = new CartModel(this);
@@ -120,8 +120,20 @@ const QString &Controller::currentCategory() const
 void Controller::setCurrentCategory(const QString &categoryName)
 {
     mCurrentCategory = categoryName;
-    qDebug() << "CURRENT CATEGORY = " << categoryName;
     emit currentCategoryChanged();
+}
+
+// Return current filter:
+const QString &Controller::currentFilter() const
+{
+    return mCurrentFilter;
+}
+
+// Set current filter:
+void Controller::setCurrentFilter(const QString &filterName)
+{
+    mCurrentFilter = filterName;
+    emit currentFilterChanged();
 }
 
 // Increment item count:
