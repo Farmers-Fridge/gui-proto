@@ -4,7 +4,7 @@ import "script/Utils.js" as Utils
 
 Window {
     id: mainWindow
-    visibility: Window.Maximized
+    visibility: Window.FullScreen
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
     visible: true    
