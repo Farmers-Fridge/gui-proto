@@ -14,7 +14,7 @@ Item {
     // Background decoration:
     Background {
         anchors.fill: parent
-        color: _settings.mainWindowColor
+        source: "qrc:/qml/images/ico-background.png"
     }
 
     // Notepad text:
