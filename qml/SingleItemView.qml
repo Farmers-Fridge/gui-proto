@@ -57,7 +57,7 @@ Item {
                     color: "white"
                 }
             }
-            onStatusChanged: _appIsBusy = (originalImage.status === Image.Loading)
+            //onStatusChanged: _appIsBusy = (originalImage.status === Image.Loading)
         }
     }
 

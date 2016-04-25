@@ -24,7 +24,7 @@ XmlListModel {
 
     // App stays busy as long as a XmlListModel is loading:
     onStatusChanged: {
-        _appIsBusy = (root.status === XmlListModel.Loading)
+        //_appIsBusy = (root.status === XmlListModel.Loading)
         timer.stop()
     }
 
