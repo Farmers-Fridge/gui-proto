@@ -39,7 +39,14 @@ GridView {
             width: height
             height: itemView.width/3
             anchors.centerIn: parent
-            //onStatusChanged: _appIsBusy = (originalImage.status === Image.Loading)
+
+            // Busy indicator:
+            BusyIndicator {
+                id: busyIndicator
+                anchors.centerIn: parent
+                on: originalImage.status === Image.Loading
+                visible: on
+            }
 
             MouseArea {
                 anchors.fill: parent

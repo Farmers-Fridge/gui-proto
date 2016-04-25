@@ -252,6 +252,7 @@ Item {
         anchors.centerIn: parent
         on: _appIsBusy
         visible: on
+        z: _settings.zMax
     }
 }
 

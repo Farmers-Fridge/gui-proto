@@ -57,7 +57,14 @@ Item {
                     color: "white"
                 }
             }
-            //onStatusChanged: _appIsBusy = (originalImage.status === Image.Loading)
+
+            // Busy indicator:
+            BusyIndicator {
+                id: busyIndicator
+                anchors.centerIn: parent
+                on: originalImage.status === Image.Loading
+                visible: on
+            }
         }
     }
 
