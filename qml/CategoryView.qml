@@ -164,6 +164,14 @@ Item {
                     anchors.centerIn: parent
                     selected: _controller.currentFilter === filterImages[index].name
                     onClicked: _controller.currentFilter = filterImages[index].name
+                    Image {
+                        anchors.left: parent.left
+                        anchors.leftMargin: -4
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: -8
+                        source: "qrc:/qml/images/ico-checkmark.png"
+                        visible: checkableFilter.selected
+                    }
                 }
             }
         }

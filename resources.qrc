@@ -132,5 +132,6 @@
         <file>qml/ToggleImageButton.qml</file>
         <file>qml/images/ico-bottom-bg.png</file>
         <file>qml/images/ico-top-bg.png</file>
+        <file>qml/images/ico-checkmark.png</file>
     </qresource>
 </RCC>
