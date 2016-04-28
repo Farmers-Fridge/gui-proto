@@ -108,7 +108,7 @@ Item {
     function onCurrentStockItemChanged()
     {
         // Don't use ==!
-        if (columnNumber !== undefined)
+        if (stockItem)
             highlighted = ((_currentStockItemRow == rowNumber) && (_currentStockItemCol == columnNumber))
     }
 
