@@ -9,7 +9,7 @@ RestCommand {
     function execute()
     {
         var params = ""
-        console.log("RUNNING COMMAND: ", _restOrder)
+        mainWindow.logMessage("RUNNING COMMAND: ", _restOrder)
         post(params)
     }
 }

@@ -7,12 +7,12 @@ import "../script/Utils.js" as Utils
 
 CustomPage {
     pageId: "_networkpage_"
-    idleTime: _settings.pageIdleTime
+    idleTime: _timeSettings.pageIdleTime
 
     // Time out:
     function onIdleTimeOut()
     {
-        console.log("NETWORKPAGE::LOADPREVIOUS")
+        mainWindow.logMessage("NETWORKPAGE::LOADPREVIOUS")
         mainApplication.loadPreviousPage()
     }
 

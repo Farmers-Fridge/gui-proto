@@ -20,7 +20,7 @@ Item {
 
     // Behavior on opacity:
     Behavior on opacity {
-        NumberAnimation {duration: _settings.pageTransitionDelay}
+        NumberAnimation {duration: _timeSettings.pageTransitionDelay}
     }
 
     // Key pad enter clicked:
@@ -57,7 +57,7 @@ Item {
         height: 96
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        z: _settings.zMax
+        z: _generalSettings.zMax
 
         onClicked: {
             mainApplication.keyPadEnterKeyClicked.connect(onKeyPadEnterKeyClicked)

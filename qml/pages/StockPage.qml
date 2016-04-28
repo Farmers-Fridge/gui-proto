@@ -6,7 +6,7 @@ import ".."
 Page {
     id: stockPage
     pageId: "_stockpage_"
-    idleTime: _settings.pageIdleTime
+    idleTime: _timeSettings.pageIdleTime
     signal stopStockPagePrivate()
 
     // Time out:

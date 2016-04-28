@@ -9,13 +9,13 @@ Item {
         width: 1
         height: parent.height
         anchors.horizontalCenter: parent.horizontalCenter
-        color: "#22000000"
+        color: _colors.ffToolBarSeparator1
     }
     Rectangle {
         width: 1
         height: parent.height
         anchors.horizontalCenterOffset: 1
         anchors.horizontalCenter: parent.horizontalCenter
-        color: "#33ffffff"
+        color: _colors.ffToolBarSeparator2
     }
 }

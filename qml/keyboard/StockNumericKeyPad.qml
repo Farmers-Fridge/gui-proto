@@ -9,6 +9,9 @@ NumericKeyPad {
     // Theo par:
     property int theoPar: 0
 
+    // One digit only:
+    oneDigitOnly: true
+
     // Return key enabled state:
     function keyEnabledState(keyId)
     {

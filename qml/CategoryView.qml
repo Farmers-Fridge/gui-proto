@@ -6,7 +6,8 @@ import "script/Utils.js" as Utils
 
 // Category view:
 Item {
-    anchors.fill: parent
+    width: parent.width
+    height: _generalSettings.toolbarHeight
 
     // Background:
     Image {
@@ -80,11 +81,9 @@ Item {
     function getUnSelectedImage(categoryName)
     {
         var target = categoryName.toUpperCase()
-        console.log("TARGET IS: ", target)
         for (var i=0; i<dishImages.length; i++)
         {
             var current = dishImages[i].name.toUpperCase()
-            console.log("CURRENT IS: ", current)
             if (current === target)
                 return dishImages[i].unselected
         }

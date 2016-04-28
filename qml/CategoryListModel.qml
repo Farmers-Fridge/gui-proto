@@ -23,12 +23,12 @@ CustomXmlListModel {
         {
             if (status === XmlListModel.Error)
                 // Failure:
-                console.log("FAILED TO LOAD IMAGES FOR CATEGORY: " + targetCategory)
+                mainWindow.logMessage("FAILED TO LOAD IMAGES FOR CATEGORY: " + targetCategory)
             else
             if (status === XmlListModel.Ready)
             {
                 // Success:
-                console.log("IMAGES FOR CATEGORY: " + targetCategory + " LOADED SUCCESSFULLY")
+                mainWindow.logMessage("IMAGES FOR CATEGORY: " + targetCategory + " LOADED SUCCESSFULLY")
                 modelReady()
             }
         }

@@ -40,7 +40,7 @@ ScrollView {
             StockPageRow {
                 height: stockGridBlock.delegateHeight
                 width: stockGridBlock.width
-                rowNumber: (xmlRowModel.get(index) !== undefined) ? xmlRowModel.get(index).rowNumber : -1
+                rowNumber: objValid(xmlRowModel.get(index)) ? xmlRowModel.get(index).rowNumber : -1
             }
         }
     }

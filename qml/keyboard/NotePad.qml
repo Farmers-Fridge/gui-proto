@@ -91,7 +91,7 @@ Rectangle {
     // Color dialog:
     ColorDialog {
         id: colorDialog
-        color: "black"
+        color: _colors.ffBlack
         onAccepted: document.textColor = color
     }
 

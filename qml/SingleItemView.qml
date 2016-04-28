@@ -10,22 +10,22 @@ Item {
     Rectangle {
         id: container
         anchors.centerIn: parent
-        color: "transparent"
-        border.color: _settings.green
+        color: _colors.ffTransparent
+        border.color: _colors.ffDarkGreen
         width: parent.width*.75
         height: parent.height*.75
 
         // Image loading background
         Rectangle {
             id: imageLoadingBkg
-            color: "white"
+            color: _colors.ffWhite
             anchors.centerIn: parent
             antialiasing: true
             width: Math.min(parent.width, parent.height)
             height: width
             visible: originalImage.status !== Image.Ready
             Rectangle {
-                color: _settings.green
+                color: _colors.ffDarkGreen
                 antialiasing: true
                 anchors { fill: parent; margins: 3 }
             }
@@ -54,7 +54,7 @@ Item {
                 CommonText {
                     id: priceText
                     anchors.centerIn: parent
-                    color: "white"
+                    color: _colors.ffWhite
                 }
             }
 

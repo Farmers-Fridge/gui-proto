@@ -6,7 +6,7 @@ import ".."
 Page {
     id: firstPage
     pageId: "_menupage_"
-    idleTime: _settings.pageIdleTime
+    idleTime: _timeSettings.pageIdleTime
     property int gridViewIndex: 0
     property string viewMode: "gridview"
 
@@ -34,17 +34,17 @@ Page {
         viewMode = mode
     }
 
-    // Primary header area:
-    PrimaryHeaderArea {
+    // Category view:
+    CategoryView {
         id: categoryView
         anchors.top: parent.top
         width: parent.width
-        height: _settings.toolbarHeight
+        height: _generalSettings.toolbarHeight
     }
 
     // Background:
     Rectangle {
-        color: "black"
+        color: _colors.ffBlack
         width: parent.width
         anchors.top: categoryView.bottom
         anchors.bottom: primaryBottomArea.top
@@ -82,7 +82,7 @@ Page {
                 visible: opacity > 0
                 model: categoryListModel
                 Behavior on opacity {
-                    NumberAnimation {duration: _settings.pageTransitionDelay}
+                    NumberAnimation {duration: _timeSettings.widgetAnimationDelay}
                 }
                 onGridImageClicked: {
                     mainApplication.loadPathView()
@@ -105,7 +105,7 @@ Page {
                 visible: opacity > 0
                 model: categoryListModel
                 Behavior on opacity {
-                    NumberAnimation {duration: _settings.pageTransitionDelay}
+                    NumberAnimation {duration: _timeSettings.widgetAnimationDelay}
                 }
             }
         }
@@ -117,7 +117,7 @@ Page {
     BottomArea {
         id: primaryBottomArea
         width: parent.width
-        height: _settings.toolbarHeight
+        height: _generalSettings.toolbarHeight
         anchors.bottom: parent.bottom
     }
 

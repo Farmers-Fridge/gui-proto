@@ -58,7 +58,7 @@ Rectangle {
         color: kbdSettings.keyLabelColor
         font.pointSize: kbdSettings.keyLabelPointSize
         font.weight: kbdSettings.keyLabelFontWeight
-        font.family: kbdSettings.keyLabelFontFamily
+        font.family: _fontSettings.keyLabelFontFamily
         font.capitalization: keyBoard.allUpperCase ? Font.AllUppercase : Font.MixedCase
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter

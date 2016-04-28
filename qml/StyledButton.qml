@@ -19,11 +19,11 @@ Button {
             implicitWidth: 128
             implicitHeight: 25
             border.width: control.activeFocus ? 2 : 1
-            border.color: "#888"
+            border.color: _colors.ffGray1
             radius: 4
             gradient: Gradient {
-                GradientStop { position: 0 ; color: control.pressed ? _colors.ffGreen : "#eee" }
-                GradientStop { position: 1 ; color: control.pressed ? "#ccc" : _colors.ffGreen }
+                GradientStop { position: 0 ; color: control.pressed ? _colors.ffGreen : _colors.ffGray2 }
+                GradientStop { position: 1 ; color: control.pressed ? _colors.ffGray3 : _colors.ffGreen }
             }
         }
     }

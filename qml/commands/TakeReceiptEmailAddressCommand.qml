@@ -10,7 +10,7 @@ RestCommand {
     function execute()
     {
         var params = "emailAddress=" + emailAddress
-        console.log("RUNNING COMMAND: " + _restOrder + " USING EMAIL: " + emailAddress)
+        mainWindow.logMessage("RUNNING COMMAND: " + _restOrder + " USING EMAIL: " + emailAddress)
         post(params)
     }
 }

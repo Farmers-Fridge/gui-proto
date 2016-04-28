@@ -16,14 +16,14 @@ GridView {
         // Image loading background
         Rectangle {
             id: imageLoadingBkg
-            color: "white"
+            color: _colors.ffWhite
             anchors.centerIn: parent
             antialiasing: true
             width: height
             height: itemView.width/3
             visible: originalImage.status !== Image.Ready
             Rectangle {
-                color: _settings.green
+                color: _colors.ffDarkGreen
                 antialiasing: true
                 anchors { fill: parent; margins: 3 }
             }

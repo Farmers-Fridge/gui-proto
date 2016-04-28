@@ -22,14 +22,14 @@ Command {
 
         http.onreadystatechange = function() { // Call a function when the state changes.
             _appIsBusy = false
-            console.log("USED PARAMETERS: ")
-            console.log(params)
+            mainWindow.logMessage("USED PARAMETERS: ")
+            mainWindow.logMessage(params)
             if (http.readyState === 4) {
                 if (http.status === 200) {
-                    console.log("RESPONSE TO REST ORDER: " + _restOrder + " IS: " + http.responseText)
+                    mainWindow.logMessage("RESPONSE TO REST ORDER: " + _restOrder + " IS: " + http.responseText)
                     cmdSuccess(http.responseText)
                 } else {
-                    console.log("ERROR FROM REST ORDER: " + _restOrder + " IS: " + http.status)
+                    mainWindow.logMessage("ERROR FROM REST ORDER: " + _restOrder + " IS: " + http.status)
                     cmdError(_restOrder + " COMMAND REST ERROR: " + http.status)
                 }
             }

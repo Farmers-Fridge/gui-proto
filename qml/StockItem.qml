@@ -8,15 +8,11 @@ Item {
     id: stockItem
     property double innerRectRatio: .95
     property int userActualPar: actualPar
-    property alias labelOn: itemStatus.labelOn
-    property alias labelOff: itemStatus.labelOff
-    property bool kitchenShort: true
-    property bool machineShort: false
     property bool highlighted: false
     focus: true
     Rectangle {
         id: inner
-        color: "transparent"
+        color: _colors.ffTransparent
         width: parent.width*innerRectRatio
         height: parent.height*innerRectRatio
 
@@ -53,7 +49,7 @@ Item {
             id: stockMgr
             width: parent.width
             height: 48
-            anchors.bottom: itemStatus.top
+            anchors.bottom: orders.top
             anchors.bottomMargin: itemSpacing/2
 
             Item {
@@ -67,25 +63,10 @@ Item {
                     id: actualParText
                     anchors.centerIn: parent
                     font.pixelSize: 24
-                    color: "brown"
+                    color: _colors.ffBrown
                     font.bold: true
                     text: userActualPar
                 }
-            }
-        }
-
-        // Item status:
-        ToggleButton {
-            id: itemStatus
-            anchors.bottom: orders.top
-            anchors.bottomMargin: itemSpacing
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width-8
-            height: itemSpacing*2
-            visible: userActualPar != theoPar
-            onToggled: {
-                kitchenShort = active
-                machineShort = !active
             }
         }
 
@@ -114,7 +95,7 @@ Item {
             }
             CommonText {
                 font.pixelSize: parent.height
-                color: (actualPar == theoPar) ? _colors.ffPar : _colors.ffException
+                color: (previousParValues.length > 0) ? (userActualPar > previousParValues[index] ? _colors.ffGreen : _colors.ffRed) : _colors.ffBlack
                 text: actualPar
                 anchors.right: parent.right
                 anchors.rightMargin: 4
@@ -127,13 +108,21 @@ Item {
     function onCurrentStockItemChanged()
     {
         // Don't use ==!
-        if (stockItem !== undefined)
+        if (columnNumber !== undefined)
             highlighted = ((_currentStockItemRow == rowNumber) && (_currentStockItemCol == columnNumber))
     }
 
     // Ok clicked:
     function onStockKeyPadEnterKeyClicked(keyId)
     {
+        // Clear previous par values:
+        while(previousParValues.length > 0)
+            previousParValues.pop()
+
+        // Store previous par values:
+        for (var i=0; i<xmlColumnModel.count; i++)
+            previousParValues.push(xmlColumnModel.get(i).actualPar)
+
         // Set user actual par:
         if (userActualPar !== keyId)
         {
@@ -146,8 +135,6 @@ Item {
             _updateRestockExceptionCommand.theoAdds = theoAdds
             _updateRestockExceptionCommand.userActualPar = userActualPar
             _updateRestockExceptionCommand.theoPar = theoPar
-            _updateRestockExceptionCommand.kitchenShort = kitchenShort
-            _updateRestockExceptionCommand.machineShort = machineShort
 
             // Connect:
             _updateRestockExceptionCommand.cmdSuccess.connect(xmlColumnModel.onUpdateRestockExceptionCommandSucces)

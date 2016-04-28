@@ -29,7 +29,7 @@ Popup {
 
     // Transition:
     transitions: Transition {
-        SpringAnimation {target: keyPadPopup; property: "y"; duration: _settings.pageTransitionDelay; spring: 3; damping: 0.2}
+        SpringAnimation {target: keyPadPopup; property: "y"; duration: _timeSettings.widgetAnimationDelay; spring: 3; damping: 0.2}
     }
 
     // Show key pad:

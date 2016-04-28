@@ -6,7 +6,7 @@ import "script/Utils.js" as Utils
 
 Rectangle {
     id: stockPageRow
-    color: "transparent"
+    color: _colors.ffTransparent
     border.color: _colors.ffGreen
 
     // Row number:
@@ -14,6 +14,9 @@ Rectangle {
 
     // Item spacing:
     property int itemSpacing: 12
+
+    // Previous par values:
+    property variant previousParValues: []
 
     // Row label:
     Item {
@@ -67,6 +70,8 @@ Rectangle {
                         _updateRestockExceptionCommand.cmdSuccess.disconnect(xmlColumnModel.onUpdateRestockExceptionCommandSucces)
                         _updateRestockExceptionCommand.cmdError.disconnect(xmlColumnModel.onUpdateRestockExceptionCommandError)
 
+                        var children = stockGridColumns.children
+
                         // Reload:
                         xmlColumnModel.reload()
                     }
@@ -86,8 +91,6 @@ Rectangle {
                 id: stockItem
                 width: buttons.width/xmlColumnModel.count-8
                 height: buttons.height
-                labelOn: "Kitchen Short"
-                labelOff: "Machine Short"
             }
         }
     }

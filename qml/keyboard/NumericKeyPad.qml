@@ -6,6 +6,9 @@ Rectangle {
     width: 3*(kbdSettings.keyWidth+4)+4
     height: 4*(kbdSettings.keyHeight+4)+4
 
+    // Max digits:
+    property bool oneDigitOnly: false
+
     // Return key enabled state (virtual):
     function keyEnabledState(keyId)
     {
@@ -121,7 +124,7 @@ Rectangle {
         color: kbdSettings.keyLabelColor
         font.pointSize: kbdSettings.keyLabelPointSize
         font.weight: kbdSettings.keyLabelFontWeight
-        font.family: kbdSettings.keyLabelFontFamily
+        font.family: _fontSettings.keyLabelFontFamily
         font.capitalization: Font.MixedCase
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
@@ -145,7 +148,6 @@ Rectangle {
                 iconSource: keyIcon
                 mainLabel: keyText
                 mainFont: proxyMainTextItem.font
-                keyColor: "#34495E"
                 mainFontColor: proxyMainTextItem.color
                 keyPressedColor: "#1ABC9C"
                 enabled: keyEnabledState(keyId)
@@ -161,10 +163,13 @@ Rectangle {
                     }
                     else {
                         currentKey = keyId
+                        if (oneDigitOnly)
+                            enteredText = ""
                         enteredText += keyText
                     }
                 }
-                opacity: enabled ? 1 : .75
+                keyColor: "#34495E"
+                opacity: enabled ? 1 : .5
             }
         }
     }

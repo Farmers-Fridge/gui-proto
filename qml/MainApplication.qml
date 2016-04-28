@@ -96,6 +96,12 @@ Item {
     // Current stock item changed:
     signal currentStockItemChanged()
 
+    // Object valid?
+    function objValid(obj)
+    {
+        return (obj !== null) && (typeof(obj) !== "undefined")
+    }
+
     // Set current stock item:
     function setCurrentStockItem(rowNumber, columnNumber)
     {
@@ -108,8 +114,18 @@ Item {
     }
 
     // Settings:
-    Settings {
-        id: _settings
+    GeneralSettings {
+        id: _generalSettings
+    }
+
+    // Time settings:
+    TimeSettings {
+        id: _timeSettings
+    }
+
+    // Font settings:
+    FontSettings {
+        id: _fontSettings
     }
 
     // Colors:
@@ -180,7 +196,7 @@ Item {
                 if (status === XmlListModel.Error)
                 {
                     // Log:
-                    console.log("Can't load: " + source)
+                    logMessage("Can't load: " + source)
                 }
                 else
                 // Model ready:
@@ -193,7 +209,7 @@ Item {
                     _categoryModel = categoryModel
 
                     // Log:
-                    console.log(source + " loaded successfully")
+                    logMessage(source + " loaded successfully")
 
                     // Notify:
                     mainApplication.modelReady()
@@ -252,7 +268,7 @@ Item {
         anchors.centerIn: parent
         on: _appIsBusy
         visible: on
-        z: _settings.zMax
+        z: _generalSettings.zMax
     }
 }
 

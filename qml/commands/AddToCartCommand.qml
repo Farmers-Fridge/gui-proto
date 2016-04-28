@@ -11,7 +11,7 @@ Command {
     function execute()
     {
         // Log:
-        console.log("RUNNING AddToCartCommand WITH: " +
+        mainWindow.logMessage("RUNNING AddToCartCommand WITH: " +
             currentItem["vendItemName"] + "/" + currentItem["icon"] + "/" +
                 currentItem["nutrition"] + "/" + currentItem["category"] + "/" +
                     currentItem["price"])

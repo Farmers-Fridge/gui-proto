@@ -95,7 +95,7 @@ Item {
         if (pageHistory.length > 1)
         {
             historyPop()
-            console.log("LOADING: ", pageHistory[pageHistory.length-1])
+            mainWindow.logMessage("LOADING: ", pageHistory[pageHistory.length-1])
             pageMgr.loadPage(pageHistory[pageHistory.length-1])
         }
     }
@@ -168,7 +168,7 @@ Item {
         font.pixelSize: 48
         text: elapsedTime
         anchors.centerIn: parent
-        z: _settings.zMax
+        z: _generalSettings.zMax
     }
     */
 }

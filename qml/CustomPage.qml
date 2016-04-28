@@ -10,7 +10,7 @@ Page {
     Item {
         id: topBar
         width: parent.width
-        height: _settings.toolbarHeight
+        height: _generalSettings.toolbarHeight
         anchors.top: parent.top
     }
 
@@ -26,7 +26,7 @@ Page {
     Item {
         id: bottomBar
         width: parent.width
-        height: _settings.toolbarHeight
+        height: _generalSettings.toolbarHeight
         anchors.bottom: parent.bottom
     }
 }

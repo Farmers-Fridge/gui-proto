@@ -9,16 +9,16 @@ Popup {
         width: parent.width
         height: parent.height*3/4
         anchors.centerIn: parent
-        color: _settings.popupBkgColor
+        color: _colors.ffIvory
 
         // Header (tax and total):
         Rectangle {
             width: parent.width/2
-            height: _settings.checkOutPopupHeaderHeight
+            height: _generalSettings.checkOutPopupHeaderHeight
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: container.top
-            color: _settings.popupBkgColor
-            border.color: _settings.green
+            color: _colors.ffIvory
+            border.color: _colors.ffDarkGreen
             border.width: 3
 
             CommonText {
@@ -32,8 +32,8 @@ Popup {
             id: header
             anchors.top: parent.top
             width: parent.width
-            height: _settings.checkOutPopupHeaderHeight
-            color: "brown"
+            height: _generalSettings.checkOutPopupHeaderHeight
+            color: _colors.ffBrown
         }
 
         // View container:
@@ -54,9 +54,9 @@ Popup {
         Rectangle {
             id: controlArea
             width: parent.width
-            height: _settings.checkOutPopupHeaderHeight
+            height: _generalSettings.checkOutPopupHeaderHeight
             anchors.bottom: parent.bottom
-            color: "brown"
+            color: _colors.ffBrown
 
             Row {
                 anchors.fill: parent

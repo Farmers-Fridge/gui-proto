@@ -83,7 +83,7 @@ ListView {
             anchors.bottom: parent.bottom
             height: 1
             width: parent.width
-            color: _settings.green
+            color: _colors.ffDarkGreen
         }
     }
 }

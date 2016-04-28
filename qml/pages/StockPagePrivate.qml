@@ -65,7 +65,7 @@ CustomPage {
                 // Notepad enter key clicked:
                 function onNotePadEnterKeyClicked()
                 {
-                    console.log("ENTER KEY CLICKED FOR NOTEPAD")
+                    mainWindow.logMessage("ENTER KEY CLICKED FOR NOTEPAD")
                     mainApplication.hideNotePad()
 
                     mainApplication.notePadEnterClicked.disconnect(onNotePadEnterKeyClicked)
@@ -75,7 +75,7 @@ CustomPage {
                 // Notepad cancel key clicked:
                 function onNotePadCancelKeyClicked()
                 {
-                    console.log("CANCEL KEY CLICKED FOR NOTEPAD")
+                    mainWindow.logMessage("CANCEL KEY CLICKED FOR NOTEPAD")
                     mainApplication.hideNotePad()
 
                     mainApplication.notePadEnterClicked.disconnect(onNotePadEnterKeyClicked)

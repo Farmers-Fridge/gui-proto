@@ -10,7 +10,7 @@ RestCommand {
     function execute()
     {
         var params = "couponCode=" + couponCode
-        console.log("RUNNING COMMAND: " + _restOrder + " USING COUPON CODE: " + couponCode)
+        mainWindow.logMessage("RUNNING COMMAND: " + _restOrder + " USING COUPON CODE: " + couponCode)
         post(params)
     }
 }

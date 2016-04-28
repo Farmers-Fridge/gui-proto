@@ -8,7 +8,7 @@ Page {
     // Main timer (debug only):
     Timer {
         id: timer
-        interval: _settings.idleTimeOut
+        interval: _timeSettings.idlePageImageTimeOut
         repeat: true
         running: _pageMgr.enabled
         onTriggered: idleView.currentIndex++
@@ -45,7 +45,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 8
-        color: _settings.green
+        color: _colors.ffDarkGreen
         text: qsTr("Touch Screen To Start")
         font.pixelSize: 42
     }

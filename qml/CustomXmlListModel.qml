@@ -13,7 +13,7 @@ XmlListModel {
         triggeredOnStart: true
         onTriggered: {
             root.elpasedTime += 1000
-            if (root.elpasedTime > _settings.networkTimeOut)
+            if (root.elpasedTime > _timeSettings.networkTimeOut)
             {
                 timer.stop()
                 root.source = ""

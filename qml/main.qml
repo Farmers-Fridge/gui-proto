@@ -7,8 +7,7 @@ Window {
     visibility: Window.FullScreen
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
-    visible: true    
-    property bool imageLoading: false
+    visible: true
 
     // Application data:
     property variant _appData: undefined
@@ -16,19 +15,29 @@ Window {
     // Category model:
     property variant _categoryModel: undefined
 
+    // Verbose mode:
+    property bool _verbose: false
+
+    // Log message:
+    function logMessage(msg)
+    {
+        if (_verbose)
+            console.log(msg)
+    }
+
     // XML parser:
     XMLParser {
         id: _xmlParser
         url: "qrc:/qml/json/application.json"
         onDataReady: {
             // Log:
-            console.log("Loaded application.json")
+            mainWindow.logMessage("Loaded application.json")
 
             // Set application data:
             _appData = JSON.parse(responseText)
 
             // Log:
-            console.log("Response text: " + responseText)
+            mainWindow.logMessage("Response text: " + responseText)
 
             // Update title:
             mainWindow.title = _appData.appName + "/" + _appData.clientName

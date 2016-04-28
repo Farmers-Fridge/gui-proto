@@ -11,8 +11,6 @@ RestCommand {
     property string theoAdds: ""
     property string userActualPar: ""
     property string theoPar: ""
-    property bool kitchenShort: false
-    property bool machineShort: false
 
     // Execute:
     function execute()
@@ -22,6 +20,13 @@ RestCommand {
         var delta = theoPar - userActualPar
         var reason = "na"
         if (userActualPar !== theoPar) {
+            if (theoAdds >= delta) {
+                actualStocks = theoAdds - delta
+            } else {
+                actualStocks = 0
+                actualPulls = theoExpired + (delta - theoAdds)
+            }
+            /*
             if (kitchenShort) {
                 reason = "Kitchen Short"
                 if (theoAdds >= delta) {
@@ -35,6 +40,7 @@ RestCommand {
                 reason = "Machine Short"
                 actualPulls = theoExpired + delta
             }
+            */
         }
 
         var totalPulls = actualPulls

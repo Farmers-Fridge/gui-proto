@@ -5,8 +5,8 @@ Rectangle {
     id: header
     anchors.top: parent.top
     width: parent.width
-    height: _settings.checkOutPopupHeaderHeight
-    color: _settings.cartViewHeaderColor
+    height: _generalSettings.checkOutPopupHeaderHeight
+    color: _colors.ffBrown
 
     // First col:
     Item {
@@ -16,7 +16,7 @@ Rectangle {
         CommonText {
             anchors.centerIn: parent
             text: qsTr("PRODUCT")
-            color: "white"
+            color: _colors.ffWhite
         }
     }
 
@@ -26,7 +26,7 @@ Rectangle {
         height: parent.height-8
         anchors.left: firstCol.right
         anchors.verticalCenter: parent.verticalCenter
-        color: "white"
+        color: _colors.ffWhite
     }
 
     // Second col:
@@ -38,7 +38,7 @@ Rectangle {
         CommonText {
             anchors.centerIn: parent
             text: qsTr("QTY")
-            color: "white"
+            color: _colors.ffWhite
         }
     }
 
@@ -48,7 +48,7 @@ Rectangle {
         height: parent.height-8
         anchors.left: secondCol.right
         anchors.verticalCenter: parent.verticalCenter
-        color: "white"
+        color: _colors.ffWhite
     }
 
     // Third col:
@@ -60,7 +60,7 @@ Rectangle {
         CommonText {
             anchors.centerIn: parent
             text: qsTr("TOTAL")
-            color: "white"
+            color: _colors.ffWhite
         }
     }
 
@@ -70,7 +70,7 @@ Rectangle {
         height: parent.height-8
         anchors.left: thirdCol.right
         anchors.verticalCenter: parent.verticalCenter
-        color: "white"
+        color: _colors.ffWhite
     }
 
     // Fourth col:
@@ -82,7 +82,7 @@ Rectangle {
         CommonText {
             anchors.centerIn: parent
             text: qsTr("ACTION")
-            color: "white"
+            color: _colors.ffWhite
         }
     }
 }
