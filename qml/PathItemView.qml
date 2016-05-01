@@ -44,7 +44,9 @@ PathView {
         visible: vendItemName !== ""
         width: pathView.width
         height: pathView.height
-        itemUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
+        menuImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
+        nutritionFactImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, nutrition)
+        onNutritionFactImageUrlChanged: console.log(nutritionFactImageUrl)
         itemPrice: price
     }
 

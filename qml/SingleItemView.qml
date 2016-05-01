@@ -4,8 +4,10 @@ import QtQuick.Window 2.0
 Item {
     id: singleItemView
     visible: vendItemName !== ""
-    property alias itemUrl: originalImage.source
-    property alias itemPrice: priceText.text
+    property alias menuImageUrl: flipableMenuImage.frontImage
+    property alias nutritionFactImageUrl: flipableMenuImage.backImage
+    onNutritionFactImageUrlChanged: console.log("************************************************************************************************************************", nutritionFactImageUrl)
+    property alias itemPrice: priceDisplay.itemPrice
 
     Rectangle {
         id: container
@@ -23,7 +25,7 @@ Item {
             antialiasing: true
             width: Math.min(parent.width, parent.height)
             height: width
-            visible: originalImage.status !== Image.Ready
+            visible: !flipableMenuImage.ready
             Rectangle {
                 color: _colors.ffDarkGreen
                 antialiasing: true
@@ -31,40 +33,17 @@ Item {
             }
         }
 
-        // Original image:
-        Image {
-            id: originalImage
-            antialiasing: true
-            cache: true
-            fillMode: Image.PreserveAspectFit
+        // Flipable menu image:
+        FlipableMenuImage {
+            id: flipableMenuImage
             width: imageLoadingBkg.width
             height: imageLoadingBkg.height
             anchors.centerIn: parent
-            Image {
-                width: 128
-                fillMode: Image.PreserveAspectFit
-                rotation: 3
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: parent.top
-                anchors.topMargin: 8
-                source: "qrc:/qml/images/ico-cardboard.png"
-                antialiasing: true
+        }
 
-                // Display price top right:
-                CommonText {
-                    id: priceText
-                    anchors.centerIn: parent
-                    color: _colors.ffWhite
-                }
-            }
-
-            // Busy indicator:
-            BusyIndicator {
-                id: busyIndicator
-                anchors.centerIn: parent
-                on: originalImage.status === Image.Loading
-                visible: on
-            }
+        // Price:
+        PriceDisplay {
+            id: priceDisplay
         }
     }
 

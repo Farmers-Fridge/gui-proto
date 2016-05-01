@@ -21,7 +21,7 @@ Popup {
 
     // Transition:
     transitions: Transition {
-        SpringAnimation {target: popup; property: "y"; duration: _timeSettings.widgetAnimationDelay; spring: 3; damping: 0.2}
+        SpringAnimation {target: popup; property: "y"; duration: _timeSettings.widgetAnimationDuration; spring: 3; damping: 0.2}
     }
 
     // Show notepad:

@@ -2,10 +2,10 @@ import QtQuick 2.5
 
 Item {
     // Page transition delay:
-    readonly property int pageTransitionDelay: 500
+    readonly property int pageTransitionDuration: 500
 
     // Widget animation delay:
-    readonly property int widgetAnimationDelay: 500
+    readonly property int widgetAnimationDuration: 500
 
     // Idle time out:
     readonly property int idlePageImageTimeOut: 3000
@@ -15,5 +15,8 @@ Item {
 
     // Network time out:
     readonly property int networkTimeOut: 15000
+
+    // Nutrition image display timeout:
+    readonly property int nutritionImageDisplayTimeOut: 3000
 }
 

@@ -82,7 +82,7 @@ Page {
                 visible: opacity > 0
                 model: categoryListModel
                 Behavior on opacity {
-                    NumberAnimation {duration: _timeSettings.widgetAnimationDelay}
+                    NumberAnimation {duration: _timeSettings.widgetAnimationDuration}
                 }
                 onGridImageClicked: {
                     mainApplication.loadPathView()
@@ -105,7 +105,7 @@ Page {
                 visible: opacity > 0
                 model: categoryListModel
                 Behavior on opacity {
-                    NumberAnimation {duration: _timeSettings.widgetAnimationDelay}
+                    NumberAnimation {duration: _timeSettings.widgetAnimationDuration}
                 }
             }
         }

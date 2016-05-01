@@ -20,7 +20,7 @@ Item {
 
     // Behavior on opacity:
     Behavior on opacity {
-        NumberAnimation {duration: _timeSettings.pageTransitionDelay}
+        NumberAnimation {duration: _timeSettings.pageTransitionDuration}
     }
 
     // Key pad enter clicked:

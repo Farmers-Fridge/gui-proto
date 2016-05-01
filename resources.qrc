@@ -134,5 +134,8 @@
         <file>qml/IdleSettings.qml</file>
         <file>qml/TimeSettings.qml</file>
         <file>qml/FontSettings.qml</file>
+        <file>qml/FlipableMenuImage.qml</file>
+        <file>qml/PriceDisplay.qml</file>
+        <file>qml/images/ico-question.png</file>
     </qresource>
 </RCC>
