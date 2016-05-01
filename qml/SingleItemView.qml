@@ -25,7 +25,7 @@ Item {
             antialiasing: true
             width: Math.min(parent.width, parent.height)
             height: width
-            visible: !flipableMenuImage.ready
+            visible: !flipableMenuImage.frontImageReady
             Rectangle {
                 color: _colors.ffDarkGreen
                 antialiasing: true

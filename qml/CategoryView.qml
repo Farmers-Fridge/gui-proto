@@ -72,7 +72,10 @@ Item {
         {
             var current = dishImages[i].name.toUpperCase()
             if (current === target)
+            {
+                console.log("SELECTED IMAGE FOR: ", categoryName, " IS: ", dishImages[i].selected)
                 return dishImages[i].selected
+            }
         }
         return ""
     }
@@ -85,7 +88,10 @@ Item {
         {
             var current = dishImages[i].name.toUpperCase()
             if (current === target)
+            {
+                console.log("UNSELECTED IMAGE FOR: ", categoryName, " IS: ", dishImages[i].unselected)
                 return dishImages[i].unselected
+            }
         }
         return ""
     }

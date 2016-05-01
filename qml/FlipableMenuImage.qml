@@ -7,7 +7,8 @@ Flipable {
     property alias frontImage: frontImage.source
     property alias backImage: backImage.source
     property bool flipped: false
-    property bool ready: (frontImage.status !== Image.Loading) //&& (backImage.status !== Image.Loading)
+    property bool frontImageReady: frontImage.status !== Image.Loading
+    property bool backImageReady: backImage.status !== Image.Loading
 
     // Timer:
     Timer {
@@ -36,7 +37,7 @@ Flipable {
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        on: (frontImage.status === Image.Loading) //|| (backImage.status === Image.Loading)
+        on: (frontImage.status === Image.Loading)
         visible: on
         z: _generalSettings.zMax
     }
@@ -62,6 +63,7 @@ Flipable {
     MouseArea {
         anchors.fill: parent
         onClicked: flipable.flipped = !flipable.flipped
+        enabled: frontImageReady && backImageReady
     }
 
     onStateChanged: {
