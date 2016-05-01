@@ -7,7 +7,7 @@ Flipable {
     property alias frontImage: frontImage.source
     property alias backImage: backImage.source
     property bool flipped: false
-    property bool ready: (frontImage.status !== Image.Loading) && (backImage.status !== Image.Loading)
+    property bool ready: (frontImage.status !== Image.Loading) //&& (backImage.status !== Image.Loading)
 
     // Timer:
     Timer {
@@ -36,7 +36,7 @@ Flipable {
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        on: (frontImage.status === Image.Loading) || (backImage.status === Image.Loading)
+        on: (frontImage.status === Image.Loading) //|| (backImage.status === Image.Loading)
         visible: on
         z: _generalSettings.zMax
     }
