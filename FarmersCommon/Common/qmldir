@@ -1,0 +1,15 @@
+module FarmersCommon
+XMLParser 1.0 XMLParser.qml
+Page 1.0 Page.qml
+PageMgr 1.0 PageMgr.qml
+Popup 1.0 Popup.qml
+PopupMgr 1.0 PopupMgr.qml
+CommonText 1.0 CommonText.qml
+ImageButton 1.0 ImageButton.qml
+TabButton 1.0 TabButton.qml
+TextButton 1.0 TextButton.qml
+CustomXmlListModel 1.0 CustomXmlListModel.qml
+BusyIndicator 1.0 BusyIndicator.qml
+CircularButton 1.0 CircularButton.qml
+IncrementalButton 1.0 IncrementalButton.qml
+Utils 1.0 Utils.js

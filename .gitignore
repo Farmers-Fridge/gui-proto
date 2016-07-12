@@ -10,5 +10,6 @@
 *.Release
 *.Debug
 *.exe
-*.zip
-*/latest/*
+*.autosave
+*.dll
+*.a

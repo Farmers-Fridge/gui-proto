@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="JSONListModel.qml">JSONListModel.qml</file>
+        <file alias="Key.qml">Key.qml</file>
+        <file alias="KeyBoard.qml">KeyBoard.qml</file>
+        <file alias="KeyboardSettings.qml">KeyboardSettings.qml</file>
+        <file alias="NotePad.qml">NotePad.qml</file>
+        <file alias="NumericKeyPad.qml">NumericKeyPad.qml</file>
+        <file alias="StockNumericKeyPad.qml">StockNumericKeyPad.qml</file>
+        <file alias="ToolBarSeparator.qml">ToolBarSeparator.qml</file>
+        <file alias="ico-backspace.png">assets/ico-backspace.png</file>
+        <file alias="ico-clear.png">assets/ico-clear.png</file>
+        <file alias="ico-cross.png">assets/ico-cross.png</file>
+        <file alias="FontSizeControl.qml">FontSizeControl.qml</file>
+        <file alias="ico-editredo.png">assets/ico-editundo.png</file>
+        <file alias="ico-filenew.png">assets/ico-filenew.png</file>
+        <file alias="ico-fileopen.png">assets/ico-fileopen.png</file>
+        <file alias="ico-filesave.png">assets/ico-filesave.png</file>
+        <file alias="ico-minus.png">assets/ico-minus.png</file>
+        <file alias="ico-ok.png">assets/ico-ok.png</file>
+        <file alias="ico-plus.png">assets/ico-plus.png</file>
+        <file alias="ico-return.png">assets/ico-return.png</file>
+        <file alias="ico-shift.png">assets/ico-shift.png</file>
+        <file alias="ico-textbold.png">assets/ico-textbold.png</file>
+        <file alias="ico-textcenter.png">assets/ico-textcenter.png</file>
+        <file alias="ico-textitalic.png">assets/ico-textitalic.png</file>
+        <file alias="ico-textjustify.png">assets/ico-textjustify.png</file>
+        <file alias="ico-textleft.png">assets/ico-textleft.png</file>
+        <file alias="ico-textright.png">assets/ico-textright.png</file>
+        <file alias="ico-textunder.png">assets/ico-textunder.png</file>
+        <file alias="jsonpath.js">jsonpath.js</file>
+        <file alias="keyboard_us.json">keyboards/keyboard_us.json</file>
+		<file alias="qmldir">qmldir</file>
+    </qresource>
+</RCC>

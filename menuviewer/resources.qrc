@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>json/application.json</file>
+        <file>qml/MainApplication.qml</file>
+        <file>qml/pages/idle/IdlePage.qml</file>
+        <file>qml/pages/menu/PresentationPage.qml</file>
+        <file>qml/pages/checkout/CheckOutPage.qml</file>
+        <file>qml/Header.qml</file>
+        <file>qml/Footer.qml</file>
+        <file>qml/Settings.qml</file>
+        <file>qml/MenuPageTemplate.qml</file>
+        <file>qml/ReservedArea.qml</file>
+        <file>qml/CategoryListModel.qml</file>
+        <file>qml/GridItemView.qml</file>
+        <file>qml/PathItemView.qml</file>
+        <file>assets/ico-fork.png</file>
+        <file>assets/ico-primary-darkbar.png</file>
+        <file>qml/SingleItemView.qml</file>
+        <file>qml/FlipableMenuImage.qml</file>
+        <file>qml/PriceDisplay.qml</file>
+        <file>assets/ico-cardboard.png</file>
+        <file>assets/ico-next.png</file>
+        <file>assets/ico-prev.png</file>
+        <file>assets/Carousel Images Empty Plate.png</file>
+        <file>assets/ico-add.png</file>
+        <file>assets/ico-home.png</file>
+        <file>assets/ico-cart.png</file>
+        <file>assets/ico-pig.png</file>
+        <file>assets/ico-drinks.png</file>
+        <file>qml/CartView.qml</file>
+        <file>qml/TotalView.qml</file>
+        <file>assets/ico-question.png</file>
+        <file>assets/ico-nav-left.png</file>
+        <file>assets/ico-nav-right.png</file>
+    </qresource>
+</RCC>

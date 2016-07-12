@@ -1,0 +1,26 @@
+{
+    "currentIP": "166.130.89.142",
+    "appName": "Tablet GUI",
+    "clientName": "Farmers Fridge",
+    "categorySource": "/config/categories",
+    "categoryQuery": "/categories/item",
+    "categoryListSource": "/config/vendItems",
+    "categoryListQuery": "/vendItems/item",
+    "urlPublicRootValue": "bytebucket.org/jacbop/kiosk-assets/raw/master",
+    "tabletGuiCode": "5678",
+    "exitCode": "1234",
+
+    "pages": [
+        {
+            "pageId": "IDLE_PAGE",
+            "url": "qrc:/qml/pages/idle/IdlePage.qml"
+        },
+        {
+            "pageId": "MENU_PAGE",
+            "url": "qrc:/qml/pages/menu/PresentationPage.qml"
+        },
+        {
+            "pageId": "CHECKOUT_PAGE",
+            "url": "qrc:/qml/pages/checkout/CheckOutPage.qml"
+        }    ]
+}

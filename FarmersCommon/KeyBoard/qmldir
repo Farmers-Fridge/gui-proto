@@ -1,0 +1,11 @@
+module KeyBoard
+FontSizeControl 1.0 FontSizeControl.qml
+JSONListModel 1.0 JSONListModel.qml
+Key 1.0 Key.qml
+Keyboard 1.0 Keyboard.qml
+KeyboardSettings 1.0 KeyboardSettings.qml
+NotePad 1.0 NotePad.qml
+NumericKeyPad 1.0 NumericKeyPad.qml
+StockNumericKeyPad 1.0 StockNumericKeyPad.qml
+ToolBarSeparator 1.0 ToolBarSeparator.qml
+jsonpath 1.0 jsonpath.js
