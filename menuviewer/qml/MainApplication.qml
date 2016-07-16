@@ -58,6 +58,16 @@ Item {
         id: _updateRestockExceptionCommand
     }
 
+    // Clear all command:
+    ClearAllCommand {
+        id: _clearAllCommand
+    }
+
+    // Restock from tablet command:
+    RestockFromTabletCommand {
+        id: _restockFromTabletCommand
+    }
+
     // Page mgr:
     PageMgr {
         id: pageMgr
