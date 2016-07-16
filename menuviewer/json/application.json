@@ -22,5 +22,15 @@
         {
             "pageId": "CHECKOUT_PAGE",
             "url": "qrc:/qml/pages/checkout/CheckOutPage.qml"
-        }    ]
+        },
+        {
+            "pageId": "NETWORK_PAGE",
+            "url": "qrc:/qml/pages/network/NetworkPage.qml"
+        },
+        {
+            "pageId": "STOCK_PAGE",
+            "url": "qrc:/qml/pages/stock/StockPage.qml"
+        }
+
+    ]
 }

@@ -14,7 +14,8 @@ StackView {
 	signal loadFirstPage()
 	signal loadNextPage()
 	signal loadPreviousPage()
-
+	signal loadPage(string pageId)
+	
     // Main timer (debug only):
     Timer {
         id: mainTimer
@@ -105,6 +106,14 @@ StackView {
     {
         pop(get(0))
     }
+	
+	// Load specific page:
+	function onLoadPage(pageId)
+	{
+		var page = createPage(pageId)
+		if (page)
+			push(page)
+	}
 
     Component.onCompleted: {
         if (pages.length > 0)
@@ -116,6 +125,7 @@ StackView {
 			loadFirstPage.connect(onLoadFirstPage)
             loadPreviousPage.connect(onLoadPreviousPage)
             loadNextPage.connect(onLoadNextPage)
+			loadPage.connect(onLoadPage)
         }
     }
 }

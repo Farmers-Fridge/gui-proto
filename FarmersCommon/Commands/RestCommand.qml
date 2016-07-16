@@ -10,7 +10,6 @@ Command {
 
     // Post:
     function post(params) {
-        _appIsBusy = true
         var http = new XMLHttpRequest()
         var url = Utils.urlPlay(_networkIP, "/post/" + _restOrder);
         http.open("POST", url, true);
@@ -21,7 +20,6 @@ Command {
         http.setRequestHeader("Connection", "close");
 
         http.onreadystatechange = function() { // Call a function when the state changes.
-            _appIsBusy = false
             console.log(params)
             if (http.readyState === 4) {
                 if (http.status === 200) {

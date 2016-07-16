@@ -49,7 +49,7 @@ Flipable {
         anchors.centerIn: parent
         on: (frontImage.status === Image.Loading)
         visible: on
-        z: 1e9
+        z: _settings.zMax
     }
 
     transform: Rotation {

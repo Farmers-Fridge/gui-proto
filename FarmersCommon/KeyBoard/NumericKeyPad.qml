@@ -5,6 +5,11 @@ Rectangle {
     color: kbdSettings.bkgColor
     width: 3*(kbdSettings.keyWidth+4)+4
     height: 4*(kbdSettings.keyHeight+4)+4
+    opacity: 0
+    visible: opacity > 0
+
+    // Invoker:
+    property variant invoker
 
     // Max digits:
     property bool oneDigitOnly: false
@@ -152,17 +157,21 @@ Rectangle {
                 keyPressedColor: "#1ABC9C"
                 enabled: keyEnabledState(keyId)
                 onClicked: {
+                    console.log("ICI: ", keyId)
                     if (keyId >= 10)
                     {
+                        console.log("ICI INVOKER = ", invoker)
                         // OK:
                         if (keyId === 10)
-                            okClicked(enteredText)
+                            invoker.onOKClicked(enteredText)
                         else
-                        if (keyId === 11)
-                            cancelClicked()
+                        if (keyId === 11) {
+                            keyPad.state = ""
+                        }
                     }
                     else {
                         currentKey = keyId
+                        console.log("ONEDIGITONLY = ", oneDigitOnly)
                         if (oneDigitOnly)
                             enteredText = ""
                         enteredText += keyText
@@ -173,4 +182,20 @@ Rectangle {
             }
         }
     }
+
+    // On state:
+    states: State {
+        name: "on"
+        PropertyChanges {
+            target: privateNumericKeyPad
+            opacity: 1
+        }
+    }
+
+    // Behavior on opacity:
+    Behavior on opacity {
+        NumberAnimation {duration: 500}
+    }
+
+    onStateChanged: keyPad.enteredText = ""
 }

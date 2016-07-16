@@ -33,5 +33,14 @@
         <file>assets/ico-question.png</file>
         <file>assets/ico-nav-left.png</file>
         <file>assets/ico-nav-right.png</file>
+        <file>qml/pages/network/NetworkPage.qml</file>
+        <file>qml/pages/stock/StockPage.qml</file>
+        <file>qml/pages/stock/StockPagePrivate.qml</file>
+        <file>assets/ico-logo.png</file>
+        <file>qml/pages/stock/StockPageGrid.qml</file>
+        <file>qml/pages/stock/StockPageHeaderBlock.qml</file>
+        <file>qml/pages/stock/StockPageRow.qml</file>
+        <file>qml/pages/stock/StockItem.qml</file>
+        <file>assets/ico-ok.png</file>
     </qresource>
 </RCC>

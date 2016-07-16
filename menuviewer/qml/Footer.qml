@@ -2,7 +2,7 @@ import QtQuick 2.5
 import Common 1.0
 
 Rectangle {
-    color: _settings.bkgColor
+    color: _settings.ffIvoryLight
     property alias bottomAreaSource: bottomArea.source
     property alias homeVisible: homeButton.visible
     property alias pigVisible: pigButton.visible

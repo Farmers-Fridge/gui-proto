@@ -51,7 +51,7 @@ Page {
             width: parent.width
             anchors.top: parent.top
             anchors.bottom: bottomArea.top
-            color: _settings.bkgColor
+            color: _settings.ffIvoryLight
         }
 
         // Bottom area:
@@ -61,7 +61,7 @@ Page {
             height: parent.height*.25
             anchors.bottom: parent.bottom
             border.color: _settings.ffGreen
-            color: _settings.bkgColor
+            color: _settings.ffIvoryLight
         }
     }
 

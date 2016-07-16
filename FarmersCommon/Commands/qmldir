@@ -2,3 +2,4 @@ module Commands
 Command 1.0 Command.qml
 RestCommand 1.0 RestCommand.qml
 AddToCartCommand 1.0 AddToCartCommand.qml
+UpdateRestockExceptionCommand 1.0 UpdateRestockExceptionCommand.qml

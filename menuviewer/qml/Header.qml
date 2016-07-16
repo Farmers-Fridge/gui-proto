@@ -3,7 +3,7 @@ import Common 1.0
 
 Rectangle {
     property alias bottomAreaSource: bottomArea.source
-    color: _settings.bkgColor
+    color: _settings.ffIvoryLight
     signal tabClicked()
 
     Column {
@@ -12,7 +12,7 @@ Rectangle {
         // Part1:
         Rectangle {
             id: part1
-            color: _settings.bkgColor
+            color: _settings.ffIvoryLight
             width: parent.width
             height: parent.height/3
             anchors.left: parent.left
@@ -61,7 +61,7 @@ Rectangle {
         // Part2:
         Rectangle {
             id: part2
-            color: _settings.bkgColor
+            color: _settings.ffIvoryLight
             width: parent.width
             height: parent.height/3
 
@@ -72,7 +72,7 @@ Rectangle {
                     TabButton {
                         width: part2.width/_categoryModel.count
                         height: part2.height
-                        color: _settings.bkgColor
+                        color: _settings.ffIvoryLight
                         backgroundImage: categoryName === "Drinks" ?
                             "qrc:/assets/ico-drinks.png" :
                             "qrc:/assets/ico-primary-darkbar.png"
@@ -89,7 +89,7 @@ Rectangle {
         // Part3:
         Rectangle {
             id: part3
-            color: _settings.bkgColor
+            color: _settings.ffIvoryLight
             width: parent.width
             height: parent.height/3
 

@@ -5,9 +5,6 @@ import KeyBoard 1.0
 import Commands 1.0
 
 Item {
-    // Show private keypad:
-    signal showPrivateKeyPad()
-
     // Load path view:
     signal loadPathView()
 
@@ -29,10 +26,25 @@ Item {
     // Show nutritional info:
     signal showNutritionalInfo()
 
-    // Show keypad:
-    function onShowPrivateKeyPad()
+    // Current stock item changed:
+    signal currentStockItemChanged()
+
+    // Identify current stock item by row/column:
+    property int _currentStockItemRow: -1
+    property int _currentStockItemCol: -1
+
+    // App busy state:
+    property bool _appIsBusy: false
+
+    // Set current stock item:
+    function setCurrentStockItem(rowNumber, columnNumber)
     {
-        privateNumericKeyPad.state = "on"
+        if ((rowNumber > 0) && (columnNumber > 0))
+        {
+            _currentStockItemRow = rowNumber
+            _currentStockItemCol = columnNumber
+            currentStockItemChanged()
+        }
     }
 
     // Add to cart command:
@@ -41,12 +53,18 @@ Item {
         onAddItem: _controller.addItem(vendItemName, icon, nutrition, category, price)
     }
 
+    // Update restock exception command:
+    UpdateRestockExceptionCommand {
+        id: _updateRestockExceptionCommand
+    }
+
     // Page mgr:
     PageMgr {
         id: pageMgr
         anchors.fill: parent
         pages: _appData.pages
-        enabled: privateNumericKeyPad.state === ""
+        enabled: (privateNumericKeyPad.state === "") &&
+            (stockNumericKeyPad.state === "")
     }
 
     // XML version model:
@@ -86,41 +104,29 @@ Item {
         }
     }
 
+    // OK clicked:
+    function onOKClicked(enteredText)
+    {   // User entered exit code:
+        if (enteredText === _appData.exitCode)
+            Qt.quit()
+        else
+        if (enteredText === _appData.tabletGuiCode)
+            pageMgr.loadPage("NETWORK_PAGE")
+        privateNumericKeyPad.state = ""
+    }
+
     // Numeric keypad:
     NumericKeyPad {
         id: privateNumericKeyPad
-        opacity: 0
-        visible: opacity > 0
         anchors.centerIn: parent
-        z: 1e9
-        // OK clicked (TO DO):
-        onOkClicked: {
-            // User entered exit code:
-            if (enteredText === _appData.exitCode)
-                Qt.quit()
-            // (TO DO)
-            /*
-            else
-            if (enteredText === _appData.tabletGuiCode)
-                mainApplication.loadPage("_networkpage_")
-            */
-            privateNumericKeyPad.state = ""
-        }
-        // Cancel clicked (TO DO):
-        onCancelClicked: {
-            privateNumericKeyPad.state = ""
-        }
-        onStateChanged: privateNumericKeyPad.enteredText = ""
-        states: State {
-            name: "on"
-            PropertyChanges {
-                target: privateNumericKeyPad
-                opacity: 1
-            }
-        }
-        Behavior on opacity {
-            NumberAnimation {duration: 500}
-        }
+        z: _settings.zMax
+    }
+
+    // Stock numeric keypad:
+    StockNumericKeyPad {
+        id: stockNumericKeyPad
+        anchors.centerIn: parent
+        z: _settings.zMax
     }
 
     // Reserved area:
@@ -129,12 +135,20 @@ Item {
         anchors.right: parent.right
         height: (_settings.footerRatio/2)*parent.height
         width: height
-        z: 1e9
-        onReservedAreaClicked: showPrivateKeyPad()
+        z: _settings.zMax
+        onReservedAreaClicked: {
+            privateNumericKeyPad.invoker = mainApplication
+            privateNumericKeyPad.state = "on"
+        }
     }
 
-    Component.onCompleted: {
-        mainApplication.showPrivateKeyPad.connect(onShowPrivateKeyPad)
+    // Busy indicator:
+    BusyIndicator {
+        id: _busyIndicator
+        anchors.centerIn: parent
+        on: _appIsBusy
+        visible: on
+        z: _settings.zMax
     }
 }
 

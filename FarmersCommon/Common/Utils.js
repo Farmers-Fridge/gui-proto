@@ -29,3 +29,8 @@ function staticNoCacheOf(route, url) {
     return urlPublicStatic(route, urlUnique)
 }
 
+// Object valid?
+function objValid(object)
+{
+	return object && (typeof(object) !== "undefined")
+}
