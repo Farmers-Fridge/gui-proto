@@ -4,10 +4,10 @@ Item {
     id: kbdSettings
 
     // Keyboards dir:
-    readonly property string keyboardsDir: "qrc:/Farmers/KeyBoard/keyboards/"
+    readonly property string keyboardsDir: "keyboards/"
 
     // Assets dir:
-    readonly property string assetsDir: "qrc:/Farmers/KeyBoard/assets/"
+    readonly property string assetsDir: "assets/"
 
     // Bkg color:
     readonly property string bkgColor: "gray"

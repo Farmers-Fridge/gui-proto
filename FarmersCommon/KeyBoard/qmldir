@@ -2,7 +2,7 @@ module KeyBoard
 FontSizeControl 1.0 FontSizeControl.qml
 JSONListModel 1.0 JSONListModel.qml
 Key 1.0 Key.qml
-Keyboard 1.0 Keyboard.qml
+KeyBoard 1.0 KeyBoard.qml
 KeyboardSettings 1.0 KeyboardSettings.qml
 NotePad 1.0 NotePad.qml
 NumericKeyPad 1.0 NumericKeyPad.qml

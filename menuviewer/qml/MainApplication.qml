@@ -64,7 +64,8 @@ Item {
         anchors.fill: parent
         pages: _appData.pages
         enabled: (privateNumericKeyPad.state === "") &&
-            (stockNumericKeyPad.state === "")
+            (stockNumericKeyPad.state === "") &&
+                 (notepad.state === "")
     }
 
     // XML version model:
@@ -125,6 +126,13 @@ Item {
     // Stock numeric keypad:
     StockNumericKeyPad {
         id: stockNumericKeyPad
+        anchors.centerIn: parent
+        z: _settings.zMax
+    }
+
+    // Notepad:
+    NotePad {
+        id: notepad
         anchors.centerIn: parent
         z: _settings.zMax
     }

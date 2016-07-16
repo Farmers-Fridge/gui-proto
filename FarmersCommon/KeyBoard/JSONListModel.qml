@@ -1,5 +1,5 @@
 import QtQuick 2.5
-import Common 1.0
+import "jsonpath.js" as JSONPath
 
 Item {
     property string source: ""

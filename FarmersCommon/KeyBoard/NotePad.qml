@@ -14,13 +14,14 @@ Rectangle {
     property int toolBarHeight: 48
     property string spaceStr: " "
     property bool simple: false
+	
+	// Set default state:
+    opacity: 0
+    visible: opacity > 0
 
-    // Enter clicked:
-    signal enterClicked(string text)
-
-    // Cancel clicked:
-    signal cancelClicked()
-
+    // Invoker:
+    property variant invoker
+	
     // Clear:
     function clear()
     {
@@ -35,7 +36,7 @@ Rectangle {
     // Bold:
     Action {
         id: boldAction
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-textbold.png"
+        iconSource: "assets/ico-textbold.png"
         onTriggered: document.bold = !document.bold
         checkable: true
         checked: document.bold
@@ -44,7 +45,7 @@ Rectangle {
     // Italic:
     Action {
         id: italicAction
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-textitalic.png"
+        iconSource: "assets/ico-textitalic.png"
         onTriggered: document.italic = !document.italic
         checkable: true
         checked: document.italic
@@ -53,7 +54,7 @@ Rectangle {
     // Underline:
     Action {
         id: underlineAction
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-textunder.png"
+        iconSource: "assets/ico-textunder.png"
         onTriggered: document.underline = !document.underline
         checkable: true
         checked: document.underline
@@ -62,7 +63,7 @@ Rectangle {
     // Undo:
     Action {
         id: undoAction
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-editundo.png"
+        iconSource: "assets/ico-editundo.png"
         onTriggered: {
             textArea.undo()
             document.reset()
@@ -72,7 +73,7 @@ Rectangle {
     // Redo:
     Action {
         id: redoAction
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-editredo.png"
+        iconSource: "assets/ico-editredo.png"
         onTriggered: {
             textArea.redo()
             document.reset()
@@ -101,7 +102,7 @@ Rectangle {
     // File savas action:
     Action {
         id: fileSaveAsAction
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-filesave.png"
+        iconSource: "assets/ico-filesave.png"
         onTriggered: {
             fileDialog.selectExisting = false
             fileDialog.open()
@@ -111,21 +112,21 @@ Rectangle {
     // Font size action (+):
     Action {
         id: fontActionPlus
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-plus.png"
+        iconSource: "assets/ico-plus.png"
     }
 
     // Font size action (-):
     Action {
         id: fontActionMinus
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-minus.png"
+        iconSource: "assets/ico-minus.png"
     }
 
     // Quit:
     Action {
         id: exitAction
-        iconSource: "qrc:/Farmers/KeyBoard/assets/ico-cross.png"
+        iconSource: "assets/ico-cross.png"
         onTriggered: {
-            cancelClicked()
+            notePad.state = ""
             notePad.clear()
         }
     }
@@ -215,7 +216,7 @@ Rectangle {
         onKeyClicked: textArea.insert(textArea.cursorPosition, key)
 
         // Enter clicked:
-        onEnterClicked: notePad.enterClicked(textArea.text)
+        onEnterClicked: invoker.onOKClicked(textArea.text)
 
         // Return clicked:
         onReturnClicked: textArea.insert(textArea.cursorPosition, "\n")
@@ -245,5 +246,22 @@ Rectangle {
             errorDialog.visible = true
         }
     }
+	
+	
+    // On state:
+    states: State {
+        name: "on"
+        PropertyChanges {
+            target: notepad
+            opacity: 1
+        }
+    }
+
+    // Behavior on opacity:
+    Behavior on opacity {
+        NumberAnimation {duration: 500}
+    }
+
+    onStateChanged: keyBoard.enteredText = ""
 }
 

@@ -14,6 +14,13 @@ Page {
             xmlVersionModel.source = ""
     }
 
+    // OK clicked on notepad:
+    function onOKClicked(enteredText)
+    {
+        console.log("YOU ENTERED: ", enteredText)
+        notepad.state = ""
+    }
+
     // XML version model:
     CustomXmlListModel {
         id: xmlVersionModel
@@ -84,9 +91,8 @@ Page {
                 }
 
                 onClicked: {
-                    mainApplication.notePadEnterClicked.connect(onNotePadEnterKeyClicked)
-                    mainApplication.notePadCancelKeyClicked.connect(onNotePadCancelKeyClicked)
-                    mainApplication.showNodePad()
+                    notepad.invoker = stockPagePrivate
+                    notepad.state = "on"
                 }
             }
         }

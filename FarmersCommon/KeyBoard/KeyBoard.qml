@@ -14,7 +14,7 @@ Rectangle {
     property bool showSymbol: false
 
     // Keyboard text:
-    property string keyBoardText: ""
+    property string enteredText: ""
 
     // Back space clicked:
     signal backSpaceClicked()
@@ -114,11 +114,11 @@ Rectangle {
                                     break
                                 case "enter":
                                     keyBoard.enterClicked()
-                                    keyBoardText = ""
+                                    enteredText = ""
                                     break
                                 case "return":
                                     keyBoard.returnClicked()
-                                    keyBoardText = ""
+                                    enteredText = ""
                                     break
                                 case "symbol":
                                     keyBoard.showSymbol = !keyBoard.showSymbol
@@ -139,7 +139,7 @@ Rectangle {
                             {
                                 // Retrieve text (lower or upper case):
                                 var actualText = allUpperCase ? mainLabel.toUpperCase() : mainLabel
-                                keyBoardText += actualText
+                                enteredText += actualText
                                 keyBoard.keyClicked(actualText)
                             }
                         }
