@@ -3,8 +3,9 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.XmlListModel 2.0
 import Common 1.0
+import "../.."
 
-Page {
+SimplePageTemplate {
     // Host model:
     CustomXmlListModel {
         id: xmlHostModel
@@ -13,29 +14,13 @@ Page {
 
         XmlRole { name: "name"; query: "name/string()"; isKey: true }
         XmlRole { name: "url"; query: "url/string()"; isKey: true }
-    }
 
-    // Top bar:
-    Item {
-        id: topBar
-        anchors.top: parent.top
-        width: parent.width
-        height: 64
-
-        Button {
-            anchors.left: parent.left
-            anchors.leftMargin: 8
-            anchors.verticalCenter: parent.verticalCenter
-            onClicked: pageMgr.loadPreviousPage()
-            text: qsTr("BACK")
-        }
+        onStatusChanged: _appIsBusy = (status === XmlListModel.Loading)
     }
 
     // Contents:
-    Item {
-        anchors.top: topBar.bottom
-        width: parent.width
-        anchors.bottom: parent.bottom
+    contents: Item {
+        anchors.fill: parent
 
         // Icon:
         Image {
@@ -46,8 +31,15 @@ Page {
             source: "qrc:/assets/ico-logo.png"
         }
 
+        // Digital clock:
+        DigitalClock {
+            anchors.right: parent.right
+            anchors.verticalCenter: logo.verticalCenter
+        }
+
         // Title:
         CommonText {
+            id: title
             text: qsTr("Please select target network, or enter it manually")
             anchors.top: logo.bottom
             anchors.bottomMargin: 32
@@ -62,16 +54,18 @@ Page {
             opacity: .5
             border.color: _settings.ffBlack
             border.width: 3
-            width: parent.width-32
-            height: parent.height*3/4
-            anchors.centerIn: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: title.bottom
+            anchors.bottom: ipTextInput.top
+            anchors.margins: 8
         }
 
         // Text input:
         TextField {
             id: ipTextInput
-            anchors.top: background.bottom
-            anchors.topMargin: 8
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
             anchors.left: background.left
             anchors.right: background.right
             height: 48
@@ -82,7 +76,6 @@ Page {
             // Return pressed:
             onAccepted: {
                 _controller.currentNetworkIP = url
-                //pageMgr.setupStockPage()
                 pageMgr.loadPage("STOCK_PAGE")
             }
 
@@ -148,18 +141,10 @@ Page {
                     onEntered: gridView.currentIndex = index
                     onClicked: {
                         _controller.currentNetworkIP = url
-                        //pageMgr.setupStockPage()
                         pageMgr.loadPage("STOCK_PAGE")
                     }
                 }
             }
-        }
-
-        // Digital clock:
-        DigitalClock {
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 32
-            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 }

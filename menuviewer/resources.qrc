@@ -42,5 +42,6 @@
         <file>qml/pages/stock/StockPageRow.qml</file>
         <file>qml/pages/stock/StockItem.qml</file>
         <file>assets/ico-ok.png</file>
+        <file>qml/SimplePageTemplate.qml</file>
     </qresource>
 </RCC>

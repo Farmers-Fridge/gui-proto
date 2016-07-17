@@ -46,7 +46,7 @@ Rectangle {
     ImageButton {
         id: pigButton
         anchors.bottom: bottomAreaContainer.top
-        anchors.right: cartButton.left
+        anchors.right: cartButton.visible ? cartButton.left : parent.right
         anchors.rightMargin: 8
         source: "qrc:/assets/ico-pig.png"
         height: parent.height/2

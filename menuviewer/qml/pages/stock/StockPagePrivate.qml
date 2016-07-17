@@ -7,28 +7,11 @@ import Common 1.0
 Page {
     id: stockPagePrivate
 
-    // Stop:
-    function onStop()
-    {
-        if (xmlVersionModel)
-            xmlVersionModel.source = ""
-    }
-
     // OK clicked on notepad:
     function onOKClicked(enteredText)
     {
         console.log("YOU ENTERED: ", enteredText)
         notepad.state = ""
-    }
-
-    // XML version model:
-    CustomXmlListModel {
-        id: xmlVersionModel
-        query: "/versionStatus/item"
-        source: Utils.urlPlay(_controller.currentNetworkIP, "/config/versionStatus")
-
-        XmlRole { name: "versionModel"; query: "version/string()"; isKey: true }
-        XmlRole { name: "statusModel"; query: "status/string()"; isKey: true }
     }
 
     // XML row model:
@@ -38,6 +21,7 @@ Page {
         source: Utils.urlPlay(_controller.currentNetworkIP, "/config/restocks")
 
         XmlRole { name: "rowNumber"; query: "@rowId/string()"; isKey: true }
+        onStatusChanged: _appIsBusy = (status === XmlListModel.Loading)
     }
 
     // Top bar:
@@ -60,11 +44,6 @@ Page {
                 id: clearAll
                 text: qsTr("CLEAR ALL")
                 onClicked: _clearAllCommand.execute()
-            }
-            Button {
-                id: back
-                text: qsTr("BACK")
-                onClicked: pageMgr.loadPreviousPage()
             }
             Button {
                 id: note
@@ -104,27 +83,13 @@ Page {
         height: parent.height
         width: parent.width-32
         anchors.top: topBar.bottom
-        anchors.bottom: bottomBar.top
+        anchors.bottom: parent.bottom
 
         // Stock page grid:
         StockPageGrid {
             Layout.preferredWidth: body.width
             Layout.preferredHeight: body.height * .90
             Layout.alignment: Qt.AlignTop
-        }
-    }
-
-    // Stock page footer block:
-    Item {
-        id: bottomBar
-        width: parent.width
-        height: 64
-        anchors.bottom: parent.bottom
-        StockPageHeaderBlock {
-            id: header
-            Layout.preferredWidth: body.width
-            height: parent.height
-            anchors.centerIn: parent
         }
     }
 }

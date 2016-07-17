@@ -89,6 +89,8 @@ Item {
         XmlRole { name: "header"; query: "header/string()"; isKey: true }
 
         onStatusChanged: {
+            _appIsBusy = (status === XmlListModel.Loading)
+
             // Load main application:
             if (status !== XmlListModel.Loading)
             {

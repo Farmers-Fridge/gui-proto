@@ -157,10 +157,8 @@ Rectangle {
                 keyPressedColor: "#1ABC9C"
                 enabled: keyEnabledState(keyId)
                 onClicked: {
-                    console.log("ICI: ", keyId)
                     if (keyId >= 10)
                     {
-                        console.log("ICI INVOKER = ", invoker)
                         // OK:
                         if (keyId === 10)
                             invoker.onOKClicked(enteredText)
@@ -171,7 +169,6 @@ Rectangle {
                     }
                     else {
                         currentKey = keyId
-                        console.log("ONEDIGITONLY = ", oneDigitOnly)
                         if (oneDigitOnly)
                             enteredText = ""
                         enteredText += keyText

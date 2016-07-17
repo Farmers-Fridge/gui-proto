@@ -86,10 +86,9 @@ Rectangle {
                     // Disconnect:
                     _updateRestockExceptionCommand.cmdSuccess.disconnect(xmlColumnModel.onUpdateRestockExceptionCommandSucces)
                     _updateRestockExceptionCommand.cmdError.disconnect(xmlColumnModel.onUpdateRestockExceptionCommandError)
-
-                    // Update app busy state:
-                    _appIsBusy = fals
                 }
+
+                onStatusChanged: _appIsBusy = (status === XmlListModel.Loading)
             }
 
             // Delegate:

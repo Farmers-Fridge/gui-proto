@@ -4,7 +4,7 @@ import Common 1.0
 
 Window {
     id: mainWindow
-    visibility: Window.Maximized
+    visibility: Window.FullScreen
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
     visible: true

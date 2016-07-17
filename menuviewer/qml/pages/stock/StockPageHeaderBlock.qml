@@ -5,22 +5,21 @@ import Common 1.0
 
 Item {
     id: foot
-    property bool good: false
+    anchors.fill: parent
 
     Repeater {
         model: xmlVersionModel
+        anchors.fill: parent
         delegate: Item {
             id: container
-            width: foot.width
-            height: foot.height
+            anchors.fill: parent
             CommonText {
                 anchors.centerIn: container
                 font.pixelSize: 28
                 text: versionModel + " " + statusModel
                 wrapMode: Text.WordWrap
-                horizontalAlignment: Text.AlignHCenter
+                color: "white"
             }
-            Component.onCompleted: foot.good = (statusModel.substr(0,4) !== "Fail")
         }
     }
 }

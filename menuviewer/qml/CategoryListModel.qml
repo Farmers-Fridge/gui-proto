@@ -18,6 +18,7 @@ CustomXmlListModel {
     XmlRole { name: "price"; query: "price/string()"; isKey: true }
 
     onStatusChanged: {
+        _appIsBusy = (status === XmlListModel.Loading)
         if (status !== XmlListModel.Loading)
         {
             if (status === XmlListModel.Error)
