@@ -15,7 +15,7 @@ FORMS    +=
 
 CONFIG(debug, debug|release) {
     LIBS += -L$$PWD/../lib/ -lfarmers-utilsd
-    TARGET = menuviewer
+    TARGET = menuviewerd
 } else {
     LIBS += -L$$PWD/../lib/ -lfarmers-utils
     TARGET = menuviewer
