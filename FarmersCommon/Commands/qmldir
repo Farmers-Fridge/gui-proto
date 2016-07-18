@@ -6,4 +6,4 @@ UpdateRestockExceptionCommand 1.0 UpdateRestockExceptionCommand.qml
 ClearAllCommand 1.0 ClearAllCommand.qml
 RestockFromTabletCommand 1.0 RestockFromTabletCommand.qml
 TakeCouponCommand 1.0 TakeCouponCommand.qml
-TakeReceiptEmailAddressCommand TakeReceiptEmailAddressCommand.qml
+TakeReceiptEmailAddressCommand 1.0 TakeReceiptEmailAddressCommand.qml

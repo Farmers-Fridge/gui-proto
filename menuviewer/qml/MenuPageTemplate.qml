@@ -6,6 +6,8 @@ Page {
     property alias topContents: topArea.children
     property alias bottomContents: bottomArea.children
     property alias homeVisible: footer.homeVisible
+    property alias emailVisible: footer.emailVisible
+    property alias couponVisible: footer.couponVisible
     property alias pigVisible: footer.pigVisible
     property alias cartVisible: footer.cartVisible
     signal tabClicked()
@@ -14,6 +16,18 @@ Page {
     function onHomeClicked()
     {
         pageMgr.loadFirstPage()
+    }
+
+    // Email clicked:
+    function onEmailClicked()
+    {
+        // Base impl does nothing
+    }
+
+    // Coupon clicked:
+    function onCouponClicked()
+    {
+        // Base impl does nothing
     }
 
     // Pig clicked:
@@ -73,6 +87,8 @@ Page {
         anchors.bottom: parent.bottom
         bottomAreaSource: "qrc:/assets/ico-primary-darkbar.png"
         onHomeClicked: menuPageTemplate.onHomeClicked()
+        onEmailClicked: menuPageTemplate.onEmailClicked()
+        onCouponClicked: menuPageTemplate.onCouponClicked()
         onPigClicked: menuPageTemplate.onPigClicked()
         onCartClicked: menuPageTemplate.onCartClicked()
     }

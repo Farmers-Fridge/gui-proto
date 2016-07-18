@@ -5,9 +5,13 @@ Rectangle {
     color: _settings.ffIvoryLight
     property alias bottomAreaSource: bottomArea.source
     property alias homeVisible: homeButton.visible
+    property alias emailVisible: emailButton.visible
+    property alias couponVisible: couponButton.visible
     property alias pigVisible: pigButton.visible
     property alias cartVisible: cartButton.visible
     signal homeClicked()
+    signal emailClicked()
+    signal couponClicked()
     signal pigClicked()
     signal cartClicked()
 
@@ -20,6 +24,31 @@ Rectangle {
         source: "qrc:/assets/ico-home.png"
         height: parent.height/2
         onClicked: homeClicked()
+        visible: false
+    }
+
+    // Email button:
+    ImageButton {
+        id: emailButton
+        anchors.bottom: bottomAreaContainer.top
+        anchors.left: homeButton.right
+        anchors.leftMargin: 8
+        source: "qrc:/assets/ico-email.png"
+        height: parent.height/2
+        onClicked: emailClicked()
+        visible: false
+    }
+
+    // Coupon button:
+    ImageButton {
+        id: couponButton
+        anchors.bottom: bottomAreaContainer.top
+        anchors.left: emailButton.right
+        anchors.leftMargin: 8
+        source: "qrc:/assets/ico-entercoupon.png"
+        height: parent.height/2
+        onClicked: couponClicked()
+        visible: false
     }
 
     // Cart button:
@@ -31,6 +60,7 @@ Rectangle {
         source: "qrc:/assets/ico-cart.png"
         height: parent.height/2
         onClicked: cartClicked()
+        visible: false
 
         CommonText {
             anchors.centerIn: parent
@@ -51,6 +81,7 @@ Rectangle {
         source: "qrc:/assets/ico-pig.png"
         height: parent.height/2
         onClicked: pigClicked()
+        visible: false
     }
 
     // Footer:

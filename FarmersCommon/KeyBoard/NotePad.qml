@@ -262,6 +262,9 @@ Rectangle {
         NumberAnimation {duration: 500}
     }
 
-    onStateChanged: keyBoard.enteredText = ""
+    onStateChanged: {
+        keyBoard.enteredText = ""
+        textArea.text = ""
+    }
 }
 

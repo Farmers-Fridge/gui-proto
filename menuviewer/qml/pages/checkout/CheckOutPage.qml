@@ -5,11 +5,62 @@ import "../.."
 MenuPageTemplate {
     id: checkOutPage
     homeVisible: true
+    emailVisible: true
+    couponVisible: true
     pigVisible: true
     cartVisible: true
 
+    // 0: email request
+    // 1: coupon request
+    property int requestType: 0
+
     // Go to previous page:
     onTabClicked: pageMgr.loadPreviousPage()
+
+    // OK clicked:
+    function onOKClicked(enteredText)
+    {
+        console.log("REQUEST TYPE = ", requestType)
+
+        // Email request:
+        if (requestType === 0)
+        {
+            if (_controller.validateEmailAddress(enteredText))
+            {
+                _takeReceiptEmailAddressCommand.emailAddress = enteredText
+                _takeReceiptEmailAddressCommand.execute()
+            }
+        }
+        else
+        // Coupon request:
+        if (requestType === 1)
+        {
+            if (enteredText.length > 0)
+            {
+                _takeCouponCodeCommand.couponCode = enteredText
+                _takeCouponCodeCommand.execute()
+            }
+        }
+
+        // Hide notepad:
+        notepad.state = ""
+    }
+
+    // Coupon clicked:
+    function onCouponClicked()
+    {
+        requestType = 1
+        notepad.invoker = checkOutPage
+        notepad.state = "on"
+    }
+
+    // Email clicked:
+    function onEmailClicked()
+    {
+        requestType = 0
+        notepad.invoker = checkOutPage
+        notepad.state = "on"
+    }
 
     // Pig clicked:
     function onPigClicked()

@@ -66,6 +66,19 @@ Item {
     // Restock from tablet command:
     RestockFromTabletCommand {
         id: _restockFromTabletCommand
+        _networkIP: _controller.currentNetworkIP
+    }
+
+    // Take coupon command:
+    TakeCouponCommand {
+        id: _takeCouponCodeCommand
+        _networkIP: _appData.currentIP
+    }
+
+    // Take receipt email address command:
+    TakeReceiptEmailAddressCommand {
+        id: _takeReceiptEmailAddressCommand
+        _networkIP: _appData.currentIP
     }
 
     // Page mgr:
