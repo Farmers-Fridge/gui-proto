@@ -45,5 +45,8 @@
         <file>qml/SimplePageTemplate.qml</file>
         <file>assets/ico-email.png</file>
         <file>assets/ico-entercoupon.png</file>
+        <file>assets/ico-jar.png</file>
+        <file>assets/ico-proteins.png</file>
+        <file>assets/ico-snacks.png</file>
     </qresource>
 </RCC>

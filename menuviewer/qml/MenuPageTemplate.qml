@@ -3,8 +3,7 @@ import Common 1.0
 
 Page {
     id: menuPageTemplate
-    property alias topContents: topArea.children
-    property alias bottomContents: bottomArea.children
+    property alias contents: contents.children
     property alias homeVisible: footer.homeVisible
     property alias emailVisible: footer.emailVisible
     property alias couponVisible: footer.couponVisible
@@ -53,30 +52,12 @@ Page {
     }
 
     // Contents:
-    Item {
+    Rectangle {
         id: contents
         anchors.top: header.bottom
         anchors.bottom: footer.top
         width: parent.width
-
-        // Top area:
-        Rectangle {
-            id: topArea
-            width: parent.width
-            anchors.top: parent.top
-            anchors.bottom: bottomArea.top
-            color: _settings.ffIvoryLight
-        }
-
-        // Bottom area:
-        Rectangle {
-            id: bottomArea
-            width: parent.width
-            height: parent.height*.25
-            anchors.bottom: parent.bottom
-            border.color: _settings.ffGreen
-            color: _settings.ffIvoryLight
-        }
+        color: _settings.ffIvoryLight
     }
 
     // Header:

@@ -6,6 +6,20 @@ Rectangle {
     color: _settings.ffIvoryLight
     signal tabClicked()
 
+    // Get highlight for category:
+    function getHighlightForCategory(categoryName)
+    {
+        if (categoryName === "Salads")
+            return "qrc:/assets/ico-jar.png"
+        if (categoryName === "Proteins")
+            return "qrc:/assets/ico-proteins.png"
+        if (categoryName === "Drinks")
+            return "qrc:/assets/ico-jar.png"
+        if (categoryName === "Snacks")
+            return "qrc:/assets/ico-snacks.png"
+        return "qrc:/assets/ico-primary-darkbar.png"
+    }
+
     Column {
         anchors.fill: parent
 
@@ -36,7 +50,6 @@ Rectangle {
                 anchors.rightMargin: 24
                 anchors.top: parent.top
                 anchors.topMargin: 8
-                border.color: _settings.ffGreen
                 bold: true
                 pixelSize: 24
                 textColor: _settings.ffGreen
@@ -50,7 +63,6 @@ Rectangle {
                 anchors.rightMargin: 8
                 anchors.top: parent.top
                 anchors.topMargin: 8
-                border.color: _settings.ffGreen
                 bold: true
                 pixelSize: 24
                 textColor: _settings.ffGreen
@@ -73,9 +85,7 @@ Rectangle {
                         width: part2.width/_categoryModel.count
                         height: part2.height
                         color: _settings.ffIvoryLight
-                        backgroundImage: categoryName === "Drinks" ?
-                            "qrc:/assets/ico-drinks.png" :
-                            "qrc:/assets/ico-primary-darkbar.png"
+                        backgroundImage: getHighlightForCategory(categoryName)
                         selected: _controller.currentCategory === categoryName
                         onClicked: {
                             _controller.currentCategory = categoryName

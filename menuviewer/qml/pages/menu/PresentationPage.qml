@@ -57,7 +57,7 @@ MenuPageTemplate {
     }
 
     // Top contents:
-    topContents: Item {
+    contents: Item {
         anchors.fill: parent
         Repeater {
             id: repeater
@@ -110,6 +110,7 @@ MenuPageTemplate {
         }
     }
 
+    /*
     // Bottom contents:
     bottomContents: Item {
         anchors.fill: parent
@@ -147,7 +148,7 @@ MenuPageTemplate {
             }
         }
 
-        // Nutrional info:
+        // Nutritional info:
         Item {
             anchors.fill: parent
             visible: viewMode === "pathview"
@@ -170,7 +171,7 @@ MenuPageTemplate {
                 text: "PROVIDE DETAILED ITEM DESCRIPTION HERE"
             }
         }
-    }
+    }*/
 
     Component.onCompleted: {
         mainApplication.loadPathView.connect(onLoadPathView)

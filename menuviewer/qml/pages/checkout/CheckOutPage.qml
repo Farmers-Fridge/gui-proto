@@ -68,6 +68,7 @@ MenuPageTemplate {
         pageMgr.loadPreviousPage()
     }
 
+    /* TO DO
     // Cart view:
     topContents: CartView {
         id: cartView
@@ -84,5 +85,6 @@ MenuPageTemplate {
         cartCount: _cartModel.cartCount +
             (_cartModel.cartCount > 0 ? qsTr(" Items") : qsTr(" Item"))
     }
+    */
 }
 

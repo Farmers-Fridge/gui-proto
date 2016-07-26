@@ -49,11 +49,25 @@ GridView {
                 visible: on
             }
 
+            // Handle clicks:
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
                      gridImageClicked(index-1)
                 }
+            }
+
+            // Add item to cart:
+            ImageButton {
+                id: addItem
+                anchors.verticalCenter: parent.bottom
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                width: 48
+                height: 48
+                source: "qrc:/assets/ico-add.png"
+                onClicked: mainApplication.addCurrentItemToCart()
+                visible: originalImage.status === Image.Ready
             }
         }
     }
