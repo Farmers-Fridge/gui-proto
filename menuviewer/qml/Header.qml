@@ -14,7 +14,7 @@ Rectangle {
         if (categoryName === "Proteins")
             return "qrc:/assets/ico-proteins.png"
         if (categoryName === "Drinks")
-            return "qrc:/assets/ico-jar.png"
+            return "qrc:/assets/ico-drinks.png"
         if (categoryName === "Snacks")
             return "qrc:/assets/ico-snacks.png"
         return "qrc:/assets/ico-primary-darkbar.png"
