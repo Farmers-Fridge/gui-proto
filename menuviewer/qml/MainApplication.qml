@@ -91,10 +91,30 @@ Item {
                  (notepad.state === "")
     }
 
+    // Get category model source:
+    function getCategoryModelSource()
+    {
+        var source = ""
+
+        // Off line:
+        if (_appData.offline_mode === "1")
+        {
+            // TO DO
+            source = "file:///" + _controller.offLinePath + "/categories"
+        }
+        else
+        // In line:
+        {
+            source = Utils.urlPlay(_appData.currentIP, _appData.categorySource)
+        }
+
+        return source
+    }
+
     // XML version model:
     CustomXmlListModel {
         id: categoryModel
-        source: Utils.urlPlay(_appData.currentIP, _appData.categorySource)
+        source: getCategoryModelSource()
         query: _appData.categoryQuery
 
         XmlRole { name: "categoryName"; query: "categoryName/string()"; isKey: true }

@@ -28,6 +28,7 @@ Flipable {
         width: flipable.width
         height: flipable.height
         anchors.centerIn: parent
+        fillMode: Image.PreserveAspectFit
     }
 
     // Back image (nutrition image):
@@ -36,6 +37,7 @@ Flipable {
         cache: true
         width: frontImage.width
         height: frontImage.height
+        fillMode: Image.PreserveAspectFit
         anchors.centerIn: parent
         onStatusChanged: {
             if (status === Image.Error)

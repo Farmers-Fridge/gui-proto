@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vendItems>
+
+<item>
+<vendItemName>Fruit Jar</vendItemName>
+<icon>1_fruitjar.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/blueberry_corn_salad.png</nutrition>
+<category>Breakfast</category>
+<price>$5.00</price>
+</item>
+
+<item>
+<vendItemName>Sweet Potato Kale Hash</vendItemName>
+<icon>2_sweet potato kale hash.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/Pure_Wow_Salad.png</nutrition>
+<category>Breakfast</category>
+<price>$8.00</price>
+</item>
+
+<item>
+<vendItemName>Almond Butter Oatmeal</vendItemName>
+<icon>3_almond butter oatmeal.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater.png</nutrition>
+<category>Breakfast</category>
+<price>$8.00</price>
+</item>
+
+<item>
+<vendItemName>Greek Yogurt and Granola</vendItemName>
+<icon>4_greek yogurt and granola.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/Shrimp_Succotash_N.png</nutrition>
+<category>Breakfast</category>
+<price>$12.00</price>
+</item>
+
+</vendItems>

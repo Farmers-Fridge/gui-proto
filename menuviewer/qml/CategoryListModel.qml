@@ -5,9 +5,29 @@ import Common 1.0
 // XML version model:
 CustomXmlListModel {
     id: categoryListModel
-    property string targetCategory: ""
-    source: Utils.urlPlay(_appData.currentIP, _appData.categoryListSource + "?category=" + targetCategory)
 
+    // Get source:
+    function getCategoryListSource()
+    {
+        var source = ""
+
+        // Off line:
+        if (_appData.offline_mode === "1")
+        {
+            // TO DO
+            source = "file:///" + _controller.offLinePath + "/" + targetCategory + "/" + targetCategory
+        }
+        // In line:
+        else
+        {
+            source = Utils.urlPlay(_appData.currentIP, _appData.categoryListSource + "?category=" + targetCategory)
+        }
+
+        return source
+    }
+
+    property string targetCategory: ""
+    source: getCategoryListSource()
     query: _appData.categoryListQuery
     signal modelReady()
 

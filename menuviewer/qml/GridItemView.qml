@@ -30,11 +30,32 @@ GridView {
             }
         }
 
+        // Get image source:
+        function getImageSource()
+        {
+            var source = ""
+
+            // Off line:
+            if (_appData.offline_mode === "1")
+            {
+                // TO DO
+                source = "file:///" + _controller.offLinePath + "/" + targetCategory + "/" + icon
+            }
+            else
+            // In line:
+            {
+                source = Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
+            }
+
+            return source
+        }
+
         // Original image:
         Image {
             id: originalImage
             antialiasing: true
-            source: Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
+            asynchronous: true
+            source: imageDelegate.getImageSource()
             cache: true
             fillMode: Image.PreserveAspectFit
             width: height

@@ -10,7 +10,8 @@
 // Constructor:
 Controller::Controller(QObject *parent) : QObject(parent),
     mEventWatcher(0), mCartModel(0), mCurrentCategory(""),
-    mCurrentFilter(""), mCurrentNetworkIP("127.0.0.1")
+    mCurrentFilter(""), mCurrentNetworkIP("127.0.0.1"),
+    mOffLinePath("")
 {
     // Cart model:
     mCartModel = new CartModel(this);
@@ -27,6 +28,16 @@ Controller::~Controller()
 // Startup:
 bool Controller::startup()
 {
+    // Define offline path:
+    QDir offLinePath = Utils::appDir();
+    if (offLinePath.cdUp())
+    {
+        if (offLinePath.cd("local_data"))
+        {
+            mOffLinePath = offLinePath.absolutePath();
+        }
+    }
+
     // Read salad assets:
     readSaladAssets();
 
@@ -88,14 +99,14 @@ void Controller::startGUI()
 // Read asset salads:
 void Controller::readSaladAssets()
 {
-    QDir saladAssetsDir = Utils::appDir();
-    if (saladAssetsDir.cdUp())
+    QDir idleImagesDir = Utils::appDir();
+    if (idleImagesDir.cdUp())
     {
-        if (saladAssetsDir.cd("salad_assets"))
+        if (idleImagesDir.cd("idle_images"))
         {
             QStringList filter;
             filter << "*.png";
-            Utils::files(saladAssetsDir.absolutePath(), filter, mSaladAssets);
+            Utils::files(idleImagesDir.absolutePath(), filter, mSaladAssets);
             emit saladAssetsChanged();
         }
     }
@@ -183,4 +194,10 @@ bool Controller::validateCoupon(const QString &coupon)
 {
     Q_UNUSED(coupon);
     return true;
+}
+
+// Return offline path:
+const QString &Controller::offLinePath() const
+{
+    return mOffLinePath;
 }

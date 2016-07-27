@@ -15,6 +15,7 @@ class Controller : public QObject, public IService
     Q_PROPERTY(QString currentCategory READ currentCategory WRITE setCurrentCategory NOTIFY currentCategoryChanged)
     Q_PROPERTY(QString currentFilter READ currentFilter WRITE setCurrentFilter NOTIFY currentFilterChanged)
     Q_PROPERTY(QStringList saladAssets READ saladAssets NOTIFY saladAssetsChanged)
+    Q_PROPERTY(QString offLinePath READ offLinePath NOTIFY offLinePathChanged)
 
 public:
     friend class MenuViewer;
@@ -88,6 +89,9 @@ private:
     // Set current filter:
     void setCurrentFilter(const QString &filterName);
 
+    // Return offline path:
+    const QString &offLinePath() const;
+
 private:
     // Salad assets:
     QStringList mSaladAssets;
@@ -110,6 +114,9 @@ private:
     // Current network IP:
     QString mCurrentNetworkIP;
 
+    // Offline path:
+    QString mOffLinePath;
+
 signals:
     // Current network IP changed:
     void currentNetworkIPChanged();
@@ -125,6 +132,9 @@ signals:
 
     // Salad assets changed:
     void saladAssetsChanged();
+
+    // Off line path changed:
+    void offLinePathChanged();
 };
 
 #endif // CONTROLLER_H

@@ -43,11 +43,34 @@ PathView {
     // Delegate:
     delegate: SingleItemView {
         id: imageDelegate
+
+        // Get menu image url:
+        function getMenuImageUrl()
+        {
+            var source = ""
+
+            // Off line:
+            if (_appData.offline_mode === "1")
+            {
+                // TO DO
+                source = "file:///" + _controller.offLinePath + "/" + targetCategory + "/" + icon
+            }
+            else
+            // In line:
+            {
+                source = Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
+            }
+
+            return source
+        }
+
         visible: vendItemName !== ""
         width: pathView.width
         height: pathView.height
-        menuImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
-        nutritionFactImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, nutrition)
+        menuImageUrl: getMenuImageUrl()
+        //nutritionFactImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, nutrition)
+        //TO DO
+        nutritionFactImageUrl: "qrc:/assets/ico-question.png"
         itemPrice: price
 
         // Show nutritional info:
