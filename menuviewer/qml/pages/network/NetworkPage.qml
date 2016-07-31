@@ -31,12 +31,6 @@ SimplePageTemplate {
             source: "qrc:/assets/ico-logo.png"
         }
 
-        // Digital clock:
-        DigitalClock {
-            anchors.right: parent.right
-            anchors.verticalCenter: logo.verticalCenter
-        }
-
         // Title:
         CommonText {
             id: title
@@ -58,7 +52,7 @@ SimplePageTemplate {
             anchors.right: parent.right
             anchors.top: title.bottom
             anchors.bottom: ipTextInput.top
-            anchors.margins: 8
+            anchors.margins: 24
         }
 
         // Text input:

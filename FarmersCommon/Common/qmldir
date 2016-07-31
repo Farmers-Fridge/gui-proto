@@ -13,4 +13,5 @@ BusyIndicator 1.0 BusyIndicator.qml
 CircularButton 1.0 CircularButton.qml
 IncrementalButton 1.0 IncrementalButton.qml
 DigitalClock 1.0 DigitalClock.qml
+ToggleImageButton 1.0 ToggleImageButton.qml
 Utils 1.0 Utils.js

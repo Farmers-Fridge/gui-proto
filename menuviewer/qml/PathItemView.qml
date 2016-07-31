@@ -53,7 +53,7 @@ PathView {
             if (_appData.offline_mode === "1")
             {
                 // TO DO
-                source = "file:///" + _controller.offLinePath + "/" + targetCategory + "/" + icon
+                source = "file:///" + _controller.offLinePath + "/" + targetCategory + "/Square Thumbnails/" + icon
             }
             else
             // In line:
@@ -71,7 +71,6 @@ PathView {
         //nutritionFactImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, nutrition)
         //TO DO
         nutritionFactImageUrl: "qrc:/assets/ico-question.png"
-        itemPrice: price
 
         // Show nutritional info:
         function onShowNutritionalInfo()

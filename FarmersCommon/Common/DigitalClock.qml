@@ -8,7 +8,9 @@ Column {
     property var locale: Qt.locale()
     property string dateTimeString: "Tue 2013-09-17 10:56:06"
     property int fontPixelSize: 18
+    property color textColor: "white"
 
+    // Timer:
     Timer {
         interval: 1000; running: true; repeat: true; triggeredOnStart: true
         onTriggered: {
@@ -25,6 +27,7 @@ Column {
         height: parent.height
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: fontPixelSize
+        color: textColor
     }
 
     // Time text:
@@ -34,5 +37,6 @@ Column {
         height: parent.height
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: fontPixelSize
+        color: textColor
     }
 }

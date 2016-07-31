@@ -3,48 +3,48 @@
 
 <item>
 <vendItemName>Blood Orange Chia Pudding</vendItemName>
-<icon>1_blood orange chia pudding.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/blueberry_corn_salad.png</nutrition>
+<icon>1_blood orange chia pudding square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/blueberry_corn_salad square.png</nutrition>
 <category>Snacks</category>
 <price>$5.00</price>
 </item>
 
 <item>
 <vendItemName>Chocolate Rail Mix</vendItemName>
-<icon>2_chocolatetrailmix.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/Pure_Wow_Salad.png</nutrition>
+<icon>2_chocolatetrailmix square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/Pure_Wow_Salad square.png</nutrition>
 <category>Snacks</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>Maple Chili Nut Mix</vendItemName>
-<icon>3_maple chili nut mix.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater.png</nutrition>
+<icon>3_maple chili nut mix square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater square.png</nutrition>
 <category>Snacks</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>Fruit Jar</vendItemName>
-<icon>4_fruitjar.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater.png</nutrition>
+<icon>4_fruitjar square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater square.png</nutrition>
 <category>Snacks</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>Seasoned Chicken</vendItemName>
-<icon>5_seasoned chicken.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater.png</nutrition>
+<icon>5_seasoned chicken square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater square.png</nutrition>
 <category>Snacks</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>Phoenix Bean Tofu</vendItemName>
-<icon>6_phoenix bean tofu.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater.png</nutrition>
+<icon>6_phoenix bean tofu square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater square.png</nutrition>
 <category>Snacks</category>
 <price>$8.00</price>
 </item>

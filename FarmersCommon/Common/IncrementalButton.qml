@@ -2,19 +2,13 @@ import QtQuick 2.5
 import Common 1.0
 
 Column {
-    property int buttonSize: 48
-    property int buttonSpacing: 16
+    property int buttonSize: 80
+    property int buttonSpacing: 24
     property int value: 0
     property int minValue: 0
     property int maxValue: 10
     spacing: buttonSpacing
     width: buttonSize*2+buttonSpacing
-
-    // Quantity:
-    CommonText {
-        text: qsTr("Quantity: ") + value
-        anchors.horizontalCenter: row.horizontalCenter
-    }
 
     Row {
         id: row

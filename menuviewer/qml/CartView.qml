@@ -6,14 +6,41 @@ ListView {
     clip: true
     model: _controller.cartModel
     snapMode: ListView.SnapOneItem
+
+    // Row colors:
+    property variant rowColors: ["#C8DBC7", "#E1D9C6", "#BABBAB"]
     delegate: Item {
         id: delegate
         width: parent.width
-        height: cartView.height/4
+        height: _settings.cartViewRowHeight
+
+        // Get image source:
+        function getImageSource()
+        {
+            var source = ""
+
+            // Off line:
+            if (_appData.offline_mode === "1")
+            {
+                // TO DO
+                source = "file:///" + _controller.offLinePath + "/" + category + "/Square Thumbnails/" + icon
+            }
+            else
+            // In line:
+            {
+                source = Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
+            }
+
+            console.log("********************** USING SOURCE: ", source)
+
+            return source
+        }
+
         Row {
             id: row
             anchors.fill: parent
             Item {
+                id: leftArea
                 width: parent.width/2
                 height: parent.height
 
@@ -38,7 +65,7 @@ ListView {
                 Image {
                     id: originalImage
                     antialiasing: true
-                    source: Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
+                    source: getImageSource()
                     cache: true
                     fillMode: Image.PreserveAspectFit
                     anchors.left: parent.left
@@ -56,23 +83,42 @@ ListView {
                 }
 
                 // Vend item name:
-                CommonText {
+                Rectangle {
                     anchors.left: imageLoadingBkg.right
-                    anchors.leftMargin: 8
-                    anchors.top: parent.top
-                    text: vendItemName
-                    font.italic: true
-                    color: _settings.ffGreen
+                    anchors.right: parent.right
+                    height: parent.height
+                    color: rowColors[index%3]
+
+                    CommonText {
+                        width: parent.width
+                        anchors.left: parent.left
+                        anchors.leftMargin: 8
+                        wrapMode: Text.WordWrap
+                        horizontalAlignment: Text.AlignLeft
+                        text: vendItemName
+                        font.italic: true
+                        color: _settings.ffGray
+                    }
                 }
             }
 
             // Incremental button:
-            Item {
+            Rectangle {
+                id: centralArea
                 width: parent.width/4
                 height: parent.height
+                color: rowColors[index%3]
+
+                // Quantity:
+                CommonText {
+                    text: qsTr("Quantity: ") + incButton.value
+                    anchors.top: parent.top
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
 
                 // Incremental button:
                 IncrementalButton {
+                    id: incButton
                     anchors.centerIn: parent
                     value: count
                     minValue: 0
@@ -85,9 +131,11 @@ ListView {
             }
 
             // Total:
-            Item {
+            Rectangle {
+                id: rightArea
                 width: parent.width/4
                 height: parent.height
+                color: rowColors[index%3]
                 CommonText {
                     anchors.centerIn: parent
                     text: "$"+count*price

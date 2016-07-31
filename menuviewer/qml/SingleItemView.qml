@@ -7,7 +7,6 @@ Item {
     visible: vendItemName !== ""
     property alias menuImageUrl: flipableMenuImage.frontImage
     property alias nutritionFactImageUrl: flipableMenuImage.backImage
-    property alias itemPrice: priceDisplay.itemPrice
     property alias frontImageReady: flipableMenuImage.frontImageReady
 
     // Flip:
@@ -44,11 +43,6 @@ Item {
             width: imageLoadingBkg.width
             height: imageLoadingBkg.height
             anchors.centerIn: parent
-        }
-
-        // Price:
-        PriceDisplay {
-            id: priceDisplay
         }
     }
 }

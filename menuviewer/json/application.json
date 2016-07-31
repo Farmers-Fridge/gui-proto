@@ -13,10 +13,6 @@
 
     "pages": [
         {
-            "pageId": "IDLE_PAGE",
-            "url": "qrc:/qml/pages/idle/IdlePage.qml"
-        },
-        {
             "pageId": "MENU_PAGE",
             "url": "qrc:/qml/pages/menu/PresentationPage.qml"
         },

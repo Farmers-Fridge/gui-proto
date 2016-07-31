@@ -4,6 +4,7 @@ import Common 1.0
 Rectangle {
     color: _settings.ffIvoryLight
     property alias bottomAreaSource: bottomArea.source
+    property alias bottomAreaContainer: bottomAreaContainer
     property alias homeVisible: homeButton.visible
     property alias emailVisible: emailButton.visible
     property alias couponVisible: couponButton.visible
@@ -65,10 +66,11 @@ Rectangle {
         CommonText {
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: -21
-            anchors.verticalCenterOffset: -16
+            anchors.verticalCenterOffset: -18
             color: _settings.ffGreen
             text: _cartModel.cartCount
             visible: _cartModel.cartCount > 0
+            font.pixelSize: 40
         }
     }
 

@@ -68,23 +68,30 @@ MenuPageTemplate {
         pageMgr.loadPreviousPage()
     }
 
-    /* TO DO
-    // Cart view:
-    topContents: CartView {
-        id: cartView
+    // Contents:
+    contents: Item {
         anchors.fill: parent
-    }
 
-    // Bottom contents:
-    bottomContents: TotalView {
-        id: totalView
-        anchors.fill: parent
-        subTotal: "$ " + Math.round(_cartModel.cartSubTotal*100)/100
-        tax: "$" + Math.round(_cartModel.cartTax*100)/100
-        total: "$" + Math.round((_cartModel.cartSubTotal + _cartModel.cartTax)*100)/100
-        cartCount: _cartModel.cartCount +
-            (_cartModel.cartCount > 0 ? qsTr(" Items") : qsTr(" Item"))
+        // Cart view:
+        CartView {
+            id: cartView
+            width: parent.width
+            anchors.top: parent.top
+            anchors.bottom: totalView.top
+        }
+
+        // Bottom contents:
+        TotalView {
+            id: totalView
+            width: parent.width
+            height: parent.height*.15
+            anchors.bottom: parent.bottom
+            subTotal: "$ " + Math.round(_cartModel.cartSubTotal*100)/100
+            tax: "$" + Math.round(_cartModel.cartTax*100)/100
+            total: "$" + Math.round((_cartModel.cartSubTotal + _cartModel.cartTax)*100)/100
+            cartCount: _cartModel.cartCount +
+                (_cartModel.cartCount > 0 ? qsTr(" Items") : qsTr(" Item"))
+        }
     }
-    */
 }
 

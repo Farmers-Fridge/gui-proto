@@ -3,24 +3,24 @@
 
 <item>
 <vendItemName>La Croix Pampelmousse</vendItemName>
-<icon>1_la croix pampelmousse.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/blueberry_corn_salad.png</nutrition>
+<icon>1_la croix pampelmousse square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/blueberry_corn_salad square.png</nutrition>
 <category>Drinks</category>
 <price>$5.00</price>
 </item>
 
 <item>
 <vendItemName>La Croix Lime</vendItemName>
-<icon>2_la croix lime.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/Pure_Wow_Salad.png</nutrition>
+<icon>2_la croix lime square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/Pure_Wow_Salad square.png</nutrition>
 <category>Drinks</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>La Croix Natural</vendItemName>
-<icon>3_la croix natural.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater.png</nutrition>
+<icon>3_la croix natural square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater square.png</nutrition>
 <category>Drinks</category>
 <price>$8.00</price>
 </item>

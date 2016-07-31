@@ -38,5 +38,12 @@ Page {
         pigVisible: true
         onPigClicked: simplePageTemplate.onPigClicked()
         cartVisible: false
+
+        // Digital clock:
+        DigitalClock {
+            anchors.top: footer.bottomAreaContainer.top
+            anchors.topMargin: 16
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
     }
 }

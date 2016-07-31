@@ -3,64 +3,64 @@
 
 <item>
 <vendItemName>Crunchy Thai Salad</vendItemName>
-<icon>1_Crunchy thai.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/blueberry_corn_salad.png</nutrition>
+<icon>1_Crunchy thai square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/blueberry_corn_salad square.png</nutrition>
 <category>Salads</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>High Protein Salad</vendItemName>
-<icon>2_high protein.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/Pure_Wow_Salad.png</nutrition>
+<icon>2_high protein square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/Pure_Wow_Salad square.png</nutrition>
 <category>Salads</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>North Napa Salad</vendItemName>
-<icon>3_northnapa.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater.png</nutrition>
+<icon>3_northnapa square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/cheater square.png</nutrition>
 <category>Salads</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>Avocado BLT Salad</vendItemName>
-<icon>4_avocadoblt.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/Shrimp_Succotash_N.png</nutrition>
+<icon>4_avocadoblt square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/Shrimp_Succotash_N square.png</nutrition>
 <category>Salads</category>
 <price>$12.00</price>
 </item>
 
 <item>
 <vendItemName>South West Salad</vendItemName>
-<icon>5_southwest.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/high_prot.png</nutrition>
+<icon>5_southwest square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/high_prot square.png</nutrition>
 <category>Salads</category>
 <price>$7.00</price>
 </item>
 
 <item>
 <vendItemName>Shrimp and Succotash Salad</vendItemName>
-<icon>6_shrimp and succotash.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/high_prot.png</nutrition>
+<icon>6_shrimp and succotash square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/high_prot square.png</nutrition>
 <category>Salads</category>
 <price>$10.00</price>
 </item>
 
 <item>
 <vendItemName>California Salad</vendItemName>
-<icon>7_california.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/high_prot.png</nutrition>
+<icon>7_california square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/high_prot square.png</nutrition>
 <category>Salads</category>
 <price>$8.00</price>
 </item>
 
 <item>
 <vendItemName>Cheater Salad</vendItemName>
-<icon>8_cheater.png</icon>
-<nutrition>/GOLDEN_UI/14_nutrional/salads/high_prot.png</nutrition>
+<icon>8_cheater square.png</icon>
+<nutrition>/GOLDEN_UI/14_nutrional/salads/high_prot square.png</nutrition>
 <category>Salads</category>
 <price>$6.00</price>
 </item>

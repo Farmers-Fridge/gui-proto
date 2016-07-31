@@ -145,6 +145,9 @@ Item {
 
                     // Log:
                     console.log(source + " loaded successfully")
+
+                    // Load first page:
+                    pageMgr.initialize()
                 }
             }
         }

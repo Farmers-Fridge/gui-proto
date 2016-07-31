@@ -109,6 +109,17 @@ Rectangle {
                 anchors.fill: parent
                 fillMode: Image.Stretch
             }
+
+            // Filter area:
+            Rectangle {
+                color: "lightgray"
+                width: parent.width
+                height: parent.height/2
+                anchors.centerIn: parent
+                FilterArea {
+                    anchors.fill: parent
+                }
+            }
         }
     }
 }

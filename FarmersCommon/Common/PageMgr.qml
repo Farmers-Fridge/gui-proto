@@ -40,6 +40,17 @@ StackView {
         Component.onCompleted: _eventWatcher.userActive.connect(onUserActive)
     }
 
+    // Initialize:
+    function initialize()
+    {
+        if (_appData.pages.length > 0)
+        {
+            var page = createPage(_appData.pages[0].pageId)
+            if (page)
+                push(page)
+        }
+    }
+
     // Create page:
     function createPage(pageId)
     {
@@ -118,10 +129,6 @@ StackView {
     Component.onCompleted: {
         if (pages.length > 0)
         {
-            var page = createPage(pages[0].pageId)
-            if (page)
-                push(page)
-
 			loadFirstPage.connect(onLoadFirstPage)
             loadPreviousPage.connect(onLoadPreviousPage)
             loadNextPage.connect(onLoadNextPage)
