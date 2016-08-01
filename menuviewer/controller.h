@@ -51,6 +51,12 @@ public:
     // Validate coupon:
     Q_INVOKABLE bool validateCoupon(const QString &coupon);
 
+    // To local file:
+    Q_INVOKABLE QString toLocalFile(const QString &filePath);
+
+    // From local file:
+    Q_INVOKABLE QString fromLocalFile(const QString &filePath);
+
 protected:
     // Constructor:
     explicit Controller(QObject *parent = 0);

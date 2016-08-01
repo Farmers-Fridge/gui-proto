@@ -44,7 +44,7 @@ GridView {
             if (_appData.offline_mode === "1")
             {
                 // TO DO
-                source = "file:///" + _controller.offLinePath + "/" + targetCategory + "/Square Thumbnails/" + icon
+                source = _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + "/Square Thumbnails/" + icon)
             }
             else
             // In line:

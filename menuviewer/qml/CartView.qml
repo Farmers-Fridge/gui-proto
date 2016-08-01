@@ -23,7 +23,7 @@ ListView {
             if (_appData.offline_mode === "1")
             {
                 // TO DO
-                source = "file:///" + _controller.offLinePath + "/" + category + "/Square Thumbnails/" + icon
+                source = _controller.fromLocalFile(_controller.offLinePath + "/" + category + "/Square Thumbnails/" + icon)
             }
             else
             // In line:

@@ -196,6 +196,18 @@ bool Controller::validateCoupon(const QString &coupon)
     return true;
 }
 
+// To local file:
+QString Controller::toLocalFile(const QString &filePath)
+{
+    return Utils::toLocalFile(filePath);
+}
+
+// From local file:
+QString Controller::fromLocalFile(const QString &filePath)
+{
+    return Utils::fromLocalFile(filePath);
+}
+
 // Return offline path:
 const QString &Controller::offLinePath() const
 {

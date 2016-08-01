@@ -100,7 +100,7 @@ Item {
         if (_appData.offline_mode === "1")
         {
             // TO DO
-            source = "file:///" + _controller.offLinePath + "/categories"
+            source = _controller.fromLocalFile(_controller.offLinePath + "/categories")
         }
         else
         // In line:

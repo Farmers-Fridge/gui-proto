@@ -15,7 +15,7 @@ CustomXmlListModel {
         if (_appData.offline_mode === "1")
         {
             // TO DO
-            source = "file:///" + _controller.offLinePath + "/" + targetCategory + "/" + targetCategory
+            source = _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + "/" + targetCategory)
         }
         // In line:
         else
