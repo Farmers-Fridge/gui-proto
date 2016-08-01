@@ -36,6 +36,11 @@ bool Controller::startup()
         {
             mOffLinePath = offLinePath.absolutePath();
         }
+        else
+        {
+            qDebug() << "Can't find local_data folder.";
+            return false;
+        }
     }
 
     // Read salad assets:
