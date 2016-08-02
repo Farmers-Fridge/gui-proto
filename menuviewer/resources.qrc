@@ -9,7 +9,6 @@
         <file>qml/Header.qml</file>
         <file>qml/Footer.qml</file>
         <file>qml/Settings.qml</file>
-        <file>qml/MenuPageTemplate.qml</file>
         <file>qml/ReservedArea.qml</file>
         <file>qml/CategoryListModel.qml</file>
         <file>qml/GridItemView.qml</file>
@@ -42,7 +41,6 @@
         <file>qml/pages/stock/StockPageRow.qml</file>
         <file>qml/pages/stock/StockItem.qml</file>
         <file>assets/ico-ok.png</file>
-        <file>qml/SimplePageTemplate.qml</file>
         <file>assets/ico-email.png</file>
         <file>assets/ico-entercoupon.png</file>
         <file>assets/ico-jar.png</file>
@@ -58,5 +56,6 @@
         <file>assets/ico-vegan-unchecked.png</file>
         <file>qml/FilterArea.qml</file>
         <file>assets/ico-checkmark.png</file>
+        <file>qml/PageTemplate.qml</file>
     </qresource>
 </RCC>

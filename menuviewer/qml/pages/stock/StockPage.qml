@@ -3,7 +3,7 @@ import QtQuick.XmlListModel 2.0
 import Common 1.0
 import "../.."
 
-SimplePageTemplate {
+PageTemplate {
     id: stockPage
     signal stopStockPagePrivate()
 
@@ -19,6 +19,12 @@ SimplePageTemplate {
     {
         pageLoader.sourceComponent = undefined
         pageLoader.sourceComponent = pageComponent
+    }
+
+    // Pig clicked:
+    function onPigClicked()
+    {
+        pageMgr.loadPreviousPage()
     }
 
     contents: Item {
@@ -40,12 +46,14 @@ SimplePageTemplate {
             }
         }
 
+        // Setup stock page:
         Component.onCompleted: {
             console.log("SETTING UP STOCK PAGE")
             setup()
         }
     }
 
+    /* TO DO
     footer: Item {
         anchors.fill: parent
 
@@ -81,4 +89,5 @@ SimplePageTemplate {
             }
         }
     }
+    */
 }

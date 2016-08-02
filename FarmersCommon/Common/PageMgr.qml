@@ -7,6 +7,13 @@ StackView {
 	// Pages:
 	property variant pages: []
 
+    // Current page id:
+    property string currentPageId: ""
+    onCurrentItemChanged: {
+        if (currentItem)
+            currentPageId = currentItem.pageId
+    }
+
     // Measurement of elapsed time:
     property int elapsedTime: 0
 

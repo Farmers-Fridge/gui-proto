@@ -2,13 +2,8 @@ import QtQuick 2.0
 import Common 1.0
 import "../.."
 
-MenuPageTemplate {
+PageTemplate {
     id: checkOutPage
-    homeVisible: true
-    emailVisible: true
-    couponVisible: true
-    pigVisible: true
-    cartVisible: true
 
     // 0: email request
     // 1: coupon request

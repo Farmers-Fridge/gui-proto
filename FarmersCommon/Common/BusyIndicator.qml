@@ -6,4 +6,5 @@ Image {
     source: "assets/ico-busy.png"
     visible: container.on
     NumberAnimation on rotation { running: container.on; from: 0; to: 360; loops: Animation.Infinite; duration: 1200 }
+    z: _settings.zMax
 }

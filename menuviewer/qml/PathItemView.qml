@@ -86,34 +86,34 @@ PathView {
             }
         }
 
-        Component.onCompleted: {
-            mainApplication.showNutritionalInfo.connect(onShowNutritionalInfo)
-        }
+        Component.onCompleted: mainApplication.showNutritionalInfo.connect(onShowNutritionalInfo)
     }
 
     // Navigation arrows:
     Item {
-        width: parent.width
-        height: containerHeight
-        anchors.centerIn: parent
+        width: Math.min(parent.width, parent.height)
+        height: width
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        z: _settings.zMax
         visible: categoryListModel.count > 1
 
         // Navigation left:
         ImageButton {
-            anchors.left: parent.left
-            anchors.leftMargin: 8
+            anchors.right: parent.left
+            anchors.rightMargin: -8
             anchors.verticalCenter: parent.verticalCenter
             source: "qrc:/assets/ico-nav-left.png"
-            onClicked: mainApplication.navigateLeft()
+            onClicked: onNavigateLeft()
         }
 
         // Navigation right:
         ImageButton {
-            anchors.right: parent.right
-            anchors.rightMargin: 8
+            anchors.left: parent.right
+            anchors.leftMargin: -8
             anchors.verticalCenter: parent.verticalCenter
             source: "qrc:/assets/ico-nav-right.png"
-            onClicked: mainApplication.navigateRight()
+            onClicked: onNavigateRight()
         }
     }
 
@@ -162,12 +162,5 @@ PathView {
             _addToCartCommand.currentItem = categoryListModel.get(visibleIndex)
             _addToCartCommand.execute()
         }
-    }
-
-    // Handle navigation:
-    Component.onCompleted: {
-        mainApplication.navigateLeft.connect(onNavigateLeft)
-        mainApplication.navigateRight.connect(onNavigateRight)
-        mainApplication.addCurrentItemToCart.connect(onAddCurrentItemToCart)
     }
 }

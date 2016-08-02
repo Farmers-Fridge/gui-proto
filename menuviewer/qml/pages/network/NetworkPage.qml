@@ -5,7 +5,16 @@ import QtQuick.XmlListModel 2.0
 import Common 1.0
 import "../.."
 
-SimplePageTemplate {
+PageTemplate {
+    // Hide header:
+    headerVisible: false
+
+    // Pig clicked:
+    function onPigClicked()
+    {
+        pageMgr.loadPreviousPage()
+    }
+
     // Host model:
     CustomXmlListModel {
         id: xmlHostModel

@@ -3,7 +3,7 @@ import QtQuick 2.5
 Item {
     readonly property color ffBlack: "black"
     readonly property color ffIvoryLight: "#F6F8F3"
-    readonly property color ffGreen: "#9FC088"
+    readonly property color ffGreen: "#BCD4B9"
     readonly property color ffLightGray: "lightgray"
     readonly property color ffGray: "#606365"
     readonly property color ffOrange: "orange"

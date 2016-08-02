@@ -14,15 +14,6 @@ Item {
     // Set menu page mode:
     signal setMenuPageMode()
 
-    // Navigate left:
-    signal navigateLeft()
-
-    // Navigate right:
-    signal navigateRight()
-
-    // Add current item to cart:
-    signal addCurrentItemToCart()
-
     // Show nutritional info:
     signal showNutritionalInfo()
 
@@ -32,6 +23,9 @@ Item {
     // Identify current stock item by row/column:
     property int _currentStockItemRow: -1
     property int _currentStockItemCol: -1
+
+    // Current view mode:
+    property string _viewMode: "gridview"
 
     // App busy state:
     property bool _appIsBusy: false

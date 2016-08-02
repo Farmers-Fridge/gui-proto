@@ -17,15 +17,22 @@ Item {
 
     Item {
         id: container
-        anchors.centerIn: parent
         anchors.fill: parent
-        anchors.margins: 128
+
+        // Flipable menu image:
+        FlipableMenuImage {
+            id: flipableMenuImage
+            width: imageLoadingBkg.width
+            height: imageLoadingBkg.height
+            anchors.centerIn: imageLoadingBkg
+        }
 
         // Image loading background
         Rectangle {
             id: imageLoadingBkg
             color: "white"
-            anchors.centerIn: parent
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
             antialiasing: true
             width: Math.min(parent.width, parent.height)
             height: width
@@ -35,14 +42,6 @@ Item {
                 antialiasing: true
                 anchors { fill: parent; margins: 3 }
             }
-        }
-
-        // Flipable menu image:
-        FlipableMenuImage {
-            id: flipableMenuImage
-            width: imageLoadingBkg.width
-            height: imageLoadingBkg.height
-            anchors.centerIn: parent
         }
     }
 }

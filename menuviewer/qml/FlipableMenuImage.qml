@@ -29,6 +29,41 @@ Flipable {
         height: flipable.height
         anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
+
+        /*
+        Item {
+            width: frontImage.paintedWidth
+            height: frontImage.paintedHeight
+            anchors.centerIn: frontImage
+
+            // Add item to cart:
+            ImageButton {
+                id: addItem
+                anchors.verticalCenter: parent.bottom
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                width: 96
+                height: 96
+                source: "qrc:/assets/ico-add.png"
+
+                // Add current item to cart:
+                onClicked: onAddCurrentItemToCart()
+
+                // Set visibility:
+                visible: frontImage.status === Image.Ready
+            }
+
+            // Add to cart text:
+            CommonText {
+                anchors.top: addItem.bottom
+                anchors.topMargin: -8
+                anchors.horizontalCenter: addItem.horizontalCenter
+                text: qsTr("ADD TO CART")
+                font.pixelSize: 24
+                color: _settings.ffGray
+            }
+        }
+        */
     }
 
     // Back image (nutrition image):
@@ -51,9 +86,9 @@ Flipable {
         anchors.centerIn: parent
         on: (frontImage.status === Image.Loading)
         visible: on
-        z: _settings.zMax
     }
 
+    // Define transform:
     transform: Rotation {
         id: rotation
         origin.x: flipable.width/2
@@ -62,16 +97,19 @@ Flipable {
         angle: 0
     }
 
+    // Define states:
     states: State {
         name: "back"
         PropertyChanges { target: rotation; angle: 180 }
         when: flipable.flipped
     }
 
+    // Define transitions:
     transitions: Transition {
         NumberAnimation { target: rotation; property: "angle"; duration: 500 }
     }
 
+    // Handle nutrition image display timeout:
     onStateChanged: {
         if (state === "back")
             nutritionImageDisplayTimeOut.start()

@@ -1,6 +1,6 @@
 import QtQuick 2.5
 
-Rectangle {
+Item {
     id: textButton
     signal clicked()
     implicitWidth: label.width+16
