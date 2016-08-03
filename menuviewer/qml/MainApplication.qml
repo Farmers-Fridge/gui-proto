@@ -20,6 +20,9 @@ Item {
     // Current stock item changed:
     signal currentStockItemChanged()
 
+    // Add current item to cart:
+    signal addCurrentItemToCart()
+
     // Identify current stock item by row/column:
     property int _currentStockItemRow: -1
     property int _currentStockItemCol: -1

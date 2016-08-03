@@ -159,8 +159,15 @@ PathView {
         {
             // Run add to cart command:
             visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%model.count
-            _addToCartCommand.currentItem = categoryListModel.get(visibleIndex)
-            _addToCartCommand.execute()
+            if (visibleIndex >= 0)
+            {
+                _addToCartCommand.currentItem = categoryListModel.get(visibleIndex)
+                _addToCartCommand.execute()
+            }
         }
+    }
+
+    Component.onCompleted: {
+        mainApplication.addCurrentItemToCart.connect(onAddCurrentItemToCart)
     }
 }

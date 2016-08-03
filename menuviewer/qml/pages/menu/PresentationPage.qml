@@ -145,7 +145,7 @@ PageTemplate {
                 source: "qrc:/assets/ico-add.png"
 
                 // Add current item to cart:
-                onClicked: onAddCurrentItemToCart()
+                onClicked: addCurrentItemToCart()
             }
 
             // Add to cart text:
