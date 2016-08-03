@@ -19,7 +19,7 @@ Page {
     // Home clicked:
     function onHomeClicked()
     {
-        pageMgr.loadFirstPage()
+        mainApplication.state = ""
     }
 
     // Email clicked:

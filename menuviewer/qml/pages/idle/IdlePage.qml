@@ -2,7 +2,17 @@ import QtQuick 2.0
 import Common 1.0
 import "../.."
 
-Page {
+Rectangle {
+    color: "#F6F8F4"
+    signal idlePageClicked()
+
+    // Define behavior on opacity:
+    visible: opacity > 0
+    opacity: 1
+    Behavior on opacity {
+        NumberAnimation {duration: 500}
+    }
+
     // Main timer:
     Timer {
         id: timer
@@ -54,12 +64,6 @@ Page {
     // Clicking anywhere loads previous page:
     MouseArea {
         anchors.fill: parent
-        onClicked: pageMgr.loadNextPage()
-    }
-
-    // Return next page id:
-    function nextPageId()
-    {
-        return "MENU_PAGE"
+        onClicked: idlePageClicked()
     }
 }

@@ -69,19 +69,24 @@ PathView {
         height: pathView.height
         menuImageUrl: getMenuImageUrl()
         //nutritionFactImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, nutrition)
-        //TO DO
         nutritionFactImageUrl: "qrc:/assets/ico-question.png"
 
         // Show nutritional info:
         function onShowNutritionalInfo()
         {
-            if ((typeof(_controller) !== "undefined") && frontImageReady)
+            // Delegate available:
+            if (imageDelegate)
             {
-                if (targetCategory === _controller.currentCategory)
+                // Front image ready:
+                if (frontImageReady)
                 {
-                    visibleIndex = (pathView.currentIndex+1)%(pathView.model.count)
-                    if (index === visibleIndex)
-                        imageDelegate.flip()
+                    // This is current category:
+                    if (targetCategory === _controller.currentCategory)
+                    {
+                        visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%pathView.model.count
+                        if (index === visibleIndex)
+                            imageDelegate.flip()
+                    }
                 }
             }
         }

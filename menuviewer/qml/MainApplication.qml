@@ -3,6 +3,7 @@ import QtQuick.XmlListModel 2.0
 import Common 1.0
 import KeyBoard 1.0
 import Commands 1.0
+import "pages/idle"
 
 Item {
     // Load path view:
@@ -202,6 +203,30 @@ Item {
         on: _appIsBusy
         visible: on
         z: _settings.zMax
+    }
+
+    // Idle page:
+    IdlePage {
+        id: idlePage
+        anchors.fill: parent
+        onIdlePageClicked: {
+            pageMgr.loadFirstPage()
+            mainApplication.state = "active"
+        }
+    }
+
+    states: State {
+        name: "active"
+        PropertyChanges {
+            target: idlePage
+            opacity: 0
+        }
+    }
+
+    // Set state back to grid view mode:
+    onStateChanged: {
+        if (state === "active")
+            _viewMode = "gridview"
     }
 }
 
