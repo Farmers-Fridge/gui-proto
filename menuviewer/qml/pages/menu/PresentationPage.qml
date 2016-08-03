@@ -132,6 +132,9 @@ PageTemplate {
                 pixelSize: 24
                 textColor: _settings.ffGreen
                 label: qsTr("SEE NUTRITIONAL INFO")
+
+                // Add current item to cart:
+                onClicked: mainApplication.showNutritionalInfo()
             }
 
             // Add item to cart:
@@ -145,7 +148,7 @@ PageTemplate {
                 source: "qrc:/assets/ico-add.png"
 
                 // Add current item to cart:
-                onClicked: addCurrentItemToCart()
+                onClicked: mainApplication.addCurrentItemToCart()
             }
 
             // Add to cart text:
