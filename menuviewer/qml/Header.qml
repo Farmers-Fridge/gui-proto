@@ -9,15 +9,16 @@ Rectangle {
     // Get highlight for category:
     function getHighlightForCategory(categoryName)
     {
+        if (categoryName === "Breakfast")
+            return "qrc:/assets/ico-breakfast.png"
         if (categoryName === "Salads")
             return "qrc:/assets/ico-jar.png"
-        if (categoryName === "Proteins")
-            return "qrc:/assets/ico-proteins.png"
-        if (categoryName === "Drinks")
-            return "qrc:/assets/ico-drinks.png"
+        if (categoryName === "Dishes")
+            return "qrc:/assets/ico-dishes.png"
         if (categoryName === "Snacks")
             return "qrc:/assets/ico-snacks.png"
-        return "qrc:/assets/ico-jar.png"
+        if (categoryName === "Drinks")
+            return "qrc:/assets/ico-drinks.png"
     }
 
     Column {

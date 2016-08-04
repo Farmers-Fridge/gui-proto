@@ -57,5 +57,7 @@
         <file>qml/FilterArea.qml</file>
         <file>assets/ico-checkmark.png</file>
         <file>qml/PageTemplate.qml</file>
+        <file>assets/ico-breakfast.png</file>
+        <file>assets/ico-dishes.png</file>
     </qresource>
 </RCC>
