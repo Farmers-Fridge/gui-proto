@@ -5,6 +5,9 @@ import "../.."
 PageTemplate {
     id: presentationPage
 
+    // Grid view current index:
+    property int gridViewIndex: 0
+
     // Pig clicked:
     function onPigClicked()
     {
@@ -28,9 +31,6 @@ PageTemplate {
     {
         return "CHECKOUT_PAGE"
     }
-
-    // Grid view current index:
-    property int gridViewIndex: 0
 
     // Load path view:
     function onLoadPathView()
@@ -107,6 +107,21 @@ PageTemplate {
                                   (_viewMode === "pathview"))
                         visible: opacity > 0
                         model: categoryListModel
+                        onVisibleChanged: {
+                            if (visible)
+                                onUpdateCurrentVendItemName()
+                        }
+
+                        // Current vend item name:
+                        function onUpdateCurrentVendItemName()
+                        {
+                            if (_controller.currentCategory === categoryListModel.targetCategory)
+                            {
+                                currentVendItemName.text = categoryListModel.get(visibleIndex).vendItemName
+                            }
+                        }
+
+                        Component.onCompleted: visibleIndexChanged.connect(onUpdateCurrentVendItemName)
                     }
                 }
             }
@@ -135,6 +150,16 @@ PageTemplate {
 
                 // Add current item to cart:
                 onClicked: mainApplication.showNutritionalInfo()
+            }
+
+            // Current vend item name:
+            CommonText {
+                id: currentVendItemName
+                anchors.top: nutritionalInfo.bottom
+                anchors.topMargin: 8
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize: 40
+                font.italic: true
             }
 
             // Add item to cart:

@@ -21,7 +21,7 @@ Item {
         id: backgroundItem
         anchors.fill: parent
         anchors.margins: root.bounds
-        color: mouseArea.pressed ? keyPressedColor : keyColor;
+        color: mouseArea.pressed ? keyPressedColor : keyColor
 
         Image {
             id: icon
@@ -45,5 +45,8 @@ Item {
         id: mouseArea
         anchors.fill: parent
         onClicked: root.clicked()
+        hoverEnabled: true
+        onEntered: backgroundItem.color = keyPressedColor
+        onExited: backgroundItem.color = keyColor
     }
 }

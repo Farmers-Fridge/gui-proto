@@ -71,7 +71,7 @@ Page {
         width: parent.width
         height: parent.height*_settings.footerRatio
         anchors.bottom: parent.bottom
-        homeVisible: pageMgr.currentPageId !== "MENU_PAGE"
+        homeVisible: true
         cartVisible: pageMgr.currentPageId === "MENU_PAGE"
         emailVisible: pageMgr.currentPageId === "CHECKOUT_PAGE"
         couponVisible: pageMgr.currentPageId === "CHECKOUT_PAGE"

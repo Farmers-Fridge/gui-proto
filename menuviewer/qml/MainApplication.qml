@@ -225,8 +225,10 @@ Item {
 
     // Set state back to grid view mode:
     onStateChanged: {
-        if (state === "active")
+        if (state === "active") {
+            _controller.currentCategory = _categoryModel.get(0).categoryName
             _viewMode = "gridview"
+        }
     }
 }
 
