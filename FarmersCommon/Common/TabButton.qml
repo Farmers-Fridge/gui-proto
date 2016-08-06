@@ -1,4 +1,5 @@
 import QtQuick 2.5
+import Common 1.0
 
 Item {
     id: textButton
@@ -25,10 +26,10 @@ Item {
     }
 
     // Dish label:
-    CommonText {
+    LargeBoldText {
         id: label
         anchors.centerIn: parent
-        color: selected ? "white" : "#858687"
+        color: selected ? "white" : _settings.ffDarkGray
         text: categoryName
     }
 

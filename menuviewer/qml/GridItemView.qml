@@ -84,7 +84,11 @@ GridView {
                         // Handle clicks:
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: gridImageClicked(index-1)
+                            onClicked: {
+                                // Set current item:
+                                currentMenuItem = categoryListModel.get(index)
+                                gridImageClicked(index-1)
+                            }
                         }
 
                         // Add item to cart:
@@ -163,7 +167,6 @@ GridView {
     {
         // Run add to cart command:
         _addToCartCommand.currentItem = model.get(itemView.currentIndex)
-        console.log(_addToCartCommand.currentItem.category)
         _addToCartCommand.execute()
     }
 }

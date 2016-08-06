@@ -218,3 +218,24 @@ const QString &Controller::offLinePath() const
 {
     return mOffLinePath;
 }
+
+// Set current menu item for category:
+void Controller::setCurrentMenuItemForCategory(const QVariant &menuItem)
+{
+    QVariantMap expanded = menuItem.toMap();
+    if (expanded.isEmpty())
+        return;
+    QString category = expanded["category"].toString();
+    if (category.simplified().isEmpty())
+        return;
+    mCurrentItemForCategory[category] = menuItem;
+
+    qDebug() << "----------------------------------------------------------------------> CURRENT ITEM FOR " << category << " IS: " << expanded["vendItemName"];
+    emit currentMenuItemForCategoryChanged();
+}
+
+// Retur current menu item for category:
+QVariant Controller::getCurrentMenuItemForCategory(const QString &category)
+{
+    return mCurrentItemForCategory[category];
+}

@@ -34,6 +34,26 @@ Item {
     // App busy state:
     property bool _appIsBusy: false
 
+    // Get category model source:
+    function getCategoryModelSource()
+    {
+        var source = ""
+
+        // Off line:
+        if (_appData.offline_mode === "1")
+        {
+            // TO DO
+            source = _controller.fromLocalFile(_controller.offLinePath + "/categories")
+        }
+        else
+        // In line:
+        {
+            source = Utils.urlPlay(_appData.currentIP, _appData.categorySource)
+        }
+
+        return source
+    }
+
     // Set current stock item:
     function setCurrentStockItem(rowNumber, columnNumber)
     {
@@ -43,6 +63,17 @@ Item {
             _currentStockItemCol = columnNumber
             currentStockItemChanged()
         }
+    }
+
+    // OK clicked:
+    function onOKClicked(enteredText)
+    {   // User entered exit code:
+        if (enteredText === _appData.exitCode)
+            Qt.quit()
+        else
+        if (enteredText === _appData.tabletGuiCode)
+            pageMgr.loadPage("NETWORK_PAGE")
+        privateNumericKeyPad.state = ""
     }
 
     // Add to cart command:
@@ -89,26 +120,6 @@ Item {
                  (notepad.state === "")
     }
 
-    // Get category model source:
-    function getCategoryModelSource()
-    {
-        var source = ""
-
-        // Off line:
-        if (_appData.offline_mode === "1")
-        {
-            // TO DO
-            source = _controller.fromLocalFile(_controller.offLinePath + "/categories")
-        }
-        else
-        // In line:
-        {
-            source = Utils.urlPlay(_appData.currentIP, _appData.categorySource)
-        }
-
-        return source
-    }
-
     // XML version model:
     CustomXmlListModel {
         id: categoryModel
@@ -149,17 +160,6 @@ Item {
                 }
             }
         }
-    }
-
-    // OK clicked:
-    function onOKClicked(enteredText)
-    {   // User entered exit code:
-        if (enteredText === _appData.exitCode)
-            Qt.quit()
-        else
-        if (enteredText === _appData.tabletGuiCode)
-            pageMgr.loadPage("NETWORK_PAGE")
-        privateNumericKeyPad.state = ""
     }
 
     // Numeric keypad:

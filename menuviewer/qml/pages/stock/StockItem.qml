@@ -159,7 +159,6 @@ Item {
         hoverEnabled: true
         onHoveredChanged: mainApplication.setCurrentStockItem(rowNumber, columnNumber)
         onClicked: {
-            console.log(theoPar, actualPar)
             stockNumericKeyPad.theoPar = theoPar
             stockNumericKeyPad.currentKey = actualPar
             stockNumericKeyPad.invoker = stockItem

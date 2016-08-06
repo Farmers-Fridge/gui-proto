@@ -15,8 +15,6 @@ PageTemplate {
     // OK clicked:
     function onOKClicked(enteredText)
     {
-        console.log("REQUEST TYPE = ", requestType)
-
         // Email request:
         if (requestType === 0)
         {

@@ -50,6 +50,10 @@ PageTemplate {
         _viewMode = mode
     }
 
+    onTabClicked: {
+        _controller.currentMenuItemForCategoryChanged();
+    }
+
     // Top contents:
     contents: Item {
         anchors.fill: parent
@@ -70,11 +74,22 @@ PageTemplate {
                 Item {
                     anchors.fill: parent
 
+                    // Current menu item by category:
+                    property variant currentMenuItem
+
+                    // Set current item for category:
+                    onCurrentMenuItemChanged: {
+                        _controller.setCurrentMenuItemForCategory(currentMenuItem)
+                    }
+
                     // Category list model:
                     CategoryListModel {
                         id: categoryListModel
                         targetCategory: _categoryModel.get(gridItemView.gridViewIndex).categoryName
-                        Component.onCompleted: categoryListModel.modelReady.connect(gridItemView.onModelReady)
+                        Component.onCompleted: {
+                            categoryListModel.modelReady.connect(gridItemView.onModelReady)
+                            categoryListModel.modelReady.connect(pathItemView.onModelReady)
+                        }
                     }
 
                     // Grid item view:
@@ -107,21 +122,6 @@ PageTemplate {
                                   (_viewMode === "pathview"))
                         visible: opacity > 0
                         model: categoryListModel
-                        onVisibleChanged: {
-                            if (visible)
-                                onUpdateCurrentVendItemName()
-                        }
-
-                        // Current vend item name:
-                        function onUpdateCurrentVendItemName()
-                        {
-                            if (_controller.currentCategory === categoryListModel.targetCategory)
-                            {
-                                currentVendItemName.text = categoryListModel.get(visibleIndex).vendItemName
-                            }
-                        }
-
-                        Component.onCompleted: visibleIndexChanged.connect(onUpdateCurrentVendItemName)
                     }
                 }
             }
@@ -153,13 +153,24 @@ PageTemplate {
             }
 
             // Current vend item name:
-            CommonText {
+            LargeBoldItalicText {
                 id: currentVendItemName
                 anchors.top: nutritionalInfo.bottom
                 anchors.topMargin: 8
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 40
                 font.italic: true
+
+                // Current menu item for category changed:
+                function onCurrentMenuItemForCategoryChanged()
+                {
+                    var currentMenuItem = _controller.getCurrentMenuItemForCategory(_controller.currentCategory)
+                    if (currentMenuItem)
+                        currentVendItemName.text = currentMenuItem.vendItemName
+                }
+
+                Component.onCompleted: {
+                    _controller.currentMenuItemForCategoryChanged.connect(onCurrentMenuItemForCategoryChanged)
+                }
             }
 
             // Add item to cart:

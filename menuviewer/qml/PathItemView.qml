@@ -137,8 +137,11 @@ PathView {
             currentIndex -= incr
             pathView.gotoIndex(currentIndex)
 
-            // Define visible index:
+            // Set visible item:
             visibleIndex = pathView.currentIndex%model.count
+
+            // Set current menu item:
+            currentMenuItem = categoryListModel.get(visibleIndex)
         }
     }
 
@@ -152,8 +155,11 @@ PathView {
             currentIndex += incr
             pathView.gotoIndex(currentIndex)
 
-            // Define visible index:
+            // Set visible index:
             visibleIndex = (pathView.currentIndex+pathView.pathItemCount)%model.count
+
+            // Set current menu item:
+            currentMenuItem = categoryListModel.get(visibleIndex)
         }
     }
 
@@ -170,6 +176,12 @@ PathView {
                 _addToCartCommand.execute()
             }
         }
+    }
+
+    // Model ready:
+    function onModelReady()
+    {
+        currentMenuItem = categoryListModel.get(1)
     }
 
     Component.onCompleted: {

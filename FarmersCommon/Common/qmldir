@@ -1,10 +1,12 @@
-module FarmersCommon
+module Common
 XMLParser 1.0 XMLParser.qml
 Page 1.0 Page.qml
 PageMgr 1.0 PageMgr.qml
 Popup 1.0 Popup.qml
 PopupMgr 1.0 PopupMgr.qml
 CommonText 1.0 CommonText.qml
+LargeBoldText 1.0 LargeBoldText.qml
+LargeBoldItalicText 1.0 LargeBoldItalicText.qml
 ImageButton 1.0 ImageButton.qml
 TabButton 1.0 TabButton.qml
 TextButton 1.0 TextButton.qml
