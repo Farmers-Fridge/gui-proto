@@ -13,6 +13,7 @@ Text {
 
     FontLoader {
         id: fontLoader
+        source: "../fonts/Grotto Ironic/GrottoIronic-Bold.otf"
     }
 }
 
