@@ -54,7 +54,7 @@ StackView {
         {
             var page = createPage(_appData.pages[0].pageId)
             if (page)
-                push(page)
+                push(page, false)
         }
     }
 
@@ -109,7 +109,7 @@ StackView {
             console.log("REQUEST TO LOAD: ", currentItem.nextPageId())
             var nextPage = createPage(currentItem.nextPageId())
             if (nextPage)
-                push(nextPage)
+                push(nextPage, false)
         }
     }
 
@@ -130,7 +130,7 @@ StackView {
 	{
 		var page = createPage(pageId)
 		if (page)
-			push(page)
+            push(page, false)
 	}
 
     Component.onCompleted: {

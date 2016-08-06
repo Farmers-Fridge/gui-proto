@@ -188,12 +188,11 @@ PageTemplate {
             }
 
             // Add to cart text:
-            CommonText {
+            StandardText {
                 anchors.top: addItem.bottom
                 anchors.topMargin: 8
                 anchors.horizontalCenter: addItem.horizontalCenter
                 text: qsTr("ADD TO CART")
-                font.pixelSize: 24
                 color: _settings.ffGray
             }
         }

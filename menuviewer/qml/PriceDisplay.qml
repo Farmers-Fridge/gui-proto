@@ -13,7 +13,7 @@ Image {
     property string itemPrice: ""
 
     // Display price top right:
-    CommonText {
+    StandardText {
         id: priceText
         anchors.centerIn: parent
         color: "white"

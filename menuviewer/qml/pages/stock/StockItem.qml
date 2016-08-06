@@ -63,7 +63,7 @@ Item {
         anchors.centerIn: parent
 
         // Title:
-        CommonText {
+        StandardText {
             id: menuTitle
             width: parent.width-4
             font.pixelSize: 16
@@ -119,7 +119,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
             height: 32
-            CommonText {
+            StandardText {
                 id: pullTextBox
                 font.pixelSize: parent.height *.75
                 color: _settings.ffRed
@@ -128,13 +128,13 @@ Item {
                 anchors.leftMargin: 4
                 anchors.verticalCenter: parent.verticalCenter
             }
-            CommonText {
+            StandardText {
                 font.pixelSize: parent.height *.75
                 color: _settings.ffGreen
                 text: actualAdd
                 anchors.centerIn: parent
             }
-            CommonText {
+            StandardText {
                 font.pixelSize: parent.height
                 color: (previousParValues.length > 0) ? (userActualPar > previousParValues[index] ? _settings.ffGreen : _settings.ffRed) : _settings.ffBlack
                 text: actualPar

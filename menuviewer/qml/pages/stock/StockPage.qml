@@ -63,7 +63,7 @@ PageTemplate {
             height: parent.height/2
             anchors.bottom: parent.bottom
 
-            CommonText {
+            StandardText {
                 id: serverLabel
                 anchors.centerIn: parent
                 color: "white"

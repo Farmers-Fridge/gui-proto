@@ -70,14 +70,13 @@ Rectangle {
             onClicked: cartClicked()
             visible: false
 
-            CommonText {
+            StandardText {
                 anchors.centerIn: parent
                 anchors.horizontalCenterOffset: -21
                 anchors.verticalCenterOffset: -18
                 color: _settings.ffGreen
                 text: _cartModel.cartCount
                 visible: _cartModel.cartCount > 0
-                font.pixelSize: 40
             }
         }
 

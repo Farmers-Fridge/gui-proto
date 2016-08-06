@@ -41,7 +41,7 @@ PageTemplate {
         }
 
         // Title:
-        CommonText {
+        StandardText {
             id: title
             text: qsTr("Please select target network, or enter it manually")
             anchors.top: logo.bottom
@@ -121,7 +121,7 @@ PageTemplate {
                     border.color: index == gridView.currentIndex ? _settings.ffOrange : _settings.ffGreen
                     border.width: 8
                     radius: 8
-                    CommonText {
+                    StandardText {
                         anchors.centerIn: parent
                         width: parent.width-16
                         horizontalAlignment: Text.AlignHCenter

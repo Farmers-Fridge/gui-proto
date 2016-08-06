@@ -6,66 +6,58 @@ Item {
     property alias tax: taxValue.text
     property alias total: totalValue.text
     property alias cartCount: cartCount.text
-    property int fontPixelSize: 24
 
     Item {
         width: parent.width/2
         height: parent.height
         anchors.right: parent.right
-        CommonText {
+        StandardText {
             id: subTotal
             text: qsTr("Subtotal")
             anchors.top: parent.top
             anchors.topMargin: 8
-            font.pixelSize: fontPixelSize
         }
-        CommonText {
+        StandardText {
             id: subTotalValue
             anchors.right: parent.right
             anchors.rightMargin: 8
             anchors.verticalCenter: subTotal.verticalCenter
-            font.pixelSize: fontPixelSize
         }
-        CommonText {
+        StandardText {
             id: tax
             text: qsTr("Tax")
             anchors.top: subTotal.bottom
             anchors.topMargin: 8
-            font.pixelSize: fontPixelSize
         }
-        CommonText {
+        StandardText {
             id: taxValue
             anchors.right: parent.right
             anchors.rightMargin: 8
             anchors.top: subTotal.bottom
             anchors.topMargin: 8
-            font.pixelSize: fontPixelSize
         }
-        CommonText {
+        StandardText {
             id: total
             text: qsTr("Total")
             anchors.top: tax.bottom
             anchors.topMargin: 8
-            font.pixelSize: fontPixelSize
         }
         Item {
             anchors.left: total.right
             anchors.right: totalValue.left
             anchors.top: tax.bottom
             anchors.topMargin: 8
-            CommonText {
+            StandardText {
                 id: cartCount
                 anchors.centerIn: parent
-                font.pixelSize: fontPixelSize
             }
         }
-        CommonText {
+        StandardText {
             id: totalValue
             anchors.right: parent.right
             anchors.rightMargin: 8
             anchors.top: tax.bottom
             anchors.topMargin: 8
-            font.pixelSize: fontPixelSize
         }
     }
 }

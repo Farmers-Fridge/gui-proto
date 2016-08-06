@@ -5,6 +5,7 @@ PageMgr 1.0 PageMgr.qml
 Popup 1.0 Popup.qml
 PopupMgr 1.0 PopupMgr.qml
 CommonText 1.0 CommonText.qml
+StandardText 1.0 StandardText.qml
 LargeBoldText 1.0 LargeBoldText.qml
 LargeBoldItalicText 1.0 LargeBoldItalicText.qml
 ImageButton 1.0 ImageButton.qml

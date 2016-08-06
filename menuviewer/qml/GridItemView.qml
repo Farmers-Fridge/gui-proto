@@ -118,23 +118,21 @@ GridView {
                 height: 0.2*parent.height
 
                 // Vend item name:
-                CommonText {
+                StandardText {
                     anchors.top: parent.top
                     anchors.topMargin: 14
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: vendItemName
                     font.italic: true
-                    font.pixelSize: 24
                     color: "#55575B"
                 }
 
                 // Item price:
-                CommonText {
+                StandardText {
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 14
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: price
-                    font.pixelSize: 22
                     color: "gray"
                 }
             }

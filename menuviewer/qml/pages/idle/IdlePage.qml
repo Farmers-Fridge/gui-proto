@@ -52,13 +52,12 @@ Rectangle {
     }
 
     // Touch screen to start text:
-    CommonText {
+    StandardText {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 16
         color: _settings.ffGreen
         text: qsTr("Touch Screen To Start")
-        font.pixelSize: 42
     }
 
     // Clicking anywhere loads previous page:

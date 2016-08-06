@@ -13,7 +13,7 @@ Item {
         delegate: Item {
             id: container
             anchors.fill: parent
-            CommonText {
+            StandardText {
                 anchors.centerIn: container
                 font.pixelSize: 28
                 text: versionModel + " " + statusModel

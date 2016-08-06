@@ -89,7 +89,7 @@ ListView {
                     height: parent.height
                     color: rowColors[index%3]
 
-                    CommonText {
+                    StandardText {
                         width: parent.width
                         anchors.left: parent.left
                         anchors.leftMargin: 8
@@ -110,7 +110,7 @@ ListView {
                 color: rowColors[index%3]
 
                 // Quantity:
-                CommonText {
+                StandardText {
                     text: qsTr("Quantity: ") + incButton.value
                     anchors.top: parent.top
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -136,7 +136,7 @@ ListView {
                 width: parent.width/4
                 height: parent.height
                 color: rowColors[index%3]
-                CommonText {
+                StandardText {
                     anchors.centerIn: parent
                     text: "$"+count*price
                 }

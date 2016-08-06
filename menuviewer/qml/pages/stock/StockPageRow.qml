@@ -24,7 +24,7 @@ Rectangle {
         anchors.left: parent.left
         height: stockPageRow.height
         width: (stockPageRow.width * .05)
-        CommonText {
+        StandardText {
             anchors.centerIn: parent
             text: rowNumber
             font.pixelSize: 36
