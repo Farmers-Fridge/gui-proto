@@ -137,7 +137,7 @@ GridView {
                     anchors.bottomMargin: 10
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: price
-                    color: _settings.ffGray
+                    color: _settings.ffOtherGray
                 }
             }
         }

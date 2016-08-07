@@ -8,6 +8,8 @@ Item {
     readonly property color ffLightGray: "lightgray"
     readonly property color ffGray: "#606365"
     readonly property color ffDarkGray: "#57585C"
+    readonly property color ffOtherGray: "#BABCB9"
+
     readonly property color ffOrange: "orange"
     readonly property color ffTransparent: "transparent"
     readonly property color ffBrown: "brown"
@@ -16,7 +18,7 @@ Item {
 
     // Used for colorizing rows in cart view:
     readonly property color ffRowColor1: "#C8DBC7"
-    readonly property color ffRowColor3: "#E1D9C6"
+    readonly property color ffRowColor2: "#E1D9C6"
     readonly property color ffRowColor3: "#BABBAB"
 
     // Others:
