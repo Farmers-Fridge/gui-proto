@@ -48,5 +48,6 @@
         <file>assets/ico-breakfast.png</file>
         <file>assets/ico-dishes.png</file>
         <file>assets/ico-detailed_contents_placeholder.png</file>
+        <file>assets/ico-logo.png</file>
     </qresource>
 </RCC>
