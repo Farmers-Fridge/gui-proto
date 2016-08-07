@@ -9,7 +9,8 @@ Item {
     readonly property color ffGray: "#606365"
     readonly property color ffDarkGray: "#57585C"
     readonly property color ffOtherGray: "#BABCB9"
-
+    readonly property color ffToggleButtonCheckedColor: "#92B772"
+    readonly property color ffToggleButtonUncheckedColor: "#DADFDB"
     readonly property color ffOrange: "orange"
     readonly property color ffTransparent: "transparent"
     readonly property color ffBrown: "brown"
@@ -26,6 +27,8 @@ Item {
     readonly property real headerRatio: (footerRatio/2)*3
     readonly property int idlePageTimeOut: 3000
     readonly property int cartViewRowHeight: 234
+    readonly property int toggleButtonWidth: 16
+    readonly property int toggleButtonHeight: 16
     readonly property int zMax: 1e9
 }
 

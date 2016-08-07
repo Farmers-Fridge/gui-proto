@@ -112,13 +112,14 @@ Rectangle {
             }
 
             // Filter area:
-            Rectangle {
-                color: _settings.ffLightGray
+            Item {
                 width: parent.width
                 height: parent.height/2
                 anchors.centerIn: parent
                 FilterArea {
-                    anchors.fill: parent
+                    width: parent.width*.9
+                    height: parent.height
+                    anchors.centerIn: parent
                 }
             }
         }

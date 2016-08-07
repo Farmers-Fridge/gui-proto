@@ -19,8 +19,6 @@
         <file>qml/FlipableMenuImage.qml</file>
         <file>qml/PriceDisplay.qml</file>
         <file>assets/ico-cardboard.png</file>
-        <file>assets/ico-next.png</file>
-        <file>assets/ico-prev.png</file>
         <file>assets/Carousel Images Empty Plate.png</file>
         <file>assets/ico-add.png</file>
         <file>assets/ico-home.png</file>
@@ -35,7 +33,6 @@
         <file>qml/pages/network/NetworkPage.qml</file>
         <file>qml/pages/stock/StockPage.qml</file>
         <file>qml/pages/stock/StockPagePrivate.qml</file>
-        <file>assets/ico-logo.png</file>
         <file>qml/pages/stock/StockPageGrid.qml</file>
         <file>qml/pages/stock/StockPageHeaderBlock.qml</file>
         <file>qml/pages/stock/StockPageRow.qml</file>
@@ -46,14 +43,6 @@
         <file>assets/ico-jar.png</file>
         <file>assets/ico-proteins.png</file>
         <file>assets/ico-snacks.png</file>
-        <file>assets/ico-gluten-free-checked.png</file>
-        <file>assets/ico-gluten-free-unchecked.png</file>
-        <file>assets/ico-high-prot-checked.png</file>
-        <file>assets/ico-high-prot-unchecked.png</file>
-        <file>assets/ico-lite-bites-checked.png</file>
-        <file>assets/ico-lite-bites-unchecked.png</file>
-        <file>assets/ico-vegan-checked.png</file>
-        <file>assets/ico-vegan-unchecked.png</file>
         <file>qml/FilterArea.qml</file>
         <file>assets/ico-checkmark.png</file>
         <file>qml/PageTemplate.qml</file>
