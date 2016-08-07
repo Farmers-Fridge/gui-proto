@@ -7,6 +7,9 @@ PageTemplate {
     id: stockPage
     signal stopStockPagePrivate()
 
+    // Hide header:
+    headerVisible: false
+
     // Time out:
     function onIdleTimeOut()
     {

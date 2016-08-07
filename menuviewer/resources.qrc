@@ -47,5 +47,6 @@
         <file>qml/PageTemplate.qml</file>
         <file>assets/ico-breakfast.png</file>
         <file>assets/ico-dishes.png</file>
+        <file>assets/ico-detailed_contents_placeholder.png</file>
     </qresource>
 </RCC>

@@ -69,7 +69,7 @@ PathView {
         height: pathView.height
         menuImageUrl: getMenuImageUrl()
         //nutritionFactImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, nutrition)
-        nutritionFactImageUrl: "qrc:/assets/ico-question.png"
+        nutritionFactImageUrl: "qrc:/assets/Carousel Images Empty Plate.png"
 
         // Show nutritional info:
         function onShowNutritionalInfo()

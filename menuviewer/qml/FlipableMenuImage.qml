@@ -35,9 +35,8 @@ Flipable {
     back: Image {
         id: backImage
         cache: true
-        width: frontImage.width
-        height: frontImage.height
         fillMode: Image.PreserveAspectFit
+        height: frontImage.height
         anchors.centerIn: parent
         onStatusChanged: {
             if (status === Image.Error)

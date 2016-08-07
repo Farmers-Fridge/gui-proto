@@ -173,6 +173,14 @@ PageTemplate {
                 }
             }
 
+            // Image place holder:
+            Image {
+                source: "qrc:/assets/ico-detailed_contents_placeholder.png"
+                anchors.top: currentVendItemName.bottom
+                anchors.topMargin: 8
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
             // Add item to cart:
             ImageButton {
                 id: addItem

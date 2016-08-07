@@ -14,6 +14,7 @@ Item {
         width: _settings.toggleButtonWidth
         height: _settings.toggleButtonHeight
         color: _settings.ffToggleButtonUncheckedColor
+
         MouseArea {
             anchors.fill: parent
             onClicked: container.clicked()
@@ -26,6 +27,11 @@ Item {
         color: _settings.ffWhite
         anchors.right: parent.right
         anchors.verticalCenter: checkBox.verticalCenter
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: container.clicked()
+        }
     }
 
     // States:
@@ -37,5 +43,4 @@ Item {
             color: _settings.ffToggleButtonCheckedColor
         }
     }
-
 }

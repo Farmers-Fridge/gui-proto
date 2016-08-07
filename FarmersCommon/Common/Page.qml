@@ -1,13 +1,13 @@
 import QtQuick 2.5
 
 Rectangle {
-    color: "#F6F8F4"
+    color: _settings.ffIvoryLight
 
     // Page id:
     property string pageId
 
     // Idle time out (5 secs):
-    property int idleTimeOut: 50000
+    property int idleTimeOut: _settings.pageIdleTimeOut
 
     // Reserved area clicked:
     signal reservedAreaClicked()
