@@ -1,6 +1,7 @@
 import QtQuick 2.5
 
 Item {
+    // Global colors:
     readonly property color ffBlack: "black"
     readonly property color ffIvoryLight: "#F6F8F3"
     readonly property color ffGreen: "#BCD4B9"
@@ -11,6 +12,14 @@ Item {
     readonly property color ffTransparent: "transparent"
     readonly property color ffBrown: "brown"
     readonly property color ffRed: "red"
+    readonly property color ffWhite: "white"
+
+    // Used for colorizing rows in cart view:
+    readonly property color ffRowColor1: "#C8DBC7"
+    readonly property color ffRowColor3: "#E1D9C6"
+    readonly property color ffRowColor3: "#BABBAB"
+
+    // Others:
     readonly property real footerRatio: .12
     readonly property real headerRatio: (footerRatio/2)*3
     readonly property int idlePageTimeOut: 3000

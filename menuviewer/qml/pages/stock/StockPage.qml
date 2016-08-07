@@ -66,7 +66,7 @@ PageTemplate {
             StandardText {
                 id: serverLabel
                 anchors.centerIn: parent
-                color: "white"
+                color: _settings.ffWhite
             }
         }
 

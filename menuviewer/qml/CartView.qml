@@ -8,7 +8,7 @@ ListView {
     snapMode: ListView.SnapOneItem
 
     // Row colors:
-    property variant rowColors: ["#C8DBC7", "#E1D9C6", "#BABBAB"]
+    property variant rowColors: [_settings.ffRowColor1, _settings.ffRowColor2, _settings.ffRowColor3]
     delegate: Item {
         id: delegate
         width: parent.width
@@ -47,7 +47,7 @@ ListView {
                 // Image loading background
                 Rectangle {
                     id: imageLoadingBkg
-                    color: "white"
+                    color: _settings.ffWhite
                     anchors.left: parent.left
                     anchors.leftMargin: 8
                     width: parent.height
@@ -55,7 +55,7 @@ ListView {
                     anchors.verticalCenter: parent.verticalCenter
                     visible: originalImage.status !== Image.Ready
                     Rectangle {
-                        color: "darkgreen"
+                        color: _settings.ffGreen
                         antialiasing: true
                         anchors { fill: parent; margins: 3 }
                     }

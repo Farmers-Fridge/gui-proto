@@ -130,8 +130,8 @@ PageTemplate {
         // Bottom area:
         Rectangle {
             id: bottomArea
-            color: "transparent"
-            border.color: "gray"
+            color: _settings.ffTransparent
+            border.color: _settings.ffGray
             anchors.bottom: parent.bottom
             width: parent.width
             height: Math.round((1/3)*parent.height)

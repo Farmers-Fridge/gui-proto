@@ -30,7 +30,7 @@ Item {
         // Image loading background
         Rectangle {
             id: imageLoadingBkg
-            color: "white"
+            color: _settings.ffWhite
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             antialiasing: true
@@ -38,7 +38,7 @@ Item {
             height: width
             visible: !flipableMenuImage.frontImageReady
             Rectangle {
-                color: "darkgreen"
+                color: _settings.ffGreen
                 antialiasing: true
                 anchors { fill: parent; margins: 3 }
             }

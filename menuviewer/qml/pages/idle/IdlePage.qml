@@ -3,7 +3,7 @@ import Common 1.0
 import "../.."
 
 Rectangle {
-    color: "#F6F8F4"
+    color: _settings.ffIvoryLight
     signal idlePageClicked()
 
     // Define behavior on opacity:

@@ -18,7 +18,7 @@ Item {
                 font.pixelSize: 28
                 text: versionModel + " " + statusModel
                 wrapMode: Text.WordWrap
-                color: "white"
+                color: _settings.ffWhite
             }
         }
     }

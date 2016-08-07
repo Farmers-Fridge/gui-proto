@@ -113,7 +113,7 @@ Rectangle {
 
             // Filter area:
             Rectangle {
-                color: "lightgray"
+                color: _settings.ffLightGray
                 width: parent.width
                 height: parent.height/2
                 anchors.centerIn: parent
