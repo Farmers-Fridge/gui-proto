@@ -70,7 +70,7 @@ Rectangle {
             onClicked: cartClicked()
             visible: false
 
-            StandardText {
+            LargeBoldText {
                 anchors.centerIn: parent
                 anchors.horizontalCenterOffset: -21
                 anchors.verticalCenterOffset: -18

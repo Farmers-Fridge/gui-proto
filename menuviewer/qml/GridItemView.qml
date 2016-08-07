@@ -115,13 +115,16 @@ GridView {
                 id: footer
                 anchors.bottom: parent.bottom
                 width: parent.width
-                height: 0.2*parent.height
+                height: 0.33*parent.height
 
                 // Vend item name:
                 StandardText {
+                    id: ventItemNameText
                     anchors.top: parent.top
-                    anchors.topMargin: 14
+                    anchors.topMargin: 10
                     anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width*85/100
+                    wrapMode: Text.WordWrap
                     text: vendItemName
                     font.italic: true
                     color: "#55575B"
@@ -129,8 +132,9 @@ GridView {
 
                 // Item price:
                 StandardText {
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 14
+                    id: priceText
+                    anchors.top: ventItemNameText.bottom
+                    anchors.bottomMargin: 10
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: price
                     color: "gray"

@@ -29,6 +29,7 @@ Item {
     LargeBoldText {
         id: label
         anchors.centerIn: parent
+        anchors.verticalCenterOffset: 20
         color: selected ? "white" : _settings.ffDarkGray
         text: categoryName
     }
