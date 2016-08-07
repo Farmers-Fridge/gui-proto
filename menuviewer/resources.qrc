@@ -8,7 +8,6 @@
         <file>qml/pages/checkout/CheckOutPage.qml</file>
         <file>qml/Header.qml</file>
         <file>qml/Footer.qml</file>
-        <file>qml/Settings.qml</file>
         <file>qml/ReservedArea.qml</file>
         <file>qml/CategoryListModel.qml</file>
         <file>qml/GridItemView.qml</file>
