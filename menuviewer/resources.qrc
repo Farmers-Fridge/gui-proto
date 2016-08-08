@@ -49,5 +49,6 @@
         <file>assets/ico-dishes.png</file>
         <file>assets/ico-detailed_contents_placeholder.png</file>
         <file>assets/ico-logo.png</file>
+        <file>assets/ico-nutrition-fact-example.png</file>
     </qresource>
 </RCC>

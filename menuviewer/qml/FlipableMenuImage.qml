@@ -38,6 +38,15 @@ Flipable {
         fillMode: Image.PreserveAspectFit
         height: frontImage.height
         anchors.centerIn: parent
+
+        // Nutrition fact example:
+        Image {
+            height: parent.height*3/4
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/assets/ico-nutrition-fact-example.png"
+            anchors.centerIn: parent
+        }
+
         onStatusChanged: {
             if (status === Image.Error)
                 backImage.source = "qrc:/assets/ico-question.png"
