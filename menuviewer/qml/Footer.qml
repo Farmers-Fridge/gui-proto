@@ -10,6 +10,10 @@ Rectangle {
     property alias couponVisible: couponButton.visible
     property alias pigVisible: pigButton.visible
     property alias cartVisible: cartButton.visible
+    property alias footerRightText: footerRightText.text
+    property alias footerRightTextVisible: footerRightText.visible
+    property alias footerCentralText: footerCentralText.text
+    property alias footerCentralTextVisible: footerCentralText.visible
     signal homeClicked()
     signal emailClicked()
     signal couponClicked()
@@ -103,6 +107,24 @@ Rectangle {
             id: bottomArea
             anchors.fill: parent
             fillMode: Image.Stretch
+
+            // Footer central text:
+            StandardText {
+                id: footerCentralText
+                color: _settings.ffWhite
+                anchors.centerIn: parent
+                visible: false
+            }
+
+            // Footer right text:
+            StandardText {
+                id: footerRightText
+                color: _settings.ffWhite
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                visible: false
+            }
         }
     }
 }

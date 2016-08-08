@@ -92,7 +92,6 @@ PageTemplate {
                 source: "qrc:/assets/ico-ok.png"
                 onClicked: {
                     _controller.currentNetworkIP = url
-                    //pageMgr.setupStockPage()
                     pageMgr.loadPage("STOCK_PAGE")
                 }
             }

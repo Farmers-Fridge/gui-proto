@@ -13,6 +13,18 @@ Page {
     // Contents:
     property alias contents: contents.children
 
+    // Footer central text:
+    property alias footerCentralText: footer.footerCentralText
+
+    // Footer central text visible?
+    property alias footerCentralTextVisible: footer.footerCentralTextVisible
+
+    // Footer right text:
+    property alias footerRightText: footer.footerRightText
+
+    // Footer right text visible?
+    property alias footerRightTextVisible: footer.footerRightTextVisible
+
     // Handle tab clicked:
     signal tabClicked()
 
@@ -65,7 +77,7 @@ Page {
         color: _settings.ffIvoryLight
     }
 
-    // Header:
+    // Footer:
     Footer {
         id: footer
         width: parent.width

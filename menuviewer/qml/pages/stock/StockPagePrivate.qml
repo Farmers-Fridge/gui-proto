@@ -14,6 +14,12 @@ Page {
         notepad.state = ""
     }
 
+    // Stop stock page private:
+    function onStopStockPagePrivate()
+    {
+        xmlRowModel.source = ""
+    }
+
     // XML row model:
     CustomXmlListModel {
         id: xmlRowModel

@@ -27,6 +27,7 @@ PageTemplate {
     // Pig clicked:
     function onPigClicked()
     {
+        stopStockPagePrivate()
         pageMgr.loadPreviousPage()
     }
 
@@ -37,6 +38,10 @@ PageTemplate {
         Loader {
             id: pageLoader
             anchors.fill: parent
+            onStatusChanged: {
+                if (status === Loader.Ready)
+                    stockPage.stopStockPagePrivate.connect(item.onStopStockPagePrivate)
+            }
         }
 
         // Page component:
@@ -56,8 +61,7 @@ PageTemplate {
         }
     }
 
-    /* TO DO
-    footer: Item {
+    Item {
         anchors.fill: parent
 
         // Display server label:
@@ -87,10 +91,14 @@ PageTemplate {
                 if (status === XmlListModel.Ready) {
                     var versionModel = xmlVersionModel.get(0).versionModel
                     var statusModel = xmlVersionModel.get(0).statusModel
-                    serverLabel.text = versionModel + " " + statusModel
+                    var result = versionModel + " " + statusModel
+                    if (result.length > 0)
+                    {
+                        footerCentralTextVisible = true
+                        footerCentralText = result
+                    }
                 }
             }
         }
     }
-    */
 }

@@ -8,6 +8,10 @@ PageTemplate {
     // Grid view current index:
     property int gridViewIndex: 0
 
+    // Footer right text:
+    footerRightText: qsTr("Subtotal $") + _cartModel.cartSubTotal
+    footerRightTextVisible: _cartModel.cartSubTotal > 0
+
     // Pig clicked:
     function onPigClicked()
     {
