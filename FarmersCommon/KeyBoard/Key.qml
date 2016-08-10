@@ -10,8 +10,9 @@ Item {
     property alias mainFont: mainLabelItem.font
     property alias mainFontColor: mainLabelItem.color
 
-    property color keyColor: "gray"
-    property color keyPressedColor: "white"
+    property color keyColor: _settings.ffGray
+    property color keyPressedColor: _settings.ffWhite
+    property color keyBorderColor: _settings.ffTransparent
 
     property alias radius: backgroundItem.radius
 
@@ -22,7 +23,7 @@ Item {
         anchors.fill: parent
         anchors.margins: root.bounds
         color: mouseArea.pressed ? keyPressedColor : keyColor
-
+        border.color: keyBorderColor
         Image {
             id: icon
             smooth: true

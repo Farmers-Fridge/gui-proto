@@ -72,7 +72,10 @@ Item {
             Qt.quit()
         else
         if (enteredText === _appData.tabletGuiCode)
+        {
             pageMgr.loadPage("NETWORK_PAGE")
+            mainApplication.state = "active"
+        }
         privateNumericKeyPad.state = ""
     }
 

@@ -71,76 +71,90 @@ Rectangle {
     }
 
     // Main layout:
-    Column {
+    Item {
         anchors.fill: parent
-        Repeater {
-            model: keyboardRowModel.model
+        Image {
+            anchors.fill: parent
+            source: "qrc:/assets/ico-farmers_bkg.png"
+            Rectangle {
+                color: _settings.ffGreen
+                anchors.fill: parent
+                opacity: .33
+            }
+        }
+        Column {
+            anchors.fill: parent
+            Repeater {
+                model: keyboardRowModel.model
 
-            Row {
-                // Json list model:
-                JSONListModel {
-                    id: keyboardKeyModel
-                    source: kbdSettings.keyboardsDir + kbdSettings.source
-                    query: "$.Keyboard.Row["+index+"].Key[*]"
-                }
+                Row {
+                    // Json list model:
+                    JSONListModel {
+                        id: keyboardKeyModel
+                        source: kbdSettings.keyboardsDir + kbdSettings.source
+                        query: "$.Keyboard.Row["+index+"].Key[*]"
+                    }
 
-                // Key repeater:
-                Repeater {
-                    id: keyRepeater
-                    model: keyboardKeyModel.model
+                    // Key repeater:
+                    Repeater {
+                        id: keyRepeater
+                        model: keyboardKeyModel.model
 
-                    Key {
-                        id: key
-                        width: kbdSettings.keyWidth * model.ratio
-                        height: kbdSettings.keyHeight
-                        iconSource: model.icon !== "" ? kbdSettings.assetsDir + model.icon : ""
-                        mainLabel: showSymbol ? model.symbol : model.label
-                        mainFont: proxyMainTextItem.font
-                        mainFontColor: proxyMainTextItem.color
-                        keyColor: kbdSettings.keyColor
-                        keyPressedColor: kbdSettings.keyPressedColor
-                        bounds: kbdSettings.bounds
-                        radius: 8
-                        onClicked: {
-                            if (model.command !== "")
-                            {
-                                switch(model.command)
+                        Key {
+                            id: key
+                            width: kbdSettings.keyWidth * model.ratio
+                            height: kbdSettings.keyHeight
+                            iconSource: model.icon !== "" ? kbdSettings.assetsDir + model.icon : ""
+                            mainLabel: showSymbol ? model.symbol : model.label
+                            mainFont: proxyMainTextItem.font
+                            mainFontColor: proxyMainTextItem.color
+                            keyColor: _settings.ffTransparent
+                            keyBorderColor: _settings.ffWhite
+                            keyPressedColor: kbdSettings.keyPressedColor
+                            bounds: kbdSettings.bounds
+                            radius: 8
+
+                            onClicked: {
+                                if (model.command !== "")
                                 {
-                                case "shift":
-                                    keyBoard.allUpperCase = !keyBoard.allUpperCase
-                                    break
-                                case "backspace":
-                                    keyBoard.backSpaceClicked()
-                                    break
-                                case "enter":
-                                    keyBoard.enterClicked()
-                                    enteredText = ""
-                                    break
-                                case "return":
-                                    keyBoard.returnClicked()
-                                    enteredText = ""
-                                    break
-                                case "symbol":
-                                    keyBoard.showSymbol = !keyBoard.showSymbol
-                                    break
-                                case ".com":
-                                    keyBoard.dotComClicked(model.label)
-                                    break
-                                case "space":
-                                    keyBoard.spaceClicked()
-                                    break
-                                case "clear":
-                                    keyBoard.clearClicked()
-                                    break
-                                default: break
+                                    switch(model.command)
+                                    {
+                                    case "shift":
+                                        keyBoard.allUpperCase = !keyBoard.allUpperCase
+                                        break
+                                    case "backspace":
+                                        keyBoard.backSpaceClicked()
+                                        break
+                                    case "enter":
+                                        keyBoard.enterClicked()
+                                        enteredText = ""
+                                        break
+                                    case "return":
+                                        keyBoard.returnClicked()
+                                        enteredText = ""
+                                        break
+                                    case "symbol":
+                                        keyBoard.showSymbol = !keyBoard.showSymbol
+                                        break
+                                    case ".com":
+                                        keyBoard.dotComClicked(model.label)
+                                        break
+                                    case "space":
+                                        keyBoard.spaceClicked()
+                                        break
+                                    case "clear":
+                                        keyBoard.clearClicked()
+                                        break
+                                    default: break
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                // Retrieve text (lower or upper case):
-                                var actualText = allUpperCase ? mainLabel.toUpperCase() : mainLabel
-                                enteredText += actualText
-                                keyBoard.keyClicked(actualText)
+                                else
+                                {
+                                    // Retrieve text (lower or upper case):
+                                    var actualText = allUpperCase ? mainLabel.toUpperCase() : mainLabel
+                                    enteredText += actualText
+                                    keyBoard.keyClicked(actualText)
+                                }
                             }
                         }
                     }

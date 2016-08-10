@@ -2,26 +2,28 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.2
 import QtQuick.Dialogs 1.1
+import QtQuick.Controls.Styles 1.4
 import Components 1.0
 import ".."
 
 Rectangle {
     id: notePad
-    color: "gray"
+    radius: 3
+    color: _settings.ffGreen
     width: keyBoard.width
     height: 2*keyBoard.height
     property int toolBarItemSpacing: 4
     property int toolBarHeight: 48
     property string spaceStr: " "
     property bool simple: false
-	
-	// Set default state:
+
+    // Set default state:
     opacity: 0
     visible: opacity > 0
 
     // Invoker:
     property variant invoker
-	
+
     // Clear:
     function clear()
     {
@@ -191,6 +193,10 @@ Rectangle {
     // Text area:
     TextArea {
         id: textArea
+        style: TextAreaStyle {
+            textColor: _settings.ffDarkGreen
+            backgroundColor: _settings.ffRowColor2
+        }
         Accessible.name: "document"
         frameVisible: false
         width: parent.width
@@ -246,8 +252,8 @@ Rectangle {
             errorDialog.visible = true
         }
     }
-	
-	
+
+
     // On state:
     states: State {
         name: "on"
