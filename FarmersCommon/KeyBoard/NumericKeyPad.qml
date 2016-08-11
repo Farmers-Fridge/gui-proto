@@ -1,4 +1,6 @@
 import QtQuick 2.5
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
 Rectangle {
     id: keyPad
@@ -31,9 +33,33 @@ Rectangle {
     // Entered text:
     property string enteredText: ""
 
+    // Show header?
+    property bool showHeader: true
+
     // Signals:
     signal okClicked(string enteredText)
     signal cancelClicked()
+
+    // Header:
+    TextField {
+        anchors.bottom: parent.top
+        width: parent.width
+        height: 80
+        text: enteredText
+        visible: showHeader
+        style: TextFieldStyle {
+            font.pixelSize: 48
+            font.bold: true
+            textColor: _settings.ffBrown
+            background: Rectangle {
+                radius: 2
+                implicitWidth: 100
+                implicitHeight: 24
+                border.color: "#333"
+                border.width: 1
+            }
+        }
+    }
 
     ListModel {
         id: keyModel
@@ -162,9 +188,9 @@ Rectangle {
                         if (keyId === 10)
                             invoker.onOKClicked(enteredText)
                         else
-                        if (keyId === 11) {
-                            keyPad.state = ""
-                        }
+                            if (keyId === 11) {
+                                keyPad.state = ""
+                            }
                     }
                     else {
                         currentKey = keyId
