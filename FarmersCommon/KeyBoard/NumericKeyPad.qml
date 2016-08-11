@@ -2,7 +2,7 @@ import QtQuick 2.5
 
 Rectangle {
     id: keyPad
-    color: kbdSettings.bkgColor
+    color: _settings.keyboardBkgColor
     width: 3*(kbdSettings.keyWidth+4)+4
     height: 4*(kbdSettings.keyHeight+4)+4
     opacity: 0
@@ -41,71 +41,71 @@ Rectangle {
             keyText: "0"
             keyId: 0
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "1"
             keyId: 1
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "2"
             keyId: 2
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "3"
             keyId: 3
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "4"
             keyId: 4
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "5"
             keyId: 5
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "6"
             keyId: 6
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "7"
             keyId: 7
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "8"
             keyId: 8
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: "9"
             keyId: 9
             keyIcon: ""
-            keyPressedColor: "#1ABC9C"
-            keyReleasedColor: "#34495E"
+            keyPressedColor: "lightgreen"
+            keyReleasedColor: "#9B5A3C"
         }
         ListElement {
             keyText: ""
@@ -154,7 +154,6 @@ Rectangle {
                 mainLabel: keyText
                 mainFont: proxyMainTextItem.font
                 mainFontColor: proxyMainTextItem.color
-                keyPressedColor: "#1ABC9C"
                 enabled: keyEnabledState(keyId)
                 onClicked: {
                     if (keyId >= 10)
@@ -174,7 +173,7 @@ Rectangle {
                         enteredText += keyText
                     }
                 }
-                keyColor: "#34495E"
+                keyColor: "#9B5A3C"
                 opacity: enabled ? 1 : .5
             }
         }

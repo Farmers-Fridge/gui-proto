@@ -2,7 +2,7 @@ import QtQuick 2.5
 
 Rectangle {
     id: keyPad
-    color: kbdSettings.bkgColor
+    color: _settings.keyboardBkgColor
     width: 3*(kbdSettings.keyWidth+4)+4
     height: 4*(kbdSettings.keyHeight+4)+4
     opacity: 0
@@ -154,7 +154,6 @@ Rectangle {
                 mainLabel: keyText
                 mainFont: proxyMainTextItem.font
                 mainFontColor: proxyMainTextItem.color
-                keyPressedColor: "#1ABC9C"
                 enabled: keyEnabledState(keyId)
                 onClicked: {
                     if (keyId >= 10)
@@ -172,7 +171,7 @@ Rectangle {
                         enteredText = keyText
                     }
                 }
-                keyColor: "#34495E"
+				keyColor: _settings.ffBrown     
                 opacity: enabled ? 1 : .5
             }
         }

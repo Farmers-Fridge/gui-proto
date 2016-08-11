@@ -5,6 +5,7 @@ Item {
     readonly property color ffBlack: "black"
     readonly property color ffIvoryLight: "#F6F8F3"
     readonly property color ffGreen: "#BCD4B9"
+    readonly property color ffLightGreen: "lightgreen"
     readonly property color ffDarkGreen: "darkgreen"
     readonly property color ffLightGray: "lightgray"
     readonly property color ffGray: "#606365"
@@ -14,7 +15,7 @@ Item {
     readonly property color ffToggleButtonUncheckedColor: "#DADFDB"
     readonly property color ffOrange: "orange"
     readonly property color ffTransparent: "transparent"
-    readonly property color ffBrown: "brown"
+    readonly property color ffBrown: "#9B5A3C"
     readonly property color ffRed: "red"
     readonly property color ffWhite: "white"
 
@@ -32,5 +33,10 @@ Item {
     readonly property int toggleButtonWidth: 16
     readonly property int toggleButtonHeight: 16
     readonly property int zMax: 1e9
+
+    // Keyboard:
+    readonly property color keyPressedColor: ffOrange
+    readonly property color keyReleasedColor: ffBrown
+    readonly property color keyboardBkgColor: ffLightGreen
 }
 

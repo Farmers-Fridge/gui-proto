@@ -9,9 +9,6 @@ Item {
     // Assets dir:
     readonly property string assetsDir: "assets/"
 
-    // Bkg color:
-    readonly property string bkgColor: "gray"
-
     // Source:
     readonly property string source: "keyboard_us.json"
 
@@ -23,8 +20,8 @@ Item {
     readonly property int bounds: 3
 
     // Key color:
-    readonly property color keyColor: "#34495E"
-    readonly property color keyPressedColor: "#1ABC9C"
+    readonly property color keyColor: _settings.ffBrown
+    readonly property color keyPressedColor: _settings.ffGreen
 
     // Key label color:
     readonly property color keyLabelColor: "#F2F2F2"

@@ -9,7 +9,7 @@ import ".."
 Rectangle {
     id: notePad
     radius: 3
-    color: _settings.ffGreen
+    color: _settings.keyboardBkgColor
     width: keyBoard.width
     height: 2*keyBoard.height
     property int toolBarItemSpacing: 4
@@ -126,7 +126,7 @@ Rectangle {
     // Quit:
     Action {
         id: exitAction
-        iconSource: "assets/ico-cross.png"
+        iconSource: "assets/ico-leaf.png"
         onTriggered: {
             notePad.state = ""
             notePad.clear()
@@ -152,7 +152,7 @@ Rectangle {
             ToolBarSeparator {}
             ToolButton {
                 id: colorButton
-                property variant color: document.textColor
+                property color color: document.textColor
                 Rectangle {
                     id: colorRect
                     anchors.fill: parent

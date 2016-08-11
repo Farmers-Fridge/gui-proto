@@ -38,7 +38,7 @@ Rectangle {
     signal keyClicked(string key)
 
     // Bgk color:
-    color: kbdSettings.bkgColor
+    color: _settings.keyboardBkgColor
 
     // Settings:
     KeyboardSettings {
@@ -73,15 +73,6 @@ Rectangle {
     // Main layout:
     Item {
         anchors.fill: parent
-        Image {
-            anchors.fill: parent
-            source: "qrc:/assets/ico-farmers_bkg.png"
-            Rectangle {
-                color: _settings.ffGreen
-                anchors.fill: parent
-                opacity: .33
-            }
-        }
         Column {
             anchors.fill: parent
             Repeater {
@@ -108,9 +99,6 @@ Rectangle {
                             mainLabel: showSymbol ? model.symbol : model.label
                             mainFont: proxyMainTextItem.font
                             mainFontColor: proxyMainTextItem.color
-                            keyColor: _settings.ffTransparent
-                            keyBorderColor: _settings.ffWhite
-                            keyPressedColor: kbdSettings.keyPressedColor
                             bounds: kbdSettings.bounds
                             radius: 8
 

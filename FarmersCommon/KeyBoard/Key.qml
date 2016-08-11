@@ -10,8 +10,8 @@ Item {
     property alias mainFont: mainLabelItem.font
     property alias mainFontColor: mainLabelItem.color
 
-    property color keyColor: _settings.ffGray
-    property color keyPressedColor: _settings.ffWhite
+    property color keyColor: _settings.keyReleasedColor
+    property color keyPressedColor: _settings.keyPressedColor
     property color keyBorderColor: _settings.ffTransparent
 
     property alias radius: backgroundItem.radius
