@@ -6,6 +6,7 @@ ListView {
     clip: true
     model: _controller.cartModel
     snapMode: ListView.SnapOneItem
+    spacing: 4
 
     // Row colors:
     property variant rowColors: [_settings.ffRowColor1, _settings.ffRowColor2, _settings.ffRowColor3]

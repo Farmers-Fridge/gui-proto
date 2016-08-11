@@ -66,11 +66,25 @@ PageTemplate {
         anchors.fill: parent
 
         // Cart view:
-        CartView {
-            id: cartView
+        Rectangle {
             width: parent.width
             anchors.top: parent.top
             anchors.bottom: totalView.top
+            color: "transparent"
+            // Cart view:
+            CartView {
+                id: cartView
+                anchors.fill: parent
+                anchors.margins: 4
+            }
+        }
+
+        // Separator:
+        Rectangle {
+            width: parent.width
+            height: 1
+            anchors.bottom: totalView.top
+            color: _settings.ffGray
         }
 
         // Bottom contents:
