@@ -14,20 +14,44 @@
 
     "pages": [
         {
-            "pageId": "MENU_PAGE",
+            "pageId": "MENU_PRESENTATION_PAGE",
             "url": "qrc:/qml/pages/menuviewer/menu/PresentationPage.qml"
         },
         {
-            "pageId": "CHECKOUT_PAGE",
+            "pageId": "MENU_CHECKOUT_PAGE",
             "url": "qrc:/qml/pages/menuviewer/checkout/CheckOutPage.qml"
         },
         {
-            "pageId": "NETWORK_PAGE",
+            "pageId": "STOCK_NETWORK_PAGE",
             "url": "qrc:/qml/pages/stock/network/NetworkPage.qml"
         },
         {
-            "pageId": "STOCK_PAGE",
+            "pageId": "STOCK_PRESENTATION_PAGE",
             "url": "qrc:/qml/pages/stock/stock/StockPage.qml"
+        },
+        {
+            "pageId": "STATS_INTRO_PAGE",
+            "url": "qrc:/qml/pages/stats/intro/IntroPage.qml"
+        },
+        {
+            "pageId": "STATS_SYSTEM_HEALTH_PAGE",
+            "url": "qrc:/qml/pages/stats/health/SystemHealthPage.qml"
+        },
+        {
+            "pageId": "STATS_ROUTE_PAGE",
+            "url": "qrc:/qml/pages/stats/route/RoutePage.qml"
+        },
+        {
+            "pageId": "STATS_NETWORK_PAGE",
+            "url": "qrc:/qml/pages/stats/network/NetworkPage.qml"
+        },
+        {
+            "pageId": "STATS_STOCK_PAGE",
+            "url": "qrc:/qml/pages/stats/stock/StockPage.qml"
+        },
+        {
+            "pageId": "STATS_STATISTICS_PAGE",
+            "url": "qrc:/qml/pages/stats/statistics/StatisticsPage.qml"
         }
     ]
 }

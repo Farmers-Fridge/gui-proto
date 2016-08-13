@@ -79,7 +79,7 @@ PageTemplate {
             // Return pressed:
             onAccepted: {
                 _controller.currentNetworkIP = url
-                pageMgr.loadPage("STOCK_PAGE")
+                pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
             }
 
             // OK:
@@ -92,7 +92,7 @@ PageTemplate {
                 source: "qrc:/assets/ico-ok.png"
                 onClicked: {
                     _controller.currentNetworkIP = url
-                    pageMgr.loadPage("STOCK_PAGE")
+                    pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
                 }
             }
 
@@ -143,7 +143,7 @@ PageTemplate {
                     onEntered: gridView.currentIndex = index
                     onClicked: {
                         _controller.currentNetworkIP = url
-                        pageMgr.loadPage("STOCK_PAGE")
+                        pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
                     }
                 }
             }

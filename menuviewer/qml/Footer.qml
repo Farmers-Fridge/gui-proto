@@ -120,10 +120,24 @@ Rectangle {
             StandardText {
                 id: footerRightText
                 color: _settings.ffWhite
-                anchors.right: parent.right
+                anchors.right: reservedArea.left
                 anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
                 visible: false
+            }
+
+            // Reserved area:
+            ReservedArea {
+                id: reservedArea
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                height: parent.height
+                width: height
+                anchors.verticalCenter: parent.verticalCenter
+                onReservedAreaClicked: {
+                    privateNumericKeyPad.invoker = mainApplication
+                    privateNumericKeyPad.state = "on"
+                }
             }
         }
     }

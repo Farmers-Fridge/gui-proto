@@ -84,11 +84,11 @@ Page {
         height: parent.height*_settings.footerRatio
         anchors.bottom: parent.bottom
         homeVisible: true
-        cartVisible: pageMgr.currentPageId === "MENU_PAGE"
-        emailVisible: pageMgr.currentPageId === "CHECKOUT_PAGE"
-        couponVisible: pageMgr.currentPageId === "CHECKOUT_PAGE"
-        pigVisible: (pageMgr.currentPageId !== "MENU_PAGE") ||
-            ((pageMgr.currentPageId === "MENU_PAGE") && (_viewMode === "pathview"))
+        cartVisible: pageMgr.currentPageId === "MENU_PRESENTATION_PAGE"
+        emailVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
+        couponVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
+        pigVisible: (pageMgr.currentPageId !== "MENU_PRESENTATION_PAGE") ||
+            ((pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") && (_viewMode === "pathview"))
         bottomAreaSource: "qrc:/assets/ico-primary-darkbar.png"
         onHomeClicked: menuPageTemplate.onHomeClicked()
         onEmailClicked: menuPageTemplate.onEmailClicked()

@@ -33,7 +33,7 @@ PageTemplate {
     // Return next page id:
     function nextPageId()
     {
-        return "CHECKOUT_PAGE"
+        return "MENU_CHECKOUT_PAGE"
     }
 
     // Load path view:

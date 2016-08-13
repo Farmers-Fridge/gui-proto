@@ -73,7 +73,13 @@ Item {
         else
         if (enteredText === _appData.stockCode)
         {
-            pageMgr.loadPage("NETWORK_PAGE")
+            pageMgr.loadPage("STOCK_NETWORK_PAGE")
+            mainApplication.state = "active"
+        }
+        else
+        if (enteredText === _appData.statsCode)
+        {
+            pageMgr.loadPage("STOCK_NETWORK_PAGE")
             mainApplication.state = "active"
         }
         privateNumericKeyPad.state = ""
@@ -184,19 +190,6 @@ Item {
         id: notepad
         anchors.centerIn: parent
         z: _settings.zMax
-    }
-
-    // Reserved area:
-    ReservedArea {
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        height: (_settings.footerRatio/2)*parent.height
-        width: height
-        z: _settings.zMax
-        onReservedAreaClicked: {
-            privateNumericKeyPad.invoker = mainApplication
-            privateNumericKeyPad.state = "on"
-        }
     }
 
     // Busy indicator:
