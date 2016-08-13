@@ -8,25 +8,26 @@
     "categoryListSource": "/config/vendItems",
     "categoryListQuery": "/vendItems/item",
     "urlPublicRootValue": "bytebucket.org/jacbop/kiosk-assets/raw/master",
-    "tabletGuiCode": "5678",
+    "stockCode": "5678",
+    "statsCode": "3456",
     "exitCode": "1234",
 
     "pages": [
         {
             "pageId": "MENU_PAGE",
-            "url": "qrc:/qml/pages/menu/PresentationPage.qml"
+            "url": "qrc:/qml/pages/menuviewer/menu/PresentationPage.qml"
         },
         {
             "pageId": "CHECKOUT_PAGE",
-            "url": "qrc:/qml/pages/checkout/CheckOutPage.qml"
+            "url": "qrc:/qml/pages/menuviewer/checkout/CheckOutPage.qml"
         },
         {
             "pageId": "NETWORK_PAGE",
-            "url": "qrc:/qml/pages/network/NetworkPage.qml"
+            "url": "qrc:/qml/pages/stock/network/NetworkPage.qml"
         },
         {
             "pageId": "STOCK_PAGE",
-            "url": "qrc:/qml/pages/stock/StockPage.qml"
+            "url": "qrc:/qml/pages/stock/stock/StockPage.qml"
         }
     ]
 }

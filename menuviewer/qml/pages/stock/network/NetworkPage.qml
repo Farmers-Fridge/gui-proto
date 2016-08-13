@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.XmlListModel 2.0
 import Common 1.0
-import "../.."
+import "../../.."
 
 PageTemplate {
     // Hide header:

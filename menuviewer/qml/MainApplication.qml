@@ -3,7 +3,7 @@ import QtQuick.XmlListModel 2.0
 import Common 1.0
 import KeyBoard 1.0
 import Commands 1.0
-import "pages/idle"
+import "pages/menuviewer/idle"
 
 Item {
     // Load path view:
@@ -71,7 +71,7 @@ Item {
         if (enteredText === _appData.exitCode)
             Qt.quit()
         else
-        if (enteredText === _appData.tabletGuiCode)
+        if (enteredText === _appData.stockCode)
         {
             pageMgr.loadPage("NETWORK_PAGE")
             mainApplication.state = "active"

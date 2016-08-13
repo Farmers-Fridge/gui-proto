@@ -3,9 +3,6 @@
         <file>qml/main.qml</file>
         <file>json/application.json</file>
         <file>qml/MainApplication.qml</file>
-        <file>qml/pages/idle/IdlePage.qml</file>
-        <file>qml/pages/menu/PresentationPage.qml</file>
-        <file>qml/pages/checkout/CheckOutPage.qml</file>
         <file>qml/Header.qml</file>
         <file>qml/Footer.qml</file>
         <file>qml/ReservedArea.qml</file>
@@ -28,13 +25,6 @@
         <file>assets/ico-question.png</file>
         <file>assets/ico-nav-left.png</file>
         <file>assets/ico-nav-right.png</file>
-        <file>qml/pages/network/NetworkPage.qml</file>
-        <file>qml/pages/stock/StockPage.qml</file>
-        <file>qml/pages/stock/StockPagePrivate.qml</file>
-        <file>qml/pages/stock/StockPageGrid.qml</file>
-        <file>qml/pages/stock/StockPageHeaderBlock.qml</file>
-        <file>qml/pages/stock/StockPageRow.qml</file>
-        <file>qml/pages/stock/StockItem.qml</file>
         <file>assets/ico-ok.png</file>
         <file>assets/ico-email.png</file>
         <file>assets/ico-entercoupon.png</file>
@@ -51,5 +41,27 @@
         <file>assets/ico-nutrition-fact-example.png</file>
         <file>assets/ico-empty_plate.png</file>
         <file>assets/ico-locker.png</file>
+        <file>qml/pages/menuviewer/checkout/CheckOutPage.qml</file>
+        <file>qml/pages/menuviewer/idle/IdlePage.qml</file>
+        <file>qml/pages/menuviewer/menu/PresentationPage.qml</file>
+        <file>qml/pages/stats/health/SystemHealthPage.qml</file>
+        <file>qml/pages/stats/intro/IntroPage.qml</file>
+        <file>qml/pages/stats/network/NetworkPage.qml</file>
+        <file>qml/pages/stats/route/RoutePage.qml</file>
+        <file>qml/pages/stats/statistics/DataBlock.qml</file>
+        <file>qml/pages/stats/statistics/StatisticsPage.qml</file>
+        <file>qml/pages/stats/stock/StockItem.qml</file>
+        <file>qml/pages/stats/stock/StockPage.qml</file>
+        <file>qml/pages/stats/stock/StockPageGrid.qml</file>
+        <file>qml/pages/stats/stock/StockPageHeaderBlock.qml</file>
+        <file>qml/pages/stats/stock/StockPagePrivate.qml</file>
+        <file>qml/pages/stats/stock/StockPageRow.qml</file>
+        <file>qml/pages/stock/network/NetworkPage.qml</file>
+        <file>qml/pages/stock/stock/StockItem.qml</file>
+        <file>qml/pages/stock/stock/StockPage.qml</file>
+        <file>qml/pages/stock/stock/StockPageGrid.qml</file>
+        <file>qml/pages/stock/stock/StockPageHeaderBlock.qml</file>
+        <file>qml/pages/stock/stock/StockPagePrivate.qml</file>
+        <file>qml/pages/stock/stock/StockPageRow.qml</file>
     </qresource>
 </RCC>

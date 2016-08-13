@@ -1,7 +1,7 @@
 import QtQuick 2.5
 import QtQuick.XmlListModel 2.0
 import Common 1.0
-import "../.."
+import "../../.."
 
 PageTemplate {
     id: stockPage
