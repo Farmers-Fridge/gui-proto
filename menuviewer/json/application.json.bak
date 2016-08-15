@@ -12,17 +12,6 @@
     "statsCode": "3456",
     "exitCode": "1234",
 
-	"httpPrefix": "http://s3.amazonaws.com/ff-scratch/",
-    "routes": "http://s3.amazonaws.com/ff-scratch/routes.xml",
-
-    "targetStatisticsColumns": ["name", "transactions", "sales", "coupons"],
-    "statisticsPageUrl": "stats.xml",
-    "statisticsPageUpdateTime": "60000",
-
-    "targetSystemHealthColumns": ["name", "temp", "heartbeat", "lastVend", "checkpoint"],
-    "systemHealthPageUrl": "status.xml",
-    "systemHealthPageUpdateTime": "60000",
-
     "pages": [
         {
             "pageId": "MENU_PRESENTATION_PAGE",
@@ -54,7 +43,7 @@
         },
         {
             "pageId": "STATS_NETWORK_PAGE",
-            "url": "qrc:/qml/pages/stock/network/NetworkPage.qml"
+            "url": "qrc:/qml/pages/stats/network/NetworkPage.qml"
         },
         {
             "pageId": "STATS_STOCK_PAGE",
@@ -63,20 +52,6 @@
         {
             "pageId": "STATS_STATISTICS_PAGE",
             "url": "qrc:/qml/pages/stats/statistics/StatisticsPage.qml"
-        }
-    ],
-    "workflows": [
-        {
-            "name": "SYSTEM_HEALTH",
-            "icon": "qrc:/assets/ico-system-health.png"
-        },
-        {
-            "name": "ROUTES",
-            "icon": "qrc:/assets/ico-routes.png"
-        },
-        {
-            "name": "STATISTICS",
-            "icon": "qrc:/assets/ico-statistics.png"
         }
     ]
 }

@@ -1,12 +1,20 @@
 import QtQuick 2.5
 import QtQuick.XmlListModel 2.0
 import Common 1.0
+import "../../.."
 
-Page {
+PageTemplate {
     property int blockSize: 256
+    headerVisible: false
+
+    // Pig clicked:
+    function onPigClicked()
+    {
+        pageMgr.loadPreviousPage()
+    }
 
     // XML route model:
-    CustomXMLListModel {
+    CustomXmlListModel {
         id: xmlRouteModel
         query: "/hosts/item"
         source: _appData.routes
@@ -14,36 +22,49 @@ Page {
         XmlRole { name: "file"; query: "file/string()"; isKey: true }
     }
 
-    Item {
+    contents: Item {
         id: container
-        width: 3*blockSize
-        height: 3*blockSize
-        anchors.centerIn: parent
+        anchors.fill: parent
 
-        GridView {
-            id: gridView
-            anchors.fill: parent
-            model: xmlRouteModel
-            cellWidth: blockSize
-            cellHeight: blockSize
-            delegate: Item {
-                width: blockSize
-                height: blockSize
-                Rectangle {
-                    color: _colors.ffGreen
-                    anchors.fill: parent
-                    anchors.margins: 8
-                    MouseArea {
+        // Icon:
+        Image {
+            id: logo
+            anchors.top: parent.top
+            anchors.topMargin: 8
+            anchors.horizontalCenter: parent.horizontalCenter
+            source: "qrc:/assets/ico-logo.png"
+        }
+
+        Item {
+            width: 3*blockSize
+            height: 3*blockSize
+            anchors.centerIn: parent
+
+            GridView {
+                id: gridView
+                anchors.fill: parent
+                model: xmlRouteModel
+                cellWidth: blockSize
+                cellHeight: blockSize
+                delegate: Item {
+                    width: blockSize
+                    height: blockSize
+                    Rectangle {
+                        color: _settings.ffGreen
                         anchors.fill: parent
-                        onClicked: {
-                            mainApplication._selectedRoute = _appData.httpPrefix + file
-                            mainApplication.loadNextPage()
+                        anchors.margins: 8
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                mainApplication._selectedRoute = _appData.httpPrefix + file
+                                pageMgr.loadNextPage()
+                            }
                         }
-                    }
-                    CommonText {
-                        anchors.centerIn: parent
-                        color: _colors.ffWhite
-                        text: name
+                        StandardText {
+                            anchors.centerIn: parent
+                            color: _settings.ffWhite
+                            text: name
+                        }
                     }
                 }
             }
@@ -53,7 +74,7 @@ Page {
     // Return next page id:
     function nextPageId()
     {
-        return "NETWORK"
+        return "STATS_NETWORK_PAGE"
     }
 }
 

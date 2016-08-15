@@ -84,7 +84,8 @@ Page {
         height: parent.height*_settings.footerRatio
         anchors.bottom: parent.bottom
         homeVisible: true
-        cartVisible: pageMgr.currentPageId === "MENU_PRESENTATION_PAGE"
+        cartVisible: (pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") &&
+            (_cartModel.cartCount > 0)
         emailVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
         couponVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
         pigVisible: (pageMgr.currentPageId !== "MENU_PRESENTATION_PAGE") ||

@@ -88,7 +88,7 @@ ListView {
                     anchors.left: imageLoadingBkg.right
                     anchors.right: parent.right
                     height: parent.height
-                    color: rowColors[index%3]
+                    color: cartView.rowColors[index%3]
 
                     StandardText {
                         width: parent.width
@@ -125,8 +125,11 @@ ListView {
                     minValue: 0
                     maxValue: 10
                     onValueChanged: {
-                        if (value !== count)
+                        if (value !== count) {
                             _controller.setItemCount(value, vendItemName)
+                            if (_cartModel.cartCount < 1)
+                                pageMgr.loadPreviousPage()
+                        }
                     }
                 }
             }

@@ -1,4 +1,5 @@
 import QtQuick 2.5
+import Common 1.0
 
 Column {
     id: clock
@@ -21,7 +22,7 @@ Column {
     }
 
     // Date text:
-    CommonText {
+    StandardText {
         id: dateText
         width: parent.width
         height: parent.height
@@ -31,7 +32,7 @@ Column {
     }
 
     // Time text:
-    CommonText {
+    StandardText {
         id: timeText
         width: parent.width
         height: parent.height

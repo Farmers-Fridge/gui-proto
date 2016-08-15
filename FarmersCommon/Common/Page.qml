@@ -26,7 +26,7 @@ Rectangle {
     }
 
     // Finalize page:
-    function finalizePage()
+    function finalize()
     {
         // Base impl does nothing:
         //console.log("FINALIZING: ", pageID)
@@ -36,18 +36,6 @@ Rectangle {
     function nextPageId()
     {
         return ""
-    }
-
-    // Is intial page?
-    function isInitialPage()
-    {
-        return false
-    }
-
-    // Is final page?
-    function isFinalPage()
-    {
-        return false
     }
 }
 

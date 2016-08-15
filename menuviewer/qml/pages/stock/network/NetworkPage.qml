@@ -9,6 +9,13 @@ PageTemplate {
     // Hide header:
     headerVisible: false
 
+    // Initialize:
+    function initialize()
+    {
+        xmlHostModel.query = "/hosts/item"
+        gridView.positionViewAtBeginning()
+    }
+
     // Pig clicked:
     function onPigClicked()
     {
@@ -18,7 +25,7 @@ PageTemplate {
     // Host model:
     CustomXmlListModel {
         id: xmlHostModel
-        source: Utils.staticNoCacheOf(_appData.urlPublicRootValue, "/hosts.xml")
+        source: mainApplication._selectedRoute
         query: "/hosts/item"
 
         XmlRole { name: "name"; query: "name/string()"; isKey: true }

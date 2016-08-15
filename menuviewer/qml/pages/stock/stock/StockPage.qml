@@ -95,7 +95,8 @@ PageTemplate {
                     if (result.length > 0)
                     {
                         footerCentralTextVisible = true
-                        footerCentralText = result
+                        // TO DO: display selected route?
+                        footerCentralText = result //+ "\n" + mainApplication._selectedRoute
                     }
                 }
             }

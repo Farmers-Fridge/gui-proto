@@ -34,6 +34,12 @@ Item {
     // App busy state:
     property bool _appIsBusy: false
 
+    // Current workflow index:
+    property int _currentWorkflowIndex: 0
+
+    // Selected route:
+    property string _selectedRoute: ""
+
     // Get category model source:
     function getCategoryModelSource()
     {
@@ -73,13 +79,14 @@ Item {
         else
         if (enteredText === _appData.stockCode)
         {
+            mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.urlPublicRootValue, "/hosts.xml")
             pageMgr.loadPage("STOCK_NETWORK_PAGE")
             mainApplication.state = "active"
         }
         else
         if (enteredText === _appData.statsCode)
         {
-            pageMgr.loadPage("STOCK_NETWORK_PAGE")
+            pageMgr.loadPage("STATS_INTRO_PAGE")
             mainApplication.state = "active"
         }
         privateNumericKeyPad.state = ""

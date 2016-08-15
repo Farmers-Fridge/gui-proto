@@ -61,6 +61,10 @@ StackView {
     // Create page:
     function createPage(pageId)
     {
+        // Finalize:
+        if (currentItem)
+            currentItem.finalize()
+
         // Get page description:
         var pageDesc = getPageDesc(pageId)
         if (!pageDesc)

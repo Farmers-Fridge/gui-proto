@@ -10,14 +10,14 @@ Rectangle {
         width: parent.width
         height: parent.height*.9
         anchors.centerIn: parent
-        CommonText {
+        StandardText {
             id: blockTitle
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             verticalAlignment: Text.AlignTop
             font.pixelSize: 18
         }
-        CommonText {
+        StandardText {
             id: blockValue
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter

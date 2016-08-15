@@ -46,16 +46,9 @@
         <file>qml/pages/menuviewer/menu/PresentationPage.qml</file>
         <file>qml/pages/stats/health/SystemHealthPage.qml</file>
         <file>qml/pages/stats/intro/IntroPage.qml</file>
-        <file>qml/pages/stats/network/NetworkPage.qml</file>
         <file>qml/pages/stats/route/RoutePage.qml</file>
         <file>qml/pages/stats/statistics/DataBlock.qml</file>
         <file>qml/pages/stats/statistics/StatisticsPage.qml</file>
-        <file>qml/pages/stats/stock/StockItem.qml</file>
-        <file>qml/pages/stats/stock/StockPage.qml</file>
-        <file>qml/pages/stats/stock/StockPageGrid.qml</file>
-        <file>qml/pages/stats/stock/StockPageHeaderBlock.qml</file>
-        <file>qml/pages/stats/stock/StockPagePrivate.qml</file>
-        <file>qml/pages/stats/stock/StockPageRow.qml</file>
         <file>qml/pages/stock/network/NetworkPage.qml</file>
         <file>qml/pages/stock/stock/StockItem.qml</file>
         <file>qml/pages/stock/stock/StockPage.qml</file>
@@ -63,5 +56,8 @@
         <file>qml/pages/stock/stock/StockPageHeaderBlock.qml</file>
         <file>qml/pages/stock/stock/StockPagePrivate.qml</file>
         <file>qml/pages/stock/stock/StockPageRow.qml</file>
+        <file>assets/ico-routes.png</file>
+        <file>assets/ico-statistics.png</file>
+        <file>assets/ico-system-health.png</file>
     </qresource>
 </RCC>

@@ -50,13 +50,15 @@ HEADERS += \
     iservice.h \
     menuviewer.h \
     defs.h \
-    cartmodel.h
+    cartmodel.h \
+    tablemodel.h
 
 SOURCES += \
     controller.cpp \
     main.cpp \
     menuviewer.cpp \
-    cartmodel.cpp
+    cartmodel.cpp \
+    tablemodel.cpp
 
 RESOURCES += \
     resources.qrc

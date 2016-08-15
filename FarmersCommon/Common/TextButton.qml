@@ -1,4 +1,5 @@
 import QtQuick 2.5
+import Common 1.0
 
 Item {
     id: textButton
@@ -11,7 +12,7 @@ Item {
     property alias pixelSize: label.font.pixelSize
     property alias bold: label.font.bold
 	
-	CommonText {
+	StandardText {
 		id: label
 		anchors.centerIn: parent
 	}

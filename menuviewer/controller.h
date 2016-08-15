@@ -6,6 +6,7 @@
 #include "iservice.h"
 class EventWatcher;
 class CartModel;
+class TableModel;
 
 class Controller : public QObject, public IService
 {
@@ -116,6 +117,9 @@ private:
 
     // Cart model:
     CartModel *mCartModel;
+
+    // Table model:
+    TableModel *mTableModel;
 
     // Current category:
     QString mCurrentCategory;

@@ -2,6 +2,7 @@
 #include "utils.h"
 #include "eventwatcher.h"
 #include "cartmodel.h"
+#include "tablemodel.h"
 #include "documenthandler.h"
 #include <QQmlContext>
 #include <QSettings>
@@ -9,15 +10,18 @@
 
 // Constructor:
 Controller::Controller(QObject *parent) : QObject(parent),
-    mEventWatcher(0), mCartModel(0), mCurrentCategory(""),
-    mCurrentFilter(""), mCurrentNetworkIP("127.0.0.1"),
-    mOffLinePath("")
+    mEventWatcher(0), mCartModel(0), mTableModel(0),
+    mCurrentCategory(""), mCurrentFilter(""),
+    mCurrentNetworkIP("127.0.0.1"), mOffLinePath("")
 {
     // Cart model:
     mCartModel = new CartModel(this);
 
     // Event watcher:
     mEventWatcher = new EventWatcher(this);
+
+    // Table model:
+    mTableModel = new TableModel(this);
 }
 
 // Destructor:
@@ -84,6 +88,7 @@ void Controller::setContextProperties()
     mEngine.rootContext()->setContextProperty("_controller", this);
     mEngine.rootContext()->setContextProperty("_eventWatcher", mEventWatcher);
     mEngine.rootContext()->setContextProperty("_cartModel", mCartModel);
+    mEngine.rootContext()->setContextProperty("_tableModel", mTableModel);
 }
 
 // Start GUI:
