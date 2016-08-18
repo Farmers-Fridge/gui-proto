@@ -31,3 +31,52 @@ void Utils::files(const QString &srcDir, const QStringList &imageFilters, QStrin
     while (it.hasNext())
         files << fromLocalFile(it.next());
 }
+
+// Return path to settings dir:
+QString Utils::pathToSettingsDir()
+{
+    // Find settings dir:
+    QDir settingsDir = appDir();
+
+    // Load farmers-common:
+    if (settingsDir.cdUp())
+        if (settingsDir.cd("menuviewer"))
+            if (settingsDir.cd("settings"))
+                return settingsDir.absolutePath();
+
+    return "";
+}
+
+// Return path to settings files:
+QString Utils::pathToSettingsFile()
+{
+    // Get settings dir path:
+    QString settingsDirPath = pathToSettingsDir();
+    if (settingsDirPath.isEmpty())
+        return "";
+
+    // Get settings dir:
+    QDir settingsDir(settingsDirPath);
+    QString settingsFile = settingsDir.absoluteFilePath("settings.xml");
+    if (QFile::exists(settingsFile))
+        return settingsFile;
+
+    return "";
+}
+
+// Return path to default settings files:
+QString Utils::pathToDefaultSettingsFile()
+{
+    // Get settings dir path:
+    QString settingsDirPath = pathToSettingsDir();
+    if (settingsDirPath.isEmpty())
+        return "";
+
+    // Get settings dir:
+    QDir settingsDir(settingsDirPath);
+    QString settingsFile = settingsDir.absoluteFilePath("default_settings.xml");
+    if (QFile::exists(settingsFile))
+        return settingsFile;
+
+    return "";
+}

@@ -1,9 +1,9 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import Common 1.0
 import "../.."
 
 Rectangle {
-    color: _settings.ffIvoryLight
+    color: _colors.ffColor2
     signal idlePageClicked()
 
     // Define behavior on opacity:
@@ -56,7 +56,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 16
-        color: _settings.ffGreen
+        color: _colors.ffColor3
         text: qsTr("Touch Screen To Start")
     }
 

@@ -50,7 +50,7 @@ Rectangle {
         style: TextFieldStyle {
             font.pixelSize: 48
             font.bold: true
-            textColor: _settings.ffBrown
+            textColor: _colors.ffColor14
             background: Rectangle {
                 radius: 2
                 implicitWidth: 100
@@ -63,89 +63,97 @@ Rectangle {
 
     ListModel {
         id: keyModel
+		Component.onCompleted: {
+			for (var i=0; i<keyModel.count; i++) {
+				var current = keyModel.get(i)
+				keyModel.set(i, {"keyText": current.keyText, "keyId": current.keyId, 
+					"keyIcon": current.keyIcon, "keyPressedColor": _settings.keyPressedColor, 
+						"keyReleasedColor": _settings.keyReleasedColor})
+			}
+		}
         ListElement {
             keyText: "0"
             keyId: 0
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "1"
             keyId: 1
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "2"
             keyId: 2
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "3"
             keyId: 3
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "4"
             keyId: 4
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "5"
             keyId: 5
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "6"
             keyId: 6
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "7"
             keyId: 7
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "8"
             keyId: 8
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: "9"
             keyId: 9
             keyIcon: ""
-            keyPressedColor: "lightgreen"
-            keyReleasedColor: "#9B5A3C"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: ""
             keyId: 10
             keyIcon: "assets/ico-ok.png"
-            keyPressedColor: "steelblue"
-            keyReleasedColor: "lightblue"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
         ListElement {
             keyText: ""
             keyId: 11
             keyIcon: "assets/ico-cross.png"
-            keyPressedColor: "steelblue"
-            keyReleasedColor: "lightblue"
+            keyPressedColor: ""
+            keyReleasedColor: ""
         }
     }
 
@@ -199,7 +207,6 @@ Rectangle {
                         enteredText += keyText
                     }
                 }
-                keyColor: "#9B5A3C"
                 opacity: enabled ? 1 : .5
             }
         }

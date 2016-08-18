@@ -13,10 +13,10 @@ Item {
         id: checkBox
         width: _settings.toggleButtonWidth
         height: _settings.toggleButtonHeight
-        color: _settings.ffToggleButtonUncheckedColor
+        color: _colors.ffColor11
 
         MouseArea {
-            anchors.fill: parent
+            anchors.fill: _colors.ff
             onClicked: container.clicked()
         }
     }
@@ -24,12 +24,12 @@ Item {
     // Label:
     StandardText {
         id: label
-        color: _settings.ffWhite
+        color: _colors.ffColor16
         anchors.right: parent.right
         anchors.verticalCenter: checkBox.verticalCenter
 
         MouseArea {
-            anchors.fill: parent
+            anchors.fill: _colors.ff
             onClicked: container.clicked()
         }
     }
@@ -40,7 +40,7 @@ Item {
         when: selected
         PropertyChanges {
             target: checkBox
-            color: _settings.ffToggleButtonCheckedColor
+            color: _colors.ffColor10
         }
     }
 }

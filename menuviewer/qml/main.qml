@@ -1,10 +1,10 @@
-import QtQuick 2.2
+import QtQuick 2.5
 import QtQuick.Window 2.2
 import Common 1.0
 
 Window {
     id: mainWindow
-    visibility: Window.FullScreen
+    visibility: Window.Maximized
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
     visible: true

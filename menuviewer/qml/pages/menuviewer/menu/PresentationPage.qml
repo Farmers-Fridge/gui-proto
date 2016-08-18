@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import Common 1.0
 import "../../.."
 
@@ -134,8 +134,8 @@ PageTemplate {
         // Bottom area:
         Rectangle {
             id: bottomArea
-            color: _settings.ffTransparent
-            border.color: _settings.ffGray
+            color: _colors.ffColor13
+            border.color: _colors.ffColor7
             anchors.bottom: parent.bottom
             width: parent.width
             height: Math.round((1/3)*parent.height)
@@ -149,7 +149,7 @@ PageTemplate {
                 anchors.topMargin: 8
                 bold: true
                 pixelSize: 24
-                textColor: _settings.ffGreen
+                textColor: _colors.ffColor3
                 label: qsTr("SEE NUTRITIONAL INFO")
 
                 // Add current item to cart:
@@ -205,7 +205,7 @@ PageTemplate {
                 anchors.topMargin: 8
                 anchors.horizontalCenter: addItem.horizontalCenter
                 text: qsTr("ADD TO CART")
-                color: _settings.ffGray
+                color: _colors.ffColor7
             }
         }
     }

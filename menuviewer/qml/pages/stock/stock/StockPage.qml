@@ -73,7 +73,7 @@ PageTemplate {
             StandardText {
                 id: serverLabel
                 anchors.centerIn: parent
-                color: _settings.ffWhite
+                color: _colors.ffColor16
             }
         }
 

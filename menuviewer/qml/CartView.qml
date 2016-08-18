@@ -9,7 +9,7 @@ ListView {
     spacing: 4
 
     // Row colors:
-    property variant rowColors: [_settings.ffRowColor1, _settings.ffRowColor2, _settings.ffRowColor3]
+    property variant rowColors: [_colors.ffColor17, _colors.ffColor18, _colors.ffColor19]
     delegate: Item {
         id: delegate
         width: parent.width
@@ -48,7 +48,7 @@ ListView {
                 // Image loading background
                 Rectangle {
                     id: imageLoadingBkg
-                    color: _settings.ffWhite
+                    color: _colors.ffColor16
                     anchors.left: parent.left
                     anchors.leftMargin: 8
                     width: parent.height
@@ -56,7 +56,7 @@ ListView {
                     anchors.verticalCenter: parent.verticalCenter
                     visible: originalImage.status !== Image.Ready
                     Rectangle {
-                        color: _settings.ffGreen
+                        color: _colors.ffColor3
                         antialiasing: true
                         anchors { fill: parent; margins: 3 }
                     }
@@ -98,7 +98,7 @@ ListView {
                         horizontalAlignment: Text.AlignLeft
                         text: vendItemName
                         font.italic: true
-                        color: _settings.ffGray
+                        color: _colors.ffColor7
                     }
                 }
             }

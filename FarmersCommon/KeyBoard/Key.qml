@@ -12,7 +12,7 @@ Item {
 
     property color keyColor: _settings.keyReleasedColor
     property color keyPressedColor: _settings.keyPressedColor
-    property color keyBorderColor: _settings.ffTransparent
+    property color keyBorderColor: _colors.ffColor13
 
     property alias radius: backgroundItem.radius
 

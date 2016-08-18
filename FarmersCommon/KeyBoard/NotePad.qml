@@ -194,8 +194,8 @@ Rectangle {
     TextArea {
         id: textArea
         style: TextAreaStyle {
-            textColor: _settings.ffDarkGreen
-            backgroundColor: _settings.ffRowColor2
+            textColor: _colors.ffColor5
+            backgroundColor: _colors.ffColor18
         }
         Accessible.name: "document"
         frameVisible: false

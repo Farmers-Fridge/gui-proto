@@ -20,11 +20,11 @@ Item {
     readonly property int bounds: 3
 
     // Key color:
-    readonly property color keyColor: _settings.ffBrown
-    readonly property color keyPressedColor: _settings.ffGreen
+    readonly property color keyColor: _colors.ffColor14
+    readonly property color keyPressedColor: _colors.ffColor3
 
     // Key label color:
-    readonly property color keyLabelColor: "#F2F2F2"
+    readonly property color keyLabelColor: _colors.ffColor6
 
     // Key label point size:
     readonly property int keyLabelPointSize: 28

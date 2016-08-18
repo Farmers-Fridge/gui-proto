@@ -12,7 +12,7 @@ ScrollView {
             implicitWidth: 14
             implicitHeight: 26
             Rectangle {
-                color: _settings.ffGreen
+                color: _colors.ffColor3
                 anchors.fill: parent
                 anchors.topMargin: 6
                 anchors.bottomMargin: 6

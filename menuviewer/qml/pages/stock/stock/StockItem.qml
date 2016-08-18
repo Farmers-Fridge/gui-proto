@@ -53,13 +53,13 @@ Item {
 
     Rectangle {
         id: inner
-        color: _settings.ffTransparent
+        color: _colors.ffColor13
         width: parent.width*innerRectRatio
         height: parent.height*innerRectRatio
 
         radius: 8
         border.width: 3
-        border.color: highlighted ? _settings.ffOrange : _settings.ffGreen
+        border.color: highlighted ? _colors.ffColor12 : _colors.ffColor3
         anchors.centerIn: parent
 
         // Title:
@@ -105,7 +105,7 @@ Item {
                     id: actualParText
                     anchors.centerIn: parent
                     font.pixelSize: 24
-                    color: _settings.ffBrown
+                    color: _colors.ffColor14
                     font.bold: true
                     text: userActualPar
                 }
@@ -123,7 +123,7 @@ Item {
             StandardText {
                 id: pullTextBox
                 font.pixelSize: parent.height *.75
-                color: _settings.ffRed
+                color: _colors.ffColor15
                 text: theoExpired
                 anchors.left: parent.left
                 anchors.leftMargin: 4
@@ -131,13 +131,13 @@ Item {
             }
             StandardText {
                 font.pixelSize: parent.height *.75
-                color: _settings.ffGreen
+                color: _colors.ffColor3
                 text: actualAdd
                 anchors.centerIn: parent
             }
             StandardText {
                 font.pixelSize: parent.height
-                color: (previousParValues.length > 0) ? (userActualPar > previousParValues[index] ? _settings.ffGreen : _settings.ffRed) : _settings.ffBlack
+                color: (previousParValues.length > 0) ? (userActualPar > previousParValues[index] ? _colors.ffColor3 : _colors.ffColor15) : _colors.ffColor1
                 text: actualPar
                 anchors.right: parent.right
                 anchors.rightMargin: 4

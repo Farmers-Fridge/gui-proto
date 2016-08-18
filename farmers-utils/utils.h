@@ -21,6 +21,15 @@ public:
 
     // Get files  recursively:
     static void files(const QString &srcDir, const QStringList &imageFilters, QStringList &files);
+
+    // Return path to settings dir:
+    static QString pathToSettingsDir();
+
+    // Return path to settings files:
+    static QString pathToSettingsFile();
+
+    // Return path to default settings files:
+    static QString pathToDefaultSettingsFile();
 };
 
 #endif // UTILS_H

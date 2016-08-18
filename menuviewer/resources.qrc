@@ -59,5 +59,6 @@
         <file>assets/ico-routes.png</file>
         <file>assets/ico-statistics.png</file>
         <file>assets/ico-system-health.png</file>
+        <file>qml/pages/settings/SettingsPage.qml</file>
     </qresource>
 </RCC>

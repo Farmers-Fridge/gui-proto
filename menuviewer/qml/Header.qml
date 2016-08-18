@@ -3,7 +3,7 @@ import Common 1.0
 
 Rectangle {
     property alias bottomAreaSource: bottomArea.source
-    color: _settings.ffIvoryLight
+    color: _colors.ffColor2
     signal tabClicked()
 
     // Get highlight for category:
@@ -27,7 +27,7 @@ Rectangle {
         // Part1:
         Rectangle {
             id: part1
-            color: _settings.ffIvoryLight
+            color: _colors.ffColor2
             width: parent.width
             height: parent.height/3
             anchors.left: parent.left
@@ -53,7 +53,7 @@ Rectangle {
                 anchors.topMargin: 8
                 bold: true
                 pixelSize: 24
-                textColor: _settings.ffGreen
+                textColor: _colors.ffColor3
                 label: qsTr("SIGN-IN")
             }
 
@@ -66,7 +66,7 @@ Rectangle {
                 anchors.topMargin: 8
                 bold: true
                 pixelSize: 24
-                textColor: _settings.ffGreen
+                textColor: _colors.ffColor3
                 label: qsTr("REGISTER")
             }
         }
@@ -74,7 +74,7 @@ Rectangle {
         // Part2:
         Rectangle {
             id: part2
-            color: _settings.ffIvoryLight
+            color: _colors.ffColor2
             width: parent.width
             height: parent.height/3
 
@@ -85,7 +85,7 @@ Rectangle {
                     TabButton {
                         width: part2.width/_categoryModel.count
                         height: part2.height
-                        color: _settings.ffIvoryLight
+                        color: _colors.ffColor2
                         backgroundImage: getHighlightForCategory(categoryName)
                         selected: _controller.currentCategory === categoryName
                         onClicked: {
@@ -100,7 +100,7 @@ Rectangle {
         // Part3:
         Rectangle {
             id: part3
-            color: _settings.ffIvoryLight
+            color: _colors.ffColor2
             width: parent.width
             height: parent.height/3
 

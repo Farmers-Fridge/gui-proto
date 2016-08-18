@@ -6,7 +6,7 @@ Rectangle {
     property alias text: text.text
     scale: mouseArea.pressed ? .97 : 1
     signal buttonClicked()
-    border.color: "#166427"
+    border.color: _colors.ffColor3
     border.width: 8
     radius: 8
 

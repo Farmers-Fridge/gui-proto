@@ -6,8 +6,8 @@ import Common 1.0
 
 Rectangle {
     id: stockPageRow
-    color: _settings.ffTransparent
-    border.color: _settings.ffGreen
+    color: _colors.ffColor13
+    border.color: _colors.ffColor3
 
     // Row number:
     property int rowNumber: -1

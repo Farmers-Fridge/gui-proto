@@ -2,7 +2,7 @@ import QtQuick 2.5
 import Common 1.0
 
 Rectangle {
-    color: _settings.ffIvoryLight
+    color: _colors.ffColor2
     property alias bottomAreaSource: bottomArea.source
     property alias bottomAreaContainer: bottomAreaContainer
     property alias homeVisible: homeButton.visible
@@ -78,7 +78,7 @@ Rectangle {
                 anchors.centerIn: parent
                 anchors.horizontalCenterOffset: -21
                 anchors.verticalCenterOffset: -18
-                color: _settings.ffGreen
+                color: _colors.ffColor3
                 text: _cartModel.cartCount
                 visible: _cartModel.cartCount > 0
             }
@@ -111,7 +111,7 @@ Rectangle {
             // Footer central text:
             StandardText {
                 id: footerCentralText
-                color: _settings.ffWhite
+                color: _colors.ffColor16
                 anchors.centerIn: parent
                 visible: false
             }
@@ -119,7 +119,7 @@ Rectangle {
             // Footer right text:
             StandardText {
                 id: footerRightText
-                color: _settings.ffWhite
+                color: _colors.ffColor16
                 anchors.right: reservedArea.left
                 anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter

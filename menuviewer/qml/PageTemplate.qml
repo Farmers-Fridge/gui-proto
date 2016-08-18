@@ -74,7 +74,7 @@ Page {
         anchors.top: header.visible ? header.bottom : parent.top
         anchors.bottom: footer.visible ? footer.top : parent.bottom
         width: parent.width
-        color: _settings.ffIvoryLight
+        color: _colors.ffColor2
     }
 
     // Footer:

@@ -3,6 +3,7 @@
 #include "eventwatcher.h"
 #include "cartmodel.h"
 #include "tablemodel.h"
+#include "colormodel.h"
 #include "documenthandler.h"
 #include <QQmlContext>
 #include <QSettings>
@@ -22,6 +23,11 @@ Controller::Controller(QObject *parent) : QObject(parent),
 
     // Table model:
     mTableModel = new TableModel(this);
+
+    // Color model:
+    mColorModel = new ColorModel(this);
+    mColorModel->initialize();
+    connect(mColorModel, &ColorModel::updateColors, this, &Controller::onUpdateColors);
 }
 
 // Destructor:
@@ -89,12 +95,14 @@ void Controller::setContextProperties()
     mEngine.rootContext()->setContextProperty("_eventWatcher", mEventWatcher);
     mEngine.rootContext()->setContextProperty("_cartModel", mCartModel);
     mEngine.rootContext()->setContextProperty("_tableModel", mTableModel);
+    mEngine.rootContext()->setContextProperty("_colorModel", mColorModel);
+    mEngine.rootContext()->setContextProperty("_colors", mColorModel->colors());
 }
 
 // Start GUI:
 void Controller::startGUI()
 {
-    // Set import path:
+    // Find qml lib dir:
     QDir qmlLibDir = Utils::appDir();
 
     // Load farmers-common:
@@ -235,7 +243,6 @@ void Controller::setCurrentMenuItemForCategory(const QVariant &menuItem)
         return;
     mCurrentItemForCategory[category] = menuItem;
 
-    qDebug() << "----------------------------------------------------------------------> CURRENT ITEM FOR " << category << " IS: " << expanded["vendItemName"];
     emit currentMenuItemForCategoryChanged();
 }
 
@@ -243,4 +250,87 @@ void Controller::setCurrentMenuItemForCategory(const QVariant &menuItem)
 QVariant Controller::getCurrentMenuItemForCategory(const QString &category)
 {
     return mCurrentItemForCategory[category];
+}
+
+// Update colors:
+void Controller::onUpdateColors()
+{
+    mEngine.rootContext()->setContextProperty("_colors", mColorModel->colors());
+}
+
+// Restore default settings:
+void Controller::restoreDefaultSettings()
+{
+    bool error = false;
+
+    // Settings file exists? remove it:
+    QString settingsFile = Utils::pathToSettingsFile();
+    if (!settingsFile.isEmpty())
+    {
+        if (!QFile::remove(settingsFile))
+            error = true;
+    }
+
+    if (!error)
+    {
+        // Default settings file exists? Copy to settings.xml:
+        QString defaultSettingsFile = Utils::pathToDefaultSettingsFile();
+        if (!defaultSettingsFile.isEmpty())
+        {
+            settingsFile = QDir(Utils::pathToSettingsDir()).absoluteFilePath("settings.xml");
+            if (!QFile::copy(defaultSettingsFile, settingsFile))
+                error = true;
+        }
+        else error = true;
+    }
+
+    // Error? use hard coded settings:
+    if (error) {
+        useHardCodedSettings();
+    }
+    else {
+        // Reinitialize colors:
+        mColorModel->initialize();
+        onUpdateColors();
+    }
+}
+
+// Save settings:
+void Controller::saveSettings()
+{
+    // Load current:
+    QString settingsFile = Utils::pathToSettingsFile();
+    if (!settingsFile.isEmpty())
+    {
+        // Get updated colors:
+        CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
+
+        // Remove Colors node:
+        rootNode.removeNodes("Colors");
+
+        // Add new Colors node:
+        CXMLNode colorsNode("Colors");
+
+        // Add individual colors:
+        QVariantMap newColors = mColorModel->colors().toMap();
+        for (QVariantMap::iterator it=newColors.begin(); it!=newColors.end(); ++it)
+        {
+            CXMLNode color("Color");
+            color.setAttribute(QString("name"), it.key());
+            color.setAttribute(QString("value"), it.value().toString());
+            colorsNode.addNode(color);
+        }
+
+        // Add new Colors node:
+        rootNode.addNode(colorsNode);
+
+        // Save:
+        rootNode.save(settingsFile);
+    }
+}
+
+// Use hard-coded defaults:
+void Controller::useHardCodedSettings()
+{
+    mColorModel->useHardCodedSettings();
 }

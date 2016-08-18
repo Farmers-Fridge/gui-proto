@@ -77,6 +77,7 @@ Item {
         if (enteredText === _appData.exitCode)
             Qt.quit()
         else
+        // User entered stock code:
         if (enteredText === _appData.stockCode)
         {
             mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.urlPublicRootValue, "/hosts.xml")
@@ -84,9 +85,17 @@ Item {
             mainApplication.state = "active"
         }
         else
+        // User entered stats code:
         if (enteredText === _appData.statsCode)
         {
             pageMgr.loadPage("STATS_INTRO_PAGE")
+            mainApplication.state = "active"
+        }
+        else
+        // User entered settings code:
+        if (enteredText === _appData.settingsCode)
+        {
+            pageMgr.loadPage("SETTINGS_PRESENTATION_PAGE")
             mainApplication.state = "active"
         }
         privateNumericKeyPad.state = ""

@@ -17,11 +17,11 @@ GridView {
         // Image loading background
         Rectangle {
             id: imageLoadingBkg
-            color: _settings.ffWhite
+            color: _colors.ffColor16
             anchors.fill: parent
             visible: originalImage.status !== Image.Ready
             Rectangle {
-                color: _settings.ffGreen
+                color: _colors.ffColor3
                 antialiasing: true
                 anchors { fill: parent; margins: 3 }
 
@@ -127,7 +127,7 @@ GridView {
                     wrapMode: Text.WordWrap
                     text: vendItemName
                     font.italic: true
-                    color: _settings.ffDarkGray
+                    color: _colors.ffColor8
                 }
 
                 // Item price:
@@ -137,7 +137,7 @@ GridView {
                     anchors.bottomMargin: 10
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: price
-                    color: _settings.ffOtherGray
+                    color: _colors.ffColor9
                 }
             }
         }

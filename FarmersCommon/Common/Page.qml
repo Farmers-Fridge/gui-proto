@@ -1,7 +1,7 @@
 import QtQuick 2.5
 
 Rectangle {
-    color: _settings.ffIvoryLight
+    color: _colors.ffColor2
 
     // Page id:
     property string pageId

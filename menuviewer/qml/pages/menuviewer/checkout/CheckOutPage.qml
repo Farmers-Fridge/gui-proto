@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import Common 1.0
 import "../../.."
 
@@ -84,7 +84,7 @@ PageTemplate {
             width: parent.width
             height: 1
             anchors.bottom: totalView.top
-            color: _settings.ffGray
+            color: _colors.ffColor7
         }
 
         // Bottom contents:

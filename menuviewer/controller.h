@@ -7,6 +7,7 @@
 class EventWatcher;
 class CartModel;
 class TableModel;
+class ColorModel;
 
 class Controller : public QObject, public IService
 {
@@ -64,6 +65,12 @@ public:
     // Retur current menu item for category:
     Q_INVOKABLE QVariant getCurrentMenuItemForCategory(const QString &category);
 
+    // Restore default settings:
+    Q_INVOKABLE void restoreDefaultSettings();
+
+    // Save settings:
+    Q_INVOKABLE void saveSettings();
+
 protected:
     // Constructor:
     explicit Controller(QObject *parent = 0);
@@ -105,6 +112,9 @@ private:
     // Return offline path:
     const QString &offLinePath() const;
 
+    // Use hard coded settings:
+    void useHardCodedSettings();
+
 private:
     // Salad assets:
     QStringList mSaladAssets;
@@ -121,6 +131,9 @@ private:
     // Table model:
     TableModel *mTableModel;
 
+    // Color model:
+    ColorModel *mColorModel;
+
     // Current category:
     QString mCurrentCategory;
 
@@ -135,6 +148,10 @@ private:
 
     // Current item for category:
     QMap<QString, QVariant> mCurrentItemForCategory;
+
+public slots:
+    // Update colors:
+    void onUpdateColors();
 
 signals:
     // Current network IP changed:

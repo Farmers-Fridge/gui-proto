@@ -1,29 +1,6 @@
 import QtQuick 2.5
 
 Item {
-    // Global colors:
-    readonly property color ffBlack: "black"
-    readonly property color ffIvoryLight: "#F6F8F3"
-    readonly property color ffGreen: "#BCD4B9"
-    readonly property color ffLightGreen: "lightgreen"
-    readonly property color ffDarkGreen: "darkgreen"
-    readonly property color ffLightGray: "lightgray"
-    readonly property color ffGray: "#606365"
-    readonly property color ffDarkGray: "#57585C"
-    readonly property color ffOtherGray: "#BABCB9"
-    readonly property color ffToggleButtonCheckedColor: "#92B772"
-    readonly property color ffToggleButtonUncheckedColor: "#DADFDB"
-    readonly property color ffOrange: "orange"
-    readonly property color ffTransparent: "transparent"
-    readonly property color ffBrown: "#9B5A3C"
-    readonly property color ffRed: "red"
-    readonly property color ffWhite: "white"
-
-    // Used for colorizing rows in cart view:
-    readonly property color ffRowColor1: "#C8DBC7"
-    readonly property color ffRowColor2: "#E1D9C6"
-    readonly property color ffRowColor3: "#BABBAB"
-
     // Others:
     readonly property real footerRatio: .12
     readonly property real headerRatio: (footerRatio/2)*3
@@ -35,8 +12,8 @@ Item {
     readonly property int zMax: 1e9
 
     // Keyboard:
-    readonly property color keyPressedColor: ffOrange
-    readonly property color keyReleasedColor: ffBrown
-    readonly property color keyboardBkgColor: ffLightGreen
+    readonly property string keyPressedColor: _colors.ffColor12
+    readonly property string keyReleasedColor: _colors.ffColor14
+    readonly property string keyboardBkgColor: _colors.ffColor4
 }
 

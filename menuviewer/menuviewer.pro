@@ -51,14 +51,16 @@ HEADERS += \
     menuviewer.h \
     defs.h \
     cartmodel.h \
-    tablemodel.h
+    tablemodel.h \
+    colormodel.h
 
 SOURCES += \
     controller.cpp \
     main.cpp \
     menuviewer.cpp \
     cartmodel.cpp \
-    tablemodel.cpp
+    tablemodel.cpp \
+    colormodel.cpp
 
 RESOURCES += \
     resources.qrc

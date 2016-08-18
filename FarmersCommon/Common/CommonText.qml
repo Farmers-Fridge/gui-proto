@@ -5,7 +5,7 @@ Text {
     property alias fontFamily: fontLoader.source
     font.family: fontLoader.name
     font.pixelSize: 30
-    color: "#858687"
+    color: _colors.ffColor1
     font.bold: true
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter

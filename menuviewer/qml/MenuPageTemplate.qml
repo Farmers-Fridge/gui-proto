@@ -57,7 +57,7 @@ Page {
         anchors.top: header.bottom
         anchors.bottom: footer.top
         width: parent.width
-        color: _settings.ffIvoryLight
+        color: _colors.ffColor2
     }
 
     // Header:

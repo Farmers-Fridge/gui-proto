@@ -16,7 +16,7 @@ Image {
     StandardText {
         id: priceText
         anchors.centerIn: parent
-        color: _settings.ffWhite
+        color: _colors.ffColor16
         text: itemPrice
     }
 }

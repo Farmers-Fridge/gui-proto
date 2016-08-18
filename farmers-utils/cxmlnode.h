@@ -2,6 +2,8 @@
 #ifndef CXMLNODE_H
 #define CXMLNODE_H
 
+#include "farmers-utils_global.h"
+
 //-------------------------------------------------------------------------------------------------
 // Includes
 
@@ -13,7 +15,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include "farmers-utils_global.h"
 
 //-------------------------------------------------------------------------------------------------
 
@@ -30,6 +31,10 @@ public:
     //! Constructeur par défaut
     //! Default constructor
     CXMLNode();
+
+    //! Constructeur avec nom de tag
+    //! Constructor with tag name
+    CXMLNode(const QString& sTagName);
 
     //! Destructeur
     //! Destructor
@@ -67,6 +72,9 @@ public:
     //! Retourne les attributs de ce noeud
     QMap<QString, QString>& attributes();
 
+    //! Definit un attribute
+    void setAttribute(const QString &name, const QString &value);
+
     //! Retourne les noeuds enfants de ce noeud
     const QVector<CXMLNode>& nodes() const;
 
@@ -82,10 +90,24 @@ public:
     //! Retourne une liste de noeuds selon leur tag
     QVector<CXMLNode> getNodesByTagName(QString sTagName) const;
 
+    //! Ajout d'un noeud
+    void addNode(const CXMLNode &node);
+
+    //! Suppression d'un noeud
+    int removeNodes(const QString &sTagName);
+
     //-------------------------------------------------------------------------------------------------
     // Méthodes de contrôle haut niveau
     // High level control methods
     //-------------------------------------------------------------------------------------------------
+
+    //! Charge un CXMLNode depuis un fichier XML ou JSON selon son extension
+    //! Loads a CXMLNode from a XML or JSON file based on the extension
+    static CXMLNode load(const QString& sFileName);
+
+    //! Ecrit le contenu dans un fichier XML ou JSON selon son extension
+    //! Saves content to a XML or JSON file based on the extension
+    bool save(const QString& sFileName);
 
     //! Lit un fichier XML d'après un nom de fichier
     //! Reads a XML file given a file name
@@ -97,11 +119,11 @@ public:
 
     //! Convertit en QString
     //! Converts the document to a string
-    QString toString() const;
+    QString toString(bool bXMLHeader = true) const;
 
     //! Ecrit un fichier XML
     //! Saves a XML file
-    bool saveXMLToFile(const QString& sFileName);
+    bool saveXMLToFile(const QString& sFileName, bool bXMLHeader = true);
 
     //! Ecrit un fichier XML
     //! Saves a XML file
@@ -132,7 +154,7 @@ public:
 
     //! Convertit en QDomDocument
     //! Converts the node to a QDomDocument
-    QDomDocument toQDomDocument() const;
+    QDomDocument toQDomDocument(bool bXMLHeader = true) const;
 
     //! Convertit en QDomElement en utilisant 'xDocument'
     //! Converts the node to a QDomElement using 'xDocument'
@@ -142,6 +164,10 @@ public:
     //! Converts the node to a QJsonDocument
     QJsonDocument toJsonDocument() const;
 
+    //! Convertit en JSON string
+    //! Converts the node to a JSON string
+    QString toJsonString() const;
+
     //!
     QJsonObject toJsonObject() const;
 
@@ -150,16 +176,27 @@ public:
     void merge(const CXMLNode& target);
 
     //-------------------------------------------------------------------------------------------------
+    // Propriétés statiques publiques
+    // Static public properties
+    //-------------------------------------------------------------------------------------------------
+
+public:
+
+    static const QString sExtension_XML;
+    static const QString sExtension_QRC;
+    static const QString sExtension_JSON;
+
+    //-------------------------------------------------------------------------------------------------
     // Propriétés
     // Properties
     //-------------------------------------------------------------------------------------------------
 
 protected:
 
-    QString					m_sTag;			// Tag du noeud - Node's tag
-    QString					m_sValue;		// Valeur du noeud - Node's value
-    QMap<QString, QString>	m_vAttributes;	// Attributs du noeuds - Node's attributes
-    QVector<CXMLNode>		m_vNodes;		// Noeuds enfants - Child nodes
+    QString                 m_sTag;         // Tag du noeud - Node's tag
+    QString                 m_sValue;       // Valeur du noeud - Node's value
+    QMap<QString, QString>  m_vAttributes;  // Attributs du noeuds - Node's attributes
+    QVector<CXMLNode>       m_vNodes;       // Noeuds enfants - Child nodes
 };
 
 #endif // CXMLNODE_H

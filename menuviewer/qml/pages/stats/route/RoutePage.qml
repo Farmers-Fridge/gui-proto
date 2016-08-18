@@ -50,7 +50,7 @@ PageTemplate {
                     width: blockSize
                     height: blockSize
                     Rectangle {
-                        color: _settings.ffGreen
+                        color: _colors.ffColor3
                         anchors.fill: parent
                         anchors.margins: 8
                         MouseArea {
@@ -62,7 +62,7 @@ PageTemplate {
                         }
                         StandardText {
                             anchors.centerIn: parent
-                            color: _settings.ffWhite
+                            color: _colors.ffColor16
                             text: name
                         }
                     }

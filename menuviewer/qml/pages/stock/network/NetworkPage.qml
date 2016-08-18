@@ -60,9 +60,9 @@ PageTemplate {
         // Background:
         Rectangle {
             id: background
-            color: _settings.ffLightGray
+            color: _colors.ffColor6
             opacity: .5
-            border.color: _settings.ffBlack
+            border.color: _colors.ffColor1
             border.width: 3
             anchors.left: parent.left
             anchors.right: parent.right
@@ -123,8 +123,8 @@ PageTemplate {
                     id: rect
                     anchors.fill: parent
                     anchors.margins: 8
-                    color: _settings.ffLightGray
-                    border.color: index == gridView.currentIndex ? _settings.ffOrange : _settings.ffGreen
+                    color: _colors.ffColor6
+                    border.color: index == gridView.currentIndex ? _colors.ffColor12 : _colors.ffColor3
                     border.width: 8
                     radius: 8
                     StandardText {

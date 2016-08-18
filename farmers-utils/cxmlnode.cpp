@@ -1,9 +1,10 @@
 
 // Qt
 #include <QFile>
+#include <QStringList>
 
 // Library
-#include "cxmlnode.h"
+#include "CXMLNode.h"
 
 //-------------------------------------------------------------------------------------------------
 
@@ -15,10 +16,26 @@
 
 //-------------------------------------------------------------------------------------------------
 
+QString const CXMLNode::sExtension_XML = ".xml";
+QString const CXMLNode::sExtension_QRC = ".qrc";
+QString const CXMLNode::sExtension_JSON = ".json";
+
+//-------------------------------------------------------------------------------------------------
+
 /*!
     Constructs a CXMLNode.
 */
 CXMLNode::CXMLNode()
+{
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/*!
+    Constructs a CXMLNode using \a sTagName as a tag.
+*/
+CXMLNode::CXMLNode(const QString& sTagName)
+    : m_sTag(sTagName)
 {
 }
 
@@ -94,6 +111,16 @@ const QMap<QString, QString>& CXMLNode::attributes() const
 //-------------------------------------------------------------------------------------------------
 
 /*!
+    Set attribute.
+*/
+void CXMLNode::setAttribute(const QString &name, const QString &value)
+{
+    m_vAttributes[name] = value;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/*!
     Returns a map of this node's attributes.
 */
 QMap<QString, QString>& CXMLNode::attributes()
@@ -124,7 +151,52 @@ QVector<CXMLNode>& CXMLNode::nodes()
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Loads a CXMLNode hierarchy from the XML file named \a sFileName.
+    Returns a CXMLNode hierarchy loaded from the file named \a sFileName (XML or JSON).
+*/
+CXMLNode CXMLNode::load(const QString& sFileName)
+{
+    if (sFileName.toLower().endsWith(sExtension_XML))
+    {
+        return loadXMLFromFile(sFileName);
+    }
+    else if (sFileName.toLower().endsWith(sExtension_JSON))
+    {
+        return loadJSONFromFile(sFileName);
+    }
+
+    return CXMLNode();
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/*!
+    Saves this CXMLNode tree to the file named \a sFileName (XML or JSON). \br
+    Returns \c true if successful, \c false otherwise.
+*/
+bool CXMLNode::save(const QString& sFileName)
+{
+    QString sLowerFileName = sFileName.toLower();
+
+    if (sLowerFileName.endsWith(sExtension_QRC))
+    {
+        return saveXMLToFile(sFileName, false);
+    }
+    else if (sLowerFileName.endsWith(sExtension_XML))
+    {
+        return saveXMLToFile(sFileName);
+    }
+    else if (sLowerFileName.endsWith(sExtension_JSON))
+    {
+        return saveJSONToFile(sFileName);
+    }
+
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/*!
+    Returns a CXMLNode hierarchy loaded from the XML file named \a sFileName.
 */
 CXMLNode CXMLNode::loadXMLFromFile(const QString& sFileName)
 {
@@ -147,7 +219,7 @@ CXMLNode CXMLNode::loadXMLFromFile(const QString& sFileName)
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Loads a CXMLNode hierarchy from the JSON file named \a sFileName.
+    Returns a CXMLNode hierarchy loaded from the JSON file named \a sFileName.
 */
 CXMLNode CXMLNode::loadJSONFromFile(const QString& sFileName)
 {
@@ -170,7 +242,7 @@ CXMLNode CXMLNode::loadJSONFromFile(const QString& sFileName)
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Parses a xml tree from the \a node.
+    Returns a CXMLNode tree parsed from the \a node.
 */
 CXMLNode CXMLNode::parseXMLNode(QDomNode node)
 {
@@ -211,7 +283,7 @@ CXMLNode CXMLNode::parseXMLNode(QDomNode node)
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Parses a xml tree from the \a sText string.
+    Returns a CXMLNode tree parsed from the \a sText string.
 */
 CXMLNode CXMLNode::parseXML(QString sText)
 {
@@ -273,6 +345,9 @@ CXMLNode CXMLNode::parseJSONNode(QJsonObject jObject, QString sTagName)
 
 //-------------------------------------------------------------------------------------------------
 
+/*!
+    Returns a list of CXMLNode that is parsed from \a jArray, using \a sTagName as a tag name.
+*/
 QVector<CXMLNode> CXMLNode::parseJSONArray(QJsonArray jArray, QString sTagName)
 {
     QVector<CXMLNode> vNodes;
@@ -287,6 +362,9 @@ QVector<CXMLNode> CXMLNode::parseJSONArray(QJsonArray jArray, QString sTagName)
 
 //-------------------------------------------------------------------------------------------------
 
+/*!
+    Returns a JSON hierarchy from \a sText, as a CXMLNode tree.
+*/
 CXMLNode CXMLNode::parseJSON(QString sText)
 {
     CXMLNode tNode;
@@ -303,19 +381,31 @@ CXMLNode CXMLNode::parseJSON(QString sText)
 
 //-------------------------------------------------------------------------------------------------
 
-QString CXMLNode::toString() const
+/*!
+    Returns a string containing the textual XML equivalent of this CXMLNode tree. \br\br
+    If \a bXMLHeader is \c true, the xml file will contain a header of the type <?xml version="1.0" encoding="UTF-8"?>
+*/
+QString CXMLNode::toString(bool bXMLHeader) const
 {
-    return toQDomDocument().toString();
+    return toQDomDocument(bXMLHeader).toString();
 }
 
 //-------------------------------------------------------------------------------------------------
 
-QDomDocument CXMLNode::toQDomDocument() const
+/*!
+    Returns the QDomDocument equivalent of this CXMLNode tree. \br\br
+    If \a bXMLHeader is \c true, the xml file will contain a header of the type <?xml version="1.0" encoding="UTF-8"?>
+*/
+QDomDocument CXMLNode::toQDomDocument(bool bXMLHeader) const
 {
     QDomDocument doc;
 
-    QDomNode xmlNode = doc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\"");
-    doc.appendChild(xmlNode);
+    if (bXMLHeader)
+    {
+        QDomNode xmlNode = doc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\"");
+        doc.appendChild(xmlNode);
+    }
+
     doc.appendChild(toQDomElement(doc));
 
     return doc;
@@ -323,6 +413,9 @@ QDomDocument CXMLNode::toQDomDocument() const
 
 //-------------------------------------------------------------------------------------------------
 
+/*!
+    Returns the QDomElement equivalent of this CXMLNode tree, using \a xDocument.
+*/
 QDomElement CXMLNode::toQDomElement(QDomDocument& xDocument) const
 {
     QDomElement thisElement = xDocument.createElement(m_sTag);
@@ -351,6 +444,9 @@ QDomElement CXMLNode::toQDomElement(QDomDocument& xDocument) const
 
 //-------------------------------------------------------------------------------------------------
 
+/*!
+    Returns the QJsonDocument equivalent of this CXMLNode tree.
+*/
 QJsonDocument CXMLNode::toJsonDocument() const
 {
     QJsonDocument doc;
@@ -362,6 +458,23 @@ QJsonDocument CXMLNode::toJsonDocument() const
 
 //-------------------------------------------------------------------------------------------------
 
+/*!
+    Returns the JSON string equivalent of this CXMLNode tree.
+*/
+QString CXMLNode::toJsonString() const
+{
+    QJsonDocument doc;
+
+    doc.setObject(toJsonObject());
+
+    return QString::fromLatin1(doc.toJson());
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/*!
+    Returns the QJsonObject equivalent of this CXMLNode tree.
+*/
 QJsonObject CXMLNode::toJsonObject() const
 {
     QJsonObject object;
@@ -384,14 +497,22 @@ QJsonObject CXMLNode::toJsonObject() const
     foreach (QString sTag, sTagList)
     {
         QVector<CXMLNode> vNodes = getNodesByTagName(sTag);
-        QJsonArray array;
 
-        foreach (CXMLNode xNode, vNodes)
+        if (vNodes.count() > 1)
         {
-            array << xNode.toJsonObject();
-        }
+            QJsonArray array;
 
-        object[sTag] = array;
+            foreach (CXMLNode xNode, vNodes)
+            {
+                array << xNode.toJsonObject();
+            }
+
+            object[sTag] = array;
+        }
+        else
+        {
+            object[sTag] = vNodes[0].toJsonObject();
+        }
     }
 
     return object;
@@ -400,15 +521,17 @@ QJsonObject CXMLNode::toJsonObject() const
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Saves this CXMLNode tree as xml in the file named \a sFileName.
+    Saves this CXMLNode tree as XML in the file named \a sFileName. \br
+    If \a bXMLHeader is \c true, the xml file will contain a header of the type <?xml version="1.0" encoding="UTF-8"?> \br
+    Returns \c true if successful, \c false otherwise.
 */
-bool CXMLNode::saveXMLToFile(const QString& sFileName)
+bool CXMLNode::saveXMLToFile(const QString& sFileName, bool bXMLHeader)
 {
     QFile xmlFile(sFileName);
 
     if (xmlFile.open(QIODevice::WriteOnly))
     {
-        xmlFile.write(toString().toLatin1());
+        xmlFile.write(toString(bXMLHeader).toLatin1());
         xmlFile.close();
 
         return true;
@@ -420,7 +543,8 @@ bool CXMLNode::saveXMLToFile(const QString& sFileName)
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Saves this CXMLNode tree as json in the file named \a sFileName.
+    Saves this CXMLNode tree as JSON in the file named \a sFileName. \br
+    Returns \c true if successful, \c false otherwise.
 */
 bool CXMLNode::saveJSONToFile(const QString& sFileName)
 {
@@ -440,7 +564,7 @@ bool CXMLNode::saveJSONToFile(const QString& sFileName)
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Returns the child node who's tag is \a sTagName.
+    Returns the child node whose tag is \a sTagName.
 */
 CXMLNode CXMLNode::getNodeByTagName(QString sTagName)
 {
@@ -455,7 +579,7 @@ CXMLNode CXMLNode::getNodeByTagName(QString sTagName)
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Returns the child node who's tag is \a sTagName.
+    Returns the child node whose tag is \a sTagName.
 */
 CXMLNode CXMLNode::getNodeByTagName(QString sTagName) const
 {
@@ -470,7 +594,7 @@ CXMLNode CXMLNode::getNodeByTagName(QString sTagName) const
 //-------------------------------------------------------------------------------------------------
 
 /*!
-    Returns a list of child nodes who's tag is \a sTagName.
+    Returns a list of child nodes whose tag is \a sTagName.
 */
 QVector<CXMLNode> CXMLNode::getNodesByTagName(QString sTagName) const
 {
@@ -485,6 +609,37 @@ QVector<CXMLNode> CXMLNode::getNodesByTagName(QString sTagName) const
     }
 
     return vNodes;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/*!
+    Add node
+*/
+void CXMLNode::addNode(const CXMLNode &node)
+{
+    m_vNodes.push_back(node);
+}
+
+//-------------------------------------------------------------------------------------------------
+
+/*!
+    Remove node
+*/
+int CXMLNode::removeNodes(const QString &sTagName)
+{
+    int nRemoved = 0;
+    for (int i=0; i<m_vNodes.size(); i++)
+    {
+        if (m_vNodes[i].tag() == sTagName)
+        {
+            m_vNodes.remove(i);
+            nRemoved++;
+            i--;
+        }
+    }
+
+    return nRemoved;
 }
 
 //-------------------------------------------------------------------------------------------------
