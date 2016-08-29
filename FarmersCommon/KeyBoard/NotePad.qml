@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Dialogs 1.1
 import QtQuick.Controls.Styles 1.4
 import Components 1.0
+import Common 1.0
 import ".."
 
 Rectangle {
@@ -11,11 +12,12 @@ Rectangle {
     radius: 3
     color: _settings.keyboardBkgColor
     width: keyBoard.width
-    height: 2*keyBoard.height
+    height: keyBoard.height+110
     property int toolBarItemSpacing: 4
     property int toolBarHeight: 48
     property string spaceStr: " "
     property bool simple: false
+    property alias notepadLabel: notepadLabel.text
 
     // Set default state:
     opacity: 0
@@ -143,6 +145,14 @@ Rectangle {
         height: toolBarHeight
         RowLayout {
             anchors.fill: parent
+            StandardText {
+                id: notepadLabel
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            /*
             spacing: toolBarItemSpacing
             ToolButton { action: fileSaveAsAction }
             ToolBarSeparator {}
@@ -185,27 +195,31 @@ Rectangle {
                         document.fontSize++
                 }
             }
+            */
             Item { Layout.fillWidth: true }
             ToolButton { action: exitAction }
         }
     }
 
     // Text area:
-    TextArea {
+    TextField {
         id: textArea
-        style: TextAreaStyle {
+        style: TextFieldStyle {
             textColor: _colors.ffColor5
-            backgroundColor: _colors.ffColor18
+            background: Rectangle {
+                color: _colors.ffColor18
+                width: textArea.width
+                height: textArea.height
+                radius: 8
+            }
         }
         Accessible.name: "document"
-        frameVisible: false
         width: parent.width
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: mainToolBar.bottom
         anchors.bottom: keyBoard.top
         anchors.margins: 4
-        baseUrl: "qrc:/"
         onTextChanged: document.text = text
         Component.onCompleted: {
             textArea.font.pointSize = document.fontSize

@@ -84,8 +84,8 @@ Page {
         height: parent.height*_settings.footerRatio
         anchors.bottom: parent.bottom
         homeVisible: true
-        cartVisible: (pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") &&
-            (_cartModel.cartCount > 0)
+        cartVisible: ((pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") || (pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"))
+        cartOverLayState: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE" ? "requestPay" : "cartCount"
         emailVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
         couponVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
         pigVisible: (pageMgr.currentPageId !== "MENU_PRESENTATION_PAGE") ||

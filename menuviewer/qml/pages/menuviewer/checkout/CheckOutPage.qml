@@ -45,6 +45,7 @@ PageTemplate {
         requestType = 1
         notepad.invoker = checkOutPage
         notepad.state = "on"
+        notepad.notepadLabel = qsTr("Please Enter Coupon Code")
     }
 
     // Email clicked:
@@ -53,6 +54,7 @@ PageTemplate {
         requestType = 0
         notepad.invoker = checkOutPage
         notepad.state = "on"
+        notepad.notepadLabel = qsTr("Please Enter a Valid Email Address")
     }
 
     // Pig clicked:
@@ -97,7 +99,7 @@ PageTemplate {
             tax: "$" + Math.round(_cartModel.cartTax*100)/100
             total: "$" + Math.round((_cartModel.cartSubTotal + _cartModel.cartTax)*100)/100
             cartCount: _cartModel.cartCount +
-                (_cartModel.cartCount > 0 ? qsTr(" Items") : qsTr(" Item"))
+                (_cartModel.cartCount > 1 ? qsTr(" Items") : qsTr(" Item"))
         }
     }
 }

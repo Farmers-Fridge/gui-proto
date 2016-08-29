@@ -85,6 +85,7 @@ Rectangle {
                     TabButton {
                         width: part2.width/_categoryModel.count
                         height: part2.height
+                        text: categoryName.toUpperCase()
                         color: _colors.ffColor2
                         backgroundImage: getHighlightForCategory(categoryName)
                         selected: _controller.currentCategory === categoryName

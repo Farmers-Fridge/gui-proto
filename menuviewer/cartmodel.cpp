@@ -69,8 +69,6 @@ void CartModel::setItemCount(int count, const QString &vendItemName)
         emit dataChanged(index(itemIndex, 0), index(itemIndex, 0));
     }
 
-    qDebug() << vendItemName << " COUNT: " << item._count;
-
     // Subtotal changed:
     emit cartSubTotalChanged();
 }

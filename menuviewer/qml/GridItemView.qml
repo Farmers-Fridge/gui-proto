@@ -64,7 +64,7 @@ GridView {
                 id: imageArea
                 width: parent.width
                 anchors.top: parent.top
-                anchors.bottom: footer.top
+                anchors.bottom: footer.visible ? footer.top : parent.bottom
 
                 // Original image:
                 Image {
@@ -113,6 +113,7 @@ GridView {
             // Footer:
             Item {
                 id: footer
+                visible: false
                 anchors.bottom: parent.bottom
                 width: parent.width
                 height: 0.33*parent.height
@@ -156,6 +157,7 @@ GridView {
         if ((nItems === 2) || (nItems === 4))
         {
             cellWidth = itemView.width/2
+            cellHeight = itemView.height/2
         }
         else
         if ((nItems === 3) || (nItems >= 5))

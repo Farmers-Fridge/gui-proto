@@ -45,8 +45,7 @@ Item {
         Item {
             anchors.left: total.right
             anchors.right: totalValue.left
-            anchors.top: tax.bottom
-            anchors.topMargin: 8
+            anchors.verticalCenter: total.verticalCenter
             StandardText {
                 id: cartCount
                 anchors.centerIn: parent

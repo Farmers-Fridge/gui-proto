@@ -78,6 +78,7 @@ Page {
                 onClicked: {
                     notepad.invoker = stockPagePrivate
                     notepad.state = "on"
+                    notepad.notepadLabel = qsTr("Please Enter Notes")
                 }
             }
         }

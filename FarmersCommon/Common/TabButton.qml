@@ -30,8 +30,8 @@ Item {
         id: label
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 20
-        color: selected ? "white" : _colors.ffColor8
-        text: categoryName
+        font.pixelSize: 36
+        color: selected ? _colors.ffColor16 : _colors.ffColor8
     }
 
     // Handle click:
