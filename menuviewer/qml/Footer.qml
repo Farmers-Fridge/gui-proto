@@ -10,6 +10,7 @@ Rectangle {
     property alias couponVisible: couponButton.visible
     property alias pigVisible: pigButton.visible
     property alias cartVisible: cartButton.visible
+    property alias cartOverLayState: cartLabel.state
     property alias footerRightText: footerRightText.text
     property alias footerRightTextVisible: footerRightText.visible
     property alias footerCentralText: footerCentralText.text
@@ -75,12 +76,31 @@ Rectangle {
             visible: false
 
             LargeBoldText {
+                id: cartLabel
                 anchors.centerIn: parent
-                anchors.horizontalCenterOffset: -21
-                anchors.verticalCenterOffset: -18
-                color: _colors.ffColor3
+                color: _colors.ffColor16
                 text: _cartModel.cartCount
-                visible: _cartModel.cartCount > 0
+                state: "cartCount"
+                states: [
+                    State {
+                        name: "requestPay"
+                        PropertyChanges {
+                            target: cartLabel
+                            text: qsTr("PAY")
+                            anchors.horizontalCenterOffset: -21
+                            anchors.verticalCenterOffset: -18
+                        }
+                    },
+                    State {
+                        name: "cartCount"
+                        PropertyChanges {
+                            target: cartLabel
+                            text: _cartModel.cartCount
+                            anchors.horizontalCenterOffset: -21
+                            anchors.verticalCenterOffset: -18
+                        }
+                    }
+                ]
             }
         }
 
