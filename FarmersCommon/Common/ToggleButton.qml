@@ -4,6 +4,7 @@ import Common 1.0
 Item {
     id: container
     property alias label: label.text
+    property alias labelColor: label.color
     property bool selected: false
     width: _settings.toggleButtonWidth+8+label.implicitWidth
     signal clicked()
@@ -16,7 +17,7 @@ Item {
         color: _colors.ffColor11
 
         MouseArea {
-            anchors.fill: _colors.ff
+            anchors.fill: parent
             onClicked: container.clicked()
         }
     }

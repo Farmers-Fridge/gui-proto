@@ -8,6 +8,9 @@ PageTemplate {
     // Grid view current index:
     property int gridViewIndex: 0
 
+    // Current add-on (TO DO):
+    property string currentAddOn: ""
+
     // Footer right text:
     footerRightText: qsTr("Subtotal $") + _cartModel.cartSubTotal
     footerRightTextVisible: _cartModel.cartSubTotal > 0
@@ -183,6 +186,26 @@ PageTemplate {
                 anchors.top: currentVendItemName.bottom
                 anchors.topMargin: 8
                 anchors.horizontalCenter: parent.horizontalCenter
+
+                // Add seasoned chicken:
+                ToggleButton {
+                    anchors.left: parent.left
+                    anchors.bottom: parent.bottom
+                    labelColor: _colors.ffColor8
+                    label: qsTr("Add Seasoned Chicken")
+                    onClicked: currentAddOn = label
+                    selected: currentAddOn === label
+                }
+
+                // Add phoenix tofu:
+                ToggleButton {
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    labelColor: _colors.ffColor8
+                    label: qsTr("Add Phoenix Tofu")
+                    onClicked: currentAddOn = label
+                    selected: currentAddOn === label
+                }
             }
 
             // Add item to cart:
