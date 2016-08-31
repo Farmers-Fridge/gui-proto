@@ -30,6 +30,12 @@ public:
 
     // Return path to default settings files:
     static QString pathToDefaultSettingsFile();
+
+    // Clear directory:
+    static bool clearDirectory(const QString &dirName);
+
+    // Save byte array to file:
+    static bool save(const QByteArray &bArray, const QString &filePath);
 };
 
 #endif // UTILS_H

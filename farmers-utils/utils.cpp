@@ -80,3 +80,42 @@ QString Utils::pathToDefaultSettingsFile()
 
     return "";
 }
+
+// Clear directory:
+bool Utils::clearDirectory(const QString &dirName)
+{
+    bool result = true;
+    QDir dir(dirName);
+
+    if (dir.exists(dirName)) {
+        Q_FOREACH(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+            if (info.isDir()) {
+                result = clearDirectory(info.absoluteFilePath());
+            }
+            else {
+                result = QFile::remove(info.absoluteFilePath());
+            }
+
+            if (!result) {
+                return result;
+            }
+        }
+        result = dir.rmdir(dirName);
+    }
+
+    return result;
+}
+
+// Save byte array to file:
+bool Utils::save(const QByteArray &bArray, const QString &filePath)
+{
+    if (bArray.isEmpty() || bArray.isNull())
+        return false;
+    QFile file(filePath);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        file.write(bArray);
+        file.close();
+    }
+    return true;
+}
