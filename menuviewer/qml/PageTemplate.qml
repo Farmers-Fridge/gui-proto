@@ -62,9 +62,8 @@ Page {
     Header {
         id: header
         width: parent.width
-        height: parent.height*_settings.headerRatio
+        height: _settings.headerHeight
         anchors.top: parent.top
-        bottomAreaSource: "qrc:/assets/ico-primary-darkbar.png"
         onTabClicked: menuPageTemplate.tabClicked()
     }
 

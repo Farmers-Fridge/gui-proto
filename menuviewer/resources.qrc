@@ -3,7 +3,6 @@
         <file>qml/main.qml</file>
         <file>json/application.json</file>
         <file>qml/MainApplication.qml</file>
-        <file>qml/Header.qml</file>
         <file>qml/Footer.qml</file>
         <file>qml/ReservedArea.qml</file>
         <file>qml/CategoryListModel.qml</file>
@@ -19,7 +18,6 @@
         <file>assets/ico-home.png</file>
         <file>assets/ico-cart.png</file>
         <file>assets/ico-pig.png</file>
-        <file>assets/ico-drinks.png</file>
         <file>qml/CartView.qml</file>
         <file>qml/TotalView.qml</file>
         <file>assets/ico-question.png</file>
@@ -28,14 +26,9 @@
         <file>assets/ico-ok.png</file>
         <file>assets/ico-email.png</file>
         <file>assets/ico-entercoupon.png</file>
-        <file>assets/ico-jar.png</file>
-        <file>assets/ico-proteins.png</file>
-        <file>assets/ico-snacks.png</file>
         <file>qml/FilterArea.qml</file>
         <file>assets/ico-checkmark.png</file>
         <file>qml/PageTemplate.qml</file>
-        <file>assets/ico-breakfast.png</file>
-        <file>assets/ico-dishes.png</file>
         <file>assets/ico-detailed_contents_placeholder.png</file>
         <file>assets/ico-logo.png</file>
         <file>assets/ico-nutrition-fact-example.png</file>
@@ -60,5 +53,12 @@
         <file>assets/ico-statistics.png</file>
         <file>assets/ico-system-health.png</file>
         <file>qml/pages/settings/SettingsPage.qml</file>
+        <file>qml/Header.qml</file>
+        <file>qml/TabDisplay.qml</file>
+        <file>assets/ico-breakfast-menu.png</file>
+        <file>assets/ico-dishes-menu.png</file>
+        <file>assets/ico-drinks-menu.png</file>
+        <file>assets/ico-snacks-menu.png</file>
+        <file>assets/ico-salads-menu.png</file>
     </qresource>
 </RCC>
