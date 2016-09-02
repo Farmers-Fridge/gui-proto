@@ -15,10 +15,13 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                var tabWidth = root.width/avStates.length
-                var tabIndex = Math.floor(mouseX/tabWidth)
-                root.state = avStates[tabIndex]
-                tabClicked(avStates[tabIndex])
+                if (mouseY < _settings.tabClickableAreaHeight)
+                {
+                    var tabWidth = root.width/avStates.length
+                    var tabIndex = Math.floor(mouseX/tabWidth)
+                    root.state = avStates[tabIndex]
+                    tabClicked(avStates[tabIndex])
+                }
             }
         }
     }
