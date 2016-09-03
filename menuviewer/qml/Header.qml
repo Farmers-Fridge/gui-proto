@@ -63,14 +63,14 @@ Rectangle {
             header.tabClicked()
         }
 
-        // Part3:
         Item {
-            id: part3
             width: parent.width
-            height: 100
+            height: _settings.tabHeight - _settings.tabClickableAreaHeight
             anchors.bottom: parent.bottom
-            FilterArea {
-                width: parent.width*.9
+
+            // Part3:
+            FilterDisplay {
+                width: parent.width
                 height: 1
                 anchors.centerIn: parent
             }

@@ -26,7 +26,6 @@
         <file>assets/ico-ok.png</file>
         <file>assets/ico-email.png</file>
         <file>assets/ico-entercoupon.png</file>
-        <file>qml/FilterArea.qml</file>
         <file>assets/ico-checkmark.png</file>
         <file>qml/PageTemplate.qml</file>
         <file>assets/ico-detailed_contents_placeholder.png</file>
@@ -60,5 +59,11 @@
         <file>assets/ico-drinks-menu.png</file>
         <file>assets/ico-snacks-menu.png</file>
         <file>assets/ico-salads-menu.png</file>
+        <file>qml/FilterDisplay.qml</file>
+        <file>assets/ico-gluten-free-selected.png</file>
+        <file>assets/ico-lowcal-selected.png</file>
+        <file>assets/ico-lowfat-selected.png</file>
+        <file>assets/ico-vegan-selected.png</file>
+        <file>assets/ico-vegetarian-selected.png</file>
     </qresource>
 </RCC>
