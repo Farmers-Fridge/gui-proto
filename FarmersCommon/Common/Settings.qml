@@ -3,7 +3,7 @@ import QtQuick 2.5
 Item {
     // Others:
     readonly property real footerRatio: .12
-    readonly property int headerHeight: 312
+    readonly property int headerHeight: 336
     readonly property int tabHeight: 284
     readonly property int tabClickableAreaHeight: 175
 	readonly property int pageIdleTimeOut: 50000
