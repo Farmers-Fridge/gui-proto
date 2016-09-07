@@ -65,5 +65,6 @@
         <file>assets/ico-lowfat-selected.png</file>
         <file>assets/ico-vegan-selected.png</file>
         <file>assets/ico-vegetarian-selected.png</file>
+        <file>assets/ico-nofilter-selected.png</file>
     </qresource>
 </RCC>
