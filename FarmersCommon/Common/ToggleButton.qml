@@ -18,7 +18,14 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: container.clicked()
+            onClicked: {
+                if (container.state === "checked")
+                    container.state = ""
+                else
+                    container.state = "checked"
+                selected = container.state === "checked"
+                container.clicked()
+            }
         }
     }
 

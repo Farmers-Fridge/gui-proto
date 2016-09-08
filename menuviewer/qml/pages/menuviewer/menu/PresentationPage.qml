@@ -9,7 +9,9 @@ PageTemplate {
     property int gridViewIndex: 0
 
     // Current add-on (TO DO):
-    property string currentAddOn: ""
+    property variant currentAddOns: []
+    signal selectedAddOnsChanged()
+    onSelectedAddOnsChanged: console.log("SELECTED ADDONS = ", currentAddOns)
 
     // Footer right text:
     footerRightText: qsTr("Subtotal $") + _cartModel.cartSubTotal
@@ -193,8 +195,18 @@ PageTemplate {
                     anchors.bottom: parent.bottom
                     labelColor: _colors.ffColor8
                     label: qsTr("Add Seasoned Chicken")
-                    onClicked: currentAddOn = label
-                    selected: currentAddOn === label
+                    onClicked: {
+                        if (selected) {
+                            if (currentAddOns.indexOf(label) === -1)
+                                currentAddOns.push(label)
+                        }
+                        else {
+                            var index = currentAddOns.indexOf(label)
+                            if (index >= 0)
+                                currentAddOns.splice(index, 1)
+                        }
+                        selectedAddOnsChanged()
+                    }
                 }
 
                 // Add phoenix tofu:
@@ -203,8 +215,18 @@ PageTemplate {
                     anchors.bottom: parent.bottom
                     labelColor: _colors.ffColor8
                     label: qsTr("Add Phoenix Tofu")
-                    onClicked: currentAddOn = label
-                    selected: currentAddOn === label
+                    onClicked: {
+                        if (selected) {
+                            if (currentAddOns.indexOf(label) === -1)
+                                currentAddOns.push(label)
+                        }
+                        else {
+                            var index = currentAddOns.indexOf(label)
+                            if (index >= 0)
+                                currentAddOns.splice(index, 1)
+                        }
+                        selectedAddOnsChanged()
+                    }
                 }
             }
 
