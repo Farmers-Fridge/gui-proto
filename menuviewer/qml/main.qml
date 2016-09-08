@@ -61,7 +61,6 @@ Window {
         id: mainApplicationComponent
         MainApplication {
             id: mainApplication
-            scale: .75
         }
     }
 }
