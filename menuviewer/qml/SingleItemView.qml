@@ -25,6 +25,21 @@ Item {
             width: imageLoadingBkg.width
             height: imageLoadingBkg.height
             anchors.centerIn: imageLoadingBkg
+
+            // Add item to cart:
+            ImageButton {
+                id: addItem
+                anchors.top: parent.top
+                anchors.right: parent.right
+                width: 96
+                height: 96
+                source: "qrc:/assets/ico-add.png"
+
+                // Add current item to cart:
+                onClicked: {
+                    mainApplication.addCurrentItemToCart()
+                }
+            }
         }
 
         // Image loading background

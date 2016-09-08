@@ -229,29 +229,6 @@ PageTemplate {
                     }
                 }
             }
-
-            // Add item to cart:
-            ImageButton {
-                id: addItem
-                anchors.verticalCenter: parent.top
-                anchors.right: parent.right
-                anchors.rightMargin: 112
-                width: 96
-                height: 96
-                source: "qrc:/assets/ico-add.png"
-
-                // Add current item to cart:
-                onClicked: mainApplication.addCurrentItemToCart()
-            }
-
-            // Add to cart text:
-            StandardText {
-                anchors.top: addItem.bottom
-                anchors.topMargin: 8
-                anchors.horizontalCenter: addItem.horizontalCenter
-                text: qsTr("ADD TO CART")
-                color: _colors.ffColor7
-            }
         }
     }
 
