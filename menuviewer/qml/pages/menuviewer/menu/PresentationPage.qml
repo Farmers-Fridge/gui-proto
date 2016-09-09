@@ -141,6 +141,7 @@ PageTemplate {
             id: bottomArea
             color: _colors.ffColor13
             border.color: _colors.ffColor7
+            border.width: 1
             anchors.bottom: parent.bottom
             width: parent.width
             height: Math.round((1/3)*parent.height)
