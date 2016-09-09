@@ -190,43 +190,54 @@ PageTemplate {
                 anchors.topMargin: 8
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                // Add seasoned chicken:
-                ToggleButton {
-                    anchors.left: parent.left
+                Item {
+                    width: parent.width
+                    height: 1
                     anchors.bottom: parent.bottom
-                    labelColor: _colors.ffColor8
-                    label: qsTr("Add Seasoned Chicken")
-                    onClicked: {
-                        if (selected) {
-                            if (currentAddOns.indexOf(label) === -1)
-                                currentAddOns.push(label)
+                    Image {
+                        id: chickenImage
+                        source: "qrc:/assets/ico-addseasoned-chicken-unselected.png"
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        states: State {
+                            name: "selected"
+                            PropertyChanges {
+                                target: chickenImage
+                                source: "qrc:/assets/ico-addseasoned-chicken-selected.png"
+                            }
                         }
-                        else {
-                            var index = currentAddOns.indexOf(label)
-                            if (index >= 0)
-                                currentAddOns.splice(index, 1)
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                if (chickenImage.state === "")
+                                    chickenImage.state = "selected"
+                                else
+                                    chickenImage.state = ""
+                            }
                         }
-                        selectedAddOnsChanged()
                     }
-                }
-
-                // Add phoenix tofu:
-                ToggleButton {
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    labelColor: _colors.ffColor8
-                    label: qsTr("Add Phoenix Tofu")
-                    onClicked: {
-                        if (selected) {
-                            if (currentAddOns.indexOf(label) === -1)
-                                currentAddOns.push(label)
+                    Image {
+                        id: tofuImage
+                        source: "qrc:/assets/ico-add-tofu-unselected.png"
+                        anchors.right: parent.right
+                        anchors.rightMargin: -32
+                        anchors.verticalCenter: parent.verticalCenter
+                        states: State {
+                            name: "selected"
+                            PropertyChanges {
+                                target: tofuImage
+                                source: "qrc:/assets/ico-add-tofu-selected.png"
+                            }
                         }
-                        else {
-                            var index = currentAddOns.indexOf(label)
-                            if (index >= 0)
-                                currentAddOns.splice(index, 1)
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                if (tofuImage.state === "")
+                                    tofuImage.state = "selected"
+                                else
+                                    tofuImage.state = ""
+                            }
                         }
-                        selectedAddOnsChanged()
                     }
                 }
             }

@@ -66,5 +66,9 @@
         <file>assets/ico-vegan-selected.png</file>
         <file>assets/ico-vegetarian-selected.png</file>
         <file>assets/ico-nofilter-selected.png</file>
+        <file>assets/ico-addseasoned-chicken-selected.png</file>
+        <file>assets/ico-addseasoned-chicken-unselected.png</file>
+        <file>assets/ico-add-tofu-selected.png</file>
+        <file>assets/ico-add-tofu-unselected.png</file>
     </qresource>
 </RCC>
