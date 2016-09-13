@@ -7,7 +7,7 @@ Item {
     z: _settings.zMax
 
     ImageButton {
-        height: parent.height-8
+        height: parent.height-32
         anchors.centerIn: parent
         source: "qrc:/assets/ico-locker.png"
         onClicked: reservedAreaClicked()

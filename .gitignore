@@ -13,3 +13,8 @@
 *.autosave
 *.dll
 *.a
+*.exp
+*.lib
+*.ilk
+*.pdb
+*.obj
