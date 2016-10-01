@@ -216,12 +216,14 @@ void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
 // Download single icon:
 void FarmersFridgeClientPrivate::downloadSingleIcon(const QString &sIconUrl, const QDir &dstDir)
 {
+    /*
     // Create HTTP downloader:
     HttpDownLoader *pDownLoaderHead = new HttpDownLoader(this);
     m_vDownloaders << pDownLoaderHead;
     connect(pDownLoaderHead, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onSingleIconHeadRetrieved);
     connect(pDownLoaderHead, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
     pDownLoaderHead->download(sIconUrl, dstDir, m_sAPIKey, HttpWorker::HEAD);
+    */
 
     // Create HTTP downloader:
     HttpDownLoader *pDownLoader = new HttpDownLoader(this);
@@ -289,14 +291,14 @@ void FarmersFridgeClientPrivate::onSingleIconHeadRetrieved()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconRetrieved FAILED TO RETRIEVE HTTPDOWNLOADER");
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconHeadRetrieved FAILED TO RETRIEVE HTTPDOWNLOADER");
         return;
     }
 
     // Check reply:
     if (pSender->reply().isEmpty())
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconHeadRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
         updateDownLoaders(pSender);
         return;
     }
