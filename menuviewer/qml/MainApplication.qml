@@ -43,21 +43,7 @@ Item {
     // Get category model source:
     function getCategoryModelSource()
     {
-        var source = ""
-
-        // Off line:
-        if (_appData.offline_mode === "1")
-        {
-            // TO DO
-            source = _controller.fromLocalFile(_controller.offLinePath + "/categories")
-        }
-        else
-        // In line:
-        {
-            source = Utils.urlPlay(_appData.currentIP, _appData.categorySource)
-        }
-
-        return source
+        return _controller.fromLocalFile(_controller.offLinePath + "/categories.xml")
     }
 
     // Set current stock item:
@@ -77,28 +63,35 @@ Item {
         if (enteredText === _appData.exitCode)
             Qt.quit()
         else
-        // User entered stock code:
-        if (enteredText === _appData.stockCode)
-        {
-            mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.urlPublicRootValue, "/hosts.xml")
-            pageMgr.loadPage("STOCK_NETWORK_PAGE")
-            mainApplication.state = "active"
-        }
-        else
-        // User entered stats code:
-        if (enteredText === _appData.statsCode)
-        {
-            pageMgr.loadPage("STATS_INTRO_PAGE")
-            mainApplication.state = "active"
-        }
-        else
-        // User entered settings code:
-        if (enteredText === _appData.settingsCode)
-        {
-            pageMgr.loadPage("SETTINGS_PRESENTATION_PAGE")
-            mainApplication.state = "active"
-        }
+            // User entered stock code:
+            if (enteredText === _appData.stockCode)
+            {
+                mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.urlPublicRootValue, "/hosts.xml")
+                pageMgr.loadPage("STOCK_NETWORK_PAGE")
+                mainApplication.state = "active"
+            }
+            else
+                // User entered stats code:
+                if (enteredText === _appData.statsCode)
+                {
+                    pageMgr.loadPage("STATS_INTRO_PAGE")
+                    mainApplication.state = "active"
+                }
+                else
+                    // User entered settings code:
+                    if (enteredText === _appData.settingsCode)
+                    {
+                        pageMgr.loadPage("SETTINGS_PRESENTATION_PAGE")
+                        mainApplication.state = "active"
+                    }
         privateNumericKeyPad.state = ""
+    }
+
+    // Get image source:
+    function getImageSource(targetCategory, imageUrl, isNutrition)
+    {
+        var extra = isNutrition ? "/nutrition/" : "/"
+        return _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + extra + _controller.fileBaseName(imageUrl))
     }
 
     // Add to cart command:
@@ -141,7 +134,7 @@ Item {
         anchors.fill: parent
         pages: _appData.pages
         enabled: (privateNumericKeyPad.state === "") &&
-            (stockNumericKeyPad.state === "") &&
+                 (stockNumericKeyPad.state === "") &&
                  (notepad.state === "")
     }
 
@@ -168,21 +161,18 @@ Item {
                     console.log("Can't load: " + source)
                 }
                 else
-                // Model ready:
-                if (status === XmlListModel.Ready)
-                {
-                    // Set current category name:
-                    _controller.currentCategory = categoryModel.get(0).categoryName
+                    // Model ready:
+                    if (status === XmlListModel.Ready)
+                    {
+                        // Set current category name:
+                        _controller.currentCategory = categoryModel.get(0).categoryName
 
-                    // Set category model:
-                    _categoryModel = categoryModel
+                        // Log:
+                        console.log(source + " loaded successfully")
 
-                    // Log:
-                    console.log(source + " loaded successfully")
-
-                    // Load first page:
-                    pageMgr.initialize()
-                }
+                        // Load first page:
+                        pageMgr.initialize()
+                    }
             }
         }
     }
@@ -238,7 +228,7 @@ Item {
     // Set state back to grid view mode:
     onStateChanged: {
         if (state === "active") {
-            _controller.currentCategory = _categoryModel.get(0).categoryName
+            _controller.currentCategory = categoryModel.get(0).categoryName
             _viewMode = "gridview"
         }
     }

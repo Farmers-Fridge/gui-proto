@@ -9,21 +9,7 @@ CustomXmlListModel {
     // Get source:
     function getCategoryListSource()
     {
-        var source = ""
-
-        // Off line:
-        if (_appData.offline_mode === "1")
-        {
-            // TO DO
-            source = _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + "/" + targetCategory)
-        }
-        // In line:
-        else
-        {
-            source = Utils.urlPlay(_appData.currentIP, _appData.categoryListSource + "?category=" + targetCategory)
-        }
-
-        return source
+        return _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + "/" + targetCategory + ".xml")
     }
 
     property string targetCategory: ""
@@ -45,12 +31,12 @@ CustomXmlListModel {
                 // Failure:
                 console.log("FAILED TO LOAD IMAGES FOR CATEGORY: " + targetCategory)
             else
-            if (status === XmlListModel.Ready)
-            {
-                // Success:
-                console.log("IMAGES FOR CATEGORY: " + targetCategory + " LOADED SUCCESSFULLY")
-                modelReady()
-            }
+                if (status === XmlListModel.Ready)
+                {
+                    // Success:
+                    console.log("IMAGES FOR CATEGORY: " + targetCategory + " LOADED SUCCESSFULLY")
+                    modelReady()
+                }
         }
     }
 }

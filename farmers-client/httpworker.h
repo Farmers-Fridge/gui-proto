@@ -6,9 +6,12 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QDir>
-#include "farmers-server_global.h"
+#include <QTimer>
+#include "farmers-client-global.h"
 
-class FARMERSSERVERSHARED_EXPORT HttpWorker : public QObject
+#define TIME_OUT 120000
+
+class FARMERSCLIENTVERSHARED_EXPORT HttpWorker : public QObject
 {
     Q_OBJECT
 
@@ -17,35 +20,8 @@ public:
     enum RequestType {GET=0, HEAD};
     Q_ENUMS(RequestType)
 
-    // Default constructor:
-    HttpWorker(QObject *parent=0);
-
     // Constructor:
     HttpWorker(const QUrl &url, const QDir &dstDir, const QString &x_api_key="", const RequestType &requestType=HttpWorker::GET, QObject *parent=0);
-
-    // Set url:
-    void setRemoteUrl(const QUrl &url);
-
-    // Return url:
-    const QUrl &remoteUrl() const;
-
-    // Set dst dir:
-    void setDstDir(const QDir &dir);
-
-    // Return dst dir:
-    const QDir &dstDir() const;
-
-    // Set x_api_key:
-    void set_x_api_key(const QString &x_api_key);
-
-    // Return x_api_key:
-    const QString &x_api_key() const;
-
-    // Set request type:
-    void setRequestType(const RequestType &requestType);
-
-    // Return request type:
-    const RequestType &requestType() const;
 
     // Reply:
     const QByteArray &reply() const;
@@ -63,9 +39,15 @@ public slots:
     // File downloaed slot:
     void onFinished(QNetworkReply* pReply);
 
+    // Time out:
+    void onTimeOut();
+
 signals:
     // Finished signal:
     void finished();
+
+    // Time out:
+    void timeOut();
 
 private:
     // Url:
@@ -91,6 +73,9 @@ private:
 
     // Network access manager:
     QNetworkAccessManager *m_pNetworkAccessMgr;
+
+    // Timer:
+    QTimer m_tTimer;
 };
 
 #endif // HTTPWORKER_H

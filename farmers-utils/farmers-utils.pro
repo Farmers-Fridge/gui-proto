@@ -10,13 +10,13 @@ TEMPLATE = lib
 DEFINES += FARMERSUTILS_LIBRARY
 
 unix {
-    DESTDIR = ../lib
+    DESTDIR = ../bin
     MOC_DIR = ../moc
     OBJECTS_DIR = ../obj
 }
 
 win32 {
-    DESTDIR = ..\\lib
+    DESTDIR = ..\\bin
     MOC_DIR = ..\\moc
     OBJECTS_DIR = ..\\obj
 }

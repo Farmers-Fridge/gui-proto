@@ -1,5 +1,6 @@
 #include <QApplication>
 #include "menuviewer.h"
+#include <farmersfridgeclient.h>
 
 int main(int argc, char *argv[])
 {

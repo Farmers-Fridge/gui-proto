@@ -2,6 +2,5 @@ TEMPLATE = subdirs
 CONFIG = ordered
 SUBDIRS += \
     farmers-utils \
-    farmers-server \
+    farmers-client \
     menuviewer
-

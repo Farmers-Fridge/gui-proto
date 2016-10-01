@@ -4,10 +4,14 @@ Item {
     id: root
     width: parent.width
     height: _settings.tabHeight
-    property variant avStates: ["Breakfast", "Salads", "Dishes", "Drinks", "Snacks"]
-    signal categorySelected(string categoryName)
-    state: "Breakfast"
-    onStateChanged: categorySelected(state)
+
+    Component.onCompleted: {
+        for (var i=0; i<categoryModel.length; i++)
+            console.log(categoryModel.get(i).categoryName)
+    }
+
+    property variant avStates: ["breakfast", "salads", "dishes", "drinks", "snacks"]
+    state: "breakfast"
     signal tabClicked(string categoryName)
     Image {
         id: bkg
@@ -27,35 +31,35 @@ Item {
     }
     states: [
         State {
-            name: "Breakfast"
+            name: "breakfast"
             PropertyChanges {
                 target: bkg
                 source: "qrc:/assets/ico-breakfast-menu.png"
             }
         },
         State {
-            name: "Salads"
+            name: "salads"
             PropertyChanges {
                 target: bkg
                 source: "qrc:/assets/ico-salads-menu.png"
             }
         },
         State {
-            name: "Dishes"
+            name: "dishes"
             PropertyChanges {
                 target: bkg
                 source: "qrc:/assets/ico-dishes-menu.png"
             }
         },
         State {
-            name: "Drinks"
+            name: "drinks"
             PropertyChanges {
                 target: bkg
                 source: "qrc:/assets/ico-drinks-menu.png"
             }
         },
         State {
-            name: "Snacks"
+            name: "snacks"
             PropertyChanges {
                 target: bkg
                 source: "qrc:/assets/ico-snacks-menu.png"

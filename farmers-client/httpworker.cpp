@@ -1,16 +1,6 @@
 #include "httpworker.h"
 #include <utils.h>
 
-// Default constructor:
-HttpWorker::HttpWorker(QObject *parent) : QObject(parent),
-    m_x_api_key(""),
-    m_requestType(GET),
-    m_sLocalFilePath(""),
-    m_pNetworkAccessMgr(0)
-{
-
-}
-
 // Constructor:
 HttpWorker::HttpWorker(const QUrl &url, const QDir &dstDir, const QString &x_api_key, const RequestType &requestType, QObject *parent) : QObject(parent),
     m_remoteUrl(url),
@@ -23,60 +13,16 @@ HttpWorker::HttpWorker(const QUrl &url, const QDir &dstDir, const QString &x_api
     m_pNetworkAccessMgr = new QNetworkAccessManager(this);
     connect(m_pNetworkAccessMgr, &QNetworkAccessManager::finished,
         this, &HttpWorker::onFinished, Qt::QueuedConnection);
-    m_pNetworkAccessMgr->moveToThread(this->thread());
-}
-
-// Set url:
-void HttpWorker::setRemoteUrl(const QUrl &url)
-{
-    m_remoteUrl = url;
-}
-
-// Return url:
-const QUrl &HttpWorker::remoteUrl() const
-{
-    return m_remoteUrl;
-}
-
-// Set dst dir:
-void HttpWorker::setDstDir(const QDir &dir)
-{
-    m_dstDir = dir;
-}
-
-// Return dst dir:
-const QDir &HttpWorker::dstDir() const
-{
-    return m_dstDir;
-}
-
-// Set x_api_key:
-void HttpWorker::set_x_api_key(const QString &x_api_key)
-{
-    m_x_api_key = x_api_key;
-}
-
-// Return x_api_key:
-const QString &HttpWorker::x_api_key() const
-{
-    return m_x_api_key;
-}
-
-// Set request type:
-void HttpWorker::setRequestType(const RequestType &requestType)
-{
-    m_requestType = requestType;
-}
-
-// Return request type:
-const HttpWorker::RequestType &HttpWorker::requestType() const
-{
-    return m_requestType;
+    m_tTimer.setSingleShot(true);
+    connect(&m_tTimer, &QTimer::timeout, this, &HttpWorker::onTimeOut);
 }
 
 // Process:
 void HttpWorker::process()
 {
+    // Start timer:
+    m_tTimer.start(TIME_OUT);
+
     QNetworkRequest request(m_remoteUrl);
     if (!m_x_api_key.isEmpty())
         request.setRawHeader(QString("x-api-key").toLatin1(), m_x_api_key.toLatin1());
@@ -94,6 +40,8 @@ void HttpWorker::process()
 // File downloaded:
 void HttpWorker::onFinished(QNetworkReply* pReply)
 {
+    // Stop timer:
+    m_tTimer.stop();
     if (pReply->operation() == QNetworkAccessManager::HeadOperation)
     {
         // Retrieve header info:
@@ -113,7 +61,7 @@ void HttpWorker::onFinished(QNetworkReply* pReply)
     Utils::save(m_bReply, m_sLocalFilePath);
 
     // Release:
-    pReply->deleteLater();
+    delete pReply;
 
     // Notify:
     emit finished();
@@ -135,4 +83,11 @@ const QVariantMap &HttpWorker::headerInfo() const
 const QString &HttpWorker::localFilePath() const
 {
     return m_sLocalFilePath;
+}
+
+// Time out:
+void HttpWorker::onTimeOut()
+{
+    delete m_pNetworkAccessMgr;
+    emit timeOut();
 }

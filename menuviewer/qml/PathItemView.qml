@@ -44,33 +44,11 @@ PathView {
     delegate: SingleItemView {
         id: imageDelegate
 
-        // Get menu image url:
-        function getMenuImageUrl()
-        {
-            var source = ""
-
-            // Off line:
-            if (_appData.offline_mode === "1")
-            {
-                // TO DO
-                source = _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + "/Square Thumbnails/" + icon)
-            }
-            else
-            // In line:
-            {
-                source = Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
-            }
-
-            return source
-        }
-
         visible: vendItemName !== ""
         width: pathView.width
         height: pathView.height
-        menuImageUrl: getMenuImageUrl()
-        //nutritionFactImageUrl: Utils.urlPublicStatic(_appData.urlPublicRootValue, nutrition)
-        nutritionFactImageUrl: "qrc:/assets/ico-empty_plate.png"
-
+        menuImageUrl: getImageSource(targetCategory, icon, false)
+        nutritionFactImageUrl: getImageSource(targetCategory, nutrition, true)
         // Show nutritional info:
         function onShowNutritionalInfo()
         {

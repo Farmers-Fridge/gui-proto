@@ -78,7 +78,7 @@ PageTemplate {
             Repeater {
                 id: repeater
                 anchors.fill: parent
-                model: _categoryModel.count
+                model: categoryModel.count
 
                 Item {
                     anchors.fill: parent
@@ -94,7 +94,7 @@ PageTemplate {
                     // Category list model:
                     CategoryListModel {
                         id: categoryListModel
-                        targetCategory: _categoryModel.get(gridItemView.gridViewIndex).categoryName
+                        targetCategory: categoryModel.get(gridItemView.gridViewIndex).categoryName
                         Component.onCompleted: {
                             categoryListModel.modelReady.connect(gridItemView.onModelReady)
                             categoryListModel.modelReady.connect(pathItemView.onModelReady)

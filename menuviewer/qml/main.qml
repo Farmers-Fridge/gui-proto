@@ -12,9 +12,6 @@ Window {
     // Application data:
     property variant _appData: undefined
 
-    // Category model:
-    property variant _categoryModel: undefined
-
     // Verbose mode:
     property bool _verbose: false
 

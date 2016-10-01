@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui qml quick quickwidgets xml
-INCLUDEPATH += $$PWD/../farmers-utils
+INCLUDEPATH += $$PWD/../farmers-utils ../farmers-client
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,10 +14,10 @@ TEMPLATE = app
 FORMS    +=
 
 CONFIG(debug, debug|release) {
-    LIBS += -L$$PWD/../lib/ -lfarmers-utilsd
+    LIBS += -L$$PWD/../bin/ -lfarmers-utilsd -lfarmers-clientd
     TARGET = menuviewerd
 } else {
-    LIBS += -L$$PWD/../lib/ -lfarmers-utils
+    LIBS += -L$$PWD/../bin/ -lfarmers-utils -lfarmers-client
     TARGET = menuviewer
 }
 

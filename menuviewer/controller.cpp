@@ -1,5 +1,6 @@
 #include "controller.h"
 #include "utils.h"
+#include <farmersfridgeclient.h>
 #include "eventwatcher.h"
 #include "cartmodel.h"
 #include "tablemodel.h"
@@ -11,10 +12,14 @@
 
 // Constructor:
 Controller::Controller(QObject *parent) : QObject(parent),
-    mEventWatcher(0), mCartModel(0), mTableModel(0),
+    mFarmersClient(0), mEventWatcher(0), mCartModel(0), mTableModel(0),
     mCurrentCategory(""), mCurrentFilter(""),
     mCurrentNetworkIP("127.0.0.1"), mOffLinePath("")
 {
+    // Client:
+    mFarmersClient = new FarmersFridgeClient(this);
+    connect(mFarmersClient, &FarmersFridgeClient::allDone, this, &Controller::onDataReady);
+
     // Cart model:
     mCartModel = new CartModel(this);
 
@@ -35,21 +40,21 @@ Controller::~Controller()
 {
 }
 
-// Startup:
-bool Controller::startup()
+// Data ready:
+void Controller::onDataReady()
 {
     // Define offline path:
     QDir offLinePath = Utils::appDir();
     if (offLinePath.cdUp())
     {
-        if (offLinePath.cd("local_data"))
+        if (offLinePath.cd(SERVER_DIR))
         {
             mOffLinePath = offLinePath.absolutePath();
         }
         else
         {
-            qDebug() << "Can't find local_data folder.";
-            return false;
+            qDebug() << QString("Can't find %1 folder.").arg(offLinePath.absolutePath());
+            return;
         }
     }
 
@@ -67,6 +72,14 @@ bool Controller::startup()
 
     // Install event filter:
     QCoreApplication::instance()->installEventFilter(mEventWatcher);
+}
+
+// Startup:
+bool Controller::startup()
+{
+    QDir appDir = Utils::appDir();
+    if (appDir.cdUp())
+        mFarmersClient->retrieveServerData(appDir.absolutePath());
 
     return true;
 }
@@ -333,4 +346,11 @@ void Controller::saveSettings()
 void Controller::useHardCodedSettings()
 {
     mColorModel->useHardCodedSettings();
+}
+
+// Return file base name:
+QString Controller::fileBaseName(const QString &sFullPath) const
+{
+    QFileInfo fi(sFullPath);
+    return fi.fileName();
 }

@@ -9,12 +9,12 @@
 *.o
 *.Release
 *.Debug
-*.exe
 *.autosave
-*.dll
 *.a
 *.exp
 *.lib
 *.ilk
 *.pdb
 *.obj
+*.dll
+*.exe

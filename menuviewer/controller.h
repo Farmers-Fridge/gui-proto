@@ -4,6 +4,7 @@
 #include <QVariantMap>
 #include <QQmlApplicationEngine>
 #include "iservice.h"
+class FarmersFridgeClient;
 class EventWatcher;
 class CartModel;
 class TableModel;
@@ -71,6 +72,9 @@ public:
     // Save settings:
     Q_INVOKABLE void saveSettings();
 
+    // Return file base name:
+    Q_INVOKABLE QString fileBaseName(const QString &sFullPath) const;
+
 protected:
     // Constructor:
     explicit Controller(QObject *parent = 0);
@@ -122,6 +126,9 @@ private:
     // QML application engine:
     QQmlApplicationEngine mEngine;
 
+    // Farmers fridge client:
+    FarmersFridgeClient *mFarmersClient;
+
     // Event watcher:
     EventWatcher *mEventWatcher;
 
@@ -152,6 +159,9 @@ private:
 public slots:
     // Update colors:
     void onUpdateColors();
+
+    // Data ready:
+    void onDataReady();
 
 signals:
     // Current network IP changed:

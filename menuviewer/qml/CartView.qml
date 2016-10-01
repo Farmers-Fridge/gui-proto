@@ -15,28 +15,6 @@ ListView {
         width: parent.width
         height: _settings.cartViewRowHeight
 
-        // Get image source:
-        function getImageSource()
-        {
-            var source = ""
-
-            // Off line:
-            if (_appData.offline_mode === "1")
-            {
-                // TO DO
-                source = _controller.fromLocalFile(_controller.offLinePath + "/" + category + "/Square Thumbnails/" + icon)
-            }
-            else
-            // In line:
-            {
-                source = Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
-            }
-
-            console.log("********************** USING SOURCE: ", source)
-
-            return source
-        }
-
         Row {
             id: row
             anchors.fill: parent
@@ -66,7 +44,7 @@ ListView {
                 Image {
                     id: originalImage
                     antialiasing: true
-                    source: getImageSource()
+                    source: getImageSource(category, icon, false)
                     cache: true
                     fillMode: Image.PreserveAspectFit
                     anchors.left: parent.left

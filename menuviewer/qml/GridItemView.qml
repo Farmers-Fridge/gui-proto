@@ -35,26 +35,6 @@ GridView {
             }
         }
 
-        // Get image source:
-        function getImageSource()
-        {
-            var source = ""
-
-            // Off line:
-            if (_appData.offline_mode === "1")
-            {
-                // TO DO
-                source = _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + "/Square Thumbnails/" + icon)
-            }
-            else
-            // In line:
-            {
-                source = Utils.urlPublicStatic(_appData.urlPublicRootValue, icon)
-            }
-
-            return source
-        }
-
         // Original image:
         Item {
             anchors.fill: parent
@@ -71,7 +51,7 @@ GridView {
                     id: originalImage
                     antialiasing: true
                     asynchronous: true
-                    source: imageDelegate.getImageSource()
+                    source: getImageSource(targetCategory, icon, false)
                     cache: true
                     fillMode: Image.PreserveAspectFit
                     anchors.fill: parent
