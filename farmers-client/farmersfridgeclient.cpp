@@ -67,7 +67,8 @@ void FarmersFridgeClientPrivate::onCategoryListRetrieved()
     }
 
     // Check reply:
-    if (pSender->reply().isEmpty())
+    QByteArray bReply = pSender->reply();
+    if (bReply.isEmpty())
     {
         LOG_MESSAGE("FarmersFridgeClientPrivate::onCategoryListRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
         updateDownLoaders(pSender);
@@ -75,7 +76,7 @@ void FarmersFridgeClientPrivate::onCategoryListRetrieved()
     }
 
     // Parse:
-    CXMLNode result = CXMLNode::parseXML(pSender->reply());
+    CXMLNode result = CXMLNode::parseXML(bReply);
     if (result.isEmpty())
     {
         LOG_MESSAGE("FarmersFridgeClientPrivate::onCategoryListRetrieved FAILED TO PARSE HTTPDOWNLOADER REPLY");
@@ -151,7 +152,8 @@ void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
     }
 
     // Check reply:
-    if (pSender->reply().isEmpty())
+    QByteArray bReply = pSender->reply();
+    if (bReply.isEmpty())
     {
         LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
         updateDownLoaders(pSender);
@@ -159,7 +161,7 @@ void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
     }
 
     // Parse:
-    CXMLNode result = CXMLNode::parseXML(pSender->reply());
+    CXMLNode result = CXMLNode::parseXML(bReply);
     if (result.isEmpty())
     {
         LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved FAILED TO PARSE HTTPDOWNLOADER REPLY");
@@ -216,21 +218,19 @@ void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
 // Download single icon:
 void FarmersFridgeClientPrivate::downloadSingleIcon(const QString &sIconUrl, const QDir &dstDir)
 {
-    /*
     // Create HTTP downloader:
     HttpDownLoader *pDownLoaderHead = new HttpDownLoader(this);
     m_vDownloaders << pDownLoaderHead;
     connect(pDownLoaderHead, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onSingleIconHeadRetrieved);
     connect(pDownLoaderHead, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
-    pDownLoaderHead->download(sIconUrl, dstDir, m_sAPIKey, HttpWorker::HEAD);
-    */
+    pDownLoaderHead->download(QUrl(sIconUrl), dstDir, m_sAPIKey, HttpWorker::HEAD);
 
     // Create HTTP downloader:
     HttpDownLoader *pDownLoader = new HttpDownLoader(this);
     m_vDownloaders << pDownLoader;
     connect(pDownLoader, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onSingleIconRetrieved);
     connect(pDownLoader, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
-    pDownLoader->download(sIconUrl, dstDir, m_sAPIKey);
+    pDownLoader->download(QUrl(sIconUrl), dstDir, m_sAPIKey);
 }
 
 // Download single nutrition fact:
@@ -241,7 +241,7 @@ void FarmersFridgeClientPrivate::downloadSingleNutritionFact(const QString &sNut
     m_vDownloaders << pDownLoader;
     connect(pDownLoader, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved);
     connect(pDownLoader, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
-    pDownLoader->download(sNutritionUrl, dstDir, m_sAPIKey);
+    pDownLoader->download(QUrl(sNutritionUrl), dstDir, m_sAPIKey);
 }
 
 // Single icon retrieved:
@@ -256,7 +256,8 @@ void FarmersFridgeClientPrivate::onSingleIconRetrieved()
     }
 
     // Check reply:
-    if (pSender->reply().isEmpty())
+    QByteArray bReply = pSender->reply();
+    if (bReply.isEmpty())
     {
         LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
         updateDownLoaders(pSender);
@@ -296,14 +297,11 @@ void FarmersFridgeClientPrivate::onSingleIconHeadRetrieved()
     }
 
     // Check reply:
-    if (pSender->reply().isEmpty())
-    {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconHeadRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
-        updateDownLoaders(pSender);
-        return;
-    }
+    QVariantMap mHeaderInfo = pSender->headerInfo();
 
-    qDebug() << "******************* HEAD = " << pSender->reply();
+    // Display response:
+    for (QVariantMap::iterator it=mHeaderInfo.begin(); it!=mHeaderInfo.end(); ++it)
+        LOG_MESSAGE(QString("HEADER KEY = %1 HEADER VALUE = %2").arg(it.key()).arg(it.value().toString()));
 
     // Update downloaders:
     updateDownLoaders(pSender);

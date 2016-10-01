@@ -46,15 +46,9 @@ void HttpDownLoader::onFinished()
 
     // Get reply:
     m_bReply = pWorker->reply();
-    if (m_bReply.isEmpty() || m_bReply.isNull())
-    {
-        delete pWorker;
-        emit ready();
-        return;
-    }
 
     // Set header info:
-    setHeaderInfo(pWorker->headerInfo());
+    m_mHeaderInfo = pWorker->headerInfo();
 
     // Set local file path:
     setLocalFilePath(pWorker->localFilePath());
@@ -85,15 +79,9 @@ void HttpDownLoader::setLocalFilePath(const QString &sLocalFilePath)
 }
 
 // Return header info:
-const QVariant &HttpDownLoader::headerInfo() const
+const QVariantMap &HttpDownLoader::headerInfo() const
 {
-    return m_vHeaderInfo;
-}
-
-// Set header info:
-void HttpDownLoader::setHeaderInfo(const QVariant &vHeaderInfo)
-{
-    m_vHeaderInfo = vHeaderInfo;
+    return m_mHeaderInfo;
 }
 
 // Return reply:

@@ -33,10 +33,7 @@ public:
     void setLocalFilePath(const QString &sLocalFilePath);
 
     // Return header info:
-    const QVariant &headerInfo() const;
-
-    // Set header info:
-    void setHeaderInfo(const QVariant &headerInfo);
+    const QVariantMap &headerInfo() const;
 
     // Return reply:
     const QByteArray &reply() const;
@@ -51,7 +48,7 @@ private:
     QString m_sRemoteUrl;
     QString m_x_api_key;
     QString m_sLocalFilePath;
-    QVariant m_vHeaderInfo;
+    QVariantMap m_mHeaderInfo;
     HttpWorker::RequestType m_requestType;
     QByteArray m_bReply;
 

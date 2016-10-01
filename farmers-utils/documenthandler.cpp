@@ -116,7 +116,6 @@ void DocumentHandler::saveAs(const QUrl &arg, const QString &fileType)
     }
     f.write((isHtml ? mDoc->toHtml() : mDoc->toPlainText()).toLocal8Bit());
     f.close();
-    qDebug() << "saved to" << localPath;
     setFileUrl(QUrl::fromLocalFile(localPath));
 }
 
