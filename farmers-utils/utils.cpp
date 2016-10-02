@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <QDirIterator>
 
 // To local file:
 QString Utils::toLocalFile(const QString &input)
@@ -118,4 +119,26 @@ bool Utils::save(const QByteArray &bArray, const QString &filePath)
         file.close();
     }
     return true;
+}
+
+// Returns empty QByteArray() on failure.
+QString Utils::fileCheckSum(const QString &sFileName,
+    QCryptographicHash::Algorithm hashAlgorithm)
+{
+    QFile f(sFileName);
+    if (f.open(QFile::ReadOnly)) {
+        QCryptographicHash hash(hashAlgorithm);
+        if (hash.addData(&f)) {
+            return QString::fromLatin1(hash.result().toHex());
+        }
+        f.close();
+    }
+    return "";
+}
+
+// Clear string (remove non alphanumerical characters):
+QString Utils::clearString(const QString &sInput)
+{
+    QString sClear = sInput;
+    return sClear.remove(QRegExp("[^a-zA-Z\\d\\s]"));
 }

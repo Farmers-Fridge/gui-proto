@@ -4,7 +4,7 @@
 #include <QUrl>
 #include <QDir>
 #include <QCoreApplication>
-#include <QDirIterator>
+#include <QCryptographicHash>
 #include "farmers-utils_global.h"
 
 class FARMERSUTILSSHARED_EXPORT Utils
@@ -36,6 +36,13 @@ public:
 
     // Save byte array to file:
     static bool save(const QByteArray &bArray, const QString &filePath);
+
+    // Return a file checksum:
+    static QString fileCheckSum(const QString &sFileName,
+        QCryptographicHash::Algorithm hashAlgorithm=QCryptographicHash::Md5);
+
+    // Clear string (remove non alphanumerical characters):
+    static QString clearString(const QString &sInput);
 };
 
 #endif // UTILS_H

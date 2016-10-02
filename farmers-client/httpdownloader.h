@@ -18,13 +18,13 @@ public:
     Q_INVOKABLE void download();
 
     // Download:
-    void download(const QUrl &remoteUrl, const QDir &dstDir, const QString &x_api_key="", const HttpWorker::RequestType &requestType=HttpWorker::GET);
+    void download(const QUrl &uRemoteUrl, const QDir &dstDir, const QString &x_api_key="", const HttpWorker::RequestType &requestType=HttpWorker::GET);
 
     // Return dst dir:
     const QDir &dstDir() const;
 
     // Return url:
-    QString remoteUrl() const;
+    const QUrl &remoteUrl() const;
 
     // Return local file path:
     const QString &localFilePath() const;
@@ -38,6 +38,9 @@ public:
     // Return reply:
     const QByteArray &reply() const;
 
+    // Get header info:
+    QString getHeaderInfo(const QString &sKey) const;
+
 protected:
     // Default constructor:
     HttpDownLoader(QObject *parent=0);
@@ -45,7 +48,7 @@ protected:
 private:
     // Interface:
     QDir m_dstDir;
-    QString m_sRemoteUrl;
+    QUrl m_uRemoteUrl;
     QString m_x_api_key;
     QString m_sLocalFilePath;
     QVariantMap m_mHeaderInfo;

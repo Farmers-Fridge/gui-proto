@@ -1,6 +1,10 @@
 #include "farmersfridgeclient.h"
 #include "httpdownloader.h"
 #include <cxmlnode.h>
+#include <utils.h>
+#include <QMetaObject>
+
+typedef int (FarmersFridgeClientPrivate::*memberf_pointer)();
 
 // Log message:
 void FarmersFridgeClientPrivate::LOG_MESSAGE(const QString &sMessage)
@@ -23,6 +27,7 @@ void FarmersFridgeClientPrivate::retrieveServerData(
         const QString &sAPIKey,
         const QString &sDstDir)
 {
+    /*
     // Remove current server dir:
     QDir dstDir(sDstDir);
     QString sServerDir = dstDir.absoluteFilePath(SERVER_DIR);
@@ -34,6 +39,7 @@ void FarmersFridgeClientPrivate::retrieveServerData(
             LOG_MESSAGE(sMsg);
         }
     }
+    */
 
     // Initialize members:
     m_sServerUrl = sServerUrl;
@@ -42,17 +48,9 @@ void FarmersFridgeClientPrivate::retrieveServerData(
     m_dstDir.mkpath(SERVER_DIR);
     m_dstDir.cd(SERVER_DIR);
 
-    // Create HTTP downloader:
-    HttpDownLoader *pDownLoader = new HttpDownLoader(this);
-    m_vDownloaders << pDownLoader;
-    connect(pDownLoader, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onCategoryListRetrieved);
-    connect(pDownLoader, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
-
     // Build query:
     QString sQuery = QString("https://%1%2").arg(sServerUrl).arg(CATEGORY_SOURCE);
-
-    // Download:
-    pDownLoader->download(QUrl(sQuery), m_dstDir, m_sAPIKey);
+    download(QUrl(sQuery), m_dstDir, &FarmersFridgeClientPrivate::onCategoryListRetrieved);
 }
 
 // Category list retrieved:
@@ -119,12 +117,6 @@ void FarmersFridgeClientPrivate::retrieveCategoryData()
 // Retrieve single category data:
 void FarmersFridgeClientPrivate::retrieveSingleCategoryData(const QString &sCategoryName)
 {
-    // Create HTTP downloader:
-    HttpDownLoader *pDownLoader = new HttpDownLoader(this);
-    m_vDownloaders << pDownLoader;
-    connect(pDownLoader, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved);
-    connect(pDownLoader, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
-
     // Build query:
     QString sCategorySource = QString("%1/%1.xml").arg(sCategoryName);
     QString sQuery = QString("https://%1%2").arg(m_sServerUrl).arg(sCategorySource);
@@ -135,7 +127,7 @@ void FarmersFridgeClientPrivate::retrieveSingleCategoryData(const QString &sCate
     {
         if (categoryDir.cd(sCategoryName))
         {
-            pDownLoader->download(QUrl(sQuery), categoryDir, m_sAPIKey);
+            download(QUrl(sQuery), categoryDir, &FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved);
         }
     }
 }
@@ -218,30 +210,17 @@ void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
 // Download single icon:
 void FarmersFridgeClientPrivate::downloadSingleIcon(const QString &sIconUrl, const QDir &dstDir)
 {
-    // Create HTTP downloader:
-    HttpDownLoader *pDownLoaderHead = new HttpDownLoader(this);
-    m_vDownloaders << pDownLoaderHead;
-    connect(pDownLoaderHead, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onSingleIconHeadRetrieved);
-    connect(pDownLoaderHead, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
-    pDownLoaderHead->download(QUrl(sIconUrl), dstDir, m_sAPIKey, HttpWorker::HEAD);
+    // Retrieve head:
+    //download(QUrl(sIconUrl), dstDir, &FarmersFridgeClientPrivate::onSingleIconHeadRetrieved, HttpWorker::HEAD);
 
-    // Create HTTP downloader:
-    HttpDownLoader *pDownLoader = new HttpDownLoader(this);
-    m_vDownloaders << pDownLoader;
-    connect(pDownLoader, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onSingleIconRetrieved);
-    connect(pDownLoader, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
-    pDownLoader->download(QUrl(sIconUrl), dstDir, m_sAPIKey);
+    // Retrieve body:
+    download(QUrl(sIconUrl), dstDir, &FarmersFridgeClientPrivate::onSingleIconRetrieved, HttpWorker::GET);
 }
 
 // Download single nutrition fact:
 void FarmersFridgeClientPrivate::downloadSingleNutritionFact(const QString &sNutritionUrl, const QDir &dstDir)
 {
-    // Create HTTP downloader:
-    HttpDownLoader *pDownLoader = new HttpDownLoader(this);
-    m_vDownloaders << pDownLoader;
-    connect(pDownLoader, &HttpDownLoader::ready, this, &FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved);
-    connect(pDownLoader, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
-    pDownLoader->download(QUrl(sNutritionUrl), dstDir, m_sAPIKey);
+    download(QUrl(sNutritionUrl), dstDir, &FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved);
 }
 
 // Single icon retrieved:
@@ -290,18 +269,22 @@ void FarmersFridgeClientPrivate::onSingleIconHeadRetrieved()
 {
     // Retrieve sender:
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
+    qDebug() << "REMOTE URL = " << pSender->remoteUrl();
+
     if (!pSender)
     {
         LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconHeadRetrieved FAILED TO RETRIEVE HTTPDOWNLOADER");
         return;
     }
 
+    /*
     // Check reply:
-    QVariantMap mHeaderInfo = pSender->headerInfo();
+    QString sMd5Hash = pSender->getHeaderInfo(MD5_HEADER_KEY);
+    bool needUpdate = sMd5Hash.isEmpty() ?
+        true : assetNeedUpdate(pSender->localFilePath(), sMd5Hash);
 
-    // Display response:
-    for (QVariantMap::iterator it=mHeaderInfo.begin(); it!=mHeaderInfo.end(); ++it)
-        LOG_MESSAGE(QString("HEADER KEY = %1 HEADER VALUE = %2").arg(it.key()).arg(it.value().toString()));
+    qDebug() << "******************************************** NEEDUPDATE FOR: " << pSender->localFilePath() << " = " << needUpdate;
+    */
 
     // Update downloaders:
     updateDownLoaders(pSender);
@@ -353,9 +336,36 @@ void FarmersFridgeClientPrivate::updateDownLoaders(HttpDownLoader *pDownloader)
     if (nRemoved > 0)
         delete pDownloader;
 
-    qDebug() << QString("*** WAITING FOR %1 DOWNLOADERS TO COMPLETE ***").arg(m_vDownloaders.size());
+    LOG_MESSAGE(QString("*** WAITING FOR %1 DOWNLOADERS TO COMPLETE ***").arg(m_vDownloaders.size()));
     if (m_vDownloaders.isEmpty())
         emit allDone();
+}
+
+// Does asset need update?
+bool FarmersFridgeClientPrivate::assetNeedUpdate(const QString &sAssetFullPath,
+    const QString &sPrevMD5) const
+{
+    // File does not exist, need update:
+    QFileInfo fi(sAssetFullPath);
+    if (!fi.exists())
+        return true;
+
+    // Compute MD5 hash for file:
+    QString sCurrentMD5 = Utils::fileCheckSum(sAssetFullPath);
+    return sPrevMD5 != sCurrentMD5;
+}
+
+// Download:
+void FarmersFridgeClientPrivate::download(const QUrl &url, const QDir &dstDir, CallBack callBack, const HttpWorker::RequestType &requestType)
+{
+    // Create HTTP downloader:
+    HttpDownLoader *pDownLoader = new HttpDownLoader(this);
+    m_vDownloaders << pDownLoader;
+    connect(pDownLoader, &HttpDownLoader::ready, this, callBack);
+    connect(pDownLoader, &HttpDownLoader::timeOut, this, &FarmersFridgeClientPrivate::onTimeOut);
+
+    // Download:
+    pDownLoader->download(url, dstDir, m_sAPIKey, requestType);
 }
 
 // Constructor:

@@ -3,13 +3,15 @@
 #include <QObject>
 #include <QDir>
 #include <QVector>
+#include "httpworker.h"
 #include "farmers-client-global.h"
 
 #define SERVER_URL QString("xf8gcmq38b.execute-api.us-east-1.amazonaws.com/dev/v1/server/assets/")
 #define X_API_KEY QString("iyiGklK5onMLiL8ag29h4atrKJJjukJ8Aq6X6id6")
 #define CATEGORY_SOURCE "conf/categories.xml"
 #define SERVER_DIR QString("server")
-#define SILENT false
+#define MD5_HEADER_KEY QString("ETag")
+#define SILENT true
 class HttpDownLoader;
 
 class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClientPrivate : public QObject
@@ -17,6 +19,9 @@ class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClientPrivate : public QObject
     Q_OBJECT
 
 public:
+    // Callback prototype:
+    typedef void (FarmersFridgeClientPrivate::*CallBack)(void);
+
     // Constructor:
     FarmersFridgeClientPrivate(QObject *parent=0);
 
@@ -44,6 +49,12 @@ private:
 
     // Update downloaders:
     void updateDownLoaders(HttpDownLoader *pDownloader);
+
+    // Does asset need update?
+    bool assetNeedUpdate(const QString &sAssetFullPath, const QString &sPrevMD5) const;
+
+    // Download:
+    void download(const QUrl &url, const QDir &dstDir, CallBack callBack, const HttpWorker::RequestType &requestType=HttpWorker::GET);
 
 private:
     QString m_sServerUrl;

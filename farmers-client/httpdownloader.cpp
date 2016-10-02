@@ -1,10 +1,10 @@
 #include "httpdownloader.h"
 #include "httpworker.h"
+#include <utils.h>
 
 // Default constructor:
 HttpDownLoader::HttpDownLoader(QObject *parent) : QObject(parent),
     m_dstDir("."),
-    m_sRemoteUrl(""),
     m_x_api_key(""),
     m_sLocalFilePath("")
 {
@@ -18,17 +18,20 @@ HttpDownLoader::~HttpDownLoader()
 // Download:
 void HttpDownLoader::download()
 {
-    download(m_sRemoteUrl, m_dstDir, m_x_api_key, m_requestType);
+    download(m_uRemoteUrl, m_dstDir, m_x_api_key, m_requestType);
 }
 
 // Download:
-void HttpDownLoader::download(const QUrl &remoteUrl, const QDir &dstDir, const QString &x_api_key, const HttpWorker::RequestType &requestType)
+void HttpDownLoader::download(const QUrl &uRemoteUrl, const QDir &dstDir, const QString &x_api_key, const HttpWorker::RequestType &requestType)
 {
-    // Create thread:
+    // Setup downloader:
     m_dstDir = dstDir;
 
+    // Remote url:
+    m_uRemoteUrl = uRemoteUrl;
+
     // Create workers:
-    HttpWorker *pWorker = new HttpWorker(remoteUrl, m_dstDir, x_api_key, requestType);
+    HttpWorker *pWorker = new HttpWorker(uRemoteUrl, m_dstDir, x_api_key, requestType);
     connect(pWorker, &HttpWorker::finished, this, &HttpDownLoader::onFinished);
     connect(pWorker, &HttpWorker::timeOut, this, &HttpDownLoader::timeOut);
 
@@ -91,7 +94,13 @@ const QByteArray &HttpDownLoader::reply() const
 }
 
 // Return url:
-QString HttpDownLoader::remoteUrl() const
+const QUrl &HttpDownLoader::remoteUrl() const
 {
-    return m_sRemoteUrl;
+    return m_uRemoteUrl;
+}
+
+// Get header info:
+QString HttpDownLoader::getHeaderInfo(const QString &sKey) const
+{
+    return Utils::clearString(m_mHeaderInfo[sKey].toString());
 }
