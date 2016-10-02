@@ -11,7 +11,7 @@
 #define CATEGORY_SOURCE "conf/categories.xml"
 #define SERVER_DIR QString("server")
 #define MD5_HEADER_KEY QString("ETag")
-#define SILENT true
+#define SILENT false
 class HttpDownLoader;
 
 class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClientPrivate : public QObject
@@ -56,6 +56,12 @@ private:
     // Download:
     void download(const QUrl &url, const QDir &dstDir, CallBack callBack, const HttpWorker::RequestType &requestType=HttpWorker::GET);
 
+    // Process categories:
+    void processCategories(const QString &sCategoriesFile);
+
+    // Process single category:
+    void processSingleCategory(const QString &sLocalSingleCategoryFile, const QDir &dstDir);
+
 private:
     QString m_sServerUrl;
     QString m_sAPIKey;
@@ -65,20 +71,29 @@ private:
     QVector<HttpDownLoader *> m_vDownloaders;
 
 public slots:
-    // Category list retrieved:
-    void onCategoryListRetrieved();
+    // Head category list downloaded:
+    void onHeadCategoryListDownloaded();
 
-    // Single category data retrieved:
-    void onSingleCategoryDataRetrieved();
+    // Category list downloaded:
+    void onCategoryListDownloaded();
+
+    // Single category data downloaded:
+    void onHeadSingleCategoryDataDownloaded();
+
+    // Single category data downloaded:
+    void onSingleCategoryDataDownloaded();
+
+    // Head single icon downloaded:
+    void onHeadSingleIconDownloaded();
 
     // Icon downloaded:
-    void onSingleIconRetrieved();
+    void onSingleIconDownloaded();
 
-    // Icon head retrieved:
-    void onSingleIconHeadRetrieved();
+    // Head single nutrition downloaded:
+    void onHeadSingleNutritionFactDownloaded();
 
-    // Single nutrition fact retrieved:
-    void onSingleNutritionFactRetrieved();
+    // Single nutrition fact downloaded:
+    void onSingleNutritionFactDownloaded();
 
     // Time out:
     void onTimeOut();

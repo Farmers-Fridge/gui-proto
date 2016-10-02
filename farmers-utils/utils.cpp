@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <QDirIterator>
+#include <QTextStream>
 
 // To local file:
 QString Utils::toLocalFile(const QString &input)
@@ -142,3 +143,4 @@ QString Utils::clearString(const QString &sInput)
     QString sClear = sInput;
     return sClear.remove(QRegExp("[^a-zA-Z\\d\\s]"));
 }
+

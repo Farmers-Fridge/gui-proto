@@ -27,20 +27,6 @@ void FarmersFridgeClientPrivate::retrieveServerData(
         const QString &sAPIKey,
         const QString &sDstDir)
 {
-    /*
-    // Remove current server dir:
-    QDir dstDir(sDstDir);
-    QString sServerDir = dstDir.absoluteFilePath(SERVER_DIR);
-    QDir serverDir(sServerDir);
-    if (serverDir.exists()) {
-        bool test = serverDir.removeRecursively();
-        if (!test) {
-            QString sMsg = QString("armersFridgeClientPrivate::retrieveServerData FAILED TO REMOVE: %1").arg(sServerDir);
-            LOG_MESSAGE(sMsg);
-        }
-    }
-    */
-
     // Initialize members:
     m_sServerUrl = sServerUrl;
     m_sAPIKey = sAPIKey;
@@ -50,37 +36,14 @@ void FarmersFridgeClientPrivate::retrieveServerData(
 
     // Build query:
     QString sQuery = QString("https://%1%2").arg(sServerUrl).arg(CATEGORY_SOURCE);
-    download(QUrl(sQuery), m_dstDir, &FarmersFridgeClientPrivate::onCategoryListRetrieved);
+    download(QUrl(sQuery), m_dstDir, &FarmersFridgeClientPrivate::onHeadCategoryListDownloaded, HttpWorker::HEAD);
 }
 
-// Category list retrieved:
-void FarmersFridgeClientPrivate::onCategoryListRetrieved()
+// Process categories:
+void FarmersFridgeClientPrivate::processCategories(const QString &sCategoriesFile)
 {
-    // Retrieve sender:
-    HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
-    if (!pSender)
-    {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onCategoryListRetrieved FAILED TO RETRIEVE HTTPDOWNLOADER");
-        return;
-    }
-
-    // Check reply:
-    QByteArray bReply = pSender->reply();
-    if (bReply.isEmpty())
-    {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onCategoryListRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
-        updateDownLoaders(pSender);
-        return;
-    }
-
     // Parse:
-    CXMLNode result = CXMLNode::parseXML(bReply);
-    if (result.isEmpty())
-    {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onCategoryListRetrieved FAILED TO PARSE HTTPDOWNLOADER REPLY");
-        updateDownLoaders(pSender);
-        return;
-    }
+    CXMLNode result = CXMLNode::load(sCategoriesFile);
 
     // Retrieve category list:
     foreach (CXMLNode item, result.nodes())
@@ -96,12 +59,56 @@ void FarmersFridgeClientPrivate::onCategoryListRetrieved()
     // Retrieve category data:
     if (m_vCategories.isEmpty())
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onCategoryListRetrieved FAILED TO RETRIEVE LIST OF CATEGORIES");
+        LOG_MESSAGE("FarmersFridgeClientPrivate::processCategories CATEGORY LIST IS EMPTY");
         return;
     }
 
     // Retrieve category data:
     retrieveCategoryData();
+}
+
+// Head category list downloaded:
+void FarmersFridgeClientPrivate::onHeadCategoryListDownloaded()
+{
+    // Retrieve sender:
+    HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
+    if (!pSender)
+    {
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onHeadCategoryListDownloaded() HTTPDOWNLOADER IS NULL");
+        return;
+    }
+
+    // Retrieve MD5 hash:
+    QString sPrevMd5Hash = pSender->getHeaderInfo(MD5_HEADER_KEY);
+    QString sLocalCategoriesFile = pSender->localFilePath();
+
+    if (assetNeedUpdate(sLocalCategoriesFile, sPrevMd5Hash))
+    {
+        // Download:
+        download(pSender->remoteUrl(), pSender->dstDir(), &FarmersFridgeClientPrivate::onCategoryListDownloaded);
+    }
+    else
+    {
+        processCategories(sLocalCategoriesFile);
+    }
+
+    // Update downloaders:
+    updateDownLoaders(pSender);
+}
+
+// Category list downloaded:
+void FarmersFridgeClientPrivate::onCategoryListDownloaded()
+{
+    // Retrieve sender:
+    HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
+    if (!pSender)
+    {
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onCategoryListDownloaded() HTTPDOWNLOADER IS NULL");
+        return;
+    }
+
+    // Check reply:
+    processCategories(pSender->localFilePath());
 
     // Update downloaders:
     updateDownLoaders(pSender);
@@ -127,39 +134,44 @@ void FarmersFridgeClientPrivate::retrieveSingleCategoryData(const QString &sCate
     {
         if (categoryDir.cd(sCategoryName))
         {
-            download(QUrl(sQuery), categoryDir, &FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved);
+            download(QUrl(sQuery), categoryDir, &FarmersFridgeClientPrivate::onHeadSingleCategoryDataDownloaded, HttpWorker::HEAD);
         }
     }
 }
 
-// Single category data retrieved:
-void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
+// Single category data downloaded:
+void FarmersFridgeClientPrivate::onHeadSingleCategoryDataDownloaded()
 {
     // Retrieve sender:
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved FAILED TO RETRIEVE HTTPDOWNLOADER");
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onHeadSingleCategoryDataDownloaded() HTTPDOWNLOADER IS NULL");
         return;
     }
 
-    // Check reply:
-    QByteArray bReply = pSender->reply();
-    if (bReply.isEmpty())
+    // Retrieve MD5 hash:
+    QString sPrevMd5Hash = pSender->getHeaderInfo(MD5_HEADER_KEY);
+    QString sLocalSingleCategoryFile = pSender->localFilePath();
+
+    if (assetNeedUpdate(sLocalSingleCategoryFile, sPrevMd5Hash))
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
-        updateDownLoaders(pSender);
-        return;
+        download(pSender->remoteUrl(), pSender->dstDir(), &FarmersFridgeClientPrivate::onSingleCategoryDataDownloaded);
+    }
+    else
+    {
+        processSingleCategory(sLocalSingleCategoryFile, pSender->dstDir());
     }
 
+    // Update downloaders:
+    updateDownLoaders(pSender);
+}
+
+// Process single category:
+void FarmersFridgeClientPrivate::processSingleCategory(const QString &sLocalSingleCategoryFile, const QDir &dstDir)
+{
     // Parse:
-    CXMLNode result = CXMLNode::parseXML(bReply);
-    if (result.isEmpty())
-    {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved FAILED TO PARSE HTTPDOWNLOADER REPLY");
-        updateDownLoaders(pSender);
-        return;
-    }
+    CXMLNode result = CXMLNode::load(sLocalSingleCategoryFile);
 
     // Parse icons:
     foreach (CXMLNode item, result.nodes())
@@ -171,12 +183,12 @@ void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
         QString sIconUrl = iconNode.value();
         if (sIconUrl.simplified().isEmpty())
         {
-            LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved FOUND AN EMPTY ICON URL");
+            LOG_MESSAGE("FarmersFridgeClientPrivate::processSingleCategory() FOUND AN EMPTY ICON URL");
             continue;
         }
 
         // Download single icon:
-        downloadSingleIcon(sIconUrl, pSender->dstDir());
+        downloadSingleIcon(sIconUrl, dstDir);
     }
 
     // Parse nutrition facts:
@@ -189,11 +201,11 @@ void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
         QString sNutritionUrl = nutritionNode.value();
         if (sNutritionUrl.simplified().isEmpty())
         {
-            LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved FOUND AN EMPTY NUTRITION URL");
+            LOG_MESSAGE("FarmersFridgeClientPrivate::processSingleCategory() FOUND AN EMPTY NUTRITION FACT URL");
             continue;
         }
 
-        QDir nutritionDir = pSender->dstDir();
+        QDir nutritionDir = dstDir;
         if (nutritionDir.mkpath("nutrition"))
         {
             if (nutritionDir.cd("nutrition"))
@@ -203,43 +215,71 @@ void FarmersFridgeClientPrivate::onSingleCategoryDataRetrieved()
             }
         }
     }
+}
 
+// Single category data downloaded:
+void FarmersFridgeClientPrivate::onSingleCategoryDataDownloaded()
+{
+    // Retrieve sender:
+    HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
+    if (!pSender)
+    {
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleCategoryDataDownloaded() HTTPDOWNLOADER IS NULL");
+        return;
+    }
+
+    // Process single category:
+    processSingleCategory(pSender->localFilePath(), pSender->dstDir());
+
+    // Update downloaders:
     updateDownLoaders(pSender);
 }
 
 // Download single icon:
 void FarmersFridgeClientPrivate::downloadSingleIcon(const QString &sIconUrl, const QDir &dstDir)
 {
-    // Retrieve head:
-    //download(QUrl(sIconUrl), dstDir, &FarmersFridgeClientPrivate::onSingleIconHeadRetrieved, HttpWorker::HEAD);
-
     // Retrieve body:
-    download(QUrl(sIconUrl), dstDir, &FarmersFridgeClientPrivate::onSingleIconRetrieved, HttpWorker::GET);
+    download(QUrl(sIconUrl), dstDir, &FarmersFridgeClientPrivate::onHeadSingleIconDownloaded, HttpWorker::HEAD);
 }
 
 // Download single nutrition fact:
 void FarmersFridgeClientPrivate::downloadSingleNutritionFact(const QString &sNutritionUrl, const QDir &dstDir)
 {
-    download(QUrl(sNutritionUrl), dstDir, &FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved);
+    download(QUrl(sNutritionUrl), dstDir, &FarmersFridgeClientPrivate::onSingleNutritionFactDownloaded);
 }
 
-// Single icon retrieved:
-void FarmersFridgeClientPrivate::onSingleIconRetrieved()
+// Head single icon downloaded:
+void FarmersFridgeClientPrivate::onHeadSingleIconDownloaded()
 {
     // Retrieve sender:
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconRetrieved FAILED TO RETRIEVE HTTPDOWNLOADER");
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onHeadSingleIconDownloaded() HTTPDOWNLOADER IS NULL");
         return;
     }
 
-    // Check reply:
-    QByteArray bReply = pSender->reply();
-    if (bReply.isEmpty())
+    // Retrieve MD5 hash:
+    QString sPrevMd5Hash = pSender->getHeaderInfo(MD5_HEADER_KEY);
+    QString sLocalSingleIconFile = pSender->localFilePath();
+
+    if (assetNeedUpdate(sLocalSingleIconFile, sPrevMd5Hash))
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconRetrieved HTTPDOWNLOADER REPLY IS EMPTY");
-        updateDownLoaders(pSender);
+        download(pSender->remoteUrl(), pSender->dstDir(), &FarmersFridgeClientPrivate::onSingleIconDownloaded);
+    }
+
+    // Update downloaders:
+    updateDownLoaders(pSender);
+}
+
+// Single icon downloaded:
+void FarmersFridgeClientPrivate::onSingleIconDownloaded()
+{
+    // Retrieve sender:
+    HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
+    if (!pSender)
+    {
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconDownloaded() HTTPDOWNLOADER IS NULL");
         return;
     }
 
@@ -251,12 +291,12 @@ void FarmersFridgeClientPrivate::onSingleIconRetrieved()
 
     if (!QFileInfo::exists(sLocalFilePath))
     {
-        QString sMessage = QString("FarmersFridgeClientPrivate::onSingleIconRetrieved FAILED TO DOWNLOAD: %1 TO: %2").arg(url.toString()).arg(sLocalFilePath);
+        QString sMessage = QString("FarmersFridgeClientPrivate::onSingleIconDownloaded() FAILED TO DOWNLOAD: %1 TO: %2").arg(url.toString()).arg(sLocalFilePath);
         LOG_MESSAGE(sMessage);
     }
     else
     {
-        QString sMessage = QString("FarmersFridgeClientPrivate::onSingleIconRetrieved DOWNLOADED: %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
+        QString sMessage = QString("FarmersFridgeClientPrivate::onSingleIconDownloaded() DOWNLOADED: %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
         LOG_MESSAGE(sMessage);
     }
 
@@ -264,40 +304,38 @@ void FarmersFridgeClientPrivate::onSingleIconRetrieved()
     updateDownLoaders(pSender);
 }
 
-// Single icon head retrieved:
-void FarmersFridgeClientPrivate::onSingleIconHeadRetrieved()
+// Head single nutrition fact downloaded:
+void FarmersFridgeClientPrivate::onHeadSingleNutritionFactDownloaded()
 {
     // Retrieve sender:
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
-    qDebug() << "REMOTE URL = " << pSender->remoteUrl();
-
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleIconHeadRetrieved FAILED TO RETRIEVE HTTPDOWNLOADER");
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onHeadSingleNutritionFactDownloaded() FAILED TO RETRIEVE HTTPDOWNLOADER");
         return;
     }
 
-    /*
-    // Check reply:
-    QString sMd5Hash = pSender->getHeaderInfo(MD5_HEADER_KEY);
-    bool needUpdate = sMd5Hash.isEmpty() ?
-        true : assetNeedUpdate(pSender->localFilePath(), sMd5Hash);
+    // Retrieve MD5 hash:
+    QString sPrevMd5Hash = pSender->getHeaderInfo(MD5_HEADER_KEY);
+    QString sLocalSingleNutritionFactFile = pSender->localFilePath();
 
-    qDebug() << "******************************************** NEEDUPDATE FOR: " << pSender->localFilePath() << " = " << needUpdate;
-    */
+    if (assetNeedUpdate(sLocalSingleNutritionFactFile, sPrevMd5Hash))
+    {
+        download(pSender->remoteUrl(), pSender->dstDir(), &FarmersFridgeClientPrivate::onSingleNutritionFactDownloaded);
+    }
 
     // Update downloaders:
     updateDownLoaders(pSender);
 }
 
-// Single nutrition fact retrieved:
-void FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved()
+// Single nutrition fact downloaded:
+void FarmersFridgeClientPrivate::onSingleNutritionFactDownloaded()
 {
     // Retrieve sender:
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved FAILED TO RETRIEVE HTTPDOWNLOADER");
+        LOG_MESSAGE("FarmersFridgeClientPrivate::onSingleNutritionFactDownloaded() FAILED TO RETRIEVE HTTPDOWNLOADER");
         return;
     }
 
@@ -309,12 +347,12 @@ void FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved()
 
     if (!QFileInfo::exists(sLocalFilePath))
     {
-        QString sMessage = QString("FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved FAILED TO DOWNLOAD %1 TO: %2").arg(url.toString()).arg(sLocalFilePath);
+        QString sMessage = QString("FarmersFridgeClientPrivate::onSingleNutritionFactDownloaded() FAILED TO DOWNLOAD %1 TO: %2").arg(url.toString()).arg(sLocalFilePath);
         LOG_MESSAGE(sMessage);
     }
     else
     {
-        QString sMessage = QString("FarmersFridgeClientPrivate::onSingleNutritionFactRetrieved DOWNLOADED %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
+        QString sMessage = QString("FarmersFridgeClientPrivate::onSingleNutritionFactDownloaded() DOWNLOADED %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
         LOG_MESSAGE(sMessage);
     }
 
@@ -343,7 +381,7 @@ void FarmersFridgeClientPrivate::updateDownLoaders(HttpDownLoader *pDownloader)
 
 // Does asset need update?
 bool FarmersFridgeClientPrivate::assetNeedUpdate(const QString &sAssetFullPath,
-    const QString &sPrevMD5) const
+                                                 const QString &sPrevMD5) const
 {
     // File does not exist, need update:
     QFileInfo fi(sAssetFullPath);
