@@ -364,19 +364,24 @@ void FarmersFridgeClientPrivate::onSingleNutritionFactDownloaded()
 void FarmersFridgeClientPrivate::onTimeOut()
 {
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
+    if (pSender)
+        LOG_MESSAGE(QString("FarmersFridgeClientPrivate::onTimeOut() TIMEOUT FOR: %1").arg(pSender->remoteUrl().toString()));
     updateDownLoaders(pSender);
 }
 
 // Update downloaders:
 void FarmersFridgeClientPrivate::updateDownLoaders(HttpDownLoader *pDownloader)
 {
-    int nRemoved = m_vDownloaders.removeAll(pDownloader);
-    if (nRemoved > 0)
-        delete pDownloader;
+    if (pDownloader)
+    {
+        int nRemoved = m_vDownloaders.removeAll(pDownloader);
+        if (nRemoved > 0)
+            delete pDownloader;
 
-    LOG_MESSAGE(QString("*** WAITING FOR %1 DOWNLOADERS TO COMPLETE ***").arg(m_vDownloaders.size()));
-    if (m_vDownloaders.isEmpty())
-        emit allDone();
+        LOG_MESSAGE(QString("*** WAITING FOR %1 DOWNLOADERS TO COMPLETE ***").arg(m_vDownloaders.size()));
+        if (m_vDownloaders.isEmpty())
+            emit allDone();
+    }
 }
 
 // Does asset need update?
