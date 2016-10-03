@@ -19,6 +19,9 @@ class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClientPrivate : public QObject
     Q_OBJECT
 
 public:
+    // Msg type:
+    enum MsgType {OK=0, ERROR, TIMEOUT};
+
     // Callback prototype:
     typedef void (FarmersFridgeClientPrivate::*CallBack)(void);
 
@@ -32,7 +35,7 @@ public:
             const QString &sDstDir);
 
     // Log message:
-    static void LOG_MESSAGE(const QString &sMessage);
+    void LOG_MESSAGE(const QString &sMessage, const MsgType &msgType=OK);
 
 private:
     // Retrieve category data:
@@ -101,6 +104,9 @@ public slots:
 signals:
     // All done:
     void allDone();
+
+    // Notify:
+    void message(const QString &sMessage, int msgType);
 };
 
 class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClient : public QObject
@@ -116,9 +122,6 @@ public:
             const QString &dstDir,
             const QString &sServerUrl=SERVER_URL,
             const QString &sAPIKey=X_API_KEY);
-
-    // Ready:
-    void onReady();
 
 private:
     // Farmers Fridge client private:
