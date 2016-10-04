@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QDir>
 #include <QVector>
+#include <utils.h>
 #include "httpworker.h"
 #include "farmers-client-global.h"
 
@@ -14,25 +15,26 @@
 #define SILENT false
 class HttpDownLoader;
 
-class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClientPrivate : public QObject
+class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClient : public QObject
 {
     Q_OBJECT
 
 public:
     // Msg type:
     enum MsgType {OK=0, ERROR, TIMEOUT};
+    Q_ENUMS(MsgType)
 
     // Callback prototype:
-    typedef void (FarmersFridgeClientPrivate::*CallBack)(void);
+    typedef void (FarmersFridgeClient::*CallBack)(void);
 
     // Constructor:
-    FarmersFridgeClientPrivate(QObject *parent=0);
+    FarmersFridgeClient(QObject *parent=0);
 
     // Retrieve server data:
-    void retrieveServerData(
-            const QString &sServerUrl,
-            const QString &sAPIKey,
-            const QString &sDstDir);
+    Q_INVOKABLE void retrieveServerData(
+            const QString &dstDir=Utils::appDir().absolutePath(),
+            const QString &sServerUrl=SERVER_URL,
+            const QString &sAPIKey=X_API_KEY);
 
     // Log message:
     void LOG_MESSAGE(const QString &sMessage, const MsgType &msgType=OK);
@@ -107,29 +109,6 @@ signals:
 
     // Notify:
     void message(const QString &sMessage, int msgType);
-};
-
-class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClient : public QObject
-{
-    Q_OBJECT
-
-public:
-    // Constructor:
-    FarmersFridgeClient(QObject *parent=0);
-
-    // Retrieve server data:
-    void retrieveServerData(
-            const QString &dstDir,
-            const QString &sServerUrl=SERVER_URL,
-            const QString &sAPIKey=X_API_KEY);
-
-private:
-    // Farmers Fridge client private:
-    FarmersFridgeClientPrivate *m_pFarmersFridgeClientPrivate;
-
-signals:
-    // All done:
-    void allDone();
 };
 
 #endif // FARMERSFRIDGECLIENT_H

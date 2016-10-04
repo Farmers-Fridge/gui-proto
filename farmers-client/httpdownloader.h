@@ -9,7 +9,7 @@ class HttpDownLoader : public QObject
     Q_OBJECT
 
 public:
-    friend class FarmersFridgeClientPrivate;
+    friend class FarmersFridgeClient;
 
     // Destructor:
     ~HttpDownLoader();

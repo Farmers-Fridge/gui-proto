@@ -79,7 +79,7 @@ bool Controller::startup()
 {
     QDir appDir = Utils::appDir();
     if (appDir.cdUp())
-        mFarmersClient->retrieveServerData(appDir.absolutePath());
+        mFarmersClient->retrieveServerData();
 
     return true;
 }
@@ -110,6 +110,7 @@ void Controller::setContextProperties()
     mEngine.rootContext()->setContextProperty("_tableModel", mTableModel);
     mEngine.rootContext()->setContextProperty("_colorModel", mColorModel);
     mEngine.rootContext()->setContextProperty("_colors", mColorModel->colors());
+    mEngine.rootContext()->setContextProperty("_farmersClient", mFarmersClient);
 }
 
 // Start GUI:
