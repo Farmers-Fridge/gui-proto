@@ -32,8 +32,11 @@ void FarmersFridgeClient::retrieveServerData(
     m_sServerUrl = sServerUrl;
     m_sAPIKey = sAPIKey;
     m_dstDir.setPath(sDstDir);
-    m_dstDir.mkpath(SERVER_DIR);
-    m_dstDir.cd(SERVER_DIR);
+    if (m_dstDir.cdUp())
+    {
+        if (m_dstDir.mkpath(SERVER_DIR))
+            m_dstDir.cd(SERVER_DIR);
+    }
 
     // Build query:
     QString sQuery = QString("https://%1%2").arg(sServerUrl).arg(CATEGORY_SOURCE);
