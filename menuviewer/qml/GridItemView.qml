@@ -128,22 +128,44 @@ GridView {
     function onModelReady()
     {
         var nItems = categoryListModel.count
+
         cellHeight = itemView.height/3
         if (nItems === 1)
         {
             cellWidth = itemView.width
+            cellHeight = itemView.height
         }
         else
-        if ((nItems === 2) || (nItems === 4))
+        if (nItems === 2)
+        {
+            cellWidth = itemView.width/2
+            cellHeight = itemView.height
+        }
+        else
+        if (nItems === 3)
+        {
+            cellWidth = itemView.width/3
+            cellHeight = itemView.height/2
+        }
+        else
+        if (nItems === 4)
         {
             cellWidth = itemView.width/2
             cellHeight = itemView.height/2
         }
         else
-        if ((nItems === 3) || (nItems >= 5))
+        if ((nItems >= 5) && (nItems <= 6))
         {
             cellWidth = itemView.width/3
+            cellHeight = itemView.height/2
         }
+        else
+        if (nItems >= 7)
+        {
+            cellWidth = itemView.width/3
+            cellHeight = itemView.height/3
+        }
+
     }
 
     // Add current item to cart:
