@@ -249,7 +249,7 @@ void FarmersFridgeClient::downloadSingleIcon(const QString &sIconUrl, const QDir
 // Download single nutrition fact:
 void FarmersFridgeClient::downloadSingleNutritionFact(const QString &sNutritionUrl, const QDir &dstDir)
 {
-    download(QUrl(sNutritionUrl), dstDir, &FarmersFridgeClient::onSingleNutritionFactDownloaded);
+    download(QUrl(sNutritionUrl), dstDir, &FarmersFridgeClient::onHeadSingleNutritionFactDownloaded, HttpWorker::HEAD);
 }
 
 // Head single icon downloaded:
@@ -390,7 +390,7 @@ void FarmersFridgeClient::updateDownLoaders(HttpDownLoader *pDownloader)
 
 // Does asset need update?
 bool FarmersFridgeClient::assetNeedUpdate(const QString &sAssetFullPath,
-                                                 const QString &sPrevMD5) const
+                                                 const QString &sPrevMD5)
 {
     // File does not exist, need update:
     QFileInfo fi(sAssetFullPath);
@@ -399,7 +399,14 @@ bool FarmersFridgeClient::assetNeedUpdate(const QString &sAssetFullPath,
 
     // Compute MD5 hash for file:
     QString sCurrentMD5 = Utils::fileCheckSum(sAssetFullPath);
-    return sPrevMD5 != sCurrentMD5;
+    bool test = sPrevMD5 != sCurrentMD5;
+    QString sMessage = "";
+    if (test)
+        sMessage = QString("%1 NEEDS UPDATE").arg(sAssetFullPath);
+    else
+        sMessage = QString("%1 UP TO DATE").arg(sAssetFullPath);
+    LOG_MESSAGE(sMessage);
+    return test;
 }
 
 // Download:

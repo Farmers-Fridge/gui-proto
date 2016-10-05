@@ -56,7 +56,7 @@ private:
     void updateDownLoaders(HttpDownLoader *pDownloader);
 
     // Does asset need update?
-    bool assetNeedUpdate(const QString &sAssetFullPath, const QString &sPrevMD5) const;
+    bool assetNeedUpdate(const QString &sAssetFullPath, const QString &sPrevMD5);
 
     // Download:
     void download(const QUrl &url, const QDir &dstDir, CallBack callBack, const HttpWorker::RequestType &requestType=HttpWorker::GET);
