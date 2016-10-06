@@ -9,6 +9,7 @@ class EventWatcher;
 class CartModel;
 class TableModel;
 class ColorModel;
+class MessageModel;
 
 class Controller : public QObject, public IService
 {
@@ -119,6 +120,9 @@ private:
     // Use hard coded settings:
     void useHardCodedSettings();
 
+    // Save download report:
+    void saveDownloadReport();
+
 private:
     // Salad assets:
     QStringList mSaladAssets;
@@ -140,6 +144,9 @@ private:
 
     // Color model:
     ColorModel *mColorModel;
+
+    // Message model:
+    MessageModel *mMessageModel;
 
     // Current category:
     QString mCurrentCategory;

@@ -5,6 +5,7 @@
 #include <QVector>
 #include <utils.h>
 #include "httpworker.h"
+#include "message.h"
 #include "farmers-client-global.h"
 
 #define SERVER_URL QString("xf8gcmq38b.execute-api.us-east-1.amazonaws.com/dev/v1/server/assets/")
@@ -20,15 +21,14 @@ class FARMERSCLIENTVERSHARED_EXPORT FarmersFridgeClient : public QObject
     Q_OBJECT
 
 public:
-    // Msg type:
-    enum MsgType {OK=0, ERROR, TIMEOUT};
-    Q_ENUMS(MsgType)
-
     // Callback prototype:
     typedef void (FarmersFridgeClient::*CallBack)(void);
 
     // Constructor:
     FarmersFridgeClient(QObject *parent=0);
+
+    // Return messages:
+    const QVector<Message> &messages() const;
 
     // Retrieve server data:
     Q_INVOKABLE void retrieveServerData(
@@ -37,7 +37,7 @@ public:
             const QString &sAPIKey=X_API_KEY);
 
     // Log message:
-    void LOG_MESSAGE(const QString &sMessage, const MsgType &msgType=OK);
+    void LOG_MESSAGE(const QString &sMessage, const Message::MsgType &eMsgType=Message::OK);
 
 private:
     // Retrieve category data:
@@ -74,6 +74,7 @@ private:
     QDir m_localCategoryAssetDir;
     QVector<QString> m_vCategories;
     QVector<HttpDownLoader *> m_vDownloaders;
+    QVector<Message> m_vMessages;
 
 public slots:
     // Head category list downloaded:
@@ -106,9 +107,6 @@ public slots:
 signals:
     // All done:
     void allDone();
-
-    // Notify:
-    void message(const QString &sMessage, int msgType);
 };
 
 #endif // FARMERSFRIDGECLIENT_H

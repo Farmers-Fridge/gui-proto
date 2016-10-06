@@ -5,6 +5,7 @@
 #include "cartmodel.h"
 #include "tablemodel.h"
 #include "colormodel.h"
+#include "messagemodel.h"
 #include "documenthandler.h"
 #include <QQmlContext>
 #include <QSettings>
@@ -13,7 +14,7 @@
 // Constructor:
 Controller::Controller(QObject *parent) : QObject(parent),
     mFarmersClient(0), mEventWatcher(0), mCartModel(0), mTableModel(0),
-    mCurrentCategory(""), mCurrentFilter(""),
+    mColorModel(0), mMessageModel(0), mCurrentCategory(""), mCurrentFilter(""),
     mCurrentNetworkIP("127.0.0.1"), mOffLinePath("")
 {
     // Client:
@@ -33,6 +34,9 @@ Controller::Controller(QObject *parent) : QObject(parent),
     mColorModel = new ColorModel(this);
     mColorModel->initialize();
     connect(mColorModel, &ColorModel::updateColors, this, &Controller::onUpdateColors);
+
+    // Message model:
+    mMessageModel = new MessageModel(this);
 }
 
 // Destructor:
@@ -43,6 +47,9 @@ Controller::~Controller()
 // Data ready:
 void Controller::onDataReady()
 {
+    // Save download report:
+    saveDownloadReport();
+
     // Define offline path:
     QDir offLinePath = Utils::appDir();
     if (offLinePath.cdUp())
@@ -99,6 +106,7 @@ const QStringList &Controller::saladAssets() const
 void Controller::registerTypes()
 {
     qmlRegisterType<DocumentHandler>("Components", 1, 0, "DocumentHandler");
+    qmlRegisterType<MessageModel>("Components", 1, 0, "MessageModel");
 }
 
 // Set context properties:
@@ -109,6 +117,7 @@ void Controller::setContextProperties()
     mEngine.rootContext()->setContextProperty("_cartModel", mCartModel);
     mEngine.rootContext()->setContextProperty("_tableModel", mTableModel);
     mEngine.rootContext()->setContextProperty("_colorModel", mColorModel);
+    mEngine.rootContext()->setContextProperty("_messageModel", mMessageModel);
     mEngine.rootContext()->setContextProperty("_colors", mColorModel->colors());
     mEngine.rootContext()->setContextProperty("_farmersClient", mFarmersClient);
 }
@@ -354,4 +363,10 @@ QString Controller::fileBaseName(const QString &sFullPath) const
 {
     QFileInfo fi(sFullPath);
     return fi.fileName();
+}
+
+// Save download report:
+void Controller::saveDownloadReport()
+{
+    mMessageModel->setMessages(mFarmersClient->messages());
 }

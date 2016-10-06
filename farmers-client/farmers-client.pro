@@ -38,10 +38,12 @@ HEADERS += \
     httpworker.h \
     farmersfridgeclient.h \
     httpdownloader.h \
-    farmers-client-global.h
+    farmers-client-global.h \
+    message.h
 
 SOURCES += \
     httpworker.cpp \
     farmersfridgeclient.cpp \
-    httpdownloader.cpp
+    httpdownloader.cpp \
+    message.cpp
 

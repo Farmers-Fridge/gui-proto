@@ -52,7 +52,9 @@ HEADERS += \
     defs.h \
     cartmodel.h \
     tablemodel.h \
-    colormodel.h
+    colormodel.h \
+    messagemodel.h \
+    message.h
 
 SOURCES += \
     controller.cpp \
@@ -60,7 +62,8 @@ SOURCES += \
     menuviewer.cpp \
     cartmodel.cpp \
     tablemodel.cpp \
-    colormodel.cpp
+    colormodel.cpp \
+    messagemodel.cpp
 
 RESOURCES += \
     resources.qrc

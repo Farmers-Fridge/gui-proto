@@ -7,11 +7,11 @@
 typedef int (FarmersFridgeClient::*memberf_pointer)();
 
 // Log message:
-void FarmersFridgeClient::LOG_MESSAGE(const QString &sMessage, const MsgType &msgType)
+void FarmersFridgeClient::LOG_MESSAGE(const QString &sMessage, const Message::MsgType &eMsgType)
 {
     if (!SILENT)
         qDebug() << sMessage;
-    emit message(sMessage, msgType);
+    m_vMessages << Message(sMessage, eMsgType);
 }
 
 // Constructor:
@@ -28,6 +28,8 @@ void FarmersFridgeClient::retrieveServerData(
         const QString &sServerUrl,
         const QString &sAPIKey)
 {
+    LOG_MESSAGE(QString("RETRIEVING SERVER DATA ON %1").arg(QDateTime::currentDateTime().toString()), Message::INFO);
+
     // Initialize members:
     m_sServerUrl = sServerUrl;
     m_sAPIKey = sAPIKey;
@@ -63,7 +65,7 @@ void FarmersFridgeClient::processCategories(const QString &sCategoriesFile)
     // Retrieve category data:
     if (m_vCategories.isEmpty())
     {
-        LOG_MESSAGE("FarmersFridgeClient::processCategories CATEGORY LIST IS EMPTY", ERROR);
+        LOG_MESSAGE("CATEGORY LIST IS EMPTY", Message::ERROR);
         return;
     }
 
@@ -78,7 +80,7 @@ void FarmersFridgeClient::onHeadCategoryListDownloaded()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClient::onHeadCategoryListDownloaded() HTTPDOWNLOADER IS NULL", ERROR);
+        LOG_MESSAGE("HTTPDOWNLOADER IS NULL", Message::ERROR);
         return;
     }
 
@@ -107,7 +109,7 @@ void FarmersFridgeClient::onCategoryListDownloaded()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClient::onCategoryListDownloaded() HTTPDOWNLOADER IS NULL", ERROR);
+        LOG_MESSAGE("HTTPDOWNLOADER IS NULL", Message::ERROR);
         return;
     }
 
@@ -150,7 +152,7 @@ void FarmersFridgeClient::onHeadSingleCategoryDataDownloaded()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClient::onHeadSingleCategoryDataDownloaded() HTTPDOWNLOADER IS NULL", ERROR);
+        LOG_MESSAGE("HTTPDOWNLOADER IS NULL", Message::ERROR);
         return;
     }
 
@@ -187,7 +189,7 @@ void FarmersFridgeClient::processSingleCategory(const QString &sLocalSingleCateg
         QString sIconUrl = iconNode.value();
         if (sIconUrl.simplified().isEmpty())
         {
-            LOG_MESSAGE("FarmersFridgeClient::processSingleCategory() FOUND AN EMPTY ICON URL", ERROR);
+            LOG_MESSAGE("FOUND AN EMPTY ICON URL", Message::ERROR);
             continue;
         }
 
@@ -205,7 +207,7 @@ void FarmersFridgeClient::processSingleCategory(const QString &sLocalSingleCateg
         QString sNutritionUrl = nutritionNode.value();
         if (sNutritionUrl.simplified().isEmpty())
         {
-            LOG_MESSAGE("FarmersFridgeClient::processSingleCategory() FOUND AN EMPTY NUTRITION FACT URL", ERROR);
+            LOG_MESSAGE("FOUND AN EMPTY NUTRITION FACT URL", Message::ERROR);
             continue;
         }
 
@@ -228,7 +230,7 @@ void FarmersFridgeClient::onSingleCategoryDataDownloaded()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClient::onSingleCategoryDataDownloaded() HTTPDOWNLOADER IS NULL", ERROR);
+        LOG_MESSAGE("HTTPDOWNLOADER IS NULL", Message::ERROR);
         return;
     }
 
@@ -259,7 +261,7 @@ void FarmersFridgeClient::onHeadSingleIconDownloaded()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClient::onHeadSingleIconDownloaded() HTTPDOWNLOADER IS NULL", ERROR);
+        LOG_MESSAGE("HTTPDOWNLOADER IS NULL", Message::ERROR);
         return;
     }
 
@@ -283,7 +285,7 @@ void FarmersFridgeClient::onSingleIconDownloaded()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClient::onSingleIconDownloaded() HTTPDOWNLOADER IS NULL", ERROR);
+        LOG_MESSAGE("HTTPDOWNLOADER IS NULL", Message::ERROR);
         return;
     }
 
@@ -295,13 +297,13 @@ void FarmersFridgeClient::onSingleIconDownloaded()
 
     if (!QFileInfo::exists(sLocalFilePath))
     {
-        QString sMessage = QString("FarmersFridgeClient::onSingleIconDownloaded() FAILED TO DOWNLOAD: %1 TO: %2").arg(url.toString()).arg(sLocalFilePath);
-        LOG_MESSAGE(sMessage, ERROR);
+        QString sMessage = QString("FAILED TO DOWNLOAD: %1 TO: %2").arg(url.toString()).arg(sLocalFilePath);
+        LOG_MESSAGE(sMessage, Message::ERROR);
     }
     else
     {
-        QString sMessage = QString("FarmersFridgeClient::onSingleIconDownloaded() DOWNLOADED: %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
-        LOG_MESSAGE(sMessage, OK);
+        QString sMessage = QString("DOWNLOADED: %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
+        //LOG_MESSAGE(sMessage, Message::OK);
     }
 
     // Update downloaders:
@@ -315,7 +317,7 @@ void FarmersFridgeClient::onHeadSingleNutritionFactDownloaded()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClient::onHeadSingleNutritionFactDownloaded() FAILED TO RETRIEVE HTTPDOWNLOADER", ERROR);
+        LOG_MESSAGE("FAILED TO RETRIEVE HTTPDOWNLOADER", Message::ERROR);
         return;
     }
 
@@ -339,7 +341,7 @@ void FarmersFridgeClient::onSingleNutritionFactDownloaded()
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (!pSender)
     {
-        LOG_MESSAGE("FarmersFridgeClient::onSingleNutritionFactDownloaded() FAILED TO RETRIEVE HTTPDOWNLOADER", ERROR);
+        LOG_MESSAGE("FAILED TO RETRIEVE HTTPDOWNLOADER", Message::ERROR);
         return;
     }
 
@@ -351,13 +353,13 @@ void FarmersFridgeClient::onSingleNutritionFactDownloaded()
 
     if (!QFileInfo::exists(sLocalFilePath))
     {
-        QString sMessage = QString("FarmersFridgeClient::onSingleNutritionFactDownloaded() FAILED TO DOWNLOAD %1 TO: %2").arg(url.toString()).arg(sLocalFilePath);
-        LOG_MESSAGE(sMessage, ERROR);
+        QString sMessage = QString("FAILED TO DOWNLOAD %1 TO: %2").arg(url.toString()).arg(sLocalFilePath);
+        LOG_MESSAGE(sMessage, Message::ERROR);
     }
     else
     {
-        QString sMessage = QString("FarmersFridgeClient::onSingleNutritionFactDownloaded() DOWNLOADED %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
-        LOG_MESSAGE(sMessage, OK);
+        QString sMessage = QString("DOWNLOADED %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
+        LOG_MESSAGE(sMessage, Message::OK);
     }
 
     // Update downloaders:
@@ -369,7 +371,7 @@ void FarmersFridgeClient::onTimeOut()
 {
     HttpDownLoader *pSender = dynamic_cast<HttpDownLoader *>(sender());
     if (pSender)
-        LOG_MESSAGE(QString("FarmersFridgeClient::onTimeOut() TIMEOUT FOR: %1").arg(pSender->remoteUrl().toString()), TIMEOUT);
+        LOG_MESSAGE(QString("TIMEOUT FOR: %1").arg(pSender->remoteUrl().toString()), Message::TIMEOUT);
     updateDownLoaders(pSender);
 }
 
@@ -382,9 +384,12 @@ void FarmersFridgeClient::updateDownLoaders(HttpDownLoader *pDownloader)
         if (nRemoved > 0)
             delete pDownloader;
 
-        LOG_MESSAGE(QString("*** WAITING FOR %1 DOWNLOADERS TO COMPLETE ***").arg(m_vDownloaders.size()), OK);
-        if (m_vDownloaders.isEmpty())
+        //LOG_MESSAGE(QString("*** WAITING FOR %1 DOWNLOADERS TO COMPLETE ***").arg(m_vDownloaders.size()), Message::OK);
+
+        if (m_vDownloaders.isEmpty()) {
+            LOG_MESSAGE(QString("DONE RETRIEVING SERVER DATA ON: %1").arg(QDateTime::currentDateTime().toString()), Message::INFO);
             emit allDone();
+        }
     }
 }
 
@@ -394,18 +399,24 @@ bool FarmersFridgeClient::assetNeedUpdate(const QString &sAssetFullPath,
 {
     // File does not exist, need update:
     QFileInfo fi(sAssetFullPath);
-    if (!fi.exists())
+    if (!fi.exists()) {
+        QString sMessage = QString("%1 NEED UPDATE").arg(sAssetFullPath);
+        LOG_MESSAGE(sMessage, Message::NEED_UPDATE);
         return true;
+    }
 
     // Compute MD5 hash for file:
     QString sCurrentMD5 = Utils::fileCheckSum(sAssetFullPath);
     bool test = sPrevMD5 != sCurrentMD5;
     QString sMessage = "";
-    if (test)
-        sMessage = QString("%1 NEEDS UPDATE").arg(sAssetFullPath);
-    else
+    if (test) {
+        sMessage = QString("%1 NEED UPDATE").arg(sAssetFullPath);
+        LOG_MESSAGE(sMessage, Message::NEED_UPDATE);
+    }
+    else {
         sMessage = QString("%1 UP TO DATE").arg(sAssetFullPath);
-    LOG_MESSAGE(sMessage);
+        LOG_MESSAGE(sMessage, Message::DONT_NEED_UPDATE);
+    }
     return test;
 }
 
@@ -420,4 +431,10 @@ void FarmersFridgeClient::download(const QUrl &url, const QDir &dstDir, CallBack
 
     // Download:
     pDownLoader->download(url, dstDir, m_sAPIKey, requestType);
+}
+
+// Return messages:
+const QVector<Message> &FarmersFridgeClient::messages() const
+{
+    return m_vMessages;
 }
