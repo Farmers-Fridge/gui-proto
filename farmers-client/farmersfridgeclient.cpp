@@ -359,7 +359,7 @@ void FarmersFridgeClient::onSingleNutritionFactDownloaded()
     else
     {
         QString sMessage = QString("DOWNLOADED %1 TO: %2 ").arg(url.toString()).arg(sLocalFilePath);
-        LOG_MESSAGE(sMessage, Message::OK);
+        //LOG_MESSAGE(sMessage, Message::OK);
     }
 
     // Update downloaders:
