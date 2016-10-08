@@ -1,6 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import "../Common"
 
 Rectangle {
     id: keyPad
@@ -42,9 +43,12 @@ Rectangle {
 
     // Header:
     TextField {
+        id: textField
         anchors.bottom: parent.top
         width: parent.width
         height: 80
+        // 4 caracters max:
+        maximumLength: 4
         text: enteredText
         visible: showHeader
         style: TextFieldStyle {
@@ -58,6 +62,16 @@ Rectangle {
                 border.color: "#333"
                 border.width: 1
             }
+        }
+
+        // Clear button:
+        ImageButton {
+            id: clearButton
+            anchors.right: parent.right
+            height: parent.height-8
+            anchors.verticalCenter: parent.verticalCenter
+            source: "./assets/ico-clear.png"
+            onClicked: enteredText = ""
         }
     }
 
