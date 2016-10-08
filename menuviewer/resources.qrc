@@ -70,5 +70,7 @@
         <file>assets/ico-addseasoned-chicken-unselected.png</file>
         <file>assets/ico-add-tofu-selected.png</file>
         <file>assets/ico-add-tofu-unselected.png</file>
+        <file>qml/ColorView.qml</file>
+        <file>qml/MessageView.qml</file>
     </qresource>
 </RCC>
