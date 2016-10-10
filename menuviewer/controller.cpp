@@ -6,6 +6,7 @@
 #include "tablemodel.h"
 #include "colormodel.h"
 #include "messagemodel.h"
+#include "layoutmanager.h"
 #include "documenthandler.h"
 #include <QQmlContext>
 #include <QSettings>
@@ -37,6 +38,9 @@ Controller::Controller(QObject *parent) : QObject(parent),
 
     // Message model:
     mMessageModel = new MessageModel(this);
+
+    // Layout manager:
+    mLayoutManager = new LayoutManager(this);
 }
 
 // Destructor:
@@ -120,6 +124,7 @@ void Controller::setContextProperties()
     mEngine.rootContext()->setContextProperty("_messageModel", mMessageModel);
     mEngine.rootContext()->setContextProperty("_colors", mColorModel->colors());
     mEngine.rootContext()->setContextProperty("_farmersClient", mFarmersClient);
+    mEngine.rootContext()->setContextProperty("_layoutMgr", mLayoutManager);
 }
 
 // Start GUI:
@@ -226,8 +231,7 @@ void Controller::clearCart()
 // Validate email address:
 bool Controller::validateEmailAddress(const QString &emailAddress)
 {
-    QRegExp regex("^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$");
-    return regex.exactMatch(emailAddress);
+    return Utils::validateEmailAddress(emailAddress);
 }
 
 // Validate coupon:

@@ -10,7 +10,6 @@
         <file>qml/PathItemView.qml</file>
         <file>assets/ico-fork.png</file>
         <file>assets/ico-primary-darkbar.png</file>
-        <file>qml/SingleItemView.qml</file>
         <file>qml/FlipableMenuImage.qml</file>
         <file>qml/PriceDisplay.qml</file>
         <file>assets/ico-cardboard.png</file>
@@ -72,5 +71,8 @@
         <file>assets/ico-add-tofu-unselected.png</file>
         <file>qml/ColorView.qml</file>
         <file>qml/MessageView.qml</file>
+        <file>qml/LayoutView.qml</file>
+        <file>qml/FlipableNutritionItem.qml</file>
+        <file>qml/CustomGrid.qml</file>
     </qresource>
 </RCC>

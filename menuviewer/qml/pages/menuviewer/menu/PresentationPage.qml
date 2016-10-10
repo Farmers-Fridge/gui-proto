@@ -101,21 +101,20 @@ PageTemplate {
                         }
                     }
 
-                    // Grid item view:
-                    GridItemView {
+                    // Custom grid:
+                    CustomGrid {
                         id: gridItemView
                         anchors.fill: parent
                         targetCategory: categoryListModel.targetCategory
-                        interactive: false
                         opacity: ((_controller.currentCategory === categoryListModel.targetCategory) &&
                                   (_viewMode === "gridview")) ? 1 : 0
                         visible: opacity > 0
-                        model: categoryListModel
                         onGridImageClicked: {
                             mainApplication.loadPathView()
                             pathItemView.positionViewAtIndex(selectedIndex, PathView.Visible)
                         }
                         Component.onCompleted: {
+                            _layoutMgr.currentLayoutChanged.connect(gridItemView.onModelReady)
                             gridItemView.gridViewIndex = presentationPage.gridViewIndex
                             presentationPage.gridViewIndex++
                         }

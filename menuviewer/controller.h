@@ -10,6 +10,7 @@ class CartModel;
 class TableModel;
 class ColorModel;
 class MessageModel;
+class LayoutManager;
 
 class Controller : public QObject, public IService
 {
@@ -147,6 +148,9 @@ private:
 
     // Message model:
     MessageModel *mMessageModel;
+
+    // Layout manager:
+    LayoutManager *mLayoutManager;
 
     // Current category:
     QString mCurrentCategory;

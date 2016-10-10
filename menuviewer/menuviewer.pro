@@ -54,7 +54,7 @@ HEADERS += \
     tablemodel.h \
     colormodel.h \
     messagemodel.h \
-    message.h
+    layoutmanager.h
 
 SOURCES += \
     controller.cpp \
@@ -63,7 +63,8 @@ SOURCES += \
     cartmodel.cpp \
     tablemodel.cpp \
     colormodel.cpp \
-    messagemodel.cpp
+    messagemodel.cpp \
+    layoutmanager.cpp
 
 RESOURCES += \
     resources.qrc

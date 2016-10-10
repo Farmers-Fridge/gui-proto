@@ -20,7 +20,7 @@ PageTemplate {
     // Setup page:
     function setup()
     {
-        pageLoader.sourceComponent = undefined
+        pageLoader.sourceComponent = null
         pageLoader.sourceComponent = pageComponent
     }
 

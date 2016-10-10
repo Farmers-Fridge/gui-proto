@@ -4,13 +4,13 @@ import Common 1.0
 
 Window {
     id: mainWindow
-    visibility: Window.FullScreen
+    visibility: Window.Maximized
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
     visible: true
 
     // Application data:
-    property variant _appData: undefined
+    property variant _appData
 
     // Verbose mode:
     property bool _verbose: false

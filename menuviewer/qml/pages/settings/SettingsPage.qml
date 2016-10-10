@@ -116,6 +116,17 @@ PageTemplate {
                     }
                 }
             }
+
+            Tab {
+                title: qsTr("Layouts")
+                Item {
+                    anchors.fill: parent
+                    LayoutView {
+                        anchors.fill: parent
+                        model: _layoutMgr.nLayouts
+                    }
+                }
+            }
         }
     }
 }

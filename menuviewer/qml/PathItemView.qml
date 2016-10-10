@@ -41,14 +41,14 @@ PathView {
     }
 
     // Delegate:
-    delegate: SingleItemView {
+    delegate: FlipableNutritionItem {
         id: imageDelegate
-
         visible: vendItemName !== ""
         width: pathView.width
         height: pathView.height
         menuImageUrl: getImageSource(targetCategory, icon, false)
         nutritionFactImageUrl: getImageSource(targetCategory, nutrition, true)
+
         // Show nutritional info:
         function onShowNutritionalInfo()
         {

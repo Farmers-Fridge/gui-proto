@@ -43,6 +43,9 @@ public:
 
     // Clear string (remove non alphanumerical characters):
     static QString clearString(const QString &sInput);
+
+    // Validate email address:
+    static bool validateEmailAddress(const QString &emailAddress);
 };
 
 #endif // UTILS_H
