@@ -77,16 +77,18 @@ Item {
                     border.color: "gray"
                     anchors.fill: parent
                     anchors.margins: 1
-                    color: _layoutMgr.cellSelected(index) ?
-                               "gray" : "white"
                     Drag.active: dragArea.drag.active
                     Drag.hotSpot.x: width/2
                     Drag.hotSpot.y: height/2
-                    Text {
-                        anchors.centerIn: parent
-                        text: index+1
-                        font.bold: true
+
+                    // Image place holder:
+                    Image {
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
+                        source: "qrc:/assets/ico-sample-salad.png"
+                        visible: _layoutMgr.cellSelected(index) ? true : false
                     }
+
                     MouseArea {
                         id: dragArea
                         anchors.fill: parent
@@ -136,9 +138,12 @@ Item {
             }
         }
     }
-    Rectangle {
+
+    // Highlighter:
+    Image {
         id: highlight
-        color: "red"
+        source: "qrc:/assets/ico-sample-salad.png"
+        fillMode: Image.PreserveAspectFit
         visible: false
         z: 1e9
     }

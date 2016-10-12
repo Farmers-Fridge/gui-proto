@@ -75,5 +75,6 @@
         <file>qml/FlipableNutritionItem.qml</file>
         <file>qml/CustomGrid.qml</file>
         <file>qml/SettingsControl.qml</file>
+        <file>assets/ico-sample-salad.png</file>
     </qresource>
 </RCC>
