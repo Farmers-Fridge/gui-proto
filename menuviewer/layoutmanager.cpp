@@ -20,13 +20,19 @@ void LayoutManager::initialize()
         if (!layoutsNode.nodes().isEmpty())
         {
             foreach (CXMLNode node, layoutsNode.nodes()) {
-                QString layoutId = node.attributes()["id"];
                 QString layoutValue = node.attributes()["value"];
-                QStringList splitted = layoutValue.split(",");
-                QList<bool> lLayoutValue;
-                foreach (QString sLayoutValue, splitted)
-                    lLayoutValue << (sLayoutValue == "true" ? true : false);
-                mLayouts[layoutId.toInt()] = lLayoutValue;
+                int nCols = node.attributes()["nCols"].toInt();
+                int nRows = node.attributes()["nRows"].toInt();
+                QStringList lSplitted = layoutValue.split(",");
+                if (lSplitted.size() == nCols*nRows)
+                {
+                    QList<bool> lLayoutValue;
+                    foreach (QString sLayoutValue, lSplitted)
+                        lLayoutValue << (sLayoutValue == "true" ? true : false);
+                    Layout layout(nCols, nRows);
+                    layout.setValues(lLayoutValue);
+                    mLayouts << layout;
+                }
             }
         }
         else defineDefaultLayouts();
@@ -42,11 +48,13 @@ void LayoutManager::defineDefaultLayouts()
 {
     mLayouts.clear();
     for (int i=0; i<MAX_IMAGES; i++) {
-        QList<bool> vLayout;
+        Layout layout(3, 3);
         int nImages = i+1;
+        QList<bool> lLayoutValues;
         for (int j=0; j<MAX_IMAGES; j++)
-            vLayout << (j < nImages);
-        mLayouts[i] = vLayout;
+            lLayoutValues << (j < nImages);
+        layout.setValues(lLayoutValues);
+        mLayouts << layout;
     }
 
     setCurrentLayout(0);
@@ -62,7 +70,7 @@ int LayoutManager::nLayouts() const
 // Cell selected?
 bool LayoutManager::cellSelected(int index) const
 {
-    return mLayouts[mCurrentLayout][index];
+    return mLayouts[mCurrentLayout].cellSelected(index);
 }
 
 // Update layout:
@@ -80,8 +88,8 @@ void LayoutManager::updateLayout(int startIndex, int endIndex)
         return;
     if (cellSelected(endIndex))
         return;
-    mLayouts[mCurrentLayout][startIndex] = false;
-    mLayouts[mCurrentLayout][endIndex] = true;
+    mLayouts[mCurrentLayout].setValue(startIndex, false);
+    mLayouts[mCurrentLayout].setValue(endIndex, true);
     emit currentLayoutChanged();
 }
 
@@ -98,24 +106,17 @@ void LayoutManager::setCurrentLayout(int iCurrentLayout)
     emit layoutIndexChanged();
 }
 
-// Get specific layout:
-QList<int> LayoutManager::getLayout(int iLayoutIndex) const
+// Get lsit of layout filled cells:
+QList<int> LayoutManager::getLayoutFilledCells(int iLayoutIndex) const
 {
     QList<int> positions;
-    if (mLayouts.contains(iLayoutIndex))
-    {
-        QList<bool> lValues = mLayouts[iLayoutIndex];
-        for (int i=0; i<lValues.size(); i++)
-        {
-            if (lValues[i])
-                positions << i;
-        }
-    }
+    if ((iLayoutIndex >= 0) && (iLayoutIndex < mLayouts.size()))
+        return mLayouts[iLayoutIndex].positions();
     return positions;
 }
 
 // Return layouts:
-const QMap<int, QList<bool> > &LayoutManager::layouts() const
+const QList<Layout> &LayoutManager::layouts() const
 {
     return mLayouts;
 }

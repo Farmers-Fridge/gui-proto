@@ -15,7 +15,7 @@ Rectangle {
     {
         var nImages = categoryListModel.count
         if (nImages > 0) {
-            layout = _layoutMgr.getLayout(nImages-1)
+            layout = _layoutMgr.getLayoutFilledCells(nImages-1)
             gridLoader.sourceComponent = undefined
             gridLoader.sourceComponent = gridComponent
         }

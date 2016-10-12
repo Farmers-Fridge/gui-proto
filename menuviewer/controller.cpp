@@ -331,17 +331,17 @@ void Controller::saveLayoutSettings()
     CXMLNode layoutsNode("Layouts");
 
     // Add individual colors:
-    QMap<int, QList<bool> > layouts = mLayoutManager->layouts();
+    QList<Layout> layouts = mLayoutManager->layouts();
 
-    for (QMap<int, QList<bool> >::iterator it=layouts.begin(); it!=layouts.end(); ++it)
+    foreach (Layout layout, layouts)
     {
         CXMLNode layoutNode("Layout");
-        layoutNode.setAttribute(QString("id"), QString::number(it.key()));
-
+        layoutNode.setAttribute("nCols", QString::number(layout.nCols));
+        layoutNode.setAttribute("nRows", QString::number(layout.nRows));
+        QList<bool> lLayoutValues = layout.values();
         QStringList lLayout;
-        for (int i=0; i<it.value().size(); i++)
-            lLayout << (it.value()[i] ? "true" : "false");
-
+        for (int i=0; i<lLayoutValues.size(); i++)
+            lLayout << (lLayoutValues[i] ? "true" : "false");
         layoutNode.setAttribute(QString("value"), lLayout.join(","));
         layoutsNode.addNode(layoutNode);
     }

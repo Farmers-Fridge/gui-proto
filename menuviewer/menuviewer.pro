@@ -54,7 +54,8 @@ HEADERS += \
     tablemodel.h \
     colormodel.h \
     messagemodel.h \
-    layoutmanager.h
+    layoutmanager.h \
+    layout.h
 
 SOURCES += \
     controller.cpp \

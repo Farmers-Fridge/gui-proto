@@ -2,7 +2,7 @@
 #define LAYOUTMANAGER_H
 #include <QObject>
 #include <QMap>
-#include <QPointF>
+#include "layout.h"
 #define MAX_IMAGES 9
 
 class LayoutManager : public QObject
@@ -22,10 +22,10 @@ public:
     Q_INVOKABLE void updateLayout(int startIndex, int endIndex);
 
     // Get specific layout:
-    Q_INVOKABLE QList<int> getLayout(int iLayoutIndex) const;
+    Q_INVOKABLE QList<int> getLayoutFilledCells(int iLayoutIndex) const;
 
     // Return layouts:
-    const QMap<int, QList<bool> > &layouts() const;
+    const QList<Layout> &layouts() const;
 
     // Define default layouts:
     void defineDefaultLayouts();
@@ -45,7 +45,7 @@ private:
 
 private:
     // Layouts:
-    QMap<int, QList<bool> > mLayouts;
+    QList<Layout> mLayouts;
 
     // Current layout:
     int mCurrentLayout;
