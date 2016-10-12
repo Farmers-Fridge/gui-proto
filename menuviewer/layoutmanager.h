@@ -9,7 +9,6 @@ class LayoutManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int nLayouts READ nLayouts NOTIFY nLayoutsChanged)
-    Q_PROPERTY(int maxImages READ maxImages NOTIFY maxImagesChanged)
     Q_PROPERTY(int currentLayout READ currentLayout WRITE setCurrentLayout NOTIFY layoutIndexChanged)
 
 public:
@@ -38,9 +37,6 @@ private:
     // Return # layouts:
     int nLayouts() const;
 
-    // Return max images:
-    int maxImages() const;
-
     // Return current layout:
     int currentLayout() const;
 
@@ -57,9 +53,6 @@ private:
 signals:
     // # layouts changed:
     void nLayoutsChanged();
-
-    // Max images changed:
-    void maxImagesChanged();
 
     // Layout index changed:
     void layoutIndexChanged();

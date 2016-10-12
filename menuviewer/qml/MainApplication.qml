@@ -60,8 +60,10 @@ Item {
     // OK clicked:
     function onOKClicked(enteredText)
     {   // User entered exit code:
-        if (enteredText === _appData.exitCode)
+        if (enteredText === _appData.exitCode) {
+            _controller.saveSettings()
             Qt.quit()
+        }
         else
             // User entered stock code:
             if (enteredText === _appData.stockCode)

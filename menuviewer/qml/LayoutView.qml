@@ -24,7 +24,7 @@ Item {
                 width: height
                 height: listView.width
                 color: "gray"
-                border.color: index === listView.currentIndex ? "orange" : "gray"
+                border.color: index === _layoutMgr.currentLayout ? "orange" : "gray"
                 border.width: 3
                 Rectangle {
                     id: innerRect
@@ -39,7 +39,6 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            listView.currentIndex = index
                             _layoutMgr.currentLayout = index
                         }
                     }
@@ -54,7 +53,7 @@ Item {
             anchors.left: listView.right
             width: parent.height
             height: parent.height
-            model: _layoutMgr.maxImages
+            model: _layoutMgr.nLayouts
             cellWidth: width/3
             cellHeight: height/3
 
@@ -129,7 +128,7 @@ Item {
             function onUpdateLayout()
             {
                 gridView.model = null
-                gridView.model = _layoutMgr.maxImages
+                gridView.model = _layoutMgr.nLayouts
             }
 
             Component.onCompleted: {

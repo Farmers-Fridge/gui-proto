@@ -50,10 +50,10 @@ QDir Utils::pathToSettingsDir()
 }
 
 // Return path to settings files:
-QString Utils::pathToSettingsFile()
+QString Utils::pathToSettingsFile(const QString &sSettingsFile)
 {
     // Get settings dir path:
-    return pathToSettingsDir().absoluteFilePath("settings.xml");
+    return pathToSettingsDir().absoluteFilePath(sSettingsFile);
 }
 
 // Clear directory:

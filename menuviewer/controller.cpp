@@ -296,13 +296,7 @@ void Controller::restoreDefaultSettingsForColors()
 void Controller::saveColorSettings()
 {
     // Load current:
-    QString settingsFile = Utils::pathToSettingsFile();
-
-    // Get updated colors:
-    CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
-
-    // Remove Colors node:
-    rootNode.removeNodes("Colors");
+    QString settingsFile = Utils::pathToSettingsFile("colors.xml");
 
     // Add new Colors node:
     CXMLNode colorsNode("Colors");
@@ -317,11 +311,8 @@ void Controller::saveColorSettings()
         colorsNode.addNode(colorNode);
     }
 
-    // Add new Colors node:
-    rootNode.addNode(colorsNode);
-
     // Save:
-    rootNode.save(settingsFile);
+    colorsNode.save(settingsFile);
 }
 
 // Restore default settings for layouts:
@@ -334,13 +325,7 @@ void Controller::restoreDefaultSettingsForLayouts()
 void Controller::saveLayoutSettings()
 {
     // Load current:
-    QString settingsFile = Utils::pathToSettingsFile();
-
-    // Get updated colors:
-    CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
-
-    // Remove Colors node:
-    rootNode.removeNodes("Layouts");
+    QString settingsFile = Utils::pathToSettingsFile("layouts.xml");
 
     // Add new Colors node:
     CXMLNode layoutsNode("Layouts");
@@ -361,11 +346,8 @@ void Controller::saveLayoutSettings()
         layoutsNode.addNode(layoutNode);
     }
 
-    // Add new Colors node:
-    rootNode.addNode(layoutsNode);
-
     // Save:
-    rootNode.save(settingsFile);
+    layoutsNode.save(settingsFile);
 }
 
 // Save settings:
@@ -373,6 +355,9 @@ void Controller::saveSettings()
 {
     // Save color settings:
     saveColorSettings();
+
+    // Save layout settings:
+    saveLayoutSettings();
 }
 
 // Return file base name:

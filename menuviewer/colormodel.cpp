@@ -12,12 +12,11 @@ ColorModel::ColorModel(QObject *parent) : QAbstractListModel(parent)
 void ColorModel::initialize()
 {
     // Load settings file:
-    QString settingsFile = Utils::pathToSettingsFile();
+    QString settingsFile = Utils::pathToSettingsFile("colors.xml");
     if (QFile::exists(settingsFile))
     {
         beginResetModel();
-        CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
-        CXMLNode colorNode = rootNode.getNodeByTagName("Colors");
+        CXMLNode colorNode = CXMLNode::loadXMLFromFile(settingsFile);
         if (colorNode.nodes().length() > 0)
         {
             beginResetModel();

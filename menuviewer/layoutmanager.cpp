@@ -13,15 +13,13 @@ LayoutManager::LayoutManager(QObject *parent) : QObject(parent),
 void LayoutManager::initialize()
 {
     // Load settings file:
-    QString settingsFile = Utils::pathToSettingsFile();
+    QString settingsFile = Utils::pathToSettingsFile("layouts.xml");
     if (QFile::exists(settingsFile))
     {
-        CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
-        CXMLNode colorNode = rootNode.getNodeByTagName("Layouts");
-
-        if (!colorNode.nodes().isEmpty())
+        CXMLNode layoutsNode = CXMLNode::loadXMLFromFile(settingsFile);
+        if (!layoutsNode.nodes().isEmpty())
         {
-            foreach (CXMLNode node, colorNode.nodes()) {
+            foreach (CXMLNode node, layoutsNode.nodes()) {
                 QString layoutId = node.attributes()["id"];
                 QString layoutValue = node.attributes()["value"];
                 QStringList splitted = layoutValue.split(",");
@@ -35,12 +33,14 @@ void LayoutManager::initialize()
     }
     else defineDefaultLayouts();
 
-    emit nLayoutsChanged();
+    setCurrentLayout(0);
+    emit currentLayoutChanged();
 }
 
 // Define default layouts:
 void LayoutManager::defineDefaultLayouts()
 {
+    mLayouts.clear();
     for (int i=0; i<MAX_IMAGES; i++) {
         QList<bool> vLayout;
         int nImages = i+1;
@@ -48,19 +48,15 @@ void LayoutManager::defineDefaultLayouts()
             vLayout << (j < nImages);
         mLayouts[i] = vLayout;
     }
-    emit nLayoutsChanged();
+
+    setCurrentLayout(0);
+    emit currentLayoutChanged();
 }
 
 // Return # layouts:
 int LayoutManager::nLayouts() const
 {
     return mLayouts.size();
-}
-
-// Return max images:
-int LayoutManager::maxImages() const
-{
-    return MAX_IMAGES;
 }
 
 // Cell selected?

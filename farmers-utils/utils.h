@@ -26,7 +26,7 @@ public:
     static QDir pathToSettingsDir();
 
     // Return path to settings files:
-    static QString pathToSettingsFile();
+    static QString pathToSettingsFile(const QString &sSettingsFile);
 
     // Clear directory:
     static bool clearDirectory(const QString &dirName);

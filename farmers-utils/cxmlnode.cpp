@@ -532,7 +532,6 @@ bool CXMLNode::saveXMLToFile(const QString& sFileName, bool bXMLHeader)
 
     if (xmlFile.open(QIODevice::WriteOnly))
     {
-        qDebug() << toString(bXMLHeader);
         xmlFile.write(toString(bXMLHeader).toLatin1());
         xmlFile.close();
 

@@ -63,7 +63,7 @@ Rectangle {
             }
 
             Repeater {
-                model: _layoutMgr.maxImages
+                model: _layoutMgr.nLayouts
                 Rectangle {
                     width: customGrid.width/3
                     height: customGrid.height/3

@@ -76,10 +76,8 @@ PageTemplate {
                         id: colorSettingsControls
                         anchors.bottom: parent.bottom
                         width: parent.width
-                        leftButtonText: "SAVE COLORS"
-                        onLeftButtonClicked: _controller.saveColorSettings()
-                        rightButtonText: "RESTORE DEFAULTS"
-                        onRightButtonClicked: _controller.restoreDefaultSettingsForColors()
+                        buttonText: "RESTORE DEFAULTS"
+                        onButtonClicked: _controller.restoreDefaultSettingsForColors()
                     }
                 }
             }
@@ -91,6 +89,7 @@ PageTemplate {
 
                     // Layout view:
                     LayoutView {
+                        id: layoutView
                         width: parent.width
                         anchors.top: parent.top
                         anchors.bottom: layoutSettingsControls.top
@@ -102,10 +101,10 @@ PageTemplate {
                         id: layoutSettingsControls
                         anchors.bottom: parent.bottom
                         width: parent.width
-                        leftButtonText: "SAVE LAYOUTS"
-                        onLeftButtonClicked: _controller.saveLayoutSettings()
-                        rightButtonText: "RESTORE DEFAULTS"
-                        onRightButtonClicked: _controller.restoreDefaultSettingsForLayouts()
+                        buttonText: "RESTORE DEFAULTS"
+                        onButtonClicked: {
+                            _controller.restoreDefaultSettingsForLayouts()
+                        }
                     }
                 }
             }
