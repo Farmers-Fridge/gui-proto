@@ -65,54 +65,21 @@ PageTemplate {
                         id: colorView
                         width: parent.width
                         anchors.top: parent.top
-                        anchors.bottom: buttonContainer.top
+                        anchors.bottom: colorSettingsControls.top
                         clip: true
                         model: _colorModel
                         spacing: 8
                     }
 
-                    // Button container:
-                    Item {
-                        id: buttonContainer
-                        width: parent.width
-                        height: 48
+                    // Color settings controls:
+                    SettingsControl {
+                        id: colorSettingsControls
                         anchors.bottom: parent.bottom
-
-                        Item {
-                            id: leftPart
-                            width: parent.width/2
-                            height: parent.height
-                            anchors.left: parent.left
-
-                            // Restore defaults:
-                            TextButton {
-                                id: restoreDefaults
-                                anchors.centerIn: parent
-                                bold: true
-                                pixelSize: 24
-                                textColor: _colors.ffColor3
-                                label: qsTr("RESTORE DEFAULTS")
-                                onClicked: _controller.restoreDefaultSettings()
-                            }
-                        }
-
-                        Item {
-                            id: rightPart
-                            width: parent.width/2
-                            height: parent.height
-                            anchors.left: leftPart.right
-
-                            // Save
-                            TextButton {
-                                id: save
-                                anchors.centerIn: parent
-                                bold: true
-                                pixelSize: 24
-                                textColor: _colors.ffColor3
-                                label: qsTr("SAVE SETTINGS")
-                                onClicked: _controller.saveSettings()
-                            }
-                        }
+                        width: parent.width
+                        leftButtonText: "SAVE COLORS"
+                        onLeftButtonClicked: _controller.saveColorSettings()
+                        rightButtonText: "RESTORE DEFAULTS"
+                        onRightButtonClicked: _controller.restoreDefaultSettingsForColors()
                     }
                 }
             }
@@ -121,9 +88,24 @@ PageTemplate {
                 title: qsTr("Layouts")
                 Item {
                     anchors.fill: parent
+
+                    // Layout view:
                     LayoutView {
-                        anchors.fill: parent
+                        width: parent.width
+                        anchors.top: parent.top
+                        anchors.bottom: layoutSettingsControls.top
                         model: _layoutMgr.nLayouts
+                    }
+
+                    // Color settings controls:
+                    SettingsControl {
+                        id: layoutSettingsControls
+                        anchors.bottom: parent.bottom
+                        width: parent.width
+                        leftButtonText: "SAVE LAYOUTS"
+                        onLeftButtonClicked: _controller.saveLayoutSettings()
+                        rightButtonText: "RESTORE DEFAULTS"
+                        onRightButtonClicked: _controller.restoreDefaultSettingsForLayouts()
                     }
                 }
             }

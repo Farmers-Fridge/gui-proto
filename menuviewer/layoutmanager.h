@@ -25,10 +25,16 @@ public:
     // Get specific layout:
     Q_INVOKABLE QList<int> getLayout(int iLayoutIndex) const;
 
-private:
+    // Return layouts:
+    const QMap<int, QList<bool> > &layouts() const;
+
     // Define default layouts:
     void defineDefaultLayouts();
 
+    // Initialize:
+    void initialize();
+
+private:
     // Return # layouts:
     int nLayouts() const;
 
@@ -43,10 +49,10 @@ private:
 
 private:
     // Layouts:
-    QMap<int, QList<bool> > m_mLayouts;
+    QMap<int, QList<bool> > mLayouts;
 
     // Current layout:
-    int m_iCurrentLayout;
+    int mCurrentLayout;
 
 signals:
     // # layouts changed:

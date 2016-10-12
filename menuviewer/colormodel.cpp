@@ -13,17 +13,22 @@ void ColorModel::initialize()
 {
     // Load settings file:
     QString settingsFile = Utils::pathToSettingsFile();
-    if (!settingsFile.isEmpty())
+    if (QFile::exists(settingsFile))
     {
         beginResetModel();
         CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
         CXMLNode colorNode = rootNode.getNodeByTagName("Colors");
-        foreach (CXMLNode node, colorNode.nodes()) {
-            QString colorName = node.attributes()["name"];
-            QString colorValue = node.attributes()["value"];
-            mColors[colorName] = colorValue;
+        if (colorNode.nodes().length() > 0)
+        {
+            beginResetModel();
+            foreach (CXMLNode node, colorNode.nodes()) {
+                QString colorName = node.attributes()["name"];
+                QString colorValue = node.attributes()["value"];
+                mColors[colorName] = colorValue;
+            }
+            endResetModel();
         }
-        endResetModel();
+        else useHardCodedSettings();
     }
     else useHardCodedSettings();
 }

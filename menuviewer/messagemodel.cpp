@@ -10,7 +10,7 @@ MessageModel::MessageModel(QObject *parent) : QAbstractListModel(parent)
 int MessageModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_vMessages.size();
+    return mMessages.size();
 }
 
 // Return data:
@@ -20,9 +20,9 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     if (role == MsgText)
-        return m_vMessages[index.row()].message();
+        return mMessages[index.row()].message();
     if (role == MsgType)
-        return m_vMessages[index.row()].messageType();
+        return mMessages[index.row()].messageType();
 
     return QVariant();
 }
@@ -40,6 +40,6 @@ QHash<int, QByteArray> MessageModel::roleNames() const
 void MessageModel::setMessages(const QVector<Message> &vMessages)
 {
     beginResetModel();
-    m_vMessages = vMessages;
+    mMessages = vMessages;
     endResetModel();
 }

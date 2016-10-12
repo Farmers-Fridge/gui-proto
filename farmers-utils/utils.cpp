@@ -35,52 +35,25 @@ void Utils::files(const QString &srcDir, const QStringList &imageFilters, QStrin
 }
 
 // Return path to settings dir:
-QString Utils::pathToSettingsDir()
+QDir Utils::pathToSettingsDir()
 {
     // Find settings dir:
     QDir settingsDir = appDir();
 
-    // Load farmers-common:
-    if (settingsDir.cdUp())
-        if (settingsDir.cd("menuviewer"))
-            if (settingsDir.cd("settings"))
-                return settingsDir.absolutePath();
+    // Path to settings dir:
+    settingsDir.cdUp();
+    settingsDir.cd("menuviewer");
+    settingsDir.mkdir("settings");
+    settingsDir.cd("settings");
 
-    return "";
+    return settingsDir;
 }
 
 // Return path to settings files:
 QString Utils::pathToSettingsFile()
 {
     // Get settings dir path:
-    QString settingsDirPath = pathToSettingsDir();
-    if (settingsDirPath.isEmpty())
-        return "";
-
-    // Get settings dir:
-    QDir settingsDir(settingsDirPath);
-    QString settingsFile = settingsDir.absoluteFilePath("settings.xml");
-    if (QFile::exists(settingsFile))
-        return settingsFile;
-
-    return "";
-}
-
-// Return path to default settings files:
-QString Utils::pathToDefaultSettingsFile()
-{
-    // Get settings dir path:
-    QString settingsDirPath = pathToSettingsDir();
-    if (settingsDirPath.isEmpty())
-        return "";
-
-    // Get settings dir:
-    QDir settingsDir(settingsDirPath);
-    QString settingsFile = settingsDir.absoluteFilePath("default_settings.xml");
-    if (QFile::exists(settingsFile))
-        return settingsFile;
-
-    return "";
+    return pathToSettingsDir().absoluteFilePath("settings.xml");
 }
 
 // Clear directory:
@@ -124,7 +97,7 @@ bool Utils::save(const QByteArray &bArray, const QString &filePath)
 
 // Returns empty QByteArray() on failure.
 QString Utils::fileCheckSum(const QString &sFileName,
-    QCryptographicHash::Algorithm hashAlgorithm)
+                            QCryptographicHash::Algorithm hashAlgorithm)
 {
     QFile f(sFileName);
     if (f.open(QFile::ReadOnly)) {

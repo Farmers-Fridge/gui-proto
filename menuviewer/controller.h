@@ -68,11 +68,20 @@ public:
     // Retur current menu item for category:
     Q_INVOKABLE QVariant getCurrentMenuItemForCategory(const QString &category);
 
-    // Restore default settings:
-    Q_INVOKABLE void restoreDefaultSettings();
-
     // Save settings:
     Q_INVOKABLE void saveSettings();
+
+    // Restore default settings for colors:
+    Q_INVOKABLE void restoreDefaultSettingsForColors();
+
+    // Save color settings:
+    Q_INVOKABLE void saveColorSettings();
+
+    // Restore default settings for layouts:
+    Q_INVOKABLE void restoreDefaultSettingsForLayouts();
+
+    // Set layout settings:
+    Q_INVOKABLE void saveLayoutSettings();
 
     // Return file base name:
     Q_INVOKABLE QString fileBaseName(const QString &sFullPath) const;
@@ -118,11 +127,8 @@ private:
     // Return offline path:
     const QString &offLinePath() const;
 
-    // Use hard coded settings:
-    void useHardCodedSettings();
-
-    // Save download report:
-    void saveDownloadReport();
+    // Set download report:
+    void setDownloadReport();
 
 private:
     // Salad assets:

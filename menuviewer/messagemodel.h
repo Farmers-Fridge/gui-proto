@@ -27,7 +27,7 @@ public:
 
 private:
     // Messages:
-    QVector<Message> m_vMessages;
+    QVector<Message> mMessages;
 };
 
 #endif // MESSAGEMODEL_H

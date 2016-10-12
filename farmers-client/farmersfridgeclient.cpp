@@ -24,7 +24,6 @@ FarmersFridgeClient::FarmersFridgeClient(QObject *parent) : QObject(parent),
 
 // Retrieve server data:
 void FarmersFridgeClient::retrieveServerData(
-        const QString &sDstDir,
         const QString &sServerUrl,
         const QString &sAPIKey)
 {
@@ -33,7 +32,7 @@ void FarmersFridgeClient::retrieveServerData(
     // Initialize members:
     m_sServerUrl = sServerUrl;
     m_sAPIKey = sAPIKey;
-    m_dstDir.setPath(sDstDir);
+    m_dstDir = Utils::appDir();
     if (m_dstDir.cdUp())
     {
         if (m_dstDir.mkpath(SERVER_DIR))

@@ -32,7 +32,6 @@ public:
 
     // Retrieve server data:
     Q_INVOKABLE void retrieveServerData(
-            const QString &dstDir=Utils::appDir().absolutePath(),
             const QString &sServerUrl=SERVER_URL,
             const QString &sAPIKey=X_API_KEY);
 

@@ -23,13 +23,10 @@ public:
     static void files(const QString &srcDir, const QStringList &imageFilters, QStringList &files);
 
     // Return path to settings dir:
-    static QString pathToSettingsDir();
+    static QDir pathToSettingsDir();
 
     // Return path to settings files:
     static QString pathToSettingsFile();
-
-    // Return path to default settings files:
-    static QString pathToDefaultSettingsFile();
 
     // Clear directory:
     static bool clearDirectory(const QString &dirName);

@@ -36,11 +36,12 @@ Controller::Controller(QObject *parent) : QObject(parent),
     mColorModel->initialize();
     connect(mColorModel, &ColorModel::updateColors, this, &Controller::onUpdateColors);
 
-    // Message model:
-    mMessageModel = new MessageModel(this);
-
     // Layout manager:
     mLayoutManager = new LayoutManager(this);
+    mLayoutManager->initialize();
+
+    // Message model:
+    mMessageModel = new MessageModel(this);
 }
 
 // Destructor:
@@ -51,8 +52,8 @@ Controller::~Controller()
 // Data ready:
 void Controller::onDataReady()
 {
-    // Save download report:
-    saveDownloadReport();
+    // Set download report:
+    setDownloadReport();
 
     // Define offline path:
     QDir offLinePath = Utils::appDir();
@@ -285,81 +286,93 @@ void Controller::onUpdateColors()
     mEngine.rootContext()->setContextProperty("_colors", mColorModel->colors());
 }
 
-// Restore default settings:
-void Controller::restoreDefaultSettings()
+// Restore default settings for colors:
+void Controller::restoreDefaultSettingsForColors()
 {
-    bool error = false;
+    mColorModel->useHardCodedSettings();
+}
 
-    // Settings file exists? remove it:
+// Save color settings:
+void Controller::saveColorSettings()
+{
+    // Load current:
     QString settingsFile = Utils::pathToSettingsFile();
-    if (!settingsFile.isEmpty())
+
+    // Get updated colors:
+    CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
+
+    // Remove Colors node:
+    rootNode.removeNodes("Colors");
+
+    // Add new Colors node:
+    CXMLNode colorsNode("Colors");
+
+    // Add individual colors:
+    QVariantMap newColors = mColorModel->colors().toMap();
+    for (QVariantMap::iterator it=newColors.begin(); it!=newColors.end(); ++it)
     {
-        if (!QFile::remove(settingsFile))
-            error = true;
+        CXMLNode colorNode("Color");
+        colorNode.setAttribute(QString("name"), it.key());
+        colorNode.setAttribute(QString("value"), it.value().toString());
+        colorsNode.addNode(colorNode);
     }
 
-    if (!error)
+    // Add new Colors node:
+    rootNode.addNode(colorsNode);
+
+    // Save:
+    rootNode.save(settingsFile);
+}
+
+// Restore default settings for layouts:
+void Controller::restoreDefaultSettingsForLayouts()
+{
+    mLayoutManager->defineDefaultLayouts();
+}
+
+// Save layout settings:
+void Controller::saveLayoutSettings()
+{
+    // Load current:
+    QString settingsFile = Utils::pathToSettingsFile();
+
+    // Get updated colors:
+    CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
+
+    // Remove Colors node:
+    rootNode.removeNodes("Layouts");
+
+    // Add new Colors node:
+    CXMLNode layoutsNode("Layouts");
+
+    // Add individual colors:
+    QMap<int, QList<bool> > layouts = mLayoutManager->layouts();
+
+    for (QMap<int, QList<bool> >::iterator it=layouts.begin(); it!=layouts.end(); ++it)
     {
-        // Default settings file exists? Copy to settings.xml:
-        QString defaultSettingsFile = Utils::pathToDefaultSettingsFile();
-        if (!defaultSettingsFile.isEmpty())
-        {
-            settingsFile = QDir(Utils::pathToSettingsDir()).absoluteFilePath("settings.xml");
-            if (!QFile::copy(defaultSettingsFile, settingsFile))
-                error = true;
-        }
-        else error = true;
+        CXMLNode layoutNode("Layout");
+        layoutNode.setAttribute(QString("id"), QString::number(it.key()));
+
+        QStringList lLayout;
+        for (int i=0; i<it.value().size(); i++)
+            lLayout << (it.value()[i] ? "true" : "false");
+
+        layoutNode.setAttribute(QString("value"), lLayout.join(","));
+        layoutsNode.addNode(layoutNode);
     }
 
-    // Error? use hard coded settings:
-    if (error) {
-        useHardCodedSettings();
-    }
-    else {
-        // Reinitialize colors:
-        mColorModel->initialize();
-        onUpdateColors();
-    }
+    // Add new Colors node:
+    rootNode.addNode(layoutsNode);
+
+    // Save:
+    rootNode.save(settingsFile);
 }
 
 // Save settings:
 void Controller::saveSettings()
 {
-    // Load current:
-    QString settingsFile = Utils::pathToSettingsFile();
-    if (!settingsFile.isEmpty())
-    {
-        // Get updated colors:
-        CXMLNode rootNode = CXMLNode::loadXMLFromFile(settingsFile);
-
-        // Remove Colors node:
-        rootNode.removeNodes("Colors");
-
-        // Add new Colors node:
-        CXMLNode colorsNode("Colors");
-
-        // Add individual colors:
-        QVariantMap newColors = mColorModel->colors().toMap();
-        for (QVariantMap::iterator it=newColors.begin(); it!=newColors.end(); ++it)
-        {
-            CXMLNode color("Color");
-            color.setAttribute(QString("name"), it.key());
-            color.setAttribute(QString("value"), it.value().toString());
-            colorsNode.addNode(color);
-        }
-
-        // Add new Colors node:
-        rootNode.addNode(colorsNode);
-
-        // Save:
-        rootNode.save(settingsFile);
-    }
-}
-
-// Use hard-coded defaults:
-void Controller::useHardCodedSettings()
-{
-    mColorModel->useHardCodedSettings();
+    // Save color settings:
+    saveColorSettings();
 }
 
 // Return file base name:
@@ -369,8 +382,9 @@ QString Controller::fileBaseName(const QString &sFullPath) const
     return fi.fileName();
 }
 
-// Save download report:
-void Controller::saveDownloadReport()
+// Set download report:
+void Controller::setDownloadReport()
 {
     mMessageModel->setMessages(mFarmersClient->messages());
 }
+

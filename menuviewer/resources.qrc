@@ -74,5 +74,6 @@
         <file>qml/LayoutView.qml</file>
         <file>qml/FlipableNutritionItem.qml</file>
         <file>qml/CustomGrid.qml</file>
+        <file>qml/SettingsControl.qml</file>
     </qresource>
 </RCC>
