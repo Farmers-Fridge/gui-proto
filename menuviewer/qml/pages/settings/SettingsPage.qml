@@ -90,9 +90,9 @@ PageTemplate {
                     // Layout view:
                     LayoutView {
                         id: layoutView
-                        width: parent.width
-                        anchors.top: parent.top
-                        anchors.bottom: layoutSettingsControls.top
+                        width: parent.width*2/3
+                        height: width
+                        anchors.centerIn: parent
                         model: _layoutMgr.nLayouts
                     }
 
