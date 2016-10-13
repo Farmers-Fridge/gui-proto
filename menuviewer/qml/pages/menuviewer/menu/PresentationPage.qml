@@ -26,7 +26,8 @@ PageTemplate {
     // Cart clicked:
     function onCartClicked()
     {
-        pageMgr.loadNextPage()
+        if (_cartModel.cartCount > 0)
+            pageMgr.loadNextPage()
     }
 
     // Time out:
