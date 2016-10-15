@@ -17,7 +17,7 @@ PageTemplate {
     CustomXmlListModel {
         id: xmlRouteModel
         query: "/hosts/item"
-        source: _appData.routes
+        source: getPageSettingsById("STATS_ROUTE_PAGE").routes
         XmlRole { name: "name"; query: "name/string()"; isKey: true }
         XmlRole { name: "file"; query: "file/string()"; isKey: true }
     }

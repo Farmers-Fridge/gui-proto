@@ -1,14 +1,14 @@
-{
+{    
     "currentIP": "166.130.61.4",
-    "appName": "Tablet GUI",
-    "clientName": "Farmers Fridge",
     "categoryQuery": "/categories/item",
     "categoryListQuery": "/vendItems/item",
     "urlPublicRootValue": "bytebucket.org/jacbop/kiosk-assets/raw/master",
+    "httpPrefix": "http://s3.amazonaws.com/ff-scratch/",
 
-	"httpPrefix": "http://s3.amazonaws.com/ff-scratch/",
-    "routes": "http://s3.amazonaws.com/ff-scratch/routes.xml",
-
+    "general": {
+        "appName": "Tablet GUI",
+        "clientName": "Farmers Fridge"
+    },
     "appCodes": {
         "stockCode": "5678",
         "statsCode": "3456",
@@ -46,9 +46,7 @@
         {
             "pageId": "STATS_ROUTE_PAGE",
             "url": "qrc:/qml/pages/stats/route/RoutePage.qml",
-            "targetStatisticsColumns": ["name", "transactions", "sales", "coupons"],
-            "statisticsPageUrl": "stats.xml",
-            "statisticsPageUpdateTime": "60000"
+            "routes": "http://s3.amazonaws.com/ff-scratch/routes.xml"
         },
         {
             "pageId": "STATS_NETWORK_PAGE",
@@ -60,7 +58,10 @@
         },
         {
             "pageId": "STATS_STATISTICS_PAGE",
-            "url": "qrc:/qml/pages/stats/statistics/StatisticsPage.qml"
+            "url": "qrc:/qml/pages/stats/statistics/StatisticsPage.qml",
+            "targetStatisticsColumns": ["name", "transactions", "sales", "coupons"],
+            "statisticsPageUrl": "stats.xml",
+            "statisticsPageUpdateTime": "60000"
         },
         {
             "pageId": "SETTINGS_PRESENTATION_PAGE",

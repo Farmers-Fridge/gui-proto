@@ -35,7 +35,7 @@ Window {
             console.log("Response text: " + responseText)
 
             // Update title:
-            mainWindow.title = _appData.appName + "/" + _appData.clientName
+            mainWindow.title = _appData.general.appName + "/" + _appData.general.clientName
 
             // Load main application:
             mainApplicationAppLoader.sourceComponent = mainApplicationComponent
