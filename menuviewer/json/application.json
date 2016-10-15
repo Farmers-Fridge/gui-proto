@@ -6,11 +6,6 @@
     "categoryListQuery": "/vendItems/item",
     "urlPublicRootValue": "bytebucket.org/jacbop/kiosk-assets/raw/master",
 
-    "stockCode": "5678",
-    "statsCode": "3456",
-    "exitCode": "1234",
-    "settingsCode": "2345",
-
 	"httpPrefix": "http://s3.amazonaws.com/ff-scratch/",
     "routes": "http://s3.amazonaws.com/ff-scratch/routes.xml",
 
@@ -22,6 +17,12 @@
     "systemHealthPageUrl": "status.xml",
     "systemHealthPageUpdateTime": "60000",
 
+    "appCodes": {
+        "stockCode": "5678",
+        "statsCode": "3456",
+        "settingsCode": "2345",
+        "exitCode": "1234"
+    },
     "pages": [
         {
             "pageId": "MENU_PRESENTATION_PAGE",

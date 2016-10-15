@@ -60,32 +60,32 @@ Item {
     // OK clicked:
     function onOKClicked(enteredText)
     {   // User entered exit code:
-        if (enteredText === _appData.exitCode) {
+        if (enteredText === _appData.appCodes.exitCode) {
             _controller.saveSettings()
             Qt.quit()
         }
         else
-            // User entered stock code:
-            if (enteredText === _appData.stockCode)
-            {
-                mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.urlPublicRootValue, "/hosts.xml")
-                pageMgr.loadPage("STOCK_NETWORK_PAGE")
-                mainApplication.state = "active"
-            }
-            else
-                // User entered stats code:
-                if (enteredText === _appData.statsCode)
-                {
-                    pageMgr.loadPage("STATS_INTRO_PAGE")
-                    mainApplication.state = "active"
-                }
-                else
-                    // User entered settings code:
-                    if (enteredText === _appData.settingsCode)
-                    {
-                        pageMgr.loadPage("SETTINGS_PRESENTATION_PAGE")
-                        mainApplication.state = "active"
-                    }
+        // User entered stock code:
+        if (enteredText === _appData.appCodes.stockCode)
+        {
+            mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.urlPublicRootValue, "/hosts.xml")
+            pageMgr.loadPage("STOCK_NETWORK_PAGE")
+            mainApplication.state = "active"
+        }
+        else
+        // User entered stats code:
+        if (enteredText === _appData.appCodes.statsCode)
+        {
+            pageMgr.loadPage("STATS_INTRO_PAGE")
+            mainApplication.state = "active"
+        }
+        else
+        // User entered settings code:
+        if (enteredText === _appData.appCodes.settingsCode)
+        {
+            pageMgr.loadPage("SETTINGS_PRESENTATION_PAGE")
+            mainApplication.state = "active"
+        }
         privateNumericKeyPad.state = ""
     }
 
