@@ -33,9 +33,9 @@ PageTemplate {
             width: parent.width
             height: parent.height/2
             anchors.centerIn: parent
-            targetUrl: _appData.httpPrefix + _appData.systemHealthPageUrl
-            targetColumns: _appData.targetSystemHealthColumns
-            updateTime: _appData.systemHealthPageUpdateTime
+            targetUrl: _appData.httpPrefix + getPageSettingsById("STATS_SYSTEM_HEALTH_PAGE").systemHealthPageUrl
+            targetColumns: getPageSettingsById("STATS_SYSTEM_HEALTH_PAGE").targetSystemHealthColumns
+            updateTime: getPageSettingsById("STATS_SYSTEM_HEALTH_PAGE").systemHealthPageUpdateTime
         }
     }
 

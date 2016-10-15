@@ -40,6 +40,16 @@ Item {
     // Selected route:
     property string _selectedRoute: ""
 
+    // Get page settings by id:
+    function getPageSettingsById(pageId)
+    {
+        var pages = _appData.pages
+        for (var i=0; i<pages.length; i++)
+            if (pages[i].pageId === pageId)
+                return pages[i]
+        return null
+    }
+
     // Get category model source:
     function getCategoryModelSource()
     {

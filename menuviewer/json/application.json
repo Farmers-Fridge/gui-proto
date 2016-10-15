@@ -9,14 +9,6 @@
 	"httpPrefix": "http://s3.amazonaws.com/ff-scratch/",
     "routes": "http://s3.amazonaws.com/ff-scratch/routes.xml",
 
-    "targetStatisticsColumns": ["name", "transactions", "sales", "coupons"],
-    "statisticsPageUrl": "stats.xml",
-    "statisticsPageUpdateTime": "60000",
-
-    "targetSystemHealthColumns": ["name", "temp", "heartbeat", "lastVend", "checkpoint"],
-    "systemHealthPageUrl": "status.xml",
-    "systemHealthPageUpdateTime": "60000",
-
     "appCodes": {
         "stockCode": "5678",
         "statsCode": "3456",
@@ -46,11 +38,17 @@
         },
         {
             "pageId": "STATS_SYSTEM_HEALTH_PAGE",
-            "url": "qrc:/qml/pages/stats/health/SystemHealthPage.qml"
+            "url": "qrc:/qml/pages/stats/health/SystemHealthPage.qml",
+            "targetSystemHealthColumns": ["name", "temp", "heartbeat", "lastVend", "checkpoint"],
+            "systemHealthPageUrl": "status.xml",
+            "systemHealthPageUpdateTime": "60000"
         },
         {
             "pageId": "STATS_ROUTE_PAGE",
-            "url": "qrc:/qml/pages/stats/route/RoutePage.qml"
+            "url": "qrc:/qml/pages/stats/route/RoutePage.qml",
+            "targetStatisticsColumns": ["name", "transactions", "sales", "coupons"],
+            "statisticsPageUrl": "stats.xml",
+            "statisticsPageUpdateTime": "60000"
         },
         {
             "pageId": "STATS_NETWORK_PAGE",
