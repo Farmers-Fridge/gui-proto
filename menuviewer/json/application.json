@@ -1,20 +1,27 @@
-{    
-    "currentIP": "166.130.61.4",
-    "categoryQuery": "/categories/item",
-    "categoryListQuery": "/vendItems/item",
-    "urlPublicRootValue": "bytebucket.org/jacbop/kiosk-assets/raw/master",
-    "httpPrefix": "http://s3.amazonaws.com/ff-scratch/",
-
+{
     "general": {
         "appName": "Tablet GUI",
         "clientName": "Farmers Fridge"
     },
+
     "appCodes": {
         "stockCode": "5678",
         "statsCode": "3456",
         "settingsCode": "2345",
         "exitCode": "1234"
     },
+
+    "serverInfo": {
+        "ipForTakeCouponAndTakeReceiptEmailAddress": "166.130.61.4",
+        "httpPrefix": "http://s3.amazonaws.com/ff-scratch/",
+        "urlForStock": "bytebucket.org/jacbop/kiosk-assets/raw/master"
+    },
+
+    "query": {
+        "categoryListQuery": "/vendItems/item",
+        "categoryQuery": "/categories/item"
+    },
+
     "pages": [
         {
             "pageId": "MENU_PRESENTATION_PAGE",
@@ -66,20 +73,6 @@
         {
             "pageId": "SETTINGS_PRESENTATION_PAGE",
             "url": "qrc:/qml/pages/settings/SettingsPage.qml"
-        }
-    ],
-    "workflows": [
-        {
-            "name": "SYSTEM_HEALTH",
-            "icon": "qrc:/assets/ico-system-health.png"
-        },
-        {
-            "name": "ROUTES",
-            "icon": "qrc:/assets/ico-routes.png"
-        },
-        {
-            "name": "STATISTICS",
-            "icon": "qrc:/assets/ico-statistics.png"
         }
     ]
 }

@@ -80,7 +80,7 @@ Item {
             anchors.topMargin: 8
             anchors.horizontalCenter: parent.horizontalCenter
             fillMode: Image.PreserveAspectFit
-            source: Utils.urlPublicStatic(_appData.urlPublicRootValue, iconUrl)
+            source: Utils.urlPublicStatic(_appData.urlForStock, iconUrl)
             //source: mainApplication._selectedRoute + iconUrl
             width: Math.min(inner.height * .7, inner.width) * .85
             height: Math.min(inner.height * .7, inner.width) * .85

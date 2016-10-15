@@ -7,6 +7,21 @@ PageTemplate {
     // Hide header:
     headerVisible: false
 
+    property var workflows: [
+        {
+            "name": "SYSTEM_HEALTH",
+            "icon": "qrc:/assets/ico-system-health.png"
+        },
+        {
+            "name": "ROUTES",
+            "icon": "qrc:/assets/ico-routes.png"
+        },
+        {
+            "name": "STATISTICS",
+            "icon": "qrc:/assets/ico-statistics.png"
+        }
+    ]
+
     // Pig clicked:
     function onPigClicked()
     {
@@ -33,13 +48,13 @@ PageTemplate {
             anchors.centerIn: parent
             spacing: 64
             Repeater {
-                model: _appData.workflows.length
+                model: workflows.length
                 LargeButton {
                     id: button
                     width: parent.width
                     height: 128
-                    text: _appData.workflows[index].name
-                    iconSource: _appData.workflows[index].icon
+                    text: workflows[index].name
+                    iconSource: workflows[index].icon
                     onButtonClicked: {
                         _currentWorkflowIndex = index
                         pageMgr.loadNextPage()
@@ -57,15 +72,15 @@ PageTemplate {
             return "STATS_SYSTEM_HEALTH_PAGE"
         }
         else
-        if (_currentWorkflowIndex === 1)
-        {
-            return "STATS_ROUTE_PAGE"
-        }
-        else
-        if (_currentWorkflowIndex === 2)
-        {
-            return "STATS_STATISTICS_PAGE"
-        }
+            if (_currentWorkflowIndex === 1)
+            {
+                return "STATS_ROUTE_PAGE"
+            }
+            else
+                if (_currentWorkflowIndex === 2)
+                {
+                    return "STATS_STATISTICS_PAGE"
+                }
     }
 }
 

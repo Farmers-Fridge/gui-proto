@@ -78,7 +78,7 @@ Item {
         // User entered stock code:
         if (enteredText === _appData.appCodes.stockCode)
         {
-            mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.urlPublicRootValue, "/hosts.xml")
+            mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.urlForStock, "/hosts.xml")
             pageMgr.loadPage("STOCK_NETWORK_PAGE")
             mainApplication.state = "active"
         }
@@ -131,13 +131,13 @@ Item {
     // Take coupon command:
     TakeCouponCommand {
         id: _takeCouponCodeCommand
-        _networkIP: _appData.currentIP
+        _networkIP: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
     }
 
     // Take receipt email address command:
     TakeReceiptEmailAddressCommand {
         id: _takeReceiptEmailAddressCommand
-        _networkIP: _appData.currentIP
+        _networkIP: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
     }
 
     // Page mgr:
@@ -154,7 +154,7 @@ Item {
     CustomXmlListModel {
         id: categoryModel
         source: getCategoryModelSource()
-        query: _appData.categoryQuery
+        query: _appData.query.categoryQuery
 
         XmlRole { name: "categoryName"; query: "categoryName/string()"; isKey: true }
         XmlRole { name: "icon"; query: "icon/string()"; isKey: true }

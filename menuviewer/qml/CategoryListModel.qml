@@ -14,7 +14,7 @@ CustomXmlListModel {
 
     property string targetCategory: ""
     source: getCategoryListSource()
-    query: _appData.categoryListQuery
+    query: _appData.query.categoryListQuery
     signal modelReady()
 
     XmlRole { name: "vendItemName"; query: "vendItemName/string()"; isKey: true }

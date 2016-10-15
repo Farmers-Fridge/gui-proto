@@ -56,7 +56,7 @@ PageTemplate {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                mainApplication._selectedRoute = _appData.httpPrefix + file
+                                mainApplication._selectedRoute = _appData.serverInfo.httpPrefix + file
                                 pageMgr.loadNextPage()
                             }
                         }
