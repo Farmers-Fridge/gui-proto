@@ -1,5 +1,7 @@
 #ifndef COLORMODEL_H
 #define COLORMODEL_H
+
+// Application:
 #include <QAbstractListModel>
 
 class ColorModel : public QAbstractListModel

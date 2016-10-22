@@ -1,17 +1,12 @@
 import QtQuick 2.5
 import Common 1.0
-import "../.."
+import "../../.."
 
-Rectangle {
-    color: _colors.ffColor2
-    signal idlePageClicked()
-
-    // Define behavior on opacity:
-    visible: opacity > 0
-    opacity: 1
-    Behavior on opacity {
-        NumberAnimation {duration: 500}
-    }
+PageTemplate {
+    id: idlePage
+    headerVisible: false
+    footerVisible: false
+    property int timerDuration: 500
 
     // Main timer:
     Timer {
@@ -27,10 +22,13 @@ Rectangle {
         id: idleView
         pathItemCount: 2
         model: _controller.saladAssets
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: informationArea.top
+        width: parent.width
         highlightRangeMode: PathView.StrictlyEnforceRange
         snapMode: ListView.SnapOneItem
         interactive: false
+        clip: true
 
         // Path:
         path: Path {
@@ -42,8 +40,8 @@ Rectangle {
             width: idleView.width
             height: idleView.height
             Image {
-                cache: true
-                width: parent.width/2
+                asynchronous: true
+                height: parent.height*2/3
                 fillMode: Image.PreserveAspectFit
                 anchors.centerIn: parent
                 source: _controller.saladAssets[index]
@@ -51,18 +49,45 @@ Rectangle {
         }
     }
 
-    // Touch screen to start text:
-    StandardText {
-        anchors.horizontalCenter: parent.horizontalCenter
+    // Information area:
+    Rectangle {
+        id: informationArea
+        color: _colors.ffColor16
+        border.color: _colors.ffColor3
+        border.width: 3
+        width: parent.width
+        height: 64
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 16
-        color: _colors.ffColor3
-        text: qsTr("Touch Screen To Start")
+
+        // Retrieving server data:
+        StandardText {
+            id: info1
+            anchors.centerIn: parent
+            color: _colors.ffColor15
+            text: qsTr("Retrieving server data...")
+            visible: !_controller.serverDataRetrieved
+        }
+
+        // Touch screen to start text:
+        StandardText {
+            id: info2
+            anchors.centerIn: parent
+            color: _colors.ffColor3
+            text: qsTr("Touch Screen To Start")
+            visible: _controller.serverDataRetrieved
+        }
+    }
+
+    // Return next page id:
+    function nextPageId()
+    {
+        return "MENU_PRESENTATION_PAGE"
     }
 
     // Clicking anywhere loads previous page:
     MouseArea {
         anchors.fill: parent
-        onClicked: idlePageClicked()
+        enabled: _controller.serverDataRetrieved
+        onClicked: pageMgr.loadNextPage()
     }
 }

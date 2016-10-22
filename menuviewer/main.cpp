@@ -1,6 +1,9 @@
-#include <QApplication>
+// Application:
 #include "menuviewer.h"
 #include <farmersfridgeclient.h>
+
+// Qt:
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {

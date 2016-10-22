@@ -25,6 +25,7 @@ PageTemplate {
             anchors.topMargin: 8
             anchors.horizontalCenter: parent.horizontalCenter
             source: "qrc:/assets/ico-logo.png"
+            asynchronous: true
         }
 
         // Table view:

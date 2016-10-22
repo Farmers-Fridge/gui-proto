@@ -1,5 +1,10 @@
 #ifndef HTTPWORKER_H
 #define HTTPWORKER_H
+
+// Application:
+#include "farmers-client-global.h"
+
+// Qt:
 #include <QObject>
 #include <QByteArray>
 #include <QNetworkAccessManager>
@@ -7,7 +12,6 @@
 #include <QNetworkReply>
 #include <QDir>
 #include <QTimer>
-#include "farmers-client-global.h"
 
 #define TIME_OUT 120000
 

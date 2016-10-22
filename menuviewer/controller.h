@@ -1,9 +1,14 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
+
+// Application:
+#include "iservice.h"
+
+// Qt:
 #include <QObject>
 #include <QVariantMap>
 #include <QQmlApplicationEngine>
-#include "iservice.h"
+
 class FarmersFridgeClient;
 class EventWatcher;
 class CartModel;
@@ -21,6 +26,7 @@ class Controller : public QObject, public IService
     Q_PROPERTY(QString currentFilter READ currentFilter WRITE setCurrentFilter NOTIFY currentFilterChanged)
     Q_PROPERTY(QStringList saladAssets READ saladAssets NOTIFY saladAssetsChanged)
     Q_PROPERTY(QString offLinePath READ offLinePath NOTIFY offLinePathChanged)
+    Q_PROPERTY(bool serverDataRetrieved READ serverDataRetrieved WRITE setServerDataRetrieved NOTIFY serverDataRetrievedChanged)
 
 public:
     friend class MenuViewer;
@@ -130,6 +136,12 @@ private:
     // Set download report:
     void setDownloadReport();
 
+    // Server data retrieved:
+    bool serverDataRetrieved() const;
+
+    // Set server data retrieved:
+    void setServerDataRetrieved(bool retrieved);
+
 private:
     // Salad assets:
     QStringList mSaladAssets;
@@ -173,6 +185,9 @@ private:
     // Current item for category:
     QMap<QString, QVariant> mCurrentItemForCategory;
 
+    // Server data retrieved:
+    bool mServerDataRetrieved;
+
 public slots:
     // Update colors:
     void onUpdateColors();
@@ -201,6 +216,9 @@ signals:
 
     // Current menu item for category changed:
     void currentMenuItemForCategoryChanged();
+
+    // Server data retrieved:
+    void serverDataRetrievedChanged();
 };
 
 #endif // CONTROLLER_H

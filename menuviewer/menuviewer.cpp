@@ -1,5 +1,8 @@
+// Application:
 #include "menuviewer.h"
 #include "controller.h"
+
+// Qt:
 #include <QDebug>
 
 // Farmers fridge singleton:

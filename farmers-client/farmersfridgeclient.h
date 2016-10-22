@@ -1,12 +1,15 @@
 #ifndef FARMERSFRIDGECLIENT_H
 #define FARMERSFRIDGECLIENT_H
+// Qt:
 #include <QObject>
 #include <QDir>
 #include <QVector>
-#include <utils.h>
+
+// Application:
 #include "httpworker.h"
 #include "message.h"
 #include "farmers-client-global.h"
+#include <utils.h>
 
 #define SERVER_URL QString("xf8gcmq38b.execute-api.us-east-1.amazonaws.com/dev/v1/server/assets/")
 #define X_API_KEY QString("iyiGklK5onMLiL8ag29h4atrKJJjukJ8Aq6X6id6")
@@ -31,7 +34,7 @@ public:
     const QVector<Message> &messages() const;
 
     // Retrieve server data:
-    Q_INVOKABLE void retrieveServerData(
+    void retrieveServerData(
             const QString &sServerUrl=SERVER_URL,
             const QString &sAPIKey=X_API_KEY);
 

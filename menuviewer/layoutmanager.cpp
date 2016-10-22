@@ -1,7 +1,10 @@
+// Application:
 #include "layoutmanager.h"
+#include <utils.h>
+
+// Qt:
 #include <QFile>
 #include <cxmlnode.h>
-#include <utils.h>
 
 // Constructor:
 LayoutManager::LayoutManager(QObject *parent) : QObject(parent),

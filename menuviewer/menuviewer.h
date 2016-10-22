@@ -1,7 +1,12 @@
 #ifndef MENUVIEWER_H
 #define MENUVIEWER_H
-#include <QObject>
+
+// Application:
 #include "iservice.h"
+
+// Qt:
+#include <QObject>
+
 class Controller;
 
 // Main application:

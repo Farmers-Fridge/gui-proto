@@ -1,5 +1,4 @@
 import QtQuick 2.5
-import QtQuick.XmlListModel 2.0
 import Common 1.0
 import KeyBoard 1.0
 import Commands 1.0
@@ -148,45 +147,7 @@ Item {
         enabled: (privateNumericKeyPad.state === "") &&
                  (stockNumericKeyPad.state === "") &&
                  (notepad.state === "")
-    }
-
-    // XML version model:
-    CustomXmlListModel {
-        id: categoryModel
-        source: getCategoryModelSource()
-        query: _appData.query.categoryQuery
-
-        XmlRole { name: "categoryName"; query: "categoryName/string()"; isKey: true }
-        XmlRole { name: "icon"; query: "icon/string()"; isKey: true }
-        XmlRole { name: "header"; query: "header/string()"; isKey: true }
-
-        onStatusChanged: {
-            _appIsBusy = (status === XmlListModel.Loading)
-
-            // Load main application:
-            if (status !== XmlListModel.Loading)
-            {
-                // Error:
-                if (status === XmlListModel.Error)
-                {
-                    // Log:
-                    console.log("Can't load: " + source)
-                }
-                else
-                    // Model ready:
-                    if (status === XmlListModel.Ready)
-                    {
-                        // Set current category name:
-                        _controller.currentCategory = categoryModel.get(0).categoryName
-
-                        // Log:
-                        console.log(source + " loaded successfully")
-
-                        // Load first page:
-                        pageMgr.initialize()
-                    }
-            }
-        }
+        Component.onCompleted: initialize()
     }
 
     // Numeric keypad:
@@ -217,32 +178,6 @@ Item {
         on: _appIsBusy
         visible: on
         z: _settings.zMax
-    }
-
-    // Idle page:
-    IdlePage {
-        id: idlePage
-        anchors.fill: parent
-        onIdlePageClicked: {
-            pageMgr.loadFirstPage()
-            mainApplication.state = "active"
-        }
-    }
-
-    states: State {
-        name: "active"
-        PropertyChanges {
-            target: idlePage
-            opacity: 0
-        }
-    }
-
-    // Set state back to grid view mode:
-    onStateChanged: {
-        if (state === "active") {
-            _controller.currentCategory = categoryModel.get(0).categoryName
-            _viewMode = "gridview"
-        }
     }
 }
 

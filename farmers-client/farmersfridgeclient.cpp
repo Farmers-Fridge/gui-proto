@@ -1,7 +1,10 @@
+// Application:
 #include "farmersfridgeclient.h"
 #include "httpdownloader.h"
 #include <cxmlnode.h>
 #include <utils.h>
+
+// Qt:
 #include <QMetaObject>
 
 typedef int (FarmersFridgeClient::*memberf_pointer)();
@@ -383,7 +386,7 @@ void FarmersFridgeClient::updateDownLoaders(HttpDownLoader *pDownloader)
         if (nRemoved > 0)
             delete pDownloader;
 
-        //LOG_MESSAGE(QString("*** WAITING FOR %1 DOWNLOADERS TO COMPLETE ***").arg(m_vDownloaders.size()), Message::OK);
+        LOG_MESSAGE(QString("*** WAITING FOR %1 DOWNLOADERS TO COMPLETE ***").arg(m_vDownloaders.size()), Message::OK);
 
         if (m_vDownloaders.isEmpty()) {
             LOG_MESSAGE(QString("DONE RETRIEVING SERVER DATA ON: %1").arg(QDateTime::currentDateTime().toString()), Message::INFO);

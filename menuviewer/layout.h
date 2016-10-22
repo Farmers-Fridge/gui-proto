@@ -1,5 +1,7 @@
 #ifndef LAYOUT_H
 #define LAYOUT_H
+
+// Qt:
 #include <QList>
 
 #define ROW_MIN 1

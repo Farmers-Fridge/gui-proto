@@ -1,4 +1,5 @@
 import QtQuick 2.5
+import QtQuick.XmlListModel 2.0
 import Common 1.0
 import "../../.."
 
@@ -58,6 +59,42 @@ PageTemplate {
     function onSetMenuPageMode(mode)
     {
         _viewMode = mode
+    }
+
+    // XML version model:
+    CustomXmlListModel {
+        id: categoryModel
+        source: getCategoryModelSource()
+        query: _appData.query.categoryQuery
+
+        XmlRole { name: "categoryName"; query: "categoryName/string()"; isKey: true }
+        XmlRole { name: "icon"; query: "icon/string()"; isKey: true }
+        XmlRole { name: "header"; query: "header/string()"; isKey: true }
+
+        onStatusChanged: {
+            _appIsBusy = (status === XmlListModel.Loading)
+
+            // Load main application:
+            if (status !== XmlListModel.Loading)
+            {
+                // Error:
+                if (status === XmlListModel.Error)
+                {
+                    // Log:
+                    console.log("Can't load: " + source)
+                }
+                else
+                    // Model ready:
+                    if (status === XmlListModel.Ready)
+                    {
+                        // Set current category name:
+                        _controller.currentCategory = categoryModel.get(0).categoryName
+
+                        // Log:
+                        console.log(source + " loaded successfully")
+                    }
+            }
+        }
     }
 
     onTabClicked: {
@@ -189,6 +226,7 @@ PageTemplate {
                 anchors.top: currentVendItemName.bottom
                 anchors.topMargin: 8
                 anchors.horizontalCenter: parent.horizontalCenter
+                asynchronous: true
 
                 Item {
                     width: parent.width
@@ -199,6 +237,7 @@ PageTemplate {
                         source: "qrc:/assets/ico-addseasoned-chicken-unselected.png"
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
+                        asynchronous: true
                         states: State {
                             name: "selected"
                             PropertyChanges {
@@ -222,6 +261,7 @@ PageTemplate {
                         anchors.right: parent.right
                         anchors.rightMargin: -32
                         anchors.verticalCenter: parent.verticalCenter
+                        asynchronous: true
                         states: State {
                             name: "selected"
                             PropertyChanges {

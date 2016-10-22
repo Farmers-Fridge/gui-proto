@@ -31,10 +31,13 @@ StackView {
         running: true
         onTriggered: {
             elapsedTime += 1000
-            if ((currentItem.idleTimeOut > 0) && elapsedTime >= currentItem.idleTimeOut)
+            if ((typeof currentItem !== "undefined") && (currentItem !== null))
             {
-                currentItem.onIdleTimeOut()
-                elapsedTime = 0
+                if ((currentItem.idleTimeOut > 0) && elapsedTime >= currentItem.idleTimeOut)
+                {
+                    currentItem.onIdleTimeOut()
+                    elapsedTime = 0
+                }
             }
         }
 

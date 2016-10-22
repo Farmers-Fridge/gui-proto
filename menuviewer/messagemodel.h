@@ -1,8 +1,12 @@
 #ifndef MESSAGEMODEL_H
 #define MESSAGEMODEL_H
-#include <QAbstractListModel>
-#include "farmersfridgeclient.h"
+
+// Application:
 #include <message.h>
+#include "farmersfridgeclient.h"
+
+// Qt:
+#include <QAbstractListModel>
 
 class MessageModel : public QAbstractListModel
 {

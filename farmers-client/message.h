@@ -1,7 +1,11 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
-#include <QString>
+
+// Application:
 #include "farmers-client-global.h"
+
+// Qt:
+#include <QString>
 
 class FARMERSCLIENTVERSHARED_EXPORT Message
 {

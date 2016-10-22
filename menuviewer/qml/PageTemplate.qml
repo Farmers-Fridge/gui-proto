@@ -8,7 +8,7 @@ Page {
     property alias headerVisible: header.visible
 
     // Footer visible?
-    property alias footerVisibile: footer.visible
+    property alias footerVisible: footer.visible
 
     // Contents:
     property alias contents: contents.children
@@ -31,7 +31,7 @@ Page {
     // Home clicked:
     function onHomeClicked()
     {
-        mainApplication.state = ""
+        pageMgr.loadFirstPage()
     }
 
     // Email clicked:

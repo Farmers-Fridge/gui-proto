@@ -1,8 +1,12 @@
 #ifndef HTTPDOWNLOADER_H
 #define HTTPDOWNLOADER_H
+
+// Application:
+#include "httpworker.h"
+
+// Qt:
 #include <QObject>
 #include <QDir>
-#include "httpworker.h"
 
 class HttpDownLoader : public QObject
 {

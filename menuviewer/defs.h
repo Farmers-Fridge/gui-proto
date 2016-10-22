@@ -1,5 +1,7 @@
 #ifndef DEFS_H
 #define DEFS_H
+
+// Application:
 #include <QString>
 #include <QVariant>
 

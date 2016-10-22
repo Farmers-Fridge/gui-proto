@@ -24,6 +24,10 @@
 
     "pages": [
         {
+            "pageId": "IDLE_PAGE",
+            "url": "qrc:/qml/pages/menuviewer/idle/IdlePage.qml"
+        },
+        {
             "pageId": "MENU_PRESENTATION_PAGE",
             "url": "qrc:/qml/pages/menuviewer/menu/PresentationPage.qml"
         },
@@ -37,7 +41,8 @@
         },
         {
             "pageId": "STOCK_PRESENTATION_PAGE",
-            "url": "qrc:/qml/pages/stock/stock/StockPage.qml"
+            "url": "qrc:/qml/pages/stock/stock/StockPage.qml",
+            "stockPageIP": "166.130.61.4"
         },
         {
             "pageId": "STATS_INTRO_PAGE",

@@ -1,8 +1,13 @@
 #ifndef LAYOUTMANAGER_H
 #define LAYOUTMANAGER_H
+
+// Application:
+#include "layout.h"
+
+// Qt:
 #include <QObject>
 #include <QMap>
-#include "layout.h"
+
 #define MAX_IMAGES 9
 
 class LayoutManager : public QObject

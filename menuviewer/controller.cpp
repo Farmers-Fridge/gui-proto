@@ -1,3 +1,4 @@
+// Application:
 #include "controller.h"
 #include "utils.h"
 #include <farmersfridgeclient.h>
@@ -8,6 +9,8 @@
 #include "messagemodel.h"
 #include "layoutmanager.h"
 #include "documenthandler.h"
+
+// Qt:
 #include <QQmlContext>
 #include <QSettings>
 #include <QDebug>
@@ -16,7 +19,7 @@
 Controller::Controller(QObject *parent) : QObject(parent),
     mFarmersClient(0), mEventWatcher(0), mCartModel(0), mTableModel(0),
     mColorModel(0), mMessageModel(0), mCurrentCategory(""), mCurrentFilter(""),
-    mCurrentNetworkIP("127.0.0.1"), mOffLinePath("")
+    mCurrentNetworkIP("127.0.0.1"), mOffLinePath(""), mServerDataRetrieved(false)
 {
     // Client:
     mFarmersClient = new FarmersFridgeClient(this);
@@ -42,6 +45,9 @@ Controller::Controller(QObject *parent) : QObject(parent),
 
     // Message model:
     mMessageModel = new MessageModel(this);
+
+    // Install event filter:
+    QCoreApplication::instance()->installEventFilter(mEventWatcher);
 }
 
 // Destructor:
@@ -52,23 +58,24 @@ Controller::~Controller()
 // Data ready:
 void Controller::onDataReady()
 {
+    // Server data retrieved:
+    setServerDataRetrieved(true);
+
     // Set download report:
     setDownloadReport();
+}
+
+// Startup:
+bool Controller::startup()
+{
+    QDir appDir = Utils::appDir();
+    if (appDir.cdUp())
+        mFarmersClient->retrieveServerData();
 
     // Define offline path:
     QDir offLinePath = Utils::appDir();
     if (offLinePath.cdUp())
-    {
-        if (offLinePath.cd(SERVER_DIR))
-        {
-            mOffLinePath = offLinePath.absolutePath();
-        }
-        else
-        {
-            qDebug() << QString("Can't find %1 folder.").arg(offLinePath.absolutePath());
-            return;
-        }
-    }
+        mOffLinePath = offLinePath.absoluteFilePath(SERVER_DIR);
 
     // Read salad assets:
     readSaladAssets();
@@ -81,17 +88,6 @@ void Controller::onDataReady()
 
     // Start GUI:
     startGUI();
-
-    // Install event filter:
-    QCoreApplication::instance()->installEventFilter(mEventWatcher);
-}
-
-// Startup:
-bool Controller::startup()
-{
-    QDir appDir = Utils::appDir();
-    if (appDir.cdUp())
-        mFarmersClient->retrieveServerData();
 
     return true;
 }
@@ -373,3 +369,15 @@ void Controller::setDownloadReport()
     mMessageModel->setMessages(mFarmersClient->messages());
 }
 
+// Server data retrieved:
+bool Controller::serverDataRetrieved() const
+{
+    return mServerDataRetrieved;
+}
+
+// Set server data retrieved:
+void Controller::setServerDataRetrieved(bool retrieved)
+{
+    mServerDataRetrieved = retrieved;
+    emit serverDataRetrievedChanged();
+}

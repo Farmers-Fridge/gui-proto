@@ -1,3 +1,4 @@
+// Application:
 #include "colormodel.h"
 #include "utils.h"
 #include <cxmlnode.h>

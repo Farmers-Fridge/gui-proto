@@ -1,8 +1,12 @@
 #ifndef TABLEMODEL_H
 #define TABLEMODEL_H
+
+// Application:
+#include <cxmlnode.h>
+
+// Qt:
 #include <QAbstractListModel>
 #include <QSet>
-#include <cxmlnode.h>
 
 class TableModel : public QAbstractListModel
 {

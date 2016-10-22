@@ -5,17 +5,13 @@ Item {
     width: parent.width
     height: _settings.tabHeight
 
-    Component.onCompleted: {
-        for (var i=0; i<categoryModel.length; i++)
-            console.log(categoryModel.get(i).categoryName)
-    }
-
     property variant avStates: ["breakfast", "salads", "dishes", "drinks", "snacks"]
     state: "breakfast"
     signal tabClicked(string categoryName)
     Image {
         id: bkg
         anchors.fill: parent
+        asynchronous: true
         MouseArea {
             anchors.fill: parent
             onClicked: {

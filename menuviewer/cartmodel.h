@@ -1,6 +1,10 @@
 #ifndef CARTMODEL_H
 #define CARTMODEL_H
+
+// Application:
 #include <QAbstractListModel>
+
+// Qt:
 #include "defs.h"
 
 class CartModel : public QAbstractListModel

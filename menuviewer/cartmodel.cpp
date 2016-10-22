@@ -1,5 +1,5 @@
+// Application:
 #include "cartmodel.h"
-#include <QDebug>
 
 double CartModel::sCartTaxPercent = .09;
 

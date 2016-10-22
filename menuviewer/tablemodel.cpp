@@ -1,4 +1,7 @@
+// Application:
 #include "tablemodel.h"
+
+// Qt:
 #include <QFileInfo>
 #include <QDebug>
 
