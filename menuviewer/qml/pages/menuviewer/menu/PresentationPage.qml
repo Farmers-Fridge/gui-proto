@@ -156,6 +156,9 @@ PageTemplate {
                             gridItemView.gridViewIndex = presentationPage.gridViewIndex
                             presentationPage.gridViewIndex++
                         }
+                        Behavior on opacity {
+                            NumberAnimation {duration: 500}
+                        }
                     }
 
                     // Path item view:
@@ -168,6 +171,9 @@ PageTemplate {
                                   (_viewMode === "pathview"))
                         visible: opacity > 0
                         model: categoryListModel
+                        Behavior on opacity {
+                            NumberAnimation {duration: 500}
+                        }
                     }
                 }
             }
