@@ -15,7 +15,7 @@ Rectangle {
     // Time out:
     function onIdleTimeOut()
     {
-        //console.log("CALLING PAGE::ONIDLETIMEOUT")
+        pageMgr.loadFirstPage()
     }
 
     // Initialize page:

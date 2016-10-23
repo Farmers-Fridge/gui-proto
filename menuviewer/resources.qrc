@@ -76,5 +76,6 @@
         <file>qml/CustomGrid.qml</file>
         <file>qml/SettingsControl.qml</file>
         <file>assets/ico-sample-salad.png</file>
+        <file>qml/SignInDialog.qml</file>
     </qresource>
 </RCC>

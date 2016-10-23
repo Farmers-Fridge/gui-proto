@@ -14,7 +14,7 @@ PageTemplate {
     function onIdleTimeOut()
     {
         stopStockPagePrivate()
-        pageMgr.loadPreviousPage()
+        pageMgr.loadFirstPage()
     }
 
     // Setup page:

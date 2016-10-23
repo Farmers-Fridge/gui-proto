@@ -146,8 +146,18 @@ Item {
         pages: _appData.pages
         enabled: (privateNumericKeyPad.state === "") &&
                  (stockNumericKeyPad.state === "") &&
-                 (notepad.state === "")
+                 (notepad.state === "") &&
+                 (signInDialog.state === "")
         Component.onCompleted: initialize()
+        onCurrentPageIdChanged: {
+            if (currentPageId === "IDLE_PAGE")
+            {
+                privateNumericKeyPad.state = ""
+                stockNumericKeyPad.state = ""
+                notepad.state = ""
+                signInDialog.state = ""
+            }
+        }
     }
 
     // Numeric keypad:
@@ -167,6 +177,13 @@ Item {
     // Notepad:
     NotePad {
         id: notepad
+        anchors.centerIn: parent
+        z: _settings.zMax
+    }
+
+    // Signin dialog:
+    SignInDialog {
+        id: signInDialog
         anchors.centerIn: parent
         z: _settings.zMax
     }

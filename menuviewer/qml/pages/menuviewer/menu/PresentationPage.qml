@@ -31,12 +31,6 @@ PageTemplate {
             pageMgr.loadNextPage()
     }
 
-    // Time out:
-    function onIdleTimeOut()
-    {
-        pageMgr.loadFirstPage()
-    }
-
     // Return next page id:
     function nextPageId()
     {

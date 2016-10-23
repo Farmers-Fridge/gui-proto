@@ -37,6 +37,7 @@ Rectangle {
             pixelSize: 24
             textColor: _colors.ffColor3
             label: qsTr("SIGN-IN")
+            onClicked: signInDialog.state = "on"
         }
 
         // Register:

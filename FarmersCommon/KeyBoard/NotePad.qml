@@ -267,7 +267,6 @@ Rectangle {
         }
     }
 
-
     // On state:
     states: State {
         name: "on"
