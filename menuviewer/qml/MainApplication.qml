@@ -147,7 +147,8 @@ Item {
         enabled: (privateNumericKeyPad.state === "") &&
                  (stockNumericKeyPad.state === "") &&
                  (notepad.state === "") &&
-                 (signInDialog.state === "")
+                 (signInDialog.state === "") &&
+                 (registerDialog.state === "")
         Component.onCompleted: initialize()
         onCurrentPageIdChanged: {
             if (currentPageId === "IDLE_PAGE")
@@ -156,6 +157,7 @@ Item {
                 stockNumericKeyPad.state = ""
                 notepad.state = ""
                 signInDialog.state = ""
+                registerDialog.state = ""
             }
         }
     }
@@ -184,6 +186,13 @@ Item {
     // Signin dialog:
     SignInDialog {
         id: signInDialog
+        anchors.centerIn: parent
+        z: _settings.zMax
+    }
+
+    // Register dialog:
+    RegisterDialog {
+        id: registerDialog
         anchors.centerIn: parent
         z: _settings.zMax
     }

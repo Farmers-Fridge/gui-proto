@@ -51,6 +51,7 @@ Rectangle {
             pixelSize: 24
             textColor: _colors.ffColor3
             label: qsTr("REGISTER")
+            onClicked: registerDialog.state = "on"
         }
     }
 

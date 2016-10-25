@@ -77,5 +77,10 @@
         <file>qml/SettingsControl.qml</file>
         <file>assets/ico-sample-salad.png</file>
         <file>qml/SignInDialog.qml</file>
+        <file>qml/MenuPageTemplate.qml</file>
+        <file>qml/RegisterDialog.qml</file>
+        <file>qml/SimplePageTemplate.qml</file>
+        <file>qml/StandardInput.qml</file>
+        <file>qml/UserDialogTemplate.qml</file>
     </qresource>
 </RCC>
