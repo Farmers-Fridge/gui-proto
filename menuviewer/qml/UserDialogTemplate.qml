@@ -6,7 +6,7 @@ DialogTemplate {
     id: userDialogTemplate
     property alias model: userListView.model
     property int blockSize: 96
-    width: 512
+    width: 544
     implicitHeight: (model.count+1)*blockSize
 
     // User area:

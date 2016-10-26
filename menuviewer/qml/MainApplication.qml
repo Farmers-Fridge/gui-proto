@@ -139,7 +139,7 @@ Item {
         _networkIP: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
     }
 
-    // Page mgr:
+   // Page mgr:
     PageMgr {
         id: pageMgr
         anchors.fill: parent
@@ -148,7 +148,8 @@ Item {
                  (stockNumericKeyPad.state === "") &&
                  (notepad.state === "") &&
                  (signInDialog.state === "") &&
-                 (registerDialog.state === "")
+                 (registerDialog.state === "") &&
+                 (cartSummaryDialog.state === "")
         Component.onCompleted: initialize()
         onCurrentPageIdChanged: {
             if (currentPageId === "IDLE_PAGE")
@@ -158,6 +159,7 @@ Item {
                 notepad.state = ""
                 signInDialog.state = ""
                 registerDialog.state = ""
+                cartSummaryDialog.state = ""
             }
         }
     }
@@ -193,6 +195,13 @@ Item {
     // Register dialog:
     RegisterDialog {
         id: registerDialog
+        anchors.centerIn: parent
+        z: _settings.zMax
+    }
+
+    // Cart summary dialog:
+    CartSummaryDialog {
+        id: cartSummaryDialog
         anchors.centerIn: parent
         z: _settings.zMax
     }

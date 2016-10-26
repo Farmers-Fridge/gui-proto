@@ -82,5 +82,6 @@
         <file>qml/SimplePageTemplate.qml</file>
         <file>qml/StandardInput.qml</file>
         <file>qml/UserDialogTemplate.qml</file>
+        <file>qml/CartSummaryDialog.qml</file>
     </qresource>
 </RCC>

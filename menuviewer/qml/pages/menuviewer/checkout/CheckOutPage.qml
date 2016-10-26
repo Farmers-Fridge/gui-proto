@@ -63,6 +63,12 @@ PageTemplate {
         pageMgr.loadPreviousPage()
     }
 
+    // Cart clicked:
+    function onCartClicked()
+    {
+        cartSummaryDialog.state = "on"
+    }
+
     // Contents:
     contents: Item {
         anchors.fill: parent
