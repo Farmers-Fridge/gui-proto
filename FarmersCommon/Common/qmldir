@@ -19,4 +19,5 @@ DigitalClock 1.0 DigitalClock.qml
 ToggleButton 1.0 ToggleButton.qml
 LargeButton 1.0 LargeButton.qml
 CustomTableView 1.0 CustomTableView.qml
+DialogTemplate 1.0 DialogTemplate.qml
 Utils 1.0 Utils.js
