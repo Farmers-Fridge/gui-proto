@@ -109,5 +109,6 @@ void ColorModel::useHardCodedSettings()
     mColors["ffColor17"] = "#C8DBC7";
     mColors["ffColor18"] = "#E1D9C6";
     mColors["ffColor19"] = "#BABBAB";
+    mColors["ffColor20"] = "#55575B";
     endResetModel();
 }

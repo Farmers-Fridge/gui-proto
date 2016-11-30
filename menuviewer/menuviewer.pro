@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui qml quick quickwidgets xml network
-INCLUDEPATH += $$PWD/../farmers-utils ../farmers-client ../HttpUploader
+INCLUDEPATH += $$PWD/../farmers-utils ../farmers-client
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
