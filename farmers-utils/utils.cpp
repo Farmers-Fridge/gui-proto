@@ -123,3 +123,9 @@ bool Utils::validateEmailAddress(const QString &emailAddress)
     QRegExp regex("^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$");
     return regex.exactMatch(emailAddress);
 }
+
+// Get key:
+QString Utils::getKey(const QString &input)
+{
+    return input.simplified().toLower();
+}

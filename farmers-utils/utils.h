@@ -43,6 +43,9 @@ public:
 
     // Validate email address:
     static bool validateEmailAddress(const QString &emailAddress);
+
+    // Get key:
+    static QString getKey(const QString &input);
 };
 
 #endif // UTILS_H

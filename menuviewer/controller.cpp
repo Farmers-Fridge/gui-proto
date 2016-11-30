@@ -9,6 +9,7 @@
 #include "messagemodel.h"
 #include "layoutmanager.h"
 #include "documenthandler.h"
+#include <httppostclient.h>
 
 // Qt:
 #include <QQmlContext>
@@ -108,6 +109,7 @@ void Controller::registerTypes()
 {
     qmlRegisterType<DocumentHandler>("Components", 1, 0, "DocumentHandler");
     qmlRegisterType<MessageModel>("Components", 1, 0, "MessageModel");
+    qmlRegisterType<HttpPostClient>("Components", 1, 0, "HttpPostClient");
 }
 
 // Set context properties:

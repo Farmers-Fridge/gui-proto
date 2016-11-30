@@ -4,14 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui qml quick quickwidgets xml
-INCLUDEPATH += $$PWD/../farmers-utils ../farmers-client
+QT       += core gui qml quick quickwidgets xml network
+INCLUDEPATH += $$PWD/../farmers-utils ../farmers-client ../HttpUploader
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app
-
-FORMS    +=
 
 CONFIG(debug, debug|release) {
     LIBS += -L$$PWD/../bin/ -lfarmers-utilsd -lfarmers-clientd
