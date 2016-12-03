@@ -4,7 +4,7 @@ import Common 1.0
 Rectangle {
     id: header
     color: _colors.ffColor2
-    signal tabClicked()
+    signal tabClicked(string categoryName)
 
     // Part1:
     Rectangle {
@@ -60,11 +60,7 @@ Rectangle {
         id: part2
         width: parent.width
         anchors.bottom: parent.bottom
-        onTabClicked: {
-            _controller.currentCategory = categoryName
-            header.tabClicked()
-        }
-
+        onTabClicked: header.tabClicked(categoryName)
         Item {
             width: parent.width
             height: _settings.tabHeight - _settings.tabClickableAreaHeight

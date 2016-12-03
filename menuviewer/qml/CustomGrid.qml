@@ -10,14 +10,17 @@ Rectangle {
     signal gridImageClicked(int selectedIndex)
     anchors.fill: parent
 
-    // Model changed:
-    function onModelReady()
+    // Update layout:
+    function updateLayout()
     {
         var nImages = categoryListModel.count
         if (nImages > 0) {
             layout = _layoutMgr.getLayoutFilledCells(nImages-1)
             gridLoader.sourceComponent = undefined
             gridLoader.sourceComponent = gridComponent
+
+            // Set current menu item:
+            _currentMenuItem = categoryListModel.get(1).vendItemName
         }
     }
 
@@ -90,8 +93,10 @@ Rectangle {
                                 MouseArea {
                                     anchors.fill: parent
                                     onClicked: {
+                                        // Set current menu item:
+                                        _currentMenuItem = getVendItemName(index)
+
                                         // Set current item:
-                                        currentMenuItem = categoryListModel.get(layoutIndex(index))
                                         gridImageClicked(layoutIndex(index)-1)
                                     }
                                 }
@@ -112,38 +117,6 @@ Rectangle {
                                     visible: originalImage.status === Image.Ready
                                 }
                             }
-                        }
-                    }
-
-                    // Footer:
-                    Item {
-                        id: footer
-                        visible: false
-                        anchors.bottom: parent.bottom
-                        width: parent.width
-                        height: 0.33*parent.height
-
-                        // Vend item name:
-                        StandardText {
-                            id: ventItemNameText
-                            anchors.top: parent.top
-                            anchors.topMargin: 10
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            width: parent.width*85/100
-                            wrapMode: Text.WordWrap
-                            text: getVendItemName(index)
-                            font.italic: true
-                            color: _colors.ffColor8
-                        }
-
-                        // Item price:
-                        StandardText {
-                            id: priceText
-                            anchors.top: ventItemNameText.bottom
-                            anchors.bottomMargin: 10
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: getPrice(index)
-                            color: _colors.ffColor9
                         }
                     }
                 }

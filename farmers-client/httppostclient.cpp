@@ -9,7 +9,7 @@
 // Constructor:
 HttpPostClient::HttpPostClient(QObject *parent) : QObject(parent),
     m_sUrl("127.0.0.1"), m_sContentType("application/json"),
-    m_sQuery(""), m_pNAM(NULL)
+    m_sQuery(""), m_sReply(""), m_pNAM(NULL)
 {
     m_pNAM = new QNetworkAccessManager(this);
     connect(m_pNAM, &QNetworkAccessManager::finished,
@@ -55,6 +55,19 @@ void HttpPostClient::setQuery(const QString &sQuery)
     emit queryChanged();
 }
 
+// Return reply:
+const QString &HttpPostClient::reply() const
+{
+    return m_sReply;
+}
+
+// Set reply:
+void HttpPostClient::setReply(const QString &sReply)
+{
+    m_sReply = sReply;
+    emit replyChanged();
+}
+
 // Post:
 void HttpPostClient::post()
 {
@@ -67,13 +80,12 @@ void HttpPostClient::post()
     // Set header:
     request.setHeader(QNetworkRequest::ContentTypeHeader, m_sContentType);
 
-    QByteArray data = m_sQuery.simplified().toLatin1();
-    qDebug() << "data = " << QString::fromUtf8(data.data(), data.size());
-    m_pNAM->post(request, data);
+    // Post:
+    m_pNAM->post(request, m_sQuery.simplified().toLatin1());
 }
 
 // Reply finished:
 void HttpPostClient::onReplyFinished(QNetworkReply *pReply)
 {
-    qDebug() << "ICI: " << pReply->readAll();
+    setReply(pReply->readAll());
 }

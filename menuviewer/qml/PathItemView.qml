@@ -40,6 +40,12 @@ PathView {
         onLoaded: pathView.path = item
     }
 
+    // Current index changed:
+    onCurrentIndexChanged: {
+        visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%model.count
+        _currentMenuItem = categoryListModel.get(visibleIndex).vendItemName
+    }
+
     // Delegate:
     delegate: FlipableNutritionItem {
         id: imageDelegate
@@ -58,13 +64,9 @@ PathView {
                 // Front image ready:
                 if (frontImageReady)
                 {
-                    // This is current category:
-                    if (targetCategory === _controller.currentCategory)
-                    {
-                        visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%pathView.model.count
-                        if (index === visibleIndex)
-                            imageDelegate.flip()
-                    }
+                    visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%pathView.model.count
+                    if (index === visibleIndex)
+                        imageDelegate.flip()
                 }
             }
         }
@@ -108,58 +110,38 @@ PathView {
     // Navigate left:
     function onNavigateLeft()
     {
-        if (targetCategory === _controller.currentCategory)
-        {
-            var incr = 1
-            var currentIndex = pathView.currentIndex
-            currentIndex -= incr
-            pathView.gotoIndex(currentIndex)
+        var incr = 1
+        var currentIndex = pathView.currentIndex
+        currentIndex -= incr
+        pathView.gotoIndex(currentIndex)
 
-            // Set visible item:
-            visibleIndex = pathView.currentIndex%model.count
-
-            // Set current menu item:
-            currentMenuItem = categoryListModel.get(visibleIndex)
-        }
+        // Set visible item:
+        visibleIndex = pathView.currentIndex%model.count
     }
 
     // Navigate right:
     function onNavigateRight()
     {
-        if (targetCategory === _controller.currentCategory)
-        {
-            var incr = 1
-            var currentIndex = pathView.currentIndex
-            currentIndex += incr
-            pathView.gotoIndex(currentIndex)
+        var incr = 1
+        var currentIndex = pathView.currentIndex
+        currentIndex += incr
+        pathView.gotoIndex(currentIndex)
 
-            // Set visible index:
-            visibleIndex = (pathView.currentIndex+pathView.pathItemCount)%model.count
-
-            // Set current menu item:
-            currentMenuItem = categoryListModel.get(visibleIndex)
-        }
+        // Set visible index:
+        visibleIndex = (pathView.currentIndex+pathView.pathItemCount)%model.count
     }
 
     // Add current item to cart:
     function onAddCurrentItemToCart()
     {
-        if (targetCategory === _controller.currentCategory)
+        // Run add to cart command:
+        console.log("ICI TOTO: ", pathView, model)
+        visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%model.count
+        if (visibleIndex >= 0)
         {
-            // Run add to cart command:
-            visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%model.count
-            if (visibleIndex >= 0)
-            {
-                _addToCartCommand.currentItem = categoryListModel.get(visibleIndex)
-                _addToCartCommand.execute()
-            }
+            _addToCartCommand.currentItem = categoryListModel.get(visibleIndex)
+            _addToCartCommand.execute()
         }
-    }
-
-    // Model ready:
-    function onModelReady()
-    {
-        currentMenuItem = categoryListModel.get(1)
     }
 
     Component.onCompleted: {

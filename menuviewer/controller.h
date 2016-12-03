@@ -68,12 +68,6 @@ public:
     // From local file:
     Q_INVOKABLE QString fromLocalFile(const QString &filePath);
 
-    // Set current menu item for category:
-    Q_INVOKABLE void setCurrentMenuItemForCategory(const QVariant &menuItem);
-
-    // Retur current menu item for category:
-    Q_INVOKABLE QVariant getCurrentMenuItemForCategory(const QString &category);
-
     // Save settings:
     Q_INVOKABLE void saveSettings();
 
@@ -182,9 +176,6 @@ private:
     // Offline path:
     QString mOffLinePath;
 
-    // Current item for category:
-    QMap<QString, QVariant> mCurrentItemForCategory;
-
     // Server data retrieved:
     bool mServerDataRetrieved;
 
@@ -213,9 +204,6 @@ signals:
 
     // Off line path changed:
     void offLinePathChanged();
-
-    // Current menu item for category changed:
-    void currentMenuItemForCategoryChanged();
 
     // Server data retrieved:
     void serverDataRetrievedChanged();

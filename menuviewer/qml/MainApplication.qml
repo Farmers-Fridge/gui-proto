@@ -2,6 +2,7 @@ import QtQuick 2.5
 import Common 1.0
 import KeyBoard 1.0
 import Commands 1.0
+import Components 1.0
 import "pages/menuviewer/idle"
 
 Item {
@@ -103,8 +104,20 @@ Item {
     // Get image source:
     function getImageSource(targetCategory, imageUrl, isNutrition)
     {
-        var extra = isNutrition ? "/nutrition/" : "/"
-        return _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + extra + _controller.fileBaseName(imageUrl))
+        if (targetCategory.length > 0)
+        {
+            if (isNutrition) {
+                console.log("GETTING IMAGE SOURCE FOR: ", targetCategory, imageUrl, isNutrition)
+            }
+            var extra = isNutrition ? "/nutrition/" : "/"
+            return _controller.fromLocalFile(_controller.offLinePath + "/" + targetCategory + extra + _controller.fileBaseName(imageUrl))
+        }
+        return ""
+    }
+
+    // POST client:
+    HttpPostClient {
+        id: _httpPostClient
     }
 
     // Add to cart command:
@@ -126,7 +139,8 @@ Item {
     // Restock from tablet command:
     RestockFromTabletCommand {
         id: _restockFromTabletCommand
-        _networkIP: _controller.currentNetworkIP
+        _networkIP: getPageSettingsById("STOCK_PRESENTATION_PAGE").stockPageIP
+        _contentType: "application/json"
     }
 
     // Take coupon command:
@@ -141,7 +155,7 @@ Item {
         _networkIP: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
     }
 
-   // Page mgr:
+    // Page mgr:
     PageMgr {
         id: pageMgr
         anchors.fill: parent

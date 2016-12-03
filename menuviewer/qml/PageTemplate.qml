@@ -2,7 +2,7 @@ import QtQuick 2.5
 import Common 1.0
 
 Page {
-    id: menuPageTemplate
+    id: pageTemplate
 
     // Header visible?
     property alias headerVisible: header.visible
@@ -26,7 +26,7 @@ Page {
     property alias footerRightTextVisible: footer.footerRightTextVisible
 
     // Handle tab clicked:
-    signal tabClicked()
+    signal tabClicked(string categoryName)
 
     // Home clicked:
     function onHomeClicked()
@@ -64,7 +64,7 @@ Page {
         width: parent.width
         height: _settings.headerHeight
         anchors.top: parent.top
-        onTabClicked: menuPageTemplate.tabClicked()
+        onTabClicked: pageTemplate.tabClicked(categoryName)
     }
 
     // Contents:
@@ -90,10 +90,10 @@ Page {
         pigVisible: (pageMgr.currentPageId !== "MENU_PRESENTATION_PAGE") ||
             ((pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") && (_viewMode === "pathview"))
         bottomAreaSource: "qrc:/assets/ico-primary-darkbar.png"
-        onHomeClicked: menuPageTemplate.onHomeClicked()
-        onEmailClicked: menuPageTemplate.onEmailClicked()
-        onCouponClicked: menuPageTemplate.onCouponClicked()
-        onPigClicked: menuPageTemplate.onPigClicked()
-        onCartClicked: menuPageTemplate.onCartClicked()
+        onHomeClicked: pageTemplate.onHomeClicked()
+        onEmailClicked: pageTemplate.onEmailClicked()
+        onCouponClicked: pageTemplate.onCouponClicked()
+        onPigClicked: pageTemplate.onPigClicked()
+        onCartClicked: pageTemplate.onCartClicked()
     }
 }

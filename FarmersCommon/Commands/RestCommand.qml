@@ -8,6 +8,9 @@ Command {
     // IP address:
     property string _networkIP: ""
 
+    // Content type:
+    property string _contentType: "application/x-www-form-urlencoded"
+
     // Post:
     function post(params) {
         var http = new XMLHttpRequest()
@@ -15,7 +18,7 @@ Command {
         http.open("POST", url, true);
 
         // Send the proper header information along with the request
-        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.setRequestHeader("Content-type", _contentType);
         http.setRequestHeader("Content-length", params.length);
         http.setRequestHeader("Connection", "close");
 

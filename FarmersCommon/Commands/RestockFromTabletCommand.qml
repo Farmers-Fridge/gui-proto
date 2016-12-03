@@ -3,11 +3,12 @@ import ".."
 
 RestCommand {
     _restOrder: "restockFromTablet"
- 
+    property string modifiedStockItems: ""
+
     // Execute:
     function execute()
     {
-        var params = ""
+        var params = modifiedStockItems
         console.log("RUNNING COMMAND: ", _restOrder)
         post(params)
     }

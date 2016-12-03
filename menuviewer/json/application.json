@@ -42,7 +42,7 @@
         {
             "pageId": "STOCK_PRESENTATION_PAGE",
             "url": "qrc:/qml/pages/stock/stock/StockPage.qml",
-            "stockPageIP": "166.130.61.4"
+            "stockPageIP": "52.0.49.170:9000"
         },
         {
             "pageId": "STATS_INTRO_PAGE",

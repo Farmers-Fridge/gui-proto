@@ -65,8 +65,7 @@ GridView {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                // Set current item:
-                                currentMenuItem = categoryListModel.get(index)
+                                // Notify:
                                 gridImageClicked(index-1)
                             }
                         }

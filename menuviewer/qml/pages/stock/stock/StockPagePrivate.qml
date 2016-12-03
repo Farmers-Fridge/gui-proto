@@ -3,9 +3,13 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.XmlListModel 2.0
 import Common 1.0
+import Components 1.0
 
 Page {
     id: stockPagePrivate
+
+    // Modified stock item list:
+    property var modifiedStockItemList: []
 
     // OK clicked on notepad:
     function onOKClicked(enteredText)
@@ -44,7 +48,31 @@ Page {
             Button {
                 id: stock
                 text: qsTr("STOCK")
-                onClicked: _restockFromTabletCommand.execute()
+                // TO DO
+                // onClicked: _restockFromTabletCommand.execute()
+                // TO DO
+                onClicked: {
+                    // Stringify list of modified stock items:
+                    var modifiedStockItemListStr = JSON.stringify(modifiedStockItemList)
+
+                    console.log("ICI: ", modifiedStockItemListStr)
+
+                    // Pass string of modified stock items:
+                    _restockFromTabletCommand.modifiedStockItems = modifiedStockItemListStr
+
+                    // Execute:
+                    _restockFromTabletCommand.execute()
+
+                    /*
+                    // Setup http post client:
+                    _httpPostClient.url = "http://52.0.49.170:9000/post/restockFromTablet"
+                    _httpPostClient.contentType = "application/json"
+                    _httpPostClient.query = modifiedStockItemList
+
+                    // Post:
+                    _httpPostClient.post()
+                    */
+                }
             }
             Button {
                 id: clearAll

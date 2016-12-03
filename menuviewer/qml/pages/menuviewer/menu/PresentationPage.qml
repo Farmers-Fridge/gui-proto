@@ -14,6 +14,9 @@ PageTemplate {
     signal selectedAddOnsChanged()
     onSelectedAddOnsChanged: console.log("SELECTED ADDONS = ", currentAddOns)
 
+    // Current menu item by category:
+    property string _currentMenuItem: ""
+
     // Footer right text:
     footerRightText: qsTr("Subtotal $") + _cartModel.cartSubTotal
     footerRightTextVisible: _cartModel.cartSubTotal > 0
@@ -78,21 +81,27 @@ PageTemplate {
                     console.log("Can't load: " + source)
                 }
                 else
-                    // Model ready:
-                    if (status === XmlListModel.Ready)
-                    {
-                        // Set current category name:
-                        _controller.currentCategory = categoryModel.get(0).categoryName
+                // Model ready:
+                if (status === XmlListModel.Ready)
+                {
+                    // Set current category name:
+                    _controller.currentCategory = categoryModel.get(0).categoryName
 
-                        // Log:
-                        console.log(source + " loaded successfully")
-                    }
+                    // Load first view:
+                    viewLoader.sourceComponent = viewComponent
+
+                    // Log:
+                    console.log(source + " loaded successfully")
+                }
             }
         }
     }
 
+    // Tab clicked:
     onTabClicked: {
-        _controller.currentMenuItemForCategoryChanged();
+        viewLoader.sourceComponent = undefined
+        _controller.currentCategory = categoryName
+        viewLoader.sourceComponent = viewComponent
     }
 
     // Top contents:
@@ -106,70 +115,15 @@ PageTemplate {
             anchors.top: parent.top
             anchors.bottom: bottomArea.visible ? bottomArea.top : parent.bottom
 
-            // View repeater:
-            Repeater {
-                id: repeater
+            // View component:
+            ViewComponent {
+                id: viewComponent
+            }
+
+            // Loader:
+            Loader {
+                id: viewLoader
                 anchors.fill: parent
-                model: categoryModel.count
-
-                Item {
-                    anchors.fill: parent
-
-                    // Current menu item by category:
-                    property variant currentMenuItem
-
-                    // Set current item for category:
-                    onCurrentMenuItemChanged: {
-                        _controller.setCurrentMenuItemForCategory(currentMenuItem)
-                    }
-
-                    // Category list model:
-                    CategoryListModel {
-                        id: categoryListModel
-                        targetCategory: categoryModel.get(gridItemView.gridViewIndex).categoryName
-                        Component.onCompleted: {
-                            categoryListModel.modelReady.connect(gridItemView.onModelReady)
-                            categoryListModel.modelReady.connect(pathItemView.onModelReady)
-                        }
-                    }
-
-                    // Custom grid:
-                    CustomGrid {
-                        id: gridItemView
-                        anchors.fill: parent
-                        targetCategory: categoryListModel.targetCategory
-                        opacity: ((_controller.currentCategory === categoryListModel.targetCategory) &&
-                                  (_viewMode === "gridview")) ? 1 : 0
-                        visible: opacity > 0
-                        onGridImageClicked: {
-                            mainApplication.loadPathView()
-                            pathItemView.positionViewAtIndex(selectedIndex, PathView.Visible)
-                        }
-                        Component.onCompleted: {
-                            _layoutMgr.currentLayoutChanged.connect(gridItemView.onModelReady)
-                            gridItemView.gridViewIndex = presentationPage.gridViewIndex
-                            presentationPage.gridViewIndex++
-                        }
-                        Behavior on opacity {
-                            NumberAnimation {duration: 500}
-                        }
-                    }
-
-                    // Path item view:
-                    PathItemView {
-                        id: pathItemView
-                        targetCategory: categoryListModel.targetCategory
-                        anchors.fill: parent
-                        interactive: false
-                        opacity: ((_controller.currentCategory === categoryListModel.targetCategory) &&
-                                  (_viewMode === "pathview"))
-                        visible: opacity > 0
-                        model: categoryListModel
-                        Behavior on opacity {
-                            NumberAnimation {duration: 500}
-                        }
-                    }
-                }
             }
         }
 
@@ -206,18 +160,7 @@ PageTemplate {
                 anchors.topMargin: 8
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.italic: true
-
-                // Current menu item for category changed:
-                function onCurrentMenuItemForCategoryChanged()
-                {
-                    var currentMenuItem = _controller.getCurrentMenuItemForCategory(_controller.currentCategory)
-                    if (currentMenuItem)
-                        currentVendItemName.text = currentMenuItem.vendItemName
-                }
-
-                Component.onCompleted: {
-                    _controller.currentMenuItemForCategoryChanged.connect(onCurrentMenuItemForCategoryChanged)
-                }
+                text: _currentMenuItem
             }
 
             // Image place holder:
@@ -290,3 +233,4 @@ PageTemplate {
         mainApplication.setMenuPageMode.connect(onSetMenuPageMode)
     }
 }
+

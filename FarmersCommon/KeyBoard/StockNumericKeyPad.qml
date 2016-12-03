@@ -15,6 +15,7 @@ Rectangle {
 
     // Invoker:
     property variant invoker
+    onInvokerChanged: console.log("invoker = ", invoker)
 
     // Theo par:
     property int theoPar: 0
@@ -166,8 +167,7 @@ Rectangle {
                 onClicked: {
                     if (keyId >= 10)
                     {
-                        // OK:
-                        if (keyId === 10)
+                        if (((typeof invoker !== "undefined") && (invoker !== null)) && (keyId === 10))
                             invoker.onOKClicked(enteredText)
                         else
                         if (keyId === 11) {

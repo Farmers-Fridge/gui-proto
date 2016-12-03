@@ -1,7 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Window 2.2
 import Common 1.0
-import Components 1.0
 
 Window {
     id: mainWindow
@@ -9,10 +8,6 @@ Window {
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
     visible: true
-
-    property var query: [
-        {"row": 1, "col": 1, "par": 1}
-    ]
 
     // Application data:
     property variant _appData
@@ -65,17 +60,4 @@ Window {
             id: mainApplication
         }
     }
-
-    HttpPostClient {
-        id: httpPostClient
-        url: "http://52.0.49.170:9000/post/restockFromTablet"
-        contentType: "application/json"
-        query: JSON.stringify(mainWindow.query)
-
-    }
-
-    Component.onCompleted: {
-        httpPostClient.post()
-    }
-
 }

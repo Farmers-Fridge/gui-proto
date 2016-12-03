@@ -12,6 +12,8 @@ Item {
     property bool highlighted: false
     focus: true
 
+    Component.onDestruction: console.log("************ DESTROYED!")
+
     // Ok clicked:
     function onOKClicked(keyId)
     {
@@ -46,6 +48,9 @@ Item {
 
             // Execute:
             _updateRestockExceptionCommand.execute()
+
+            // TO DO UPDATE LIST OF MODIFIED STOCK ITEMS
+            modifiedStockItemList.push({row: rowNumber, col: columnNumber, par: userActualPar})
         }
 
         stockNumericKeyPad.state = ""
@@ -149,7 +154,7 @@ Item {
     // Current stock item changed:
     function onCurrentStockItemChanged()
     {
-        // Don't use ==!
+        // Don't use !==
         if (stockItem)
             highlighted = ((_currentStockItemRow == rowNumber) && (_currentStockItemCol == columnNumber))
     }

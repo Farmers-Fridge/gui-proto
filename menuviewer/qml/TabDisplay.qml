@@ -4,7 +4,7 @@ Item {
     id: root
     width: parent.width
     height: _settings.tabHeight
-
+    property int currentTabIndex: -1
     property variant avStates: ["breakfast", "salads", "dishes", "drinks", "snacks"]
     state: "breakfast"
     signal tabClicked(string categoryName)
@@ -12,6 +12,11 @@ Item {
         id: bkg
         anchors.fill: parent
         asynchronous: true
+        onStatusChanged: {
+            if (status === Image.Ready)
+                tabClicked(avStates[currentTabIndex])
+        }
+
         MouseArea {
             anchors.fill: parent
             onClicked: {
@@ -19,8 +24,11 @@ Item {
                 {
                     var tabWidth = root.width/avStates.length
                     var tabIndex = Math.floor(mouseX/tabWidth)
-                    root.state = avStates[tabIndex]
-                    tabClicked(avStates[tabIndex])
+                    if (tabIndex !== currentTabIndex)
+                    {
+                        root.state = avStates[tabIndex]
+                        currentTabIndex = tabIndex
+                    }
                 }
             }
         }

@@ -66,7 +66,7 @@ ListView {
                     anchors.left: imageLoadingBkg.right
                     anchors.right: parent.right
                     height: parent.height
-                    color: cartView.rowColors[index%3]
+                    color: rowColors[index%3]
 
                     StandardText {
                         width: parent.width
