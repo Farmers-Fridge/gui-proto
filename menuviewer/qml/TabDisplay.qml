@@ -26,8 +26,8 @@ Item {
                     var tabIndex = Math.floor(mouseX/tabWidth)
                     if (tabIndex !== currentTabIndex)
                     {
-                        root.state = avStates[tabIndex]
                         currentTabIndex = tabIndex
+                        root.state = avStates[tabIndex]
                     }
                 }
             }
