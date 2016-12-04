@@ -135,7 +135,6 @@ PathView {
     function onAddCurrentItemToCart()
     {
         // Run add to cart command:
-        console.log("ICI TOTO: ", pathView, model)
         visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%model.count
         if (visibleIndex >= 0)
         {

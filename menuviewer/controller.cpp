@@ -186,7 +186,6 @@ const QString &Controller::currentCategory() const
 void Controller::setCurrentCategory(const QString &categoryName)
 {
     mCurrentCategory = categoryName;
-    qDebug() << "********************************************************** CURRENT CATEGORY = " << categoryName;
     emit currentCategoryChanged();
 }
 

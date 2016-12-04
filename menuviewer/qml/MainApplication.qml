@@ -78,8 +78,6 @@ Item {
         // User entered stock code:
         if (enteredText === _appData.appCodes.stockCode)
         {
-            getPageSettingsById("STATS_SYSTEM_HEALTH_PAGE")
-
             mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.serverInfo.urlForStock, "/hosts.xml")
             pageMgr.loadPage("STOCK_NETWORK_PAGE")
             mainApplication.state = "active"
