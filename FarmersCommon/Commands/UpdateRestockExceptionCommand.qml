@@ -2,8 +2,7 @@ import QtQuick 2.5
 import ".."
 
 RestCommand {
-    _restOrder: "updateRestockExceptions"
-    _networkIP: _controller.currentNetworkIP
+    _restOrder: "updateRestockException"
 
     property string row: ""
     property string column: ""

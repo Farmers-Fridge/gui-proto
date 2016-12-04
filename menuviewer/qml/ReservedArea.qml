@@ -6,6 +6,7 @@ Item {
     signal reservedAreaClicked()
     z: _settings.zMax
 
+    // Locker:
     ImageButton {
         height: parent.height-32
         anchors.centerIn: parent

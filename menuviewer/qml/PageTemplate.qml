@@ -86,6 +86,7 @@ Page {
         cartVisible: ((pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") || (pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"))
         cartOverLayState: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE" ? "requestPay" : "cartCount"
         emailVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
+        tractorVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
         couponVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
         pigVisible: (pageMgr.currentPageId !== "MENU_PRESENTATION_PAGE") ||
             ((pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") && (_viewMode === "pathview"))

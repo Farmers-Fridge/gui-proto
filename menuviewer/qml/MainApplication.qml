@@ -2,7 +2,6 @@ import QtQuick 2.5
 import Common 1.0
 import KeyBoard 1.0
 import Commands 1.0
-import Components 1.0
 import "pages/menuviewer/idle"
 
 Item {
@@ -113,11 +112,6 @@ Item {
         return ""
     }
 
-    // POST client:
-    HttpPostClient {
-        id: _httpPostClient
-    }
-
     // Add to cart command:
     AddToCartCommand {
         id: _addToCartCommand
@@ -127,6 +121,7 @@ Item {
     // Update restock exception command:
     UpdateRestockExceptionCommand {
         id: _updateRestockExceptionCommand
+        _url: getPageSettingsById("STOCK_PRESENTATION_PAGE").stockPageIP
     }
 
     // Clear all command:
@@ -137,20 +132,27 @@ Item {
     // Restock from tablet command:
     RestockFromTabletCommand {
         id: _restockFromTabletCommand
-        _networkIP: getPageSettingsById("STOCK_PRESENTATION_PAGE").stockPageIP
+        _url: getPageSettingsById("STOCK_PRESENTATION_PAGE").stockPageIP
         _contentType: "application/json"
     }
 
     // Take coupon command:
     TakeCouponCommand {
         id: _takeCouponCodeCommand
-        _networkIP: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
+        _url: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
     }
 
     // Take receipt email address command:
     TakeReceiptEmailAddressCommand {
         id: _takeReceiptEmailAddressCommand
-        _networkIP: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
+        _url: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
+    }
+
+    // Phone command:
+    PhoneCommand {
+        id: _phoneCommand
+        // TO DO: is this correct?
+        _url: _appData.serverInfo.ipForTakeCouponAndTakeReceiptEmailAddress
     }
 
     // Page mgr:

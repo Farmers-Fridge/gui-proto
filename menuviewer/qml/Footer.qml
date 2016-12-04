@@ -15,6 +15,7 @@ Rectangle {
     property alias footerRightTextVisible: footerRightText.visible
     property alias footerCentralText: footerCentralText.text
     property alias footerCentralTextVisible: footerCentralText.visible
+    property alias tractorVisible: tractorButton.visible
     signal homeClicked()
     signal emailClicked()
     signal couponClicked()
@@ -144,6 +145,15 @@ Rectangle {
                 anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
                 visible: false
+            }
+
+            // Tractor:
+            ImageButton {
+                id: tractorButton
+                height: parent.height-8
+                anchors.centerIn: parent
+                source: "qrc:/assets/ico-tractor.png"
+                onClicked: reservedAreaClicked()
             }
 
             // Reserved area:

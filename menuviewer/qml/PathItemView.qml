@@ -135,11 +135,16 @@ PathView {
     function onAddCurrentItemToCart()
     {
         // Run add to cart command:
-        visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%model.count
-        if (visibleIndex >= 0)
+        var pathViewValid = (typeof pathView !== "undefined") && (pathView !== null)
+        var modelValid = (typeof model !== "undefined") && (model !== null)
+        if (pathViewValid && modelValid)
         {
-            _addToCartCommand.currentItem = categoryListModel.get(visibleIndex)
-            _addToCartCommand.execute()
+            visibleIndex = (pathView.currentIndex+pathView.pathItemCount-1)%model.count
+            if (visibleIndex >= 0)
+            {
+                _addToCartCommand.currentItem = categoryListModel.get(visibleIndex)
+                _addToCartCommand.execute()
+            }
         }
     }
 

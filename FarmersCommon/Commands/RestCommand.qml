@@ -6,7 +6,7 @@ Command {
     property string _restOrder: ""
 
     // IP address:
-    property string _networkIP: ""
+    property string _url: ""
 
     // Content type:
     property string _contentType: "application/x-www-form-urlencoded"
@@ -14,7 +14,7 @@ Command {
     // Post:
     function post(params) {
         var http = new XMLHttpRequest()
-        var url = Utils.urlPlay(_networkIP, "/post/" + _restOrder);
+        var url = Utils.urlPlay(_url, "/post/" + _restOrder);
         http.open("POST", url, true);
 
         // Send the proper header information along with the request
