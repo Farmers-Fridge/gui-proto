@@ -3,12 +3,17 @@ import ".."
 import Components 1.0
 import Commands 1.0
 
-AlternateRestCommand {
-    // Id:
+RestCommand {
     _restOrder: "restockFromTablet"
+    property string modifiedStockItems: ""
 
-     // Content type:
-    _contentType: "application/json"
+    // Execute:
+    function execute()
+    {
+        var params = modifiedStockItems
+        console.log("RUNNING COMMAND: ", _restOrder)
+        post(params)
+    }
 }
 
 

@@ -7,5 +7,4 @@ ClearAllCommand 1.0 ClearAllCommand.qml
 RestockFromTabletCommand 1.0 RestockFromTabletCommand.qml
 TakeCouponCommand 1.0 TakeCouponCommand.qml
 TakeReceiptEmailAddressCommand 1.0 TakeReceiptEmailAddressCommand.qml
-AlternateRestCommand 1.0 AlternateRestCommand.qml
 PhoneCommand 1.0 PhoneCommand.qml

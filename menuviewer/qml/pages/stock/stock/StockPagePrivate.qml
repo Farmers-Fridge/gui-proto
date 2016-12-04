@@ -52,10 +52,8 @@ Page {
                     // Stringify list of modified stock items:
                     var modifiedStockItemListStr = JSON.stringify(modifiedStockItemList)
 
-                    console.log("ICI: ", modifiedStockItemListStr)
-
                     // Pass string of modified stock items:
-                    _restockFromTabletCommand.query = modifiedStockItemListStr
+                    _restockFromTabletCommand.modifiedStockItems = modifiedStockItemListStr
 
                     // Execute:
                     _restockFromTabletCommand.execute()

@@ -121,7 +121,8 @@ Item {
     // Update restock exception command:
     UpdateRestockExceptionCommand {
         id: _updateRestockExceptionCommand
-        _url: getPageSettingsById("STOCK_PRESENTATION_PAGE").stockPageIP
+        // TO DO: WHICH URL TO USE HERE?
+        //_url: getPageSettingsById("STOCK_PRESENTATION_PAGE").stockPageIP
     }
 
     // Clear all command:
