@@ -46,6 +46,9 @@ Item {
 
             // Execute:
             _updateRestockExceptionCommand.execute()
+
+            // Update modified stock item list:
+            modifiedStockItemList.push({row: rowNumber, col: columnNumber, par: theoPar})
         }
 
         stockNumericKeyPad.state = ""

@@ -49,14 +49,21 @@ Page {
                 id: stock
                 text: qsTr("STOCK")
                 onClicked: {
+                    console.log("YOU CLICKED STOCK")
+
                     // Stringify list of modified stock items:
                     var modifiedStockItemListStr = JSON.stringify(modifiedStockItemList)
+
+                    console.log("MODIFIED ITEM LIST IS: ", modifiedStockItemListStr)
 
                     // Pass string of modified stock items:
                     _restockFromTabletCommand.modifiedStockItems = modifiedStockItemListStr
 
                     // Execute:
                     _restockFromTabletCommand.execute()
+
+                    // Clear modified stock item list:
+                    modifiedStockItemList = []
                 }
             }
             Button {
