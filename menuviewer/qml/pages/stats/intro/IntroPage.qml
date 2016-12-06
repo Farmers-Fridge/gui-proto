@@ -25,7 +25,7 @@ PageTemplate {
     // Pig clicked:
     function onPigClicked()
     {
-        pageMgr.loadPreviousPage()
+        _pageMgr.loadPreviousPage()
     }
 
     // Set contents:
@@ -58,7 +58,7 @@ PageTemplate {
                     iconSource: workflows[index].icon
                     onButtonClicked: {
                         _currentWorkflowIndex = index
-                        pageMgr.loadNextPage()
+                        _pageMgr.loadNextPage()
                     }
                 }
             }

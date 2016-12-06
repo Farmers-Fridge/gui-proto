@@ -10,7 +10,7 @@ PageTemplate {
     // Pig clicked:
     function onPigClicked()
     {
-        pageMgr.loadPreviousPage()
+        _pageMgr.loadPreviousPage()
     }
 
     // XML route model:
@@ -58,7 +58,7 @@ PageTemplate {
                             anchors.fill: parent
                             onClicked: {
                                 mainApplication._selectedRoute = _appData.serverInfo.httpPrefix + file
-                                pageMgr.loadNextPage()
+                                _pageMgr.loadNextPage()
                             }
                         }
                         StandardText {

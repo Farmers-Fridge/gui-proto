@@ -11,7 +11,7 @@ PageTemplate {
     // Pig clicked:
     function onPigClicked()
     {
-        pageMgr.loadPreviousPage()
+        _pageMgr.loadPreviousPage()
     }
 
     Item {

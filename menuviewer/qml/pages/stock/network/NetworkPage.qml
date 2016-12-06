@@ -19,7 +19,7 @@ PageTemplate {
     // Pig clicked:
     function onPigClicked()
     {
-        pageMgr.loadPreviousPage()
+        _pageMgr.loadPreviousPage()
     }
 
     // Host model:
@@ -86,7 +86,7 @@ PageTemplate {
             // Return pressed:
             onAccepted: {
                 _controller.currentNetworkIP = url
-                pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
+                _pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
             }
 
             // OK:
@@ -99,7 +99,7 @@ PageTemplate {
                 source: "qrc:/assets/ico-ok.png"
                 onClicked: {
                     _controller.currentNetworkIP = url
-                    pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
+                    _pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
                 }
             }
 
@@ -150,7 +150,7 @@ PageTemplate {
                     onEntered: gridView.currentIndex = index
                     onClicked: {
                         _controller.currentNetworkIP = url
-                        pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
+                        _pageMgr.loadPage("STOCK_PRESENTATION_PAGE")
                     }
                 }
             }

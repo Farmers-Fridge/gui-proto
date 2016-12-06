@@ -16,7 +16,7 @@ PageTemplate {
     // Pig clicked:
     function onPigClicked()
     {
-        pageMgr.loadPreviousPage()
+        _pageMgr.loadPreviousPage()
     }
 
     // Color dialog:

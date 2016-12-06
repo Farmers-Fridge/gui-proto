@@ -88,6 +88,6 @@ PageTemplate {
     MouseArea {
         anchors.fill: parent
         enabled: _controller.serverDataRetrieved
-        onClicked: pageMgr.loadNextPage()
+        onClicked: _pageMgr.loadNextPage()
     }
 }

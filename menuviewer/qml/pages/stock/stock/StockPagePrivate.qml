@@ -15,7 +15,7 @@ Page {
     function onOKClicked(enteredText)
     {
         console.log("YOU ENTERED: ", enteredText)
-        notepad.state = ""
+        _notepad.state = ""
     }
 
     // Stop stock page private:
@@ -96,9 +96,9 @@ Page {
                 }
 
                 onClicked: {
-                    notepad.invoker = stockPagePrivate
-                    notepad.state = "on"
-                    notepad.notepadLabel = qsTr("Please Enter Notes")
+                    _notepad.invoker = stockPagePrivate
+                    _notepad.state = "on"
+                    _notepad.notepadLabel = qsTr("Please Enter Notes")
                 }
             }
         }

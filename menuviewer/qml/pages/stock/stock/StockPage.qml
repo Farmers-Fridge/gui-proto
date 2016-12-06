@@ -14,7 +14,7 @@ PageTemplate {
     function onIdleTimeOut()
     {
         stopStockPagePrivate()
-        pageMgr.loadFirstPage()
+        _pageMgr.loadFirstPage()
     }
 
     // Setup page:
@@ -28,7 +28,7 @@ PageTemplate {
     function onPigClicked()
     {
         stopStockPagePrivate()
-        pageMgr.loadPreviousPage()
+        _pageMgr.loadPreviousPage()
     }
 
     contents: Item {

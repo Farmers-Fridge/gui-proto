@@ -106,7 +106,7 @@ ListView {
                         if (value !== count) {
                             _controller.setItemCount(value, vendItemName)
                             if (_cartModel.cartCount < 1)
-                                pageMgr.loadPreviousPage()
+                                _pageMgr.loadPreviousPage()
                         }
                     }
                 }

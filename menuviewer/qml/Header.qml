@@ -37,7 +37,7 @@ Rectangle {
             pixelSize: 24
             textColor: _colors.ffColor3
             label: qsTr("SIGN-IN")
-            onClicked: signInDialog.state = "on"
+            onClicked: _signInDialog.state = "on"
         }
 
         // Register:
@@ -51,7 +51,7 @@ Rectangle {
             pixelSize: 24
             textColor: _colors.ffColor3
             label: qsTr("REGISTER")
-            onClicked: registerDialog.state = "on"
+            onClicked: _registerDialog.state = "on"
         }
     }
 

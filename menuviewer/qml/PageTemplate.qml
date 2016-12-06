@@ -31,7 +31,7 @@ Page {
     // Home clicked:
     function onHomeClicked()
     {
-        pageMgr.loadFirstPage()
+        _pageMgr.loadFirstPage()
     }
 
     // Email clicked:
@@ -83,13 +83,13 @@ Page {
         height: parent.height*_settings.footerRatio
         anchors.bottom: parent.bottom
         homeVisible: true
-        cartVisible: ((pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") || (pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"))
-        cartOverLayState: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE" ? "requestPay" : "cartCount"
-        emailVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
-        tractorVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
-        couponVisible: pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
-        pigVisible: (pageMgr.currentPageId !== "MENU_PRESENTATION_PAGE") ||
-            ((pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") && (_viewMode === "pathview"))
+        cartVisible: ((_pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") || (_pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"))
+        cartOverLayState: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE" ? "requestPay" : "cartCount"
+        emailVisible: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
+        tractorVisible: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
+        couponVisible: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
+        pigVisible: (_pageMgr.currentPageId !== "MENU_PRESENTATION_PAGE") ||
+            ((_pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") && (_viewMode === "pathview"))
         bottomAreaSource: "qrc:/assets/ico-primary-darkbar.png"
         onHomeClicked: pageTemplate.onHomeClicked()
         onEmailClicked: pageTemplate.onEmailClicked()

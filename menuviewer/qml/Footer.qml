@@ -165,8 +165,8 @@ Rectangle {
                 width: height
                 anchors.verticalCenter: parent.verticalCenter
                 onReservedAreaClicked: {
-                    privateNumericKeyPad.invoker = mainApplication
-                    privateNumericKeyPad.state = "on"
+                    _privateNumericKeyPad.invoker = mainApplication
+                    _privateNumericKeyPad.state = "on"
                 }
             }
         }

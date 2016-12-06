@@ -78,24 +78,24 @@ Item {
         if (enteredText === _appData.appCodes.stockCode)
         {
             mainApplication._selectedRoute = Utils.staticNoCacheOf(_appData.serverInfo.urlForStock, "/hosts.xml")
-            pageMgr.loadPage("STOCK_NETWORK_PAGE")
+            _pageMgr.loadPage("STOCK_NETWORK_PAGE")
             mainApplication.state = "active"
         }
         else
         // User entered stats code:
         if (enteredText === _appData.appCodes.statsCode)
         {
-            pageMgr.loadPage("STATS_INTRO_PAGE")
+            _pageMgr.loadPage("STATS_INTRO_PAGE")
             mainApplication.state = "active"
         }
         else
         // User entered settings code:
         if (enteredText === _appData.appCodes.settingsCode)
         {
-            pageMgr.loadPage("SETTINGS_PRESENTATION_PAGE")
+            _pageMgr.loadPage("SETTINGS_PRESENTATION_PAGE")
             mainApplication.state = "active"
         }
-        privateNumericKeyPad.state = ""
+        _privateNumericKeyPad.state = ""
     }
 
     // Get image source:
@@ -158,67 +158,67 @@ Item {
 
     // Page mgr:
     PageMgr {
-        id: pageMgr
+        id: _pageMgr
         anchors.fill: parent
         pages: _appData.pages
-        enabled: (privateNumericKeyPad.state === "") &&
-                 (stockNumericKeyPad.state === "") &&
-                 (notepad.state === "") &&
-                 (signInDialog.state === "") &&
-                 (registerDialog.state === "") &&
-                 (cartSummaryDialog.state === "")
+        enabled: (_privateNumericKeyPad.state === "") &&
+                 (_stockNumericKeyPad.state === "") &&
+                 (_notepad.state === "") &&
+                 (_signInDialog.state === "") &&
+                 (_registerDialog.state === "") &&
+                 (_cartSummaryDialog.state === "")
         Component.onCompleted: initialize()
         onCurrentPageIdChanged: {
             if (currentPageId === "IDLE_PAGE")
             {
-                privateNumericKeyPad.state = ""
-                stockNumericKeyPad.state = ""
-                notepad.state = ""
-                signInDialog.state = ""
-                registerDialog.state = ""
-                cartSummaryDialog.state = ""
+                _privateNumericKeyPad.state = ""
+                _stockNumericKeyPad.state = ""
+                _notepad.state = ""
+                _signInDialog.state = ""
+                _registerDialog.state = ""
+                _cartSummaryDialog.state = ""
             }
         }
     }
 
     // Numeric keypad:
     NumericKeyPad {
-        id: privateNumericKeyPad
+        id: _privateNumericKeyPad
         anchors.centerIn: parent
         z: _settings.zMax
     }
 
     // Stock numeric keypad:
     StockNumericKeyPad {
-        id: stockNumericKeyPad
+        id: _stockNumericKeyPad
         anchors.centerIn: parent
         z: _settings.zMax
     }
 
     // Notepad:
     NotePad {
-        id: notepad
+        id: _notepad
         anchors.centerIn: parent
         z: _settings.zMax
     }
 
     // Signin dialog:
     SignInDialog {
-        id: signInDialog
+        id: _signInDialog
         anchors.centerIn: parent
         z: _settings.zMax
     }
 
     // Register dialog:
     RegisterDialog {
-        id: registerDialog
+        id: _registerDialog
         anchors.centerIn: parent
         z: _settings.zMax
     }
 
     // Cart summary dialog:
     CartSummaryDialog {
-        id: cartSummaryDialog
+        id: _cartSummaryDialog
         anchors.centerIn: parent
         z: _settings.zMax
     }

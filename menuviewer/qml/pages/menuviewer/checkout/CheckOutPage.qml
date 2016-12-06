@@ -10,7 +10,7 @@ PageTemplate {
     property int requestType: 0
 
     // Go to previous page:
-    onTabClicked: pageMgr.loadPreviousPage()
+    onTabClicked: _pageMgr.loadPreviousPage()
 
     // OK clicked:
     function onOKClicked(enteredText)
@@ -36,37 +36,37 @@ PageTemplate {
         }
 
         // Hide notepad:
-        notepad.state = ""
+        _notepad.state = ""
     }
 
     // Coupon clicked:
     function onCouponClicked()
     {
         requestType = 1
-        notepad.invoker = checkOutPage
-        notepad.state = "on"
-        notepad.notepadLabel = qsTr("Please Enter Coupon Code")
+        _notepad.invoker = checkOutPage
+        _notepad.state = "on"
+        _notepad.notepadLabel = qsTr("Please Enter Coupon Code")
     }
 
     // Email clicked:
     function onEmailClicked()
     {
         requestType = 0
-        notepad.invoker = checkOutPage
-        notepad.state = "on"
-        notepad.notepadLabel = qsTr("Please Enter a Valid Email Address")
+        _notepad.invoker = checkOutPage
+        _notepad.state = "on"
+        _notepad.notepadLabel = qsTr("Please Enter a Valid Email Address")
     }
 
     // Pig clicked:
     function onPigClicked()
     {
-        pageMgr.loadPreviousPage()
+        _pageMgr.loadPreviousPage()
     }
 
     // Cart clicked:
     function onCartClicked()
     {
-        cartSummaryDialog.state = "on"
+        _cartSummaryDialog.state = "on"
     }
 
     // Contents:

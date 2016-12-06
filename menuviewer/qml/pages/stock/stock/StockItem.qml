@@ -51,7 +51,7 @@ Item {
             modifiedStockItemList.push({row: rowNumber, col: columnNumber, par: theoPar})
         }
 
-        stockNumericKeyPad.state = ""
+        _stockNumericKeyPad.state = ""
     }
 
     Rectangle {
@@ -163,10 +163,10 @@ Item {
         hoverEnabled: true
         onHoveredChanged: mainApplication.setCurrentStockItem(rowNumber, columnNumber)
         onClicked: {
-            stockNumericKeyPad.theoPar = theoPar
-            stockNumericKeyPad.currentKey = actualPar
-            stockNumericKeyPad.invoker = stockItem
-            stockNumericKeyPad.state = "on"
+            _stockNumericKeyPad.theoPar = theoPar
+            _stockNumericKeyPad.currentKey = actualPar
+            _stockNumericKeyPad.invoker = stockItem
+            _stockNumericKeyPad.state = "on"
         }
     }
 

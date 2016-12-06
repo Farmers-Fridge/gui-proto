@@ -230,7 +230,7 @@ Rectangle {
     states: State {
         name: "on"
         PropertyChanges {
-            target: privateNumericKeyPad
+            target: _privateNumericKeyPad
             opacity: 1
         }
     }

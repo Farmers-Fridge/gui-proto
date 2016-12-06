@@ -31,7 +31,7 @@ PageTemplate {
     function onCartClicked()
     {
         if (_cartModel.cartCount > 0)
-            pageMgr.loadNextPage()
+            _pageMgr.loadNextPage()
     }
 
     // Return next page id:
