@@ -38,7 +38,7 @@ Rectangle {
     signal keyClicked(string key)
 
     // Bgk color:
-    color: _settings.keyboardBkgColor
+    color: kbdSettings.keyboardBkgColor
 
     // Settings:
     KeyboardSettings {

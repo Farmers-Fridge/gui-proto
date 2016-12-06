@@ -21,7 +21,11 @@ Item {
 
     // Key color:
     readonly property color keyColor: _colors.ffColor14
-    readonly property color keyPressedColor: _colors.ffColor3
+    readonly property string keyPressedColor: _colors.ffColor12
+    readonly property string keyReleasedColor: _colors.ffColor14
+
+    // Keyboard bkg color:
+    readonly property string keyboardBkgColor: _colors.ffColor4
 
     // Key label color:
     readonly property color keyLabelColor: _colors.ffColor6

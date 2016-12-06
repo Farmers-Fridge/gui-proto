@@ -10,7 +10,7 @@ import ".."
 Rectangle {
     id: notePad
     radius: 3
-    color: _settings.keyboardBkgColor
+    color: keyBoard.color
     width: keyBoard.width
     height: keyBoard.height+110
     property int toolBarItemSpacing: 4

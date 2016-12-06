@@ -5,7 +5,7 @@ import "../Common"
 
 Rectangle {
     id: keyPad
-    color: _settings.keyboardBkgColor
+    color: kbdSettings.keyboardBkgColor
     width: 3*(kbdSettings.keyWidth+4)+4
     height: 4*(kbdSettings.keyHeight+4)+4
     opacity: 0
@@ -81,8 +81,8 @@ Rectangle {
 			for (var i=0; i<keyModel.count; i++) {
 				var current = keyModel.get(i)
 				keyModel.set(i, {"keyText": current.keyText, "keyId": current.keyId, 
-					"keyIcon": current.keyIcon, "keyPressedColor": _settings.keyPressedColor, 
-						"keyReleasedColor": _settings.keyReleasedColor})
+					"keyIcon": current.keyIcon, "keyPressedColor": kbdSettings.keyPressedColor, 
+						"keyReleasedColor": kbdSettings.keyReleasedColor})
 			}
 		}
         ListElement {
