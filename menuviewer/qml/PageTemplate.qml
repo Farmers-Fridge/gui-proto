@@ -46,6 +46,12 @@ Page {
         // Base impl does nothing
     }
 
+    // Tractor clicked:
+    function onTractorClicked()
+    {
+        // Base impl does nothing
+    }
+
     // Pig clicked:
     function onPigClicked()
     {
@@ -86,14 +92,15 @@ Page {
         cartVisible: ((_pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") || (_pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"))
         cartOverLayState: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE" ? "requestPay" : "cartCount"
         emailVisible: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
-        tractorVisible: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
         couponVisible: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
+        tractorVisible: _pageMgr.currentPageId === "MENU_CHECKOUT_PAGE"
         pigVisible: (_pageMgr.currentPageId !== "MENU_PRESENTATION_PAGE") ||
             ((_pageMgr.currentPageId === "MENU_PRESENTATION_PAGE") && (_viewMode === "pathview"))
         bottomAreaSource: "qrc:/assets/ico-primary-darkbar.png"
         onHomeClicked: pageTemplate.onHomeClicked()
         onEmailClicked: pageTemplate.onEmailClicked()
         onCouponClicked: pageTemplate.onCouponClicked()
+        onTractorClicked: pageTemplate.onTractorClicked()
         onPigClicked: pageTemplate.onPigClicked()
         onCartClicked: pageTemplate.onCartClicked()
     }

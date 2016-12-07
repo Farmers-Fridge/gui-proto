@@ -37,6 +37,13 @@ Rectangle {
     // Show header?
     property bool showHeader: true
 
+	// Max number of char:
+	property int maxChar: 4
+	
+	// Key label point size:
+    property int defaultTextInputSize: 48
+    property int textInputSize: defaultTextInputSize
+
     // Signals:
     signal okClicked(string enteredText)
     signal cancelClicked()
@@ -48,11 +55,11 @@ Rectangle {
         width: parent.width
         height: 80
         // 4 caracters max:
-        maximumLength: 4
+        maximumLength: maxChar
         text: enteredText
         visible: showHeader
         style: TextFieldStyle {
-            font.pixelSize: 48
+            font.pixelSize: textInputSize
             font.bold: true
             textColor: _colors.ffColor14
             background: Rectangle {

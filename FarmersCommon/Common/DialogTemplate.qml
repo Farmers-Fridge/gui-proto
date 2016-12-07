@@ -4,7 +4,7 @@ import QtQuick.Controls 1.4
 Rectangle {
     id: dialogTemplate
     color: _colors.ffColor16
-    border.color: _settings.keyboardBkgColor
+    border.color: _colors.ffColor4
     border.width: 3
     width: 512
     property alias contents: userArea.children

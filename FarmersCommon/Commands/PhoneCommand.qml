@@ -1,5 +1,4 @@
 import QtQuick 2.5
-import ".."
 
 RestCommand {
     _restOrder: "takePhone"
@@ -8,10 +7,8 @@ RestCommand {
     // Execute:
     function execute()
     {
-        /* TO DO
-        var params = "phoneNumber=" + phoneNumber
-        console.log("RUNNING COMMAND: " + _restOrder + " USING EMAIL: " + phoneNumber)
+        var params = "phone=" + phoneNumber
+        console.log("RUNNING COMMAND: " + _restOrder + " USING PHONE NUMBER: " + phoneNumber)
         post(params)
-        */
     }
 }

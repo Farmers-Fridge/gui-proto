@@ -23,6 +23,9 @@ PageTemplate {
                 _takeReceiptEmailAddressCommand.emailAddress = enteredText
                 _takeReceiptEmailAddressCommand.execute()
             }
+
+            // Hide notepad:
+            _notepad.state = ""
         }
         else
         // Coupon request:
@@ -33,10 +36,23 @@ PageTemplate {
                 _takeCouponCodeCommand.couponCode = enteredText
                 _takeCouponCodeCommand.execute()
             }
-        }
 
-        // Hide notepad:
-        _notepad.state = ""
+            // Hide notepad:
+            _notepad.state = ""
+        }
+        else
+        // Phone request:
+        if (requestType === 2)
+        {
+            // Set phone number:
+            _phoneCommand.phoneNumber = enteredText
+
+            // Execute:
+            _phoneCommand.execute()
+
+            // Hide keypad:
+            _privateNumericKeyPad.state = ""
+        }
     }
 
     // Coupon clicked:
@@ -46,6 +62,16 @@ PageTemplate {
         _notepad.invoker = checkOutPage
         _notepad.state = "on"
         _notepad.notepadLabel = qsTr("Please Enter Coupon Code")
+    }
+
+    // Tractor clicked:
+    function onTractorClicked()
+    {
+        requestType = 2
+		_privateNumericKeyPad.maxChar = 11
+        _privateNumericKeyPad.textInputSize = 32
+        _privateNumericKeyPad.invoker = checkOutPage
+        _privateNumericKeyPad.state = "on"
     }
 
     // Email clicked:

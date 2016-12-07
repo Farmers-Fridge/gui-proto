@@ -8,6 +8,7 @@ Rectangle {
     property alias homeVisible: homeButton.visible
     property alias emailVisible: emailButton.visible
     property alias couponVisible: couponButton.visible
+    property alias tractorVisible: tractorButton.visible
     property alias pigVisible: pigButton.visible
     property alias cartVisible: cartButton.visible
     property alias cartOverLayState: cartLabel.state
@@ -15,12 +16,12 @@ Rectangle {
     property alias footerRightTextVisible: footerRightText.visible
     property alias footerCentralText: footerCentralText.text
     property alias footerCentralTextVisible: footerCentralText.visible
-    property alias tractorVisible: tractorButton.visible
     signal homeClicked()
     signal emailClicked()
     signal couponClicked()
     signal pigClicked()
     signal cartClicked()
+    signal tractorClicked()
 
     // Top area container:
     Item {
@@ -63,6 +64,17 @@ Rectangle {
             height: parent.height
             onClicked: couponClicked()
             visible: false
+        }
+
+        // Tractor:
+        ImageButton {
+            id: tractorButton
+            height: parent.height-8
+            anchors.bottom: parent.bottom
+            anchors.left: couponButton.right
+            anchors.leftMargin: 8
+            source: "qrc:/assets/ico-tractor.png"
+            onClicked: tractorClicked()
         }
 
         // Cart button:
@@ -147,15 +159,6 @@ Rectangle {
                 visible: false
             }
 
-            // Tractor:
-            ImageButton {
-                id: tractorButton
-                height: parent.height-8
-                anchors.centerIn: parent
-                source: "qrc:/assets/ico-tractor.png"
-                onClicked: reservedAreaClicked()
-            }
-
             // Reserved area:
             ReservedArea {
                 id: reservedArea
@@ -165,6 +168,8 @@ Rectangle {
                 width: height
                 anchors.verticalCenter: parent.verticalCenter
                 onReservedAreaClicked: {
+					_privateNumericKeyPad.maxChar = 4
+                    _privateNumericKeyPad.textInputSize = _privateNumericKeyPad.defaultTextInputSize
                     _privateNumericKeyPad.invoker = mainApplication
                     _privateNumericKeyPad.state = "on"
                 }
