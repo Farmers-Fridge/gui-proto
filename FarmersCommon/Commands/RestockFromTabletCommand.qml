@@ -1,7 +1,5 @@
 import QtQuick 2.5
 import ".."
-import Components 1.0
-import Commands 1.0
 
 RestCommand {
     _restOrder: "restockFromTablet"

@@ -271,7 +271,7 @@ Rectangle {
     states: State {
         name: "on"
         PropertyChanges {
-            target: notepad
+            target: _notepad
             opacity: 1
         }
     }
